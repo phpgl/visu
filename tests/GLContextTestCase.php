@@ -3,20 +3,24 @@
 namespace VISU\Tests;
 
 use GLFWwindow;
+use VISU\Graphics\GLState;
 
 abstract class GLContextTestCase extends \PHPUnit\Framework\TestCase
 {
     protected bool $glfwInitialized = false;
     protected ?GLFWwindow $window = null;
 
+    protected GLState $glstate;
+
     protected const TEST_VIEW_WIDTH = 480;
     protected const TEST_VIEW_HEIGHT = 360;
 
-    protected function setUp() : void
+    public function setUp() : void
     {
         if (!$this->glfwInitialized) 
         {
             $this->glfwInitialized = true;
+            $this->glstate = new GLState;
 
             if (!glfwInit()) {
                 throw new \Exception("Could not initalize glfw...");

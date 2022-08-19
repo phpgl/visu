@@ -9,7 +9,8 @@
     "require-dev": {
         "phpunit/phpunit": "^9.0",
         "phpstan/phpstan": "^1.6",
-        "phpgl/ide-stubs": "dev-main"
+        "phpgl/ide-stubs": "dev-main",
+        "phpbench/phpbench": "^1.2"
     },
     "autoload": {
         "psr-4": {

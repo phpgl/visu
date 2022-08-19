@@ -2,9 +2,21 @@
 
 namespace VISU\Graphics;
 
+use GL\Math\Vec2;
+use GL\Math\Vec3;
+use GL\Math\Vec4;
 use VISU\Graphics\Exception\ShaderProgramException;
 use VISU\Graphics\Exception\ShaderProgramLinkingException;
 
+/**
+ * This class is a wrapper for OpenGL shader programs.
+ * 
+ * You will see some duplicated code in this class.
+ * Microoptimizations are bad bla bla, but as some of the methods here 
+ * are called many many times during the rendering process, squeezing our 
+ * as much overhead as possible is a good idea. Obviously, PHP itself is 
+ * a bottleneck here but VISU is PHP library..
+ */
 class ShaderProgram
 {
     /**
@@ -233,7 +245,17 @@ class ShaderProgram
     }
 
     /**
-     * quickly sets a uniform value using "glUniform1f"
+     * --------------------------------------------------------------------------------
+     * Unsafe uniform setters
+     * --------------------------------------------------------------------------------
+     */
+
+    /**
+     * Sets a uniform value using `glUniform1f`, this methods is faster 
+     * than using `setUniform1f()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniform1f` directly. 
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
      * 
      * !!! This methods expects that you already bound the program using "use"
      * !!! This methods also expects that the uniform name your are using has been binded beforehand.
@@ -246,4 +268,874 @@ class ShaderProgram
     {
         glUniform1f($this->uniformLocationMap[$name], $value);
     }
+
+    /**
+     * Sets a uniform value using `glUniform1i`, this methods is faster 
+     * than using `setUniform1i()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniform1i` directly. 
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param int $value
+     * @return void 
+     */
+    public function unsafeSetUniform1i(string $name, int $value) : void
+    {
+        glUniform1i($this->uniformLocationMap[$name], $value);
+    }
+
+    /**
+     * Sets a uniform value using `glUniform1fv`, this methods is faster 
+     * than using `setUniform1fv()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniform1fv` directly. 
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param \GL\Buffer\FloatBuffer|array<float> $value
+     * @return void 
+     */
+    public function unsafeSetUniform1fv(string $name, \GL\Buffer\FloatBuffer|array $value) : void
+    {
+        glUniform1fv($this->uniformLocationMap[$name], $value);
+    }
+
+    /**
+     * Sets a uniform value using `glUniform1iv`, this methods is faster 
+     * than using `setUniform1iv()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniform1iv` directly. 
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param \GL\Buffer\IntBuffer|array<int> $value
+     * @return void 
+     */
+    public function unsafeSetUniform1iv(string $name, \GL\Buffer\IntBuffer|array $value) : void
+    {
+        glUniform1iv($this->uniformLocationMap[$name], $value);
+    }
+
+    /**
+     * Sets a uniform value using `glUniform2f`, this methods is faster 
+     * than using `setUniform2f()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniform2f` directly. 
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param float $value1
+     * @param float $value2
+     * @return void 
+     */
+    public function unsafeSetUniform2f(string $name, float $value1, float $value2) : void
+    {
+        glUniform2f($this->uniformLocationMap[$name], $value1, $value2);
+    }
+
+    /**
+     * Sets a uniform value using `glUniform2i`, this methods is faster 
+     * than using `setUniform2i()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniform2i` directly. 
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param int $value1
+     * @param int $value2
+     * @return void 
+     */
+    public function unsafeSetUniform2i(string $name, int $value1, int $value2) : void
+    {
+        glUniform2i($this->uniformLocationMap[$name], $value1, $value2);
+    }
+
+    /**
+     * Sets a uniform value using `glUniform2fv`, this methods is faster 
+     * than using `setUniform2fv()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniform2fv` directly. 
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param \GL\Buffer\FloatBuffer|array<float> $value
+     * @return void 
+     */
+    public function unsafeSetUniform2fv(string $name, \GL\Buffer\FloatBuffer|array $value) : void
+    {
+        glUniform2fv($this->uniformLocationMap[$name], $value);
+    }
+
+    /**
+     * Sets a uniform value using `glUniform2iv`, this methods is faster 
+     * than using `setUniform2iv()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniform2iv` directly. 
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param \GL\Buffer\IntBuffer|array<int> $value
+     * @return void 
+     */
+    public function unsafeSetUniform2iv(string $name, \GL\Buffer\IntBuffer|array $value) : void
+    {
+        glUniform2iv($this->uniformLocationMap[$name], $value);
+    }
+
+    /**
+     * Sets a uniform value using `glUniform3f`, this methods is faster 
+     * than using `setUniform3f()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniform3f` directly. 
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param float $value1
+     * @param float $value2
+     * @param float $value3
+     * @return void 
+     */
+    public function unsafeSetUniform3f(string $name, float $value1, float $value2, float $value3) : void
+    {
+        glUniform3f($this->uniformLocationMap[$name], $value1, $value2, $value3);
+    }
+
+    /**
+     * Sets a uniform value using `glUniform3i`, this methods is faster 
+     * than using `setUniform3i()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniform3i` directly. 
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param int $value1
+     * @param int $value2
+     * @param int $value3
+     * @return void 
+     */
+    public function unsafeSetUniform3i(string $name, int $value1, int $value2, int $value3) : void
+    {
+        glUniform3i($this->uniformLocationMap[$name], $value1, $value2, $value3);
+    }
+
+    /**
+     * Sets a uniform value using `glUniform3fv`, this methods is faster 
+     * than using `setUniform3fv()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniform3fv` directly. 
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param \GL\Buffer\FloatBuffer|array<float> $value
+     * @return void 
+     */
+    public function unsafeSetUniform3fv(string $name, \GL\Buffer\FloatBuffer|array $value) : void
+    {
+        glUniform3fv($this->uniformLocationMap[$name], $value);
+    }
+
+    /**
+     * Sets a uniform value using `glUniform3iv`, this methods is faster 
+     * than using `setUniform3iv()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniform3iv` directly. 
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param \GL\Buffer\IntBuffer|array<int> $value
+     * @return void 
+     */
+    public function unsafeSetUniform3iv(string $name, \GL\Buffer\IntBuffer|array $value) : void
+    {
+        glUniform3iv($this->uniformLocationMap[$name], $value);
+    }
+
+    /**
+     * Sets a uniform value using `glUniform4f`, this methods is faster 
+     * than using `setUniform4f()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniform4f` directly. 
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param float $value1
+     * @param float $value2
+     * @param float $value3
+     * @param float $value4
+     * @return void 
+     */
+    public function unsafeSetUniform4f(string $name, float $value1, float $value2, float $value3, float $value4) : void
+    {
+        glUniform4f($this->uniformLocationMap[$name], $value1, $value2, $value3, $value4);
+    }
+
+    /**
+     * Sets a uniform value using `glUniform4i`, this methods is faster 
+     * than using `setUniform4i()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniform4i` directly. 
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param int $value1
+     * @param int $value2
+     * @param int $value3
+     * @param int $value4
+     * @return void 
+     */
+    public function unsafeSetUniform4i(string $name, int $value1, int $value2, int $value3, int $value4) : void
+    {
+        glUniform4i($this->uniformLocationMap[$name], $value1, $value2, $value3, $value4);
+    }
+
+    /**
+     * Sets a uniform value using `glUniform4fv`, this methods is faster 
+     * than using `setUniform4fv()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniform4fv` directly. 
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param \GL\Buffer\FloatBuffer|array<float> $value
+     * @return void 
+     */
+    public function unsafeSetUniform4fv(string $name, \GL\Buffer\FloatBuffer|array $value) : void
+    {
+        glUniform4fv($this->uniformLocationMap[$name], $value);
+    }
+
+    /**
+     * Sets a uniform value using `glUniform4iv`, this methods is faster 
+     * than using `setUniform4iv()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniform4iv` directly. 
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param \GL\Buffer\IntBuffer|array<int> $value
+     * @return void 
+     */
+    public function unsafeSetUniform4iv(string $name, \GL\Buffer\IntBuffer|array $value) : void
+    {
+        glUniform4iv($this->uniformLocationMap[$name], $value);
+    }
+
+    /**
+     * Sets a uniform value using `glUniform1ui`, this methods is faster
+     * than using `setUniform1ui()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniform1ui` directly.
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param int $value
+     * @return void 
+     */
+    public function unsafeSetUniform1ui(string $name, int $value) : void
+    {
+        glUniform1ui($this->uniformLocationMap[$name], $value);
+    }
+
+    /**
+     * Sets a uniform value using `glUniform2ui`, this methods is faster
+     * than using `setUniform2ui()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniform2ui` directly.
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param int $value1
+     * @param int $value2
+     * @return void 
+     */
+    public function unsafeSetUniform2ui(string $name, int $value1, int $value2) : void
+    {
+        glUniform2ui($this->uniformLocationMap[$name], $value1, $value2);
+    }
+
+    /**
+     * Sets a uniform value using `glUniform3ui`, this methods is faster
+     * than using `setUniform3ui()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniform3ui` directly.
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param int $value1
+     * @param int $value2
+     * @param int $value3
+     * @return void 
+     */
+    public function unsafeSetUniform3ui(string $name, int $value1, int $value2, int $value3) : void
+    {
+        glUniform3ui($this->uniformLocationMap[$name], $value1, $value2, $value3);
+    }
+
+    /**
+     * Sets a uniform value using `glUniform4ui`, this methods is faster
+     * than using `setUniform4ui()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniform4ui` directly.
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param int $value1
+     * @param int $value2
+     * @param int $value3
+     * @param int $value4
+     * @return void 
+     */
+    public function unsafeSetUniform4ui(string $name, int $value1, int $value2, int $value3, int $value4) : void
+    {
+        glUniform4ui($this->uniformLocationMap[$name], $value1, $value2, $value3, $value4);
+    }
+
+    /**
+     * Sets a uniform value using `glUniform1uiv`, this methods is faster
+     * than using `setUniform1uiv()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniform1uiv` directly.
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param \GL\Buffer\UintBuffer|array<int> $value
+     * @return void 
+     */
+    public function unsafeSetUniform1uiv(string $name, \GL\Buffer\UintBuffer|array $value) : void
+    {
+        glUniform1uiv($this->uniformLocationMap[$name], $value);
+    }
+
+    /**
+     * Sets a uniform value using `glUniform2uiv`, this methods is faster
+     * than using `setUniform2uiv()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniform2uiv` directly.
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param \GL\Buffer\UintBuffer|array<int> $value
+     * @return void 
+     */
+    public function unsafeSetUniform2uiv(string $name, \GL\Buffer\UintBuffer|array $value) : void
+    {
+        glUniform2uiv($this->uniformLocationMap[$name], $value);
+    }
+
+    /**
+     * Sets a uniform value using `glUniform3uiv`, this methods is faster
+     * than using `setUniform3uiv()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniform3uiv` directly.
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param \GL\Buffer\UintBuffer|array<int> $value
+     * @return void 
+     */
+    public function unsafeSetUniform3uiv(string $name, \GL\Buffer\UintBuffer|array $value) : void
+    {
+        glUniform3uiv($this->uniformLocationMap[$name], $value);
+    }
+
+    /**
+     * Sets a uniform value using `glUniform4uiv`, this methods is faster
+     * than using `setUniform4uiv()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniform4uiv` directly.
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param \GL\Buffer\UintBuffer|array<int> $value
+     * @return void 
+     */
+    public function unsafeSetUniform4uiv(string $name, \GL\Buffer\UintBuffer|array $value) : void
+    {
+        glUniform4uiv($this->uniformLocationMap[$name], $value);
+    }
+
+    /**
+     * Sets a uniform value using `glUniformMatrix2fv`, this methods is faster
+     * than using `setUniformMatrix2fv()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniformMatrix2fv` directly.
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param bool $transpose Whether to transpose the matrix
+     * @param \GL\Buffer\FloatBuffer|array<float> $value
+     * @return void 
+     */
+    public function unsafeSetUniformMatrix2fv(string $name, bool $transpose, \GL\Buffer\FloatBuffer|array $value) : void
+    {
+        glUniformMatrix2fv($this->uniformLocationMap[$name], $transpose, $value);
+    }
+
+    /**
+     * Sets a uniform value using `glUniformMatrix3fv`, this methods is faster
+     * than using `setUniformMatrix3fv()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniformMatrix3fv` directly.
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param bool $transpose Whether to transpose the matrix
+     * @param \GL\Buffer\FloatBuffer|array<float> $value
+     * @return void 
+     */
+    public function unsafeSetUniformMatrix3fv(string $name, bool $transpose, \GL\Buffer\FloatBuffer|array $value) : void
+    {
+        glUniformMatrix3fv($this->uniformLocationMap[$name], $transpose, $value);
+    }
+
+    /**
+     * Sets a uniform value using `glUniformMatrix4fv`, this methods is faster
+     * than using `setUniformMatrix4fv()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniformMatrix4fv` directly.
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param bool $transpose Whether to transpose the matrix
+     * @param \GL\Buffer\FloatBuffer|array<float> $value
+     * @return void 
+     */
+    public function unsafeSetUniformMatrix4fv(string $name, bool $transpose, \GL\Buffer\FloatBuffer|array $value) : void
+    {
+        glUniformMatrix4fv($this->uniformLocationMap[$name], $transpose, $value);
+    }
+
+    /**
+     * Sets a uniform value using `glUniformMatrix2x3fv`, this methods is faster
+     * than using `setUniformMatrix2x3fv()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniformMatrix2x3fv` directly.
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param bool $transpose Whether to transpose the matrix
+     * @param \GL\Buffer\FloatBuffer|array<float> $value
+     * @return void 
+     */
+    public function unsafeSetUniformMatrix2x3fv(string $name, bool $transpose, \GL\Buffer\FloatBuffer|array $value) : void
+    {
+        glUniformMatrix2x3fv($this->uniformLocationMap[$name], $transpose, $value);
+    }
+
+    /**
+     * Sets a uniform value using `glUniformMatrix3x2fv`, this methods is faster
+     * than using `setUniformMatrix3x2fv()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniformMatrix3x2fv` directly.
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param bool $transpose Whether to transpose the matrix
+     * @param \GL\Buffer\FloatBuffer|array<float> $value
+     * @return void 
+     */
+    public function unsafeSetUniformMatrix3x2fv(string $name, bool $transpose, \GL\Buffer\FloatBuffer|array $value) : void
+    {
+        glUniformMatrix3x2fv($this->uniformLocationMap[$name], $transpose, $value);
+    }
+
+    /**
+     * Sets a uniform value using `glUniformMatrix2x4fv`, this methods is faster
+     * than using `setUniformMatrix2x4fv()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniformMatrix2x4fv` directly.
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param bool $transpose Whether to transpose the matrix
+     * @param \GL\Buffer\FloatBuffer|array<float> $value
+     * @return void 
+     */
+    public function unsafeSetUniformMatrix2x4fv(string $name, bool $transpose, \GL\Buffer\FloatBuffer|array $value) : void
+    {
+        glUniformMatrix2x4fv($this->uniformLocationMap[$name], $transpose, $value);
+    }
+
+    /**
+     * Sets a uniform value using `glUniformMatrix4x2fv`, this methods is faster
+     * than using `setUniformMatrix4x2fv()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniformMatrix4x2fv` directly.
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param bool $transpose Whether to transpose the matrix
+     * @param \GL\Buffer\FloatBuffer|array<float> $value
+     * @return void 
+     */
+    public function unsafeSetUniformMatrix4x2fv(string $name, bool $transpose, \GL\Buffer\FloatBuffer|array $value) : void
+    {
+        glUniformMatrix4x2fv($this->uniformLocationMap[$name], $transpose, $value);
+    }
+
+    /**
+     * Sets a uniform value using `glUniformMatrix3x4fv`, this methods is faster
+     * than using `setUniformMatrix3x4fv()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniformMatrix3x4fv` directly.
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param bool $transpose Whether to transpose the matrix
+     * @param \GL\Buffer\FloatBuffer|array<float> $value
+     * @return void 
+     */
+    public function unsafeSetUniformMatrix3x4fv(string $name, bool $transpose, \GL\Buffer\FloatBuffer|array $value) : void
+    {
+        glUniformMatrix3x4fv($this->uniformLocationMap[$name], $transpose, $value);
+    }
+
+    /**
+     * Sets a uniform value using `glUniformMatrix4x3fv`, this methods is faster
+     * than using `setUniformMatrix4x3fv()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniformMatrix4x3fv` directly.
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param bool $transpose Whether to transpose the matrix
+     * @param \GL\Buffer\FloatBuffer|array<float> $value
+     * @return void 
+     */
+    public function unsafeSetUniformMatrix4x3fv(string $name, bool $transpose, \GL\Buffer\FloatBuffer|array $value) : void
+    {
+        glUniformMatrix4x3fv($this->uniformLocationMap[$name], $transpose, $value);
+    }
+
+    /**
+     * --------------------------------------------------------------------------------
+     * Safe uniform setters (more overhead)
+     * --------------------------------------------------------------------------------
+     */
+    
+    /**
+     * Sets a uniform value using `glUniform1i`
+     * 
+     * @param string $name The uniforms name
+     * @param int $value 
+     * @return void 
+     */
+    public function setUniform1i(string $name, int $value) : void
+    {
+        $this->use();
+        glUniform1i($this->getUniformLocation($name), $value);
+    }
+
+    /**
+     * Sets a `int` uniform value in the shader program. 
+     * This is identical to the method `setUniform1i`
+     * 
+     * @param string $name The uniforms name
+     * @param int $value 
+     * @return void 
+     */
+    public function setUniformInt(string $name, int $value) : void
+    {
+        $this->setUniform1i($name, $value);
+    }
+
+    /**
+     * Sets a uniform value using `glUniform1f`
+     * 
+     * @param string $name The uniforms name
+     * @param float $value 
+     * @return void 
+     */
+    public function setUniform1f(string $name, float $value) : void
+    {
+        $this->use();
+        glUniform1f($this->getUniformLocation($name), $value);
+    }
+
+    /**
+     * Sets a `float` uniform value in the shader program. 
+     * This is identical to the method `setUniform1f`
+     * 
+     * @param string $name The uniforms name
+     * @param float $value 
+     * @return void 
+     */
+    public function setUniformFloat(string $name, float $value) : void
+    {
+        $this->setUniform1f($name, $value);
+    }
+
+    /**
+     * Sets a uniform value using `glUniform2i`
+     * 
+     * @param string $name The uniforms name
+     * @param int $value1 
+     * @param int $value2 
+     * @return void 
+     */
+    public function setUniform2i(string $name, int $value1, int $value2) : void
+    {
+        $this->use();
+        glUniform2i($this->getUniformLocation($name), $value1, $value2);
+    }
+
+    /**
+     * Sets a `ivec2` uniform value in the shader program. 
+     * This is identical to the method `setUniform2i`
+     * 
+     * @param string $name The uniforms name
+     * @param int $value1 
+     * @param int $value2 
+     * @return void 
+     */
+    public function setUniformIvec2(string $name, int $value1, int $value2) : void
+    {
+        $this->setUniform2i($name, $value1, $value2);
+    }
+
+    /**
+     * Sets a uniform value using `glUniform2f`
+     * 
+     * @param string $name The uniforms name
+     * @param float $value1 
+     * @param float $value2 
+     * @return void 
+     */
+    public function setUniform2f(string $name, float $value1, float $value2) : void
+    {
+        $this->use();
+        glUniform2f($this->getUniformLocation($name), $value1, $value2);
+    }
+
+    /**
+     * Sets a `vec2` uniform value in the shader program. 
+     * This is identical to the method `setUniform2f`
+     * 
+     * @param string $name The uniforms nam
+     * @param Vec2 $vec The vector object to set as unfiform value
+     * @return void 
+     */
+    public function setUniformVec2(string $name, Vec2 $vec) : void
+    {
+        $this->setUniform2f($name, $vec->x, $vec->y);
+    }
+
+    /**
+     * Sets a uniform value using `glUniform3i`
+     * 
+     * @param string $name The uniforms name
+     * @param int $value1 
+     * @param int $value2 
+     * @param int $value3 
+     * @return void 
+     */
+    public function setUniform3i(string $name, int $value1, int $value2, int $value3) : void
+    {
+        $this->use();
+        glUniform3i($this->getUniformLocation($name), $value1, $value2, $value3);
+    }
+
+    /**
+     * Sets a `ivec3` uniform value in the shader program. 
+     * This is identical to the method `setUniform3i`
+     * 
+     * @param string $name The uniforms name
+     * @param int $value1 
+     * @param int $value2 
+     * @param int $value3 
+     * @return void 
+     */
+    public function setUniformIvec3(string $name, int $value1, int $value2, int $value3) : void
+    {
+        $this->setUniform3i($name, $value1, $value2, $value3);
+    }
+
+    /**
+     * Sets a uniform value using `glUniform3f`
+     * 
+     * @param string $name The uniforms name
+     * @param float $value1 
+     * @param float $value2 
+     * @param float $value3 
+     * @return void 
+     */
+    public function setUniform3f(string $name, float $value1, float $value2, float $value3) : void
+    {
+        $this->use();
+        glUniform3f($this->getUniformLocation($name), $value1, $value2, $value3);
+    }
+
+    /**
+     * Sets a `vec3` uniform value in the shader program. 
+     * This is identical to the method `setUniform3f`
+     * 
+     * @param string $name The uniforms name
+     * @param Vec3 $vec The vector object to set as unfiform value
+     * @return void 
+     */
+    public function setUniformVec3(string $name, Vec3 $vec) : void
+    {
+        $this->setUniform3f($name, $vec->x, $vec->y, $vec->z);
+    }
+
+    /**
+     * Sets a uniform value using `glUniform4i`
+     * 
+     * @param string $name The uniforms name
+     * @param int $value1 
+     * @param int $value2 
+     * @param int $value3 
+     * @param int $value4 
+     * @return void 
+     */
+    public function setUniform4i(string $name, int $value1, int $value2, int $value3, int $value4) : void
+    {
+        $this->use();
+        glUniform4i($this->getUniformLocation($name), $value1, $value2, $value3, $value4);
+    }
+
+    /**
+     * Sets a `ivec4` uniform value in the shader program. 
+     * This is identical to the method `setUniform4i`
+     * 
+     * @param string $name The uniforms name
+     * @param int $value1 
+     * @param int $value2 
+     * @param int $value3 
+     * @param int $value4 
+     * @return void 
+     */
+    public function setUniformIvec4(string $name, int $value1, int $value2, int $value3, int $value4) : void
+    {
+        $this->setUniform4i($name, $value1, $value2, $value3, $value4);
+    }
+
+    /**
+     * Sets a uniform value using `glUniform4f`
+     * 
+     * @param string $name The uniforms name
+     * @param float $value1 
+     * @param float $value2 
+     * @param float $value3 
+     * @param float $value4 
+     * @return void 
+     */
+    public function setUniform4f(string $name, float $value1, float $value2, float $value3, float $value4) : void
+    {
+        $this->use();
+        glUniform4f($this->getUniformLocation($name), $value1, $value2, $value3, $value4);
+    }
+
+    /**
+     * Sets a `vec4` uniform value in the shader program. 
+     * This is identical to the method `setUniform4f`
+     * 
+     * @param string $name The uniforms name
+     * @param Vec4 $vec The vector object to set as unfiform value
+     * @return void 
+     */
+    public function setUniformVec4(string $name, Vec4 $vec) : void
+    {
+        $this->setUniform4f($name, $vec->x, $vec->y, $vec->z, $vec->w);
+    }
+
+
+
 }

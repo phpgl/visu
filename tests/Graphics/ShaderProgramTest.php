@@ -14,7 +14,7 @@ class ShaderProgramTest extends GLContextTestCase
 {
     public function testShaderCreation()
     {
-        $shader = new ShaderProgram();
+        $shader = new ShaderProgram($this->glstate);
         $shader->attach(new ShaderStage(ShaderStage::VERTEX, <<< 'GLSL'
 #version 330 core
 layout (location = 0) in vec3 position;
@@ -45,7 +45,7 @@ GLSL));
     public function testShaderLinkError()
     {
         $this->expectException(ShaderProgramLinkingException::class);
-        $shader = new ShaderProgram();
+        $shader = new ShaderProgram($this->glstate);
         $shader->attach(new ShaderStage(ShaderStage::VERTEX, <<< 'GLSL'
 #version 330 core
 layout (location = 0) in vec3 position;
