@@ -2,18 +2,18 @@
 
 namespace VISU\Tests\Graphics;
 
-use VISU\Graphics\Shader;
+use VISU\Graphics\ShaderStage;
 use VISU\Tests\GLContextTestCase;
 
 /**
  * @group glfwinit
  */
-class ShaderTest extends GLContextTestCase
+class ShaderStageTest extends GLContextTestCase
 {
     public function testShaderCreation()
     {
-        $shader = new Shader(Shader::VERTEX);
-        $this->assertEquals(Shader::VERTEX, $shader->getType());
+        $shader = new ShaderStage(ShaderStage::VERTEX);
+        $this->assertEquals(ShaderStage::VERTEX, $shader->getTypeFromGL());
         $this->assertFalse($shader->isDeleted());
         $this->assertFalse($shader->isCompiled());
 
@@ -22,7 +22,6 @@ class ShaderTest extends GLContextTestCase
 
         $this->assertEquals($shader->getSourceLength(), 30);
         $this->assertTrue($shader->isCompiled());
-
-        var_dump($shader);
+        $this->assertFalse($shader->isDeleted());
     }
 }

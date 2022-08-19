@@ -4,7 +4,7 @@ namespace VISU\Graphics;
 
 use VISU\Graphics\Exception\ShaderCompileException;
 
-class Shader 
+class ShaderStage 
 {
     /*
      * Shader types
@@ -19,7 +19,12 @@ class Shader
     /**
      * OpenGL shader ID
      */
-    private readonly int $id;
+    public readonly int $id;
+
+    /**
+     * Shader type
+     */
+    public readonly int $type;
 
     /**
      * Constructor
@@ -28,6 +33,7 @@ class Shader
     public function __construct(int $type, ?string $sourceCode = null)
     {
         $this->id = glCreateShader($type);
+        $this->type = $type;
 
         if ($sourceCode !== null) {
             $this->setSourceCode($sourceCode);
@@ -73,7 +79,7 @@ class Shader
     /**
      * Returns the current shader type (GL_SHADER_TYPE)
      */
-    public function getType() : int
+    public function getTypeFromGL() : int
     {
         glGetShaderiv($this->id, GL_SHADER_TYPE, $type);
         return $type;
