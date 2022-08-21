@@ -1014,7 +1014,8 @@ class ShaderProgram
      */
     public function setUniformVec2(string $name, Vec2 $vec) : void
     {
-        $this->setUniform2f($name, $vec->x, $vec->y);
+        $this->use();
+        glUniformVec2f($this->getUniformLocation($name), $vec);
     }
 
     /**
@@ -1134,9 +1135,97 @@ class ShaderProgram
      */
     public function setUniformVec4(string $name, Vec4 $vec) : void
     {
-        $this->setUniform4f($name, $vec->x, $vec->y, $vec->z, $vec->w);
+        $this->use();
+        glUniformVec4f($this->getUniformLocation($name), $vec);
     }
 
+    /**
+     * Sets an array of uniform float values using `glUniform1fv`
+     * 
+     * @param string $name The uniforms name
+     * @param \GL\Buffer\FloatBuffer|array<float> $values The array of values to set
+     * @return void 
+     */
+    public function setUniformFloatArray(string $name, \GL\Buffer\FloatBuffer|array $values) :  void
+    {
+        $this->use();
+        glUniform1fv($this->getUniformLocation($name), $values);
+    }
 
+    /**
+     * Sets an array of uniform int values using `glUniform1iv`
+     * 
+     * @param string $name The uniforms name
+     * @param \GL\Buffer\IntBuffer|array<int> $values The array of values to set
+     * @return void 
+     */
+    public function setUniformIntArray(string $name, \GL\Buffer\IntBuffer|array $values) :  void
+    {
+        $this->use();
+        glUniform1iv($this->getUniformLocation($name), $values);
+    }
+
+    /**
+     * Sets an array of uniform unsigned int values using `glUniform1uiv`
+     * 
+     * @param string $name The uniforms name
+     * @param \GL\Buffer\UintBuffer|array<int> $values The array of values to set
+     * @return void 
+     */
+    public function setUniformUintArray(string $name, \GL\Buffer\UintBuffer|array $values) :  void
+    {
+        $this->use();
+        glUniform1uiv($this->getUniformLocation($name), $values);
+    }
+
+    /**
+     * Sets an array of uniform `vec2` values using `glUniform2fv`
+     * 
+     * Values are passed as flat array:
+     *  - [x1, y1, x2, y2, x3, y3, x4, y4]
+     * 
+     * @param string $name The uniforms name
+     * @param \GL\Buffer\FloatBuffer|array<float> $values The array of values to set
+     * @return void 
+     */
+    public function setUniformVec2Array(string $name, \GL\Buffer\FloatBuffer|array $values) :  void
+    {
+        $this->use();
+        glUniform2fv($this->getUniformLocation($name), $values);
+    }
+
+    /**
+     * Sets an array of uniform `vec3` values using `glUniform3fv`
+     * 
+     * Values are passed as flat array:
+     *  - [x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4]
+     * 
+     * @param string $name The uniforms name
+     * @param \GL\Buffer\FloatBuffer|array<float> $values The array of values to set
+     * @return void 
+     */
+    public function setUniformVec3Array(string $name, \GL\Buffer\FloatBuffer|array $values) :  void
+    {
+        $this->use();
+        glUniform3fv($this->getUniformLocation($name), $values);
+    }
+
+    /**
+     * Sets an array of uniform `vec4` values using `glUniform4fv`
+     * 
+     * Values are passed as flat array:
+     *  - [x1, y1, z1, w1, x2, y2, z2, w2, x3, y3, z3, w3, x4, y4, z4, w4]
+     * 
+     * @param string $name The uniforms name
+     * @param \GL\Buffer\FloatBuffer|array<float> $values The array of values to set
+     * @return void 
+     */
+    public function setUniformVec4Array(string $name, \GL\Buffer\FloatBuffer|array $values) :  void
+    {
+        $this->use();
+        glUniform4fv($this->getUniformLocation($name), $values);
+    }
+
+    
 
 }
