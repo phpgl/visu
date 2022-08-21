@@ -1072,7 +1072,8 @@ class ShaderProgram
      */
     public function setUniformVec3(string $name, Vec3 $vec) : void
     {
-        $this->setUniform3f($name, $vec->x, $vec->y, $vec->z);
+        $this->use();
+        glUniformVec3f($this->getUniformLocation($name), $vec);
     }
 
     /**

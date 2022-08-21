@@ -67,6 +67,17 @@ GLSL));
         }
     }
 
+    // /**
+    //  * @Revs(10000)
+    //  */
+    // public function benchSafeSettersWrapperInline()
+    // {
+    //     $v = new Vec3(1.0, 2.0, 3.0);
+    //     for ($i = 0; $i < 1000; $i++) {
+    //         $this->shader->setUniformVec3Inline("somevec", $v);
+    //     }
+    // }
+
     /**
      * @Revs(10000)
      */
