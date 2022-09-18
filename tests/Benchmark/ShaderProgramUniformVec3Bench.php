@@ -5,12 +5,11 @@ namespace VISU\Tests\Benchmark;
 use GL\Math\Vec3;
 use VISU\Graphics\ShaderProgram;
 use VISU\Graphics\ShaderStage;
-use VISU\Tests\GLContextTestCase;
 
 /**
  * @BeforeMethods("setUp")
  */
-class ShaderProgramUniformBench extends GLContextTestCase
+class ShaderProgramUniformVec3Bench extends GLContextBenchmark
 {
     private ShaderProgram $shader;
 

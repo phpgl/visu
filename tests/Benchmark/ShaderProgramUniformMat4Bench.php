@@ -7,12 +7,11 @@ use GL\Math\Mat4;
 use GL\Math\Vec3;
 use VISU\Graphics\ShaderProgram;
 use VISU\Graphics\ShaderStage;
-use VISU\Tests\GLContextTestCase;
 
 /**
  * @BeforeMethods("setUp")
  */
-class ShaderProgramUniformBench extends GLContextTestCase
+class ShaderProgramUniformMat4Bench extends GLContextBenchmark
 {
     private ShaderProgram $shader;
 
