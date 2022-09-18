@@ -433,6 +433,36 @@ class Window
         glfwRequestWindowAttention($this->requiresInitialization());
     }
 
+    /**
+     * Poll the queued window events and run the callbacks
+     */
+    public function pollEvents() : void
+    {
+        $this->requiresInitialization();
+        glfwPollEvents();
+    }
 
+    /**
+     * Swap the windows framebuffer
+     * 
+     * This will swap the front and back buffer of the window
+     * If not explicitly disabled we have a double buffered window by default
+     * which requires this call to be made after rendering
+     */
+    public function swapBuffers() : void
+    {
+        glfwSwapBuffers($this->requiresInitialization());
+    }
+
+    /**
+     * Register the windows key callback
+     * 
+     * This will call the given callback when a key event occurs, for more 
+     * information see the `glfwSetKeyCallback` documentation.
+     */
+    public function setKeyCallback(callable $callback) : void
+    {
+        glfwSetKeyCallback( $this->requiresInitialization(), $callback);
+    }
 
 } 
