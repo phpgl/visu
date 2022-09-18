@@ -20,7 +20,7 @@ class ShaderStageTest extends GLContextTestCase
         $shader->setSourceCode("#version 330\nvoid main() { }");
         $shader->compile();
 
-        $this->assertGreaterThan($shader->getSourceLength(), 20);
+        $this->assertGreaterThan(20, $shader->getSourceLength());
         $this->assertTrue($shader->isCompiled());
         $this->assertFalse($shader->isDeleted());
     }
