@@ -44,6 +44,10 @@ GLSL));
 
     public function testShaderLinkError()
     {
+        if (PHP_OS_FAMILY === "Linux") {
+            $this->markTestSkipped("This test is not supported on Linux, as no link error is thrown..");
+        }
+
         $this->expectException(ShaderProgramLinkingException::class);
         $shader = new ShaderProgram($this->glstate);
         $shader->attach(new ShaderStage(ShaderStage::VERTEX, <<< 'GLSL'
