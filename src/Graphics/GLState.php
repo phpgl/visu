@@ -2,6 +2,8 @@
 
 namespace VISU\Graphics;
 
+use VISU\OS\Window;
+
 /**
  * You probably will rise an eyebrow over this one.
  * OpenGL is a state machine, with a global state. So why pass around a state object
@@ -16,6 +18,13 @@ namespace VISU\Graphics;
  */
 class GLState
 {   
+    /**
+     * The Window the current GL context belongs to.
+     * 
+     * @var null|Window
+     */
+    public ?Window $window = null;
+
     /**
      * Currently used shader program object
      * 
