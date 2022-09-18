@@ -1,0 +1,65 @@
+
+/**
+ * Import the main application
+ * The ctn file behind `app` is provided by the application using VISU.
+ */
+import app
+
+/**
+ * Event Dispatching
+ *
+ * ----------------------------------------------------------------------------
+ */
+
+// main dispatcher
+@visu.dispatcher: VISU\Signal\Dispatcher
+	- readSignalsFromContainer(@container)
+
+/**
+ * Command line interface
+ *
+ * ----------------------------------------------------------------------------
+ */
+@visu.cli: League\CLImate\CLImate
+
+@visu.command.registry: VISU\Command\CommandRegistry(@container)
+	- readCommandsFromContainer(@container)
+
+@visu.command.cli_loader: VISU\Command\CommandLineInterfaceLoader(@visu.command.registry, @visu.cli)
+
+/**
+ * VISU Commands
+ */
+@visu.command.cache_clear: VISU\Command\CacheClearCommand
+	= command: 'cache:clear'
+
+@visu.command.dump_container: VISU\Command\ContainerDumpCommand(@container)
+	= command: 'container:dump'
+
+@visu.command.available: VISU\Command\AvailableCommand(@visu.command.registry)
+	= command: 'commands:available'
+
+@visu.command.maker: VISU\Command\MakerCommand(@visu.maker)
+    = command: 'make'
+
+@visu.command.dump_signal_handlers: VISU\Command\SignalDumpCommand(@visu.dispatcher)
+	= command: 'signals:dump'
+
+/**
+ * Maker / CodeGenerator
+ *
+ * ----------------------------------------------------------------------------
+ */
+@visu.maker.generator_class: VISU\Maker\Generator\ClassGenerator
+
+:visu.maker.command_namespace: 'App/Command'
+:visu.maker.path_commands_ctn: 'commands.ctn'
+@visu.maker.generator_command: VISU\Maker\Generator\CommandGenerator
+	- setPathCommandsCtn(:visu.maker.path_commands_ctn)
+	- setCommandNamespace(:visu.maker.command_namespace)
+
+
+// build the maker
+@visu.maker: VISU\Maker\Maker
+	- bind(@visu.maker.generator_class)
+	- bind(@visu.maker.generator_command)
