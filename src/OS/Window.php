@@ -122,6 +122,34 @@ class Window
     }
 
     /**
+     * Returns a window attribute using a GLFW constant.
+     * 
+     * @param int $attribute The attribute to query
+     * @return int The attribute value
+     */
+    public function getAttribute(int $attribute) : int
+    {
+        return glfwGetWindowAttrib($this->requiresInitialization(), $attribute);
+    }
+
+    /**
+     * Sets a window attribute using a GLFW constant. 
+     * VISU validates the options and throws an exception if the attribute is not changeable.
+     * 
+     * @param int $attribute 
+     * @param int $value 
+     * @return void 
+     */
+    public function setAttribute(int $attribute, int $value) : void
+    {
+        if (!in_array($attribute, [GLFW_DECORATED, GLFW_FLOATING, GLFW_RESIZABLE, GLFW_VISIBLE, GLFW_AUTO_ICONIFY, GLFW_FOCUS_ON_SHOW])) {
+            throw new WindowException("Attribute $attribute is not modifiable with an existing window.");
+        }
+
+        glfwSetWindowAttrib($this->requiresInitialization(), $attribute, $value);
+    }
+
+    /**
      * Does the window request closing?
      * 
      * @return bool True if the window should close, false otherwise
@@ -226,5 +254,185 @@ class Window
         $y = 0;
         glfwGetWindowPos($this->requiresInitialization(), $x, $y);
         return new Vec2($x, $y);
-    }    
+    }
+
+    /**
+     * Set the window position in screen coordinates
+     * 
+     * @param int $x The new window x position in screen coordinates
+     * @param int $y The new window y position in screen coordinates
+     */
+    public function setPosition(int $x, int $y) : void
+    {
+        glfwSetWindowPos($this->requiresInitialization(), $x, $y);
+    }
+
+    /**
+     * Get the window framebuffer size in pixels as a Vec2
+     * 
+     * @return Vec2 a vector containing the window framebuffer size
+     */
+    public function getFramebufferSizeVec() : Vec2
+    {
+        $x = 0;
+        $y = 0;
+        glfwGetFramebufferSize($this->requiresInitialization(), $x, $y);
+        return new Vec2($x, $y);
+    }
+
+    /**
+     * Get the window framebuffer width in pixels
+     * 
+     * @return int The window framebuffer width in pixels
+     */
+    public function getFramebufferWidth() : int
+    {
+        $x = 0;
+        $y = 0;
+        glfwGetFramebufferSize($this->requiresInitialization(), $x, $y);
+        return $x;
+    }
+
+    /**
+     * Get the window framebuffer height in pixels
+     * 
+     * @return int The window framebuffer height in pixels
+     */
+    public function getFramebufferHeight() : int
+    {
+        $x = 0;
+        $y = 0;
+        glfwGetFramebufferSize($this->requiresInitialization(), $x, $y);
+        return $y;
+    }
+
+    /**
+     * Set the windows size limits in screen coordinates
+     * 
+     * @param int $minWidth The minimum window width in screen coordinates
+     * @param int $minHeight The minimum window height in screen coordinates
+     * @param int $maxWidth The maximum window width in screen coordinates
+     * @param int $maxHeight The maximum window height in screen coordinates
+     */
+    public function setSizeLimits(int $minWidth, int $minHeight, int $maxWidth, int $maxHeight) : void
+    {
+        glfwSetWindowSizeLimits($this->requiresInitialization(), $minWidth, $minHeight, $maxWidth, $maxHeight);
+    }
+
+    /**
+     * Set the windows aspect ratio
+     * 
+     * @param int $numerator The aspect ratio numerator
+     * @param int $denominator The aspect ratio denominator
+     */
+    public function setAspectRatio(int $numerator, int $denominator) : void
+    {
+        glfwSetWindowAspectRatio($this->requiresInitialization(), $numerator, $denominator);
+    }
+
+    /**
+     * Maximizes the window
+     */
+    public function maximize() : void
+    {
+        glfwMaximizeWindow($this->requiresInitialization());
+    }
+
+    /**
+     * Returns boolean if the window is maximized
+     * 
+     * @return bool True if the window is maximized, false otherwise
+     * 
+     */
+    public function isMaximized() : bool
+    {
+        return (bool) glfwGetWindowAttrib($this->requiresInitialization(), GLFW_MAXIMIZED);
+    } 
+
+    /**
+     * Iconifies the window
+     */
+    public function iconify() : void
+    {
+        glfwIconifyWindow($this->requiresInitialization());
+    }
+
+    /**
+     * Returns boolean if the window is iconified
+     * 
+     * @return bool True if the window is iconified, false otherwise
+     * 
+     */
+    public function isIconified() : bool
+    {
+        return (bool) glfwGetWindowAttrib($this->requiresInitialization(), GLFW_ICONIFIED);
+    }
+
+    /**
+     * Restores the window
+     * This can be called to undo a maximize or iconify call
+     */
+    public function restore() : void
+    {
+        glfwRestoreWindow($this->requiresInitialization());
+    }
+
+    /**
+     * Show the window
+     * This will make the window visible again after a hide call. Dont confuse this with initialize.
+     */
+    public function show() : void
+    {
+        glfwShowWindow($this->requiresInitialization());
+    }
+
+    /**
+     * Hide the window
+     * This will make the window invisible but not destroy it
+     */
+    public function hide() : void
+    {
+        glfwHideWindow($this->requiresInitialization());
+    }
+
+    /**
+     * Returns boolean if the window is visible (show/hide state)
+     *  
+     * @return bool True if the window is visible
+     */
+    public function isVisible() : bool
+    {
+        return glfwGetWindowAttrib($this->requiresInitialization(), GLFW_VISIBLE) === GLFW_TRUE;
+    }
+
+    /**
+     * Give the window input focus
+     * Call this to really annoy the user.
+     */
+    public function focus() : void
+    {
+        glfwFocusWindow($this->requiresInitialization());
+    }
+
+    /**
+     * Returns boolean if the window has input focus
+     * 
+     * @return bool True if the window has input focus
+     */
+    public function hasFocus() : bool
+    {
+        return glfwGetWindowAttrib($this->requiresInitialization(), GLFW_FOCUSED) === GLFW_TRUE;
+    }
+
+    /**
+     * Request attention, window attention request
+     * This will make the window title bar flash depending on the OS
+     */
+    public function requestAttention() : void
+    {
+        glfwRequestWindowAttention($this->requiresInitialization());
+    }
+
+
+
 } 
