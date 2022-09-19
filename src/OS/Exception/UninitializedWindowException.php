@@ -1,5 +1,5 @@
 <?php 
 
-namespace VISU\OS;
+namespace VISU\OS\Exception;
 
 class UninitializedWindowException extends WindowException {}

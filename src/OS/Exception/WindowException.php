@@ -1,6 +1,6 @@
 <?php 
 
-namespace VISU\OS;
+namespace VISU\OS\Exception;
 
 use VISU\Exception\VISUException;
 

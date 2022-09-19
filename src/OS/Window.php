@@ -3,9 +3,12 @@
 namespace VISU\OS;
 
 use GL\Math\Vec2;
+
 use GLFWmonitor;
 use GLFWwindow;
+
 use VISU\Graphics\GLState;
+use VISU\OS\Exception\{WindowException, UninitializedWindowException};
 
 class Window
 {
@@ -462,7 +465,7 @@ class Window
      */
     public function setKeyCallback(callable $callback) : void
     {
-        glfwSetKeyCallback( $this->requiresInitialization(), $callback);
+        glfwSetKeyCallback($this->requiresInitialization(), $callback);
     }
 
 } 
