@@ -125,6 +125,46 @@ class Window
     }
 
     /**
+     * Sets the windows event handler and registers it with GLFW
+     * 
+     * @param WindowEventHandlerInterface $handler 
+     * @return void 
+     */
+    public function setEventHandler(WindowEventHandlerInterface $handler) : void
+    {
+        $glfwWindow = $this->requiresInitialization();
+
+        glfwSetKeyCallback($glfwWindow, function($key, $scancode, $action, $mods) use($handler) {
+            $handler->handleWindowKey($this, $key, $scancode, $action, $mods);
+        });
+
+        glfwSetCharCallback($glfwWindow, function($char) use($handler) {
+            $handler->handleWindowChar($this, $char);
+        });
+    }
+
+    /**
+     * Poll the queued window events and run the callbacks
+     */
+    public function pollEvents() : void
+    {
+        $this->requiresInitialization();
+        glfwPollEvents();
+    }
+
+    /**
+     * Swap the windows framebuffer
+     * 
+     * This will swap the front and back buffer of the window
+     * If not explicitly disabled we have a double buffered window by default
+     * which requires this call to be made after rendering
+     */
+    public function swapBuffers() : void
+    {
+        glfwSwapBuffers($this->requiresInitialization());
+    }
+
+    /**
      * Returns a window attribute using a GLFW constant.
      * 
      * @param int $attribute The attribute to query
@@ -435,37 +475,4 @@ class Window
     {
         glfwRequestWindowAttention($this->requiresInitialization());
     }
-
-    /**
-     * Poll the queued window events and run the callbacks
-     */
-    public function pollEvents() : void
-    {
-        $this->requiresInitialization();
-        glfwPollEvents();
-    }
-
-    /**
-     * Swap the windows framebuffer
-     * 
-     * This will swap the front and back buffer of the window
-     * If not explicitly disabled we have a double buffered window by default
-     * which requires this call to be made after rendering
-     */
-    public function swapBuffers() : void
-    {
-        glfwSwapBuffers($this->requiresInitialization());
-    }
-
-    /**
-     * Register the windows key callback
-     * 
-     * This will call the given callback when a key event occurs, for more 
-     * information see the `glfwSetKeyCallback` documentation.
-     */
-    public function setKeyCallback(callable $callback) : void
-    {
-        glfwSetKeyCallback($this->requiresInitialization(), $callback);
-    }
-
 } 
