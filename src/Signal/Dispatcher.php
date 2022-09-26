@@ -6,7 +6,7 @@ use ClanCats\Container\Container;
 
 use VISU\Signal\RegisterHandlerException;
 
-class Dispatcher
+class Dispatcher implements DispatcherInterface
 {
     /**
      * Registered signals
@@ -154,10 +154,12 @@ class Dispatcher
     }
 
     /**
-     * Dispatch a signal
+     * Dispatch a given signal to all handlers
+     * Calling this method will invoke all handlers that are registered to the given signal key.
      *
-     * @param string        $key
-     * @param Signal        $signal
+     * @param string        $key The signal key, this is name on which handlers are registered
+     * @param Signal        $signal The signal to dispatch
+     * @return void
      */
     public function dispatch(string $key, Signal $signal) : void
     {
