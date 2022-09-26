@@ -64,4 +64,35 @@ class KeySignal extends Signal
         $this->action = $action;
         $this->mods = $mods;
     }
+    
+    public function isShiftDown(): bool
+    {
+        return ($this->mods & GLFW_MOD_SHIFT) === GLFW_MOD_SHIFT;
+    }
+
+    public function isControlDown(): bool
+    {
+        return ($this->mods & GLFW_MOD_CONTROL) === GLFW_MOD_CONTROL;
+    }
+
+    public function isAltDown(): bool
+    {
+        return ($this->mods & GLFW_MOD_ALT) === GLFW_MOD_ALT;
+    }
+
+    public function isSuperDown(): bool
+    {
+        return ($this->mods & GLFW_MOD_SUPER) === GLFW_MOD_SUPER;
+    }
+
+    public function isCapsLockOn(): bool
+    {
+        return ($this->mods & GLFW_MOD_CAPS_LOCK) === GLFW_MOD_CAPS_LOCK;
+    }
+
+    public function isNumLockOn(): bool
+    {
+        return ($this->mods & GLFW_MOD_NUM_LOCK) === GLFW_MOD_NUM_LOCK;
+    }
+
 }

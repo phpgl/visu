@@ -11,6 +11,14 @@ class Key
      * $input->getKeyState(Input\Key::SPACE) === INPUT::PRESS
      * ```
      */
+    // mods
+    public const MOD_SHIFT = GLFW_MOD_SHIFT;
+    public const MOD_CONTROL = GLFW_MOD_CONTROL;
+    public const MOD_ALT = GLFW_MOD_ALT;
+    public const MOD_SUPER = GLFW_MOD_SUPER;
+    public const MOD_CAPS_LOCK = GLFW_MOD_CAPS_LOCK;
+    public const MOD_NUM_LOCK = GLFW_MOD_NUM_LOCK;
+
     // keys
     public const UNKNOWN = GLFW_KEY_UNKNOWN;
     public const SPACE = GLFW_KEY_SPACE;
