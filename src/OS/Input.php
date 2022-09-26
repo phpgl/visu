@@ -85,6 +85,85 @@ class Input implements WindowEventHandlerInterface
     }
 
     /**
+     * Returns boolean if the given key is released
+     * 
+     * Example:
+     * ```php
+     * $input->isKeyReleased(Key::SPACE);
+     * ```
+     * 
+     * @param int $key The key to check
+     * @return bool True if the key is released, false otherwise
+     */
+    public function isKeyReleased(int $key) : bool
+    {
+        return $this->getKeyState($key) === self::RELEASE;
+    }
+
+    /**
+     * Returns boolean if the given key is repeated
+     * 
+     * Example:
+     * ```php
+     * $input->isKeyRepeated(Key::SPACE);
+     * ```
+     * 
+     * @param int $key The key to check
+     * @return bool True if the key is repeated, false otherwise
+     */
+    public function isKeyRepeated(int $key) : bool
+    {
+        return $this->getKeyState($key) === self::REPEAT;
+    }
+
+    /**
+     * Get the state for a given mouse button
+     * 
+     * Can return one of the following values:
+     * - `Input::PRESS`
+     * - `Input::RELEASE`
+     * 
+     * @param int $button The mouse button to get the state for
+     * @return int The state of the mouse button
+     */
+    public function getMouseButtonState(int $button) : int
+    {
+        return glfwGetMouseButton($this->glfwWindowHandle, $button);
+    }
+
+    /**
+     * Returns boolean if the given mouse button is pressed
+     * 
+     * Example: 
+     * ```php
+     * $input->isMouseButtonPressed(MouseButton::LEFT);
+     * ```
+     * 
+     * @param int $button The mouse button to check
+     * @return bool True if the mouse button is pressed, false otherwise
+     */
+    public function isMouseButtonPressed(int $button) : bool
+    {
+        return $this->getMouseButtonState($button) === self::PRESS;
+    }
+
+    /**
+     * Returns boolean if the given mouse button is released
+     * 
+     * Example:
+     * ```php
+     * $input->isMouseButtonReleased(MouseButton::LEFT);
+     * ```
+     * 
+     * @param int $button The mouse button to check
+     * @return bool True if the mouse button is released, false otherwise
+     */
+    public function isMouseButtonReleased(int $button) : bool
+    {
+        return $this->getMouseButtonState($button) === self::RELEASE;
+    }
+
+    /**
      * Window key event callback 
      * This method is invoked when a key is pressed, repeated or released.
      * 
