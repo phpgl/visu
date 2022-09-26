@@ -12,4 +12,3 @@ It comes with high level abstractions for common tasks but also allows you to ac
 ## Features 
 
  * Shader loading with macros and inclues
-![image](https://user-images.githubusercontent.com/956212/192290212-985ac02e-5878-49df-984c-a9593f5d101e.png)
