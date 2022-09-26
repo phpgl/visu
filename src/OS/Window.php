@@ -125,6 +125,17 @@ class Window
     }
 
     /**
+     * Returns the plain GLFW window handle
+     * 
+     * @return GLFWwindow 
+     * @throws UninitializedWindowException 
+     */
+    public function getGLFWHandle() : GLFWwindow
+    {
+        return $this->requiresInitialization();
+    }
+
+    /**
      * Sets the windows event handler and registers it with GLFW
      * 
      * @param WindowEventHandlerInterface $handler 
