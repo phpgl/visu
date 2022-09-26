@@ -2,61 +2,35 @@
 
 namespace VISU\Tests;
 
-use GLFWwindow;
 use VISU\Graphics\GLState;
+use VISU\OS\Window;
 
 abstract class GLContextTestCase extends \PHPUnit\Framework\TestCase
 {
-    protected bool $glfwInitialized = false;
-    protected ?GLFWwindow $window = null;
+    protected static bool $glfwInitialized = false;
 
-    protected GLState $glstate;
+    protected static GLState $glstate;
 
     protected const TEST_VIEW_WIDTH = 480;
     protected const TEST_VIEW_HEIGHT = 360;
 
     public function setUp() : void
     {
-        if (!$this->glfwInitialized) 
+        if (!self::$glfwInitialized) 
         {
-            $this->glfwInitialized = true;
-            $this->glstate = new GLState;
-
             if (!glfwInit()) {
                 throw new \Exception("Could not initalize glfw...");
             }
-    
-            // configure the window
-            glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-    
-            // offscreen
-            glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
-            glfwWindowHint(GLFW_COCOA_MENUBAR, GLFW_FALSE);
-            glfwWindowHint(GLFW_COCOA_CHDIR_RESOURCES, GLFW_FALSE);
-    
-            glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
-            glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    
-            // fix for macOs
-            glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-        }
-        
-        if (!$this->window) {
-             // create the window
-            $windowWidth = self::TEST_VIEW_WIDTH;
-            $windowHeight = self::TEST_VIEW_HEIGHT;
-            if (!$this->window = glfwCreateWindow($windowWidth, $windowHeight, "PHPUnit Offscreen")) {
-                throw new \Exception("Could not open window...");
-            }
 
-            // setup the window
-            glfwMakeContextCurrent($this->window);
+            self::$glfwInitialized = true;
+            self::$glstate = new GLState;
         }
     }
 
-    protected function tearDown() : void
+    public function createWindow() : Window
     {
-        if ($this->window) glfwDestroyWindow($this->window);
+        $window = new Window("PHPUnit Offscreen", self::TEST_VIEW_WIDTH, self::TEST_VIEW_HEIGHT);
+        $window->initailize(self::$glstate);
+        return $window;
     }
 }

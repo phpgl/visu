@@ -3,9 +3,14 @@
 namespace VISU\OS;
 
 use GLFWwindow;
+
+use GL\Math\Vec2;
+
 use VISU\Signal\DispatcherInterface;
-use VISU\Signals\Input\CharSignal;
-use VISU\Signals\Input\KeySignal;
+use VISU\Signals\Input\{
+    CharSignal, 
+    KeySignal
+};
 
 /**
  * This class is responsible for handling window events, and includes a bunch of
@@ -41,14 +46,14 @@ class Input implements WindowEventHandlerInterface
      * @return void 
      */
     public function __construct(
-        private Window $window,
+        Window $window,
         private DispatcherInterface $dispatcher,
         bool $registerAsEventHandler = true
     ) {
-        $this->glfwWindowHandle = $this->window->getGLFWHandle();
+        $this->glfwWindowHandle = $window->getGLFWHandle();
 
         if ($registerAsEventHandler) {
-            $this->window->setEventHandler($this);
+            $window->setEventHandler($this);
         }
     }
 
@@ -161,6 +166,57 @@ class Input implements WindowEventHandlerInterface
     public function isMouseButtonReleased(int $button) : bool
     {
         return $this->getMouseButtonState($button) === self::RELEASE;
+    }
+
+    /**
+     * Get the current cursor position
+     * 
+     * @return Vec2 The current cursor position
+     */
+    public function getCursorPosition() : Vec2
+    {
+        $x = 0.0;
+        $y = 0.0;
+        glfwGetCursorPos($this->glfwWindowHandle, $x, $y);
+
+        return new Vec2($x, $y);
+    }
+
+    /**
+     * Set the cursor position
+     * 
+     * @param Vec2 $position The position to set the cursor to
+     * @return void
+     */
+    public function setCursorPosition(Vec2 $position) : void
+    {
+        glfwSetCursorPos($this->glfwWindowHandle, $position->x, $position->y);
+    }
+
+    /**
+     * Set the cursor mode
+     * 
+     * Available modes:
+     * - `CursorMode::NORMAL`
+     * - `CursorMode::HIDDEN`
+     * - `CursorMode::DISABLED`
+     * 
+     * @param CursorMode $mode The mode to set the cursor to
+     * @return void
+     */
+    public function setCursorMode(CursorMode $mode) : void
+    {
+        glfwSetInputMode($this->glfwWindowHandle, GLFW_CURSOR, $mode->value);
+    }
+
+    /**
+     * Get the current cursor mode
+     * 
+     * @return CursorMode The current cursor mode
+     */
+    public function getCursorMode() : CursorMode
+    {
+        return CursorMode::from(glfwGetInputMode($this->glfwWindowHandle, GLFW_CURSOR));
     }
 
     /**

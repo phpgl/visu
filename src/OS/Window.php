@@ -121,6 +121,7 @@ class Window
     {
         if ($this->handle !== null) {
             glfwDestroyWindow($this->handle);
+            $this->handle = null;
         }
     }
 

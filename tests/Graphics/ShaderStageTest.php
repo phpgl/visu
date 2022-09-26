@@ -3,6 +3,7 @@
 namespace VISU\Tests\Graphics;
 
 use VISU\Graphics\ShaderStage;
+use VISU\OS\Window;
 use VISU\Tests\GLContextTestCase;
 
 /**
@@ -10,6 +11,14 @@ use VISU\Tests\GLContextTestCase;
  */
 class ShaderStageTest extends GLContextTestCase
 {
+    private Window $window;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->window = $this->createWindow();
+    }
+
     public function testShaderCreation()
     {
         $shader = new ShaderStage(ShaderStage::VERTEX);

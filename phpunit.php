@@ -23,4 +23,3 @@ define('VISU_PATH_APPCONFIG', VISU_PATH_ROOT . DS . 'app');
 define('PATH_TEST_RESOURCES', __DIR__ . DS . 'tests' . DS . 'resources');
 define('VISU_PATH_RESOURCES', PATH_TEST_RESOURCES);
 define('PATH_TEST_RES_SHADER', PATH_TEST_RESOURCES . DS . 'shaders');
-

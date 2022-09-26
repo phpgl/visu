@@ -3,8 +3,10 @@
 namespace VISU\Tests\Graphics;
 
 use VISU\Graphics\Exception\ShaderProgramLinkingException;
+use VISU\Graphics\GLState;
 use VISU\Graphics\ShaderProgram;
 use VISU\Graphics\ShaderStage;
+use VISU\OS\Window;
 use VISU\Tests\GLContextTestCase;
 
 /**
@@ -12,9 +14,17 @@ use VISU\Tests\GLContextTestCase;
  */
 class ShaderProgramTest extends GLContextTestCase
 {
+    private Window $window;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+        $this->window = $this->createWindow();
+    }
+
     public function testShaderCreation()
     {
-        $shader = new ShaderProgram($this->glstate);
+        $shader = new ShaderProgram(new GLState);
         $shader->attach(new ShaderStage(ShaderStage::VERTEX, <<< 'GLSL'
 #version 330 core
 layout (location = 0) in vec3 position;
@@ -49,7 +59,7 @@ GLSL));
         }
 
         $this->expectException(ShaderProgramLinkingException::class);
-        $shader = new ShaderProgram($this->glstate);
+        $shader = new ShaderProgram(new GLState);
         $shader->attach(new ShaderStage(ShaderStage::VERTEX, <<< 'GLSL'
 #version 330 core
 layout (location = 0) in vec3 position;
