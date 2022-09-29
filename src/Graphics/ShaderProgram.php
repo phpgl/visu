@@ -2,6 +2,7 @@
 
 namespace VISU\Graphics;
 
+use GL\Math\Mat4;
 use GL\Math\Vec2;
 use GL\Math\Vec3;
 use GL\Math\Vec4;
@@ -905,6 +906,83 @@ class ShaderProgram
     }
 
     /**
+     * Sets a uniform value using `glUniformVec2f`, this methods is faster
+     * than using `setUniformVec2f()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniformVec2f` directly.
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param Vec2 $value 
+     * @return void 
+     */
+    public function unsafeSetUniformVec2(string $name, Vec2 $value) : void
+    {
+        glUniformVec2f($this->uniformLocationMap[$name], $value);
+    }
+
+    /**
+     * Sets a uniform value using `glUniformVec3f`, this methods is faster
+     * than using `setUniformVec3f()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniformVec3f` directly.
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param Vec3 $value 
+     * @return void 
+     */
+    public function unsafeSetUniformVec3(string $name, Vec3 $value) : void
+    {
+        glUniformVec3f($this->uniformLocationMap[$name], $value);
+    }
+
+    /**
+     * Sets a uniform value using `glUniformVec4f`, this methods is faster
+     * than using `setUniformVec4f()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniformVec4f` directly.
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param Vec4 $value 
+     * @return void 
+     */
+    public function unsafeSetUniformVec4(string $name, Vec4 $value) : void
+    {
+        glUniformVec4f($this->uniformLocationMap[$name], $value);
+    }
+
+    /**
+     * Sets a uniform value using `glUniformMatrix4f`, this methods is faster
+     * than using `setUniformMat4()` because it skips a bunch of checks, this is why it is labeled unsafe.
+     * 
+     * If you want to eliminate more overhead store the uniform location on your own and call `glUniformMatrix4f` directly.
+     * If this turns out to still be the bottleneck you a different technique then uniforms like SSBOs
+     * 
+     * !!! This methods expects that you already bound the program using "use"
+     * !!! This methods also expects that the uniform name your are using has been binded beforehand.
+     * 
+     * @param string $name The uniforms name
+     * @param bool $transpose Whether to transpose the matrix
+     * @param Mat4 $value
+     * @return void 
+     */
+    public function unsafeSetUniformMat4(string $name, bool $transpose, Mat4 $value) : void
+    {
+        glUniformMatrix4f($this->uniformLocationMap[$name], $transpose, $value);
+    }
+
+    /**
      * --------------------------------------------------------------------------------
      * Safe uniform setters (more overhead)
      * --------------------------------------------------------------------------------
@@ -1138,6 +1216,41 @@ class ShaderProgram
         $this->use();
         glUniformVec4f($this->getUniformLocation($name), $vec);
     }
+
+    /**
+     * Sets a `mat4` uniform value in the shader program. 
+     * 
+     * @param string $name The uniforms name
+     * @param bool $transpose 
+     * @param Mat4 $mat The matrix object to set as unfiform value
+     * @return void 
+     */
+    public function setUniformMatrix4f(string $name, bool $transpose, Mat4 $mat) : void
+    {
+        $this->use();
+        glUniformMatrix4f($this->getUniformLocation($name), $transpose, $mat);
+    }
+
+    /**
+     * Sets a `vec4` uniform value in the shader program. 
+     * This is identical to the method `setUniformMatrix4f`
+     * 
+     * @param string $name The uniforms name
+     * @param bool $transpose
+     * @param Mat4 $mat The matrix object to set as unfiform value
+     * @return void 
+     */
+    public function setUniformMat4(string $name, bool $transpose, Mat4 $mat) : void
+    {
+        $this->use();
+        glUniformMatrix4f($this->getUniformLocation($name), $transpose, $mat);
+    }
+
+    /**
+     * --------------------------------------------------------------------------------
+     * Safe uniform array setters (more overhead)
+     * --------------------------------------------------------------------------------
+     */
 
     /**
      * Sets an array of uniform float values using `glUniform1fv`
