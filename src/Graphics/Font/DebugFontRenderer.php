@@ -105,7 +105,6 @@ class DebugFontRenderer
             fragment_color = vec4(vec3(texture(font, v_uv).a), 1.0f);
         }
         GLSL));
-        var_dump($this->shaderProgram);
         $this->shaderProgram->link();
     }
 

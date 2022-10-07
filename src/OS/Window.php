@@ -146,13 +146,22 @@ class Window
     {
         $glfwWindow = $this->requiresInitialization();
 
-        glfwSetKeyCallback($glfwWindow, function($key, $scancode, $action, $mods) use($handler) {
-            $handler->handleWindowKey($this, $key, $scancode, $action, $mods);
+        $handlerRef = $handler;
+
+        $foo = 42;
+        var_dump(get_class($handler));
+
+        glfwSetKeyCallback($glfwWindow, function($key, $scancode, $action, $mods) use($handlerRef, $foo) {
+            var_dump($foo);
+            var_dump(get_class($handlerRef));
+            echo "Key: $key, Scancode: $scancode, Action: $action, Mods: $mods" . PHP_EOL;
+            // $handler->handleWindowKey($this, $key, $scancode, $action, $mods);
         });
 
-        glfwSetCharCallback($glfwWindow, function($char) use($handler) {
-            $handler->handleWindowChar($this, $char);
-        });
+        // glfwSetCharCallback($glfwWindow, function($char) use(&$handler) {
+        //     // echo "Char: $char" . PHP_EOL;
+        //     // $handler->handleWindowChar($this, $char);
+        // });
     }
 
     /**

@@ -51,10 +51,6 @@ class Input implements WindowEventHandlerInterface
         bool $registerAsEventHandler = true
     ) {
         $this->glfwWindowHandle = $window->getGLFWHandle();
-
-        if ($registerAsEventHandler) {
-            $window->setEventHandler($this);
-        }
     }
 
     /**
