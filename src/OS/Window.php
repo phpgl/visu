@@ -38,6 +38,11 @@ class Window
     public readonly WindowHints $hints;
 
     /**
+     * Current window event handler
+     */
+    private WindowEventHandlerInterface $eventHandler;
+
+    /**
      * Window constructor
      * The constructor does not create thw window resource yet, use `initailize` for that.
      * 
@@ -145,23 +150,20 @@ class Window
     public function setEventHandler(WindowEventHandlerInterface $handler) : void
     {
         $glfwWindow = $this->requiresInitialization();
+        $this->eventHandler = $handler;
 
-        $handlerRef = $handler;
+        // register all event handlers
+        glfwSetKeyCallback($glfwWindow, [$this, 'triggerWindowKeyEvent']);
+    }
 
-        $foo = 42;
-        var_dump(get_class($handler));
-
-        glfwSetKeyCallback($glfwWindow, function($key, $scancode, $action, $mods) use($handlerRef, $foo) {
-            var_dump($foo);
-            var_dump(get_class($handlerRef));
-            echo "Key: $key, Scancode: $scancode, Action: $action, Mods: $mods" . PHP_EOL;
-            // $handler->handleWindowKey($this, $key, $scancode, $action, $mods);
-        });
-
-        // glfwSetCharCallback($glfwWindow, function($char) use(&$handler) {
-        //     // echo "Char: $char" . PHP_EOL;
-        //     // $handler->handleWindowChar($this, $char);
-        // });
+    /**
+     * Triggers a window key event.
+     * This methods assumes that `setEventHandler` has been called before. 
+     * You can call this method yourself to simulate a key event.
+     */
+    public function triggerWindowKeyEvent(int $key, int $scancode, int $action, int $mods) : void
+    {
+        $this->eventHandler->handleWindowKey($this, $key, $scancode, $action, $mods);
     }
 
     /**
