@@ -154,6 +154,13 @@ class Window
 
         // register all event handlers
         glfwSetKeyCallback($glfwWindow, [$this, 'triggerWindowKeyEvent']);
+        glfwSetCharCallback($glfwWindow, [$this, 'triggerWindowCharEvent']);
+        glfwSetCharModsCallback($glfwWindow, [$this, 'triggerWindowCharModsEvent']);
+        glfwSetMouseButtonCallback($glfwWindow, [$this, 'triggerWindowMouseButtonEvent']);
+        glfwSetCursorPosCallback($glfwWindow, [$this, 'triggerWindowCursorPosEvent']);
+        glfwSetCursorEnterCallback($glfwWindow, [$this, 'triggerWindowCursorEnterEvent']);
+        glfwSetScrollCallback($glfwWindow, [$this, 'triggerWindowScrollEvent']);
+        glfwSetDropCallback($glfwWindow, [$this, 'triggerWindowDropEvent']);
     }
 
     /**
@@ -164,6 +171,78 @@ class Window
     public function triggerWindowKeyEvent(int $key, int $scancode, int $action, int $mods) : void
     {
         $this->eventHandler->handleWindowKey($this, $key, $scancode, $action, $mods);
+    }
+
+    /**
+     * Triggers a window char event.
+     * This methods assumes that `setEventHandler` has been called before. 
+     * You can call this method yourself to simulate a char event.
+     */
+    public function triggerWindowCharEvent(int $codepoint) : void
+    {
+        $this->eventHandler->handleWindowChar($this, $codepoint);
+    }
+
+    /**
+     * Triggers a window char mods event.
+     * This methods assumes that `setEventHandler` has been called before. 
+     * You can call this method yourself to simulate a char mods event.
+     */
+    public function triggerWindowCharModsEvent(int $codepoint, int $mods) : void
+    {
+        $this->eventHandler->handleWindowCharMods($this, $codepoint, $mods);
+    }
+
+    /**
+     * Triggers a window mouse button event.
+     * This methods assumes that `setEventHandler` has been called before. 
+     * You can call this method yourself to simulate a mouse button event.
+     */
+    public function triggerWindowMouseButtonEvent(int $button, int $action, int $mods) : void
+    {
+        $this->eventHandler->handleWindowMouseButton($this, $button, $action, $mods);
+    }
+
+    /**
+     * Triggers a window cursor position event.
+     * This methods assumes that `setEventHandler` has been called before. 
+     * You can call this method yourself to simulate a cursor position event.
+     */
+    public function triggerWindowCursorPosEvent(float $xpos, float $ypos) : void
+    {
+        $this->eventHandler->handleWindowCursorPos($this, $xpos, $ypos);
+    }
+
+    /**
+     * Triggers a window cursor enter event.
+     * This methods assumes that `setEventHandler` has been called before. 
+     * You can call this method yourself to simulate a cursor enter event.
+     */
+    public function triggerWindowCursorEnterEvent(int $entered) : void
+    {
+        $this->eventHandler->handleWindowCursorEnter($this, $entered);
+    }
+
+    /**
+     * Triggers a window scroll event.
+     * This methods assumes that `setEventHandler` has been called before. 
+     * You can call this method yourself to simulate a scroll event.
+     */
+    public function triggerWindowScrollEvent(float $xoffset, float $yoffset) : void
+    {
+        $this->eventHandler->handleWindowScroll($this, $xoffset, $yoffset);
+    }
+
+    /**
+     * Triggers a window drop event.
+     * This methods assumes that `setEventHandler` has been called before. 
+     * You can call this method yourself to simulate a drop event.
+     * 
+     * @param array<string>       $paths
+     */
+    public function triggerWindowDropEvent(array $paths) : void
+    {
+        $this->eventHandler->handleWindowDrop($this, $paths);
     }
 
     /**
