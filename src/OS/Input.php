@@ -8,8 +8,14 @@ use GL\Math\Vec2;
 
 use VISU\Signal\DispatcherInterface;
 use VISU\Signals\Input\{
-    CharSignal, 
-    KeySignal
+    CharModSignal,
+    CharSignal,
+    CursorEnterSignal,
+    CursorPosSignal,
+    DropSignal,
+    KeySignal,
+    MouseButtonSignal,
+    ScrollSignal
 };
 
 /**
@@ -41,14 +47,12 @@ class Input implements WindowEventHandlerInterface
      * 
      * @param Window $window The window instance to handle input for.
      * @param DispatcherInterface $dispatcher The dispatcher instance events will be dispatched to.
-     * @param bool $registerAsEventHandler If true, the input instance will register itself as an event handler for the window.
      * 
      * @return void 
      */
     public function __construct(
         Window $window,
-        private DispatcherInterface $dispatcher,
-        bool $registerAsEventHandler = true
+        private DispatcherInterface $dispatcher
     ) {
         $this->glfwWindowHandle = $window->getGLFWHandle();
     }
@@ -244,5 +248,94 @@ class Input implements WindowEventHandlerInterface
     public function handleWindowChar(Window $window, int $char): void
     {
         $this->dispatcher->dispatch("input.char", new CharSignal($window, $char));
+    }
+
+    /**
+     * Window char mods event callback
+     * This method is invoked when a character is inputted (e.g. when typing).
+     * 
+     * @param Window $window The window that received the event
+     * @param int $char The Unicode code point of the character
+     * @param int $mods Bit field describing which modifier keys were held down
+     * 
+     * @return void
+     */
+    public function handleWindowCharMods(Window $window, int $char, int $mods): void
+    {
+        $this->dispatcher->dispatch("input.char_mods", new CharModSignal($window, $char, $mods));
+    }
+
+    /**
+     * Window mouse button event callback
+     * This method is invoked when a mouse button is pressed or released.
+     * 
+     * @param Window $window The window that received the event
+     * @param int $button The mouse button that was pressed or released
+     * @param int $action The mouse button action. One of: GLFW_PRESS or GLFW_RELEASE
+     * @param int $mods Bit field describing which modifier keys were held down
+     * 
+     * @return void
+     */
+    public function handleWindowMouseButton(Window $window, int $button, int $action, int $mods): void
+    {
+        $this->dispatcher->dispatch("input.mouse_button", new MouseButtonSignal($window, $button, $action, $mods));
+    }
+
+    /**
+     * Window cursor position event callback
+     * This method is invoked when the cursor is moved.
+     * 
+     * @param Window $window The window that received the event
+     * @param float $xpos The new x-coordinate, in screen coordinates, of the cursor
+     * @param float $ypos The new y-coordinate, in screen coordinates, of the cursor
+     * 
+     * @return void
+     */
+    public function handleWindowCursorPos(Window $window, float $xpos, float $ypos): void
+    {
+        $this->dispatcher->dispatch("input.cursor", new CursorPosSignal($window, $xpos, $ypos));
+    }
+
+    /**
+     * Window cursor enter event callback
+     * This method is invoked when the cursor enters or leaves the client area of the window.
+     * 
+     * @param Window $window The window that received the event
+     * @param int $entered True if the cursor entered the window's client area, or false if it left it
+     * 
+     * @return void
+     */
+    public function handleWindowCursorEnter(Window $window, int $entered): void
+    {
+        $this->dispatcher->dispatch("input.cursor_enter", new CursorEnterSignal($window, $entered));
+    }
+
+    /**
+     * Window scroll event callback
+     * This method is invoked when a scrolling device is used, such as a mouse wheel or scrolling area of a touchpad.
+     * 
+     * @param Window $window The window that received the event
+     * @param float $xoffset The scroll offset along the x-axis
+     * @param float $yoffset The scroll offset along the y-axis
+     * 
+     * @return void
+     */
+    public function handleWindowScroll(Window $window, float $xoffset, float $yoffset): void
+    {
+        $this->dispatcher->dispatch("input.scroll", new ScrollSignal($window, $xoffset, $yoffset));
+    }
+
+    /**
+     * Window drop event callback
+     * This method is invoked when one or more dragged files are dropped on the window.
+     * 
+     * @param Window $window The window that received the event
+     * @param array<string> $paths The UTF-8 encoded file and/or directory path names
+     * 
+     * @return void
+     */
+    public function handleWindowDrop(Window $window, array $paths): void
+    {
+        $this->dispatcher->dispatch("input.drop", new DropSignal($window, $paths));
     }
 }
