@@ -6,7 +6,7 @@ use VISU\Graphics\Font\BitmapFontCharacter as BChr;
 return new BitmapFontAtlas(
     textureWidth: 242,
     textureHeight: 242,
-    texturePath: __DIR__ . '/cozette.png',
+    texturePath: __DIR__ . DS . 'cozette.png',
     characters: [
         32 => new BChr(x: 0, y: 0, width: 0, height: 0, xOffset: 0, yOffset: 0, xAdvance: 6),
         33 => new BChr(x: 28, y: 74, width: 3, height: 10, xOffset: 2, yOffset: 1, xAdvance: 6),

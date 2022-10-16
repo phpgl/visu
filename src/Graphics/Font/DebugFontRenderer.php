@@ -53,6 +53,11 @@ class DebugFontRenderer
     private ShaderProgram $shaderProgram;
 
     /**
+     * Current GL State
+     */
+    private GLState $glstate; 
+
+    /**
      * Constructor 
      * 
      * @param BitmapFontAtlas $atlas The font atlas to use.
@@ -60,6 +65,7 @@ class DebugFontRenderer
     public function __construct(BitmapFontAtlas $atlas, GLState $glstate)
     {
         $this->fontAtlas = $atlas;
+        $this->glstate = $glstate;
 
         // the font altas needs to contain a texture path for the debug font renderer to work.
         if ($this->fontAtlas->texturePath === null) {
@@ -247,10 +253,19 @@ class DebugFontRenderer
     {
         $this->shaderProgram->use();
 
+        // use the current window size for the viewport
+        if (!$this->glstate->window) {
+            return;
+        }
+
+        $width = $this->glstate->window->getWidth();
+        $height = $this->glstate->window->getHeight();
+        $dpi = 1.0;
+
         // for text rendering we need to use a orthographic projection
         $projection = new Mat4;
-        $projection->ortho(0, 1280, 720, 0, -1, 1);
-        glViewport(0, 0, 1280 * 2, 720 * 2);
+        $projection->ortho(0, $width, $height, 0, -1, 1);
+        glViewport(0, 0, $width * $dpi, $height * $dpi);
 
         // set the projection matrix
         $this->shaderProgram->setUniformMat4('projection', false, $projection);

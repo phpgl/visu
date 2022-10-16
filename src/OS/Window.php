@@ -161,6 +161,12 @@ class Window
         glfwSetCursorEnterCallback($glfwWindow, [$this, 'triggerWindowCursorEnterEvent']);
         glfwSetScrollCallback($glfwWindow, [$this, 'triggerWindowScrollEvent']);
         glfwSetDropCallback($glfwWindow, [$this, 'triggerWindowDropEvent']);
+
+        // register window events
+        glfwSetWindowSizeCallback($glfwWindow, function($width, $height) {
+            $this->width = $width;
+            $this->height = $height;
+        });
     }
 
     /**
