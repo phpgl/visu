@@ -81,7 +81,7 @@ for(int i = 0; i < NUM_OF_ITERATIONS; i++){
 }
 GLSL, $macros);
 
-        $this->assertStringContainsString("#version 330 core\n#define NUM_OF_ITERATIONS 42", $result);
+        $this->assertStringContainsString("#version 330 core\n#define NUM_OF_ITERATIONS 42", str_replace("\r", "", $result));
     }
 
     public function testShaderProcessDefineInjectionWithoutVersion()

@@ -54,7 +54,7 @@ GLSL));
 
     public function testShaderLinkError()
     {
-        if (PHP_OS_FAMILY === "Linux") {
+        if (PHP_OS_FAMILY === "Linux" || PHP_OS_FAMILY === 'Windows') {
             $this->markTestSkipped("This test is not supported on Linux, as no link error is thrown..");
         }
 
