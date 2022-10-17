@@ -8,6 +8,7 @@ use GLFWmonitor;
 use GLFWwindow;
 
 use VISU\Graphics\GLState;
+use VISU\Graphics\WindowFramebuffer;
 use VISU\OS\Exception\{WindowException, UninitializedWindowException};
 
 class Window
@@ -36,6 +37,11 @@ class Window
      * Current windows hints
      */
     public readonly WindowHints $hints;
+
+    /**
+     * The windows current framebuffer object
+     */
+    protected WindowFramebuffer $framebuffer;
 
     /**
      * Current window event handler
@@ -97,6 +103,9 @@ class Window
         // create the window
         $this->handle = glfwCreateWindow($this->width, $this->height, $this->title, $initalMonitor, null);
 
+        // create framebuffer object
+        $this->framebuffer = new WindowFramebuffer($state);
+
         // activate the window
         $this->activate($state);
     }
@@ -139,6 +148,16 @@ class Window
     public function getGLFWHandle() : GLFWwindow
     {
         return $this->requiresInitialization();
+    }
+
+    /**
+     * Returns the window framebuffer object
+     * 
+     * @return WindowFramebuffer 
+     */
+    public function getFramebuffer() : WindowFramebuffer
+    {
+        return $this->framebuffer;
     }
 
     /**

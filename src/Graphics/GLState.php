@@ -31,4 +31,18 @@ class GLState
      * @var int
      */
     public int $currentProgram = 0;
+
+    /**
+     * Currently bound READ framebuffer object
+     * 
+     * @var int
+     */
+    public int $currentReadFramebuffer = 0;
+
+    /**
+     * Currently bound DRAW framebuffer object
+     * 
+     * @var int
+     */
+    public int $currentDrawFramebuffer = 0;
 }
