@@ -1,7 +1,6 @@
 ![logo_s](https://user-images.githubusercontent.com/956212/192290126-b8c481de-9f22-4a8d-99b5-0ea16300ae70.png)
 
 
-
 # VISU - PHP Game Framework
 
 A Modern OpenGL Framework for PHP, ex php-game-framework. VISU aims to be a simple, yet powerful framework for creating 2D and 3D games and applications.
