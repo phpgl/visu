@@ -15,7 +15,7 @@ class RenderTarget
      * Constrcutor
      */
     public function __construct(
-        private GLState $gl, 
+        GLState $gl, 
         protected int $width, 
         protected int $height,
         ?AbstractFramebuffer $framebuffer = null, 
@@ -60,10 +60,5 @@ class RenderTarget
     {
         $this->framebuffer->bind();
         $this->updateViewport();
-    }
-
-    public function createDepthTexture(string $name): Texture
-    {
-        return new Texture($this->gl, $name, $this->width, $this->height, GL_DEPTH_COMPONENT, GL_DEPTH_COMPONENT, GL_FLOAT);
     }
 }
