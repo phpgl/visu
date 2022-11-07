@@ -8,6 +8,7 @@ use GLFWmonitor;
 use GLFWwindow;
 
 use VISU\Graphics\GLState;
+use VISU\Graphics\RenderTarget;
 use VISU\Graphics\WindowFramebuffer;
 use VISU\OS\Exception\{WindowException, UninitializedWindowException};
 
@@ -158,6 +159,16 @@ class Window
     public function getFramebuffer() : WindowFramebuffer
     {
         return $this->framebuffer;
+    }
+
+    /**
+     * Creates and returns the windows render target 
+     * 
+     * @return RenderTarget 
+     */
+    public function getRenderTarget() : RenderTarget
+    {
+        return new RenderTarget($this->width, $this->height, $this->framebuffer);
     }
 
     /**

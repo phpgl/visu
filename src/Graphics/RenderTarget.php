@@ -15,16 +15,11 @@ class RenderTarget
      * Constrcutor
      */
     public function __construct(
-        GLState $gl, 
         protected int $width, 
         protected int $height,
-        ?AbstractFramebuffer $framebuffer = null, 
+        AbstractFramebuffer $framebuffer 
     )
     {
-        if ($framebuffer === null) {
-            $framebuffer = new Framebuffer($gl);
-        }
-
         $this->framebuffer = $framebuffer;
     }
 
