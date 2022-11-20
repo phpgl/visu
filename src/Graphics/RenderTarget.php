@@ -24,6 +24,26 @@ class RenderTarget
     }
 
     /**
+     * Returns the render targets width
+     * 
+     * @return int
+     */
+    public function width(): int
+    {
+        return $this->width;
+    }
+
+    /**
+     * Returns the render targets height
+     * 
+     * @return int
+     */
+    public function height(): int
+    {
+        return $this->height;
+    }
+
+    /**
      * Returns the render targets framebuffer
      */
     public function framebuffer(): AbstractFramebuffer

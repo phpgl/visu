@@ -21,8 +21,10 @@ class PipelineContainer
     public function create(string $className)
     {
         if (isset($this->storage[$className])) {
-            throw new PipelineContainerException("Object of class {$className} already exists, resources must be unique");
+            throw new PipelineContainerException("Pipeline container already contains an instance of class: " . $className);
         }
+
+        $this->storage[$className] = new $className();
 
         return $this->storage[$className];
     }
