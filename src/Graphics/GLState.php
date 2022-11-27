@@ -45,4 +45,32 @@ class GLState
      * @var int
      */
     public int $currentDrawFramebuffer = 0;
+
+    /**
+     * Currently bound vertex array object
+     * 
+     * @var int
+     */
+    public int $currentVertexArray = 0;
+
+    /**
+     * Currently bound vertex buffer object
+     * 
+     * @var int
+     */
+    public int $currentVertexBuffer = 0;
+
+    /**
+     * Currently bound index buffer object
+     * 
+     * @var int
+     */
+    public int $currentIndexBuffer = 0;
+
+    /**
+     * Currently bound texture object
+     * 
+     * @var int
+     */
+    public int $currentTexture = 0;
 }
