@@ -39,7 +39,7 @@ class RenderPipeline
     )
     {
         $backbufferData = $data->create(BackbufferData::class);
-        $backbufferData->target = $this->importRenderTarget('backbuffer', $backbuffer);
+        $backbufferData->target = $this->importRenderTarget('backbuffer', $this->backbuffer);
     }
 
     /**

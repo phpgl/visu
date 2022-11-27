@@ -11,9 +11,30 @@ class PipelineResources
     /**
      * Internal array of render targets
      * 
-     * @var array<int, RenderTarget>
+     * @var array<string, RenderTarget>
      */
     private array $renderTargets = [];
+
+    /**
+     * Internal array of textures
+     * 
+     * @var array<string, Texture>
+     */
+    private array $textures = [];
+
+    /**
+     * Internal array of buffers
+     * 
+     * @var array<string, Buffer>
+     */
+    private array $buffers = [];
+
+    /**
+     * Holder of mixed generic static resources 
+     * 
+     * @var array<string, mixed>
+     */
+    private array $staticStorage = [];
 
     /**
      * The current ticke index the resources are accessed with
@@ -81,6 +102,51 @@ class PipelineResources
         }
 
         return $this->renderTargets[$resource->handle];
+    }
+
+    /**
+     * Stores a generic resource / value or object by name
+     * 
+     * @param string $name
+     * @param mixed $value
+     */
+    public function setStaticResource(string $name, mixed $value): void
+    {
+        $this->staticStorage[$name] = $value;
+    }
+
+    /**
+     * Returns a generic resource / value or object by name
+     * 
+     * @param string $name
+     * 
+     * @return mixed
+     */
+    public function getStaticResource(string $name): mixed
+    {
+        if (!isset($this->staticStorage[$name])) {
+            throw new PipelineResourceException("Static resource not found for name: " . $name);
+        }
+
+        return $this->staticStorage[$name];
+    }
+
+    /**
+     * Cacehs a generic resource / value or object by name
+     * This is the same as getStaticResource but you provide a callback which is called if the resource is not found.
+     * 
+     * @param string $name
+     * @param callable $callback
+     * 
+     * @return mixed
+     */
+    public function cacheStaticResource(string $name, callable $callback): mixed
+    {
+        if (!isset($this->staticStorage[$name])) {
+            $this->staticStorage[$name] = $callback($this->glState);
+        }
+
+        return $this->staticStorage[$name];
     }
 
     /**
