@@ -10,10 +10,22 @@ use VISU\Graphics\Rendering\PipelineResources;
 use VISU\Graphics\Rendering\RenderPass;
 use VISU\Graphics\Rendering\RenderPipeline;
 use VISU\Graphics\Rendering\Resource\TextureResource;
+use VISU\Graphics\ShaderProgram;
 
 class FullscreenQuadPass extends RenderPass
 {
+    /**
+     * The name of the texture unform in the shader
+     */
+    public string $textureUniformName = 'u_texture';
+
+    /**
+     * Constructor 
+     * 
+     * @return void 
+     */
     public function __construct(
+        private ShaderProgram $shader,
         private TextureResource $appliedTexture
     )
     {
@@ -38,11 +50,15 @@ class FullscreenQuadPass extends RenderPass
         });
 
         $quadVA->bind();
+        $this->shader->use();
 
-        // 
-        
-        // bind & clear the framebuffer
-        $renderTarget->framebuffer()->bind();
-        $renderTarget->framebuffer()->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        $glTexture = $resources->getTextureID($this->appliedTexture);
+        $this->shader->setUniform1i($this->textureUniformName, 0);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, $glTexture);
+
+        var_dump($glTexture); die;
+
+        $quadVA->draw();
     }
 }

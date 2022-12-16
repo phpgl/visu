@@ -5,6 +5,7 @@ namespace VISU\Graphics\Rendering;
 use VISU\Graphics\Exception\PipelineResourceException;
 use VISU\Graphics\GLState;
 use VISU\Graphics\RenderTarget;
+use VISU\Graphics\Texture;
 
 class PipelineResources
 {
@@ -83,7 +84,7 @@ class PipelineResources
      */
     public function setRenderTarget(RenderResource $resource, RenderTarget $target): void
     {
-        $this->renderTargets[$resource->handle] = $target;
+        $this->renderTargets[$resource->name] = $target;
     }
 
     /**
@@ -97,11 +98,42 @@ class PipelineResources
     {
         $this->resourceUseTick[$resource->name] = $this->tickIndex;
 
-        if (!isset($this->renderTargets[$resource->handle])) {
+        if (!isset($this->renderTargets[$resource->name])) {
             throw new PipelineResourceException("Render target not found for resource handle: " . $resource->handle . ' name: ' . $resource->name);
         }
 
-        return $this->renderTargets[$resource->handle];
+        return $this->renderTargets[$resource->name];
+    }
+
+    /**
+     * Sets a texture to the given handle
+     * 
+     * @param RenderResource $resource
+     * @param Texture $texture
+     * 
+     * @return void
+     */
+    public function setTexture(RenderResource $resource, Texture $texture): void
+    {
+        $this->textures[$resource->name] = $texture;
+    }
+
+    /**
+     * Returns a texture ID for the given resource
+     * The texture ID is the raw GL handle
+     * 
+     * @param RenderResource $resource
+     * @return int
+     */
+    public function getTextureID(RenderResource $resource): int
+    {
+        $this->resourceUseTick[$resource->name] = $this->tickIndex;
+
+        if (!isset($this->textures[$resource->name])) {
+            throw new PipelineResourceException("Texture not found for resource handle: " . $resource->handle . ' name: ' . $resource->name);
+        }
+
+        return $this->textures[$resource->name]->id;
     }
 
     /**

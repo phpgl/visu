@@ -83,4 +83,13 @@ class QuadVertexArray
             $this->state->currentVertexArray = $this->vertexArray;
         }
     }
+
+    /**
+     * Draws the quad
+     */
+    public function draw() : void
+    {
+        $this->bind();
+        glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    }
 }

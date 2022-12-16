@@ -4,7 +4,9 @@ namespace VISU\Graphics\Rendering;
 
 use VISU\Graphics\Rendering\Pass\BackbufferData;
 use VISU\Graphics\Rendering\Resource\RenderTargetResource;
+use VISU\Graphics\Rendering\Resource\TextureResource;
 use VISU\Graphics\RenderTarget;
+use VISU\Graphics\Texture;
 
 class RenderPipeline
 {
@@ -103,6 +105,24 @@ class RenderPipeline
         $resource->height = $target->height();
 
         $this->resourceAllocator->setRenderTarget($resource, $target);
+
+        return $resource;
+    }
+
+    /**
+     * Imports a texture resource
+     * 
+     * @param string $resourceName
+     * @param Texture $texture
+     * 
+     * @return TextureResource
+     */
+    public function importTexture(string $resourceName, Texture $texture): TextureResource
+    {
+        /** @var TextureResource */
+        $resource = $this->createResource(TextureResource::class, $resourceName);
+
+        $this->resourceAllocator->setTexture($resource, $texture);
 
         return $resource;
     }
