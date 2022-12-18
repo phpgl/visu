@@ -2,12 +2,17 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
+use GL\Math\Vec4;
 use VISU\Graphics\GLState;
 use VISU\Graphics\Rendering\Pass\BackbufferData;
 use VISU\Graphics\Rendering\Pass\ClearPass;
+use VISU\Graphics\Rendering\Pass\FullscreenQuadPass;
 use VISU\Graphics\Rendering\PipelineContainer;
 use VISU\Graphics\Rendering\PipelineResources;
 use VISU\Graphics\Rendering\RenderPipeline;
+use VISU\Graphics\ShaderProgram;
+use VISU\Graphics\ShaderStage;
+use VISU\Graphics\Texture;
 use VISU\OS\Input;
 use VISU\OS\Window;
 use VISU\Runtime\GameLoop;
@@ -25,6 +30,45 @@ $input = new Input($window, $dispatcher);
 $dispatcher->register('input.key', function (KeySignal $signal) {
     var_dump($signal);
 });
+
+$testTexture  = new Texture('test');
+// $testTexture->loadFromFile(__DIR__ . '/resources/fonts/cozette/cozette.png');
+$testTexture->loadFromFile(__DIR__ . '/resources/phplogo.png');
+
+// declare a simple shader to render the texture
+$shader = new ShaderProgram($gl);
+$shader->attach(new ShaderStage(GL_VERTEX_SHADER, <<<EOT
+#version 330 core
+
+layout (location = 0) in vec3 aPos;
+layout (location = 1) in vec2 aTexCoord;
+
+out vec2 TexCoords;
+
+void main()
+{
+    gl_Position = vec4(aPos, 1.0);
+    TexCoords = aTexCoord;
+}
+EOT
+));
+$shader->attach(new ShaderStage(GL_FRAGMENT_SHADER, <<<EOT
+#version 330 core
+
+out vec4 FragColor;
+in vec2 TexCoords;
+
+uniform sampler2D u_texture;
+
+void main()
+{             
+    FragColor = texture(u_texture, TexCoords);
+}
+EOT
+));
+
+$shader->link();
+
 
 class Game implements VISU\Runtime\GameLoopDelegate
 {
@@ -50,15 +94,18 @@ class Game implements VISU\Runtime\GameLoopDelegate
     public function render(float $delta): void
     {
         $windowRenderTarget = $this->window->getRenderTarget();
+        $windowRenderTarget->framebuffer()->clearColor = new Vec4(1, 0.2, 0.2, 1.0);
 
         $data = new PipelineContainer;
 
         $pipeline = new RenderPipeline($this->renderResources, $data, $windowRenderTarget);
 
+
+        global $testTexture, $shader;
+        $texRes = $pipeline->importTexture('test', $testTexture);
+
         $pipeline->addPass(new ClearPass($data->get(BackbufferData::class)->target));
-        
-
-
+        $pipeline->addPass(new FullscreenQuadPass($shader, $texRes));
 
         // $pipeline->addPass(new ShadowMapPass($renderables));
 
