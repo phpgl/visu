@@ -98,7 +98,6 @@ class Game implements VISU\Runtime\GameLoopDelegate
     {
         $windowRenderTarget = $this->window->getRenderTarget();
         $windowRenderTarget->framebuffer()->clearColor = new Vec4(1, 0.2, 0.2, 1.0);
-        $windowRenderTarget->preparePass();
 
         $data = new PipelineContainer;
 
@@ -108,7 +107,7 @@ class Game implements VISU\Runtime\GameLoopDelegate
         $texRes = $pipeline->importTexture('test', $testTexture);
 
         $pipeline->addPass(new ClearPass($data->get(BackbufferData::class)->target));
-        $pipeline->addPass(new FullscreenQuadPass($shader, $texRes));
+        $pipeline->addPass(new FullscreenQuadPass($data->get(BackbufferData::class)->target, $texRes, $shader));
 
         // $pipeline->addPass(new ShadowMapPass($renderables));
 

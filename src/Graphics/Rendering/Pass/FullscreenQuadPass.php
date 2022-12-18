@@ -9,6 +9,7 @@ use VISU\Graphics\Rendering\PipelineContainer;
 use VISU\Graphics\Rendering\PipelineResources;
 use VISU\Graphics\Rendering\RenderPass;
 use VISU\Graphics\Rendering\RenderPipeline;
+use VISU\Graphics\Rendering\Resource\RenderTargetResource;
 use VISU\Graphics\Rendering\Resource\TextureResource;
 use VISU\Graphics\ShaderProgram;
 
@@ -25,8 +26,9 @@ class FullscreenQuadPass extends RenderPass
      * @return void 
      */
     public function __construct(
+        private RenderTargetResource $renderTargetRes,
+        private TextureResource $appliedTexture,
         private ShaderProgram $shader,
-        private TextureResource $appliedTexture
     )
     {
     }
@@ -44,6 +46,9 @@ class FullscreenQuadPass extends RenderPass
      */
     public function execute(PipelineContainer $data, PipelineResources $resources): void
     {
+        $renderTarget = $resources->getRenderTarget($this->renderTargetRes);
+        $renderTarget->preparePass();
+
         /** @var QuadVertexArray */
         $quadVA = $resources->cacheStaticResource('quadva', function(GLState $gl) {
             return new QuadVertexArray($gl);
@@ -55,6 +60,7 @@ class FullscreenQuadPass extends RenderPass
         $glTexture = $resources->getTextureID($this->appliedTexture);
         $this->shader->setUniform1i($this->textureUniformName, 0);
         glActiveTexture(GL_TEXTURE0);
+        
         glBindTexture(GL_TEXTURE_2D, $glTexture);
 
         $quadVA->draw();
