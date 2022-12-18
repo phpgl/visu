@@ -24,11 +24,14 @@ glfwInit();
 $gl = new GLState;
 $window = new Window('Test Window', 640, 480);
 $window->initailize($gl);
+
 $dispatcher = new Dispatcher;
 $input = new Input($window, $dispatcher);
 
+$window->setEventHandler($input);
+
 $dispatcher->register('input.key', function (KeySignal $signal) {
-    var_dump($signal);
+    var_dump($signal->scancode);
 });
 
 $testTexture  = new Texture('test');
@@ -95,11 +98,11 @@ class Game implements VISU\Runtime\GameLoopDelegate
     {
         $windowRenderTarget = $this->window->getRenderTarget();
         $windowRenderTarget->framebuffer()->clearColor = new Vec4(1, 0.2, 0.2, 1.0);
+        $windowRenderTarget->preparePass();
 
         $data = new PipelineContainer;
 
         $pipeline = new RenderPipeline($this->renderResources, $data, $windowRenderTarget);
-
 
         global $testTexture, $shader;
         $texRes = $pipeline->importTexture('test', $testTexture);
