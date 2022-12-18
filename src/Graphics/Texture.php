@@ -2,6 +2,8 @@
 
 namespace VISU\Graphics;
 
+use GL\Buffer\BufferInterface;
+use GL\Buffer\UByteBuffer;
 use GL\Math\Vec2;
 use GL\Texture\Texture2D;
 use VISU\Graphics\Exception\TextureLoadException;
@@ -14,29 +16,19 @@ class Texture
     public readonly int $id;
 
     /**
-     * The textures width
+     * The textures width (copied from the options)
      */
-    protected int $width = 0;
+    private int $width = 0;
 
     /**
-     * The textures height
+     * The textures height (copied from the options)
      */
-    protected int $height = 0;
+    private int $height = 0;
 
     /**
-     * The textures internal format (This is the format the texture is stored in on the GPU)
+     * The texture options object
      */
-    protected int $internalFormat = GL_NONE;
-
-    /**
-     * The textures source format (This is the format of the texture data)
-     */
-    protected int $sourceFormat = GL_NONE;
-
-    /**
-     * The textures source type (This is the type of the texture data)
-     */
-    protected int $sourceType = GL_NONE;
+    protected ?TextureOptions $options = null;
 
     /**
      * Constructor
@@ -83,6 +75,100 @@ class Texture
     {
         return new Vec2($this->width, $this->height);
     }
+    
+    /**
+     * Applies the textures minification and magnification filter parameters
+     */
+    private function applyFilterParameters(): void
+    {
+        // to avoid incomplete textures ensure that mipmaps are generated
+        // when the min filter is set to mipmapped
+        if ($this->options->generateMipmaps === false) {
+            if ($this->options->minFilter === GL_LINEAR_MIPMAP_LINEAR ||
+                $this->options->minFilter === GL_LINEAR_MIPMAP_NEAREST ||
+                $this->options->minFilter === GL_NEAREST_MIPMAP_LINEAR ||
+                $this->options->minFilter === GL_NEAREST_MIPMAP_NEAREST) {
+                throw new TextureLoadException("Mipmapped minification filter set but mipmaps are not generated, this results in incomplete textures");
+            }
+        }
+
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, $this->options->minFilter);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, $this->options->magFilter);
+    }
+
+    /**
+     * Applies the textures wrap parameters
+     */
+    private function applyWrapParameters(): void
+    {
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, $this->options->wrapS);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, $this->options->wrapT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, $this->options->wrapR);
+    }
+
+    /**
+     * Uploads a buffer of raw data, expectes the internal properties to be set correctly. 
+     * 
+     * @param TextureOptions $options
+     * @param BufferInterface $buffer 
+     * @return void 
+     */
+    private function uploadBuffer(TextureOptions $options, BufferInterface $buffer) : void
+    {
+        // store the options
+        $this->options = $options;
+
+        // copy the size from the options
+        $this->width = $options->width;
+        $this->height = $options->height;
+
+        // bind 
+        glBindTexture(GL_TEXTURE_2D, $this->id);
+
+        // apply the texture paramters
+        $this->applyFilterParameters();
+        $this->applyWrapParameters();
+
+        // not to sure about this.. I for sure had a reason for it 
+        // in my engine but I can't remember why..
+        if ($this->width % 2 == 0 && $this->height === $this->width) {
+            glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+        } else {
+            glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+        }
+
+        // validate the internal format in the options
+        if ($options->internalFormat === null) {
+            throw new TextureLoadException("Internal format not set in texture options, cannot upload buffer to texture.");
+        }
+
+        // validate the source format in the options
+        if ($options->dataFormat === null) {
+            throw new TextureLoadException("Source format not set in texture options, cannot upload buffer to texture.");
+        }
+
+        // validate the source type in the options
+        if ($options->dataType === null) {
+            throw new TextureLoadException("Source type not set in texture options, cannot upload buffer to texture.");
+        }
+
+        glTexImage2D(
+            GL_TEXTURE_2D,
+            0,
+            $this->options->internalFormat,
+            $this->width,
+            $this->height,
+            0,
+            $this->options->dataFormat,
+            $this->options->dataType,
+            $buffer
+        );
+
+        // generate mipmaps if requested
+        if ($this->options->generateMipmaps) {
+            glGenerateMipmap(GL_TEXTURE_2D);
+        }
+    }
 
     /**
      * Loads an image from disk into the texture
@@ -126,47 +212,21 @@ class Texture
                 throw new TextureLoadException("Unsupported number of channels: {$textureData->channels()}");
         } 
 
-        $this->width = $textureData->width();
-        $this->height = $textureData->height();
-
-        if ($options->internalFormat !== null) {
-            $this->internalFormat = $options->internalFormat;
-        } else {
-            $this->internalFormat = $guessedInternalFormat;
+        if ($options->internalFormat === null) {
+            $options->internalFormat = $guessedInternalFormat;
         }
 
-        if ($options->format !== null) {
-            $this->sourceFormat = $options->format;
-        } else {
-            $this->sourceFormat = $guessedSourceFormat;
+        if ($options->dataFormat === null) {
+            $options->dataFormat = $guessedSourceFormat;
         }
 
-        if ($options->type !== null) {
-            $this->sourceType = $options->type;
-        } else {
-            $this->sourceType = GL_UNSIGNED_BYTE;
-        }
-        
-        glBindTexture(GL_TEXTURE_2D, $this->id);
-
-        // not to sure about this.. I for sure had a reason for it 
-        // in my engine but I can't remember why..
-        if ($this->width % 2 == 0 && $this->height === $this->width) {
-            glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
-        } else {
-            glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+        if ($options->dataType === null) {
+            $options->dataType = GL_UNSIGNED_BYTE;
         }
 
-        glTexImage2D(
-            GL_TEXTURE_2D,
-            0,
-            $this->internalFormat,
-            $this->width,
-            $this->height,
-            0,
-            $this->sourceFormat,
-            $this->sourceType,
-            $textureData->buffer()
-        );
+        $options->width = $textureData->width();
+        $options->height = $textureData->height();
+
+        $this->uploadBuffer($options, $textureData->buffer());
     }
 }

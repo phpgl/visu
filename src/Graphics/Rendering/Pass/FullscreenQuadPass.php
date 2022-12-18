@@ -57,8 +57,6 @@ class FullscreenQuadPass extends RenderPass
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, $glTexture);
 
-        var_dump($glTexture); die;
-
         $quadVA->draw();
     }
 }

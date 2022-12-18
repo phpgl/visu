@@ -43,15 +43,16 @@ class QuadVertexArray
         $this->state->currentVertexArray = $this->vertexArray;
         $this->state->currentVertexBuffer = $this->vertexBuffer;
 
+        // two triangles
         $buffer = new FloatBuffer([
             // positions     // texture Coords
-            -0.5,  0.5, 0.0,  0.0, 1.0, // top left
-             0.5,  0.5, 0.0,  1.0, 1.0, // top right
-             0.5, -0.5, 0.0,  1.0, 0.0, // bottom right
-
-             0.5, -0.5, 0.0,  1.0, 0.0, // bottom right
-            -0.5, -0.5, 0.0,  0.0, 0.0, // bottom left
-            -0.5,  0.5, 0.0,  0.0, 1.0  // top left
+            -1.0,  1.0, 0.0,  0.0, 1.0, // top left
+            -1.0, -1.0, 0.0,  0.0, 0.0, // bottom left
+             1.0, -1.0, 0.0,  1.0, 0.0, // bottom right
+             
+             1.0, -1.0, 0.0,  1.0, 0.0, // bottom right
+             1.0,  1.0, 0.0,  1.0, 1.0, // top right
+            -1.0,  1.0, 0.0,  0.0, 1.0  // top left
         ]);
 
         glBufferData(GL_ARRAY_BUFFER, $buffer, GL_STATIC_DRAW);
