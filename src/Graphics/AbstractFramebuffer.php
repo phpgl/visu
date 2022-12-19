@@ -141,7 +141,7 @@ abstract class AbstractFramebuffer
      * @param string $error 
      * @return bool 
      */
-    public function isValid(int &$status, string &$error): bool 
+    public function isValid(?int &$status = null, ?string &$error = null): bool 
     {
         $status = $this->getStatus();
 

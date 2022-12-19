@@ -168,7 +168,10 @@ class Window
      */
     public function getRenderTarget() : RenderTarget
     {
-        return new RenderTarget($this->width, $this->height, $this->framebuffer);
+        $width = $this->getFramebufferWidth();
+        $height = $this->getFramebufferHeight();
+
+        return new RenderTarget($width, $height, $this->framebuffer);
     }
 
     /**

@@ -110,13 +110,18 @@ class Texture
      * Uploads a buffer of raw data, expectes the internal properties to be set correctly. 
      * 
      * @param TextureOptions $options
-     * @param BufferInterface $buffer 
+     * @param BufferInterface|null $buffer 
      * @return void 
      */
-    private function uploadBuffer(TextureOptions $options, BufferInterface $buffer) : void
+    private function uploadBuffer(TextureOptions $options, ?BufferInterface $buffer = null) : void
     {
         // store the options
         $this->options = $options;
+
+        // validate width and height are set 
+        if ($options->width === null || $options->height === null) {
+            throw new TextureLoadException("Width and height must be set in texture options, cannot upload buffer to texture.");
+        }
 
         // copy the size from the options
         $this->width = $options->width;
@@ -155,17 +160,17 @@ class Texture
         glTexImage2D(
             GL_TEXTURE_2D,
             0,
-            $this->options->internalFormat,
+            $options->internalFormat,
             $this->width,
             $this->height,
             0,
-            $this->options->dataFormat,
-            $this->options->dataType,
+            $options->dataFormat,
+            $options->dataType,
             $buffer
         );
 
         // generate mipmaps if requested
-        if ($this->options->generateMipmaps) {
+        if ($options->generateMipmaps) {
             glGenerateMipmap(GL_TEXTURE_2D);
         }
     }
@@ -174,12 +179,13 @@ class Texture
      * Loads an image from disk into the texture
      * 
      * @param string $path Full absolute path to the image file
+     * @param TextureOptions|null $options Optional texture options
      * 
      * @throws TextureLoadException 
      *  
      * @return void 
      */
-    public function loadFromFile(string $path, ?TextureOptions $options = null)
+    public function loadFromFile(string $path, ?TextureOptions $options = null) : void
     {
         if (!file_exists($path) || !is_readable($path)) {
             throw new TextureLoadException("Image file not found or not accessable: {$path}");
@@ -228,5 +234,36 @@ class Texture
         $options->height = $textureData->height();
 
         $this->uploadBuffer($options, $textureData->buffer());
+    }
+
+    /**
+     * Allocates an empty texture with the given size and options
+     * 
+     * @param int $width
+     * @param int $height
+     * @param TextureOptions|null $options Optional texture options
+     */
+    public function allocateEmpty(int $width, int $height, ?TextureOptions $options = null) : void
+    {
+        if ($options === null) {
+            $options = new TextureOptions();
+        }
+
+        if ($options->internalFormat === null) {
+            $options->internalFormat = GL_RGBA;
+        }
+
+        if ($options->dataFormat === null) {
+            $options->dataFormat = GL_RGBA;
+        }
+
+        if ($options->dataType === null) {
+            $options->dataType = GL_UNSIGNED_BYTE;
+        }
+
+        $options->width = $width;
+        $options->height = $height;
+
+        $this->uploadBuffer($options, null);
     }
 }

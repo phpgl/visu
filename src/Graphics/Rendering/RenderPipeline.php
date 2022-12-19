@@ -60,13 +60,14 @@ class RenderPipeline
      * @template T of RenderResource
      * @param class-string<T> $type
      * @param string $resourceName
+     * @param mixed ...$args
      * 
      * @return T|RenderResource
      */
-    private function createResource(string $type, string $resourceName): RenderResource
+    private function createResource(string $type, string $resourceName, ...$args): RenderResource
     {
         $handle = $this->nextResourceHandle();
-        $this->resources[$handle] = new $type($handle, $resourceName);
+        $this->resources[$handle] = new $type($handle, $resourceName, ...$args);
         return $this->resources[$handle];
     }
 
@@ -120,7 +121,7 @@ class RenderPipeline
     public function createColorAttachment(RenderTargetResource $target, string $name): TextureResource
     {   
         /** @var TextureResource */
-        $resource = $this->createResource(TextureResource::class, $target->name . '.attachment.color_' . $name);
+        $resource = $this->createResource(TextureResource::class, $target->name . '.attachment.color_' . $name, $target->width, $target->height);
 
         $target->colorAttachments[] = $resource;
 
@@ -138,7 +139,7 @@ class RenderPipeline
     public function importTexture(string $resourceName, Texture $texture): TextureResource
     {
         /** @var TextureResource */
-        $resource = $this->createResource(TextureResource::class, $resourceName);
+        $resource = $this->createResource(TextureResource::class, $resourceName, $texture->width(), $texture->height());
 
         $this->resourceAllocator->setTexture($resource, $texture);
 

@@ -3,9 +3,12 @@
 namespace VISU\Graphics\Rendering;
 
 use VISU\Graphics\Exception\PipelineResourceException;
+use VISU\Graphics\Framebuffer;
 use VISU\Graphics\GLState;
+use VISU\Graphics\Rendering\Resource\RenderTargetResource;
 use VISU\Graphics\RenderTarget;
 use VISU\Graphics\Texture;
+use VISU\Graphics\TextureOptions;
 
 class PipelineResources
 {
@@ -88,18 +91,83 @@ class PipelineResources
     }
 
     /**
+     * Creates a missing render target for the given resource
+     * 
+     * @param RenderTargetResource $resource
+     * 
+     * @return void
+     */
+    private function createRenderTarget(RenderTargetResource $resource) : void
+    {
+        $target = new RenderTarget($resource->width, $resource->height, new Framebuffer($this->glState));
+
+        foreach($resource->colorAttachments as $i => $colorAttachmentTextureResource) {
+            $texture = new Texture($colorAttachmentTextureResource->name);
+            $options = new TextureOptions;
+            $options->generateMipmaps = false;
+            $options->minFilter = GL_LINEAR;
+            $options->magFilter = GL_LINEAR;
+            $texture->allocateEmpty(
+                $colorAttachmentTextureResource->width, 
+                $colorAttachmentTextureResource->height,
+                $options
+            );
+
+            // store the texture
+            $this->textures[$colorAttachmentTextureResource->name] = $texture;
+
+            $target->framebuffer()->bind();
+            
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + $i, GL_TEXTURE_2D, $texture->id, 0);  
+        }
+
+        if (!$target->framebuffer()->isValid($status, $error)) {
+            throw new PipelineResourceException("Failed to create render target: {$status} - {$error}");
+        }
+
+        $this->setRenderTarget($resource, $target);
+    }
+
+    /**
+     * Destroys a render target
+     * 
+     * @param RenderTargetResource $resource
+     * 
+     * @return void
+     */
+    public function destroyRenderTarget(RenderTargetResource $resource): void
+    {
+        // destroy all color attachments
+        foreach($resource->colorAttachments as $colorAttachmentTextureResource) {
+            unset($this->textures[$colorAttachmentTextureResource->name]);
+        }
+
+        if (isset($this->renderTargets[$resource->name])) {
+            unset($this->renderTargets[$resource->name]);
+        }
+    }
+
+    /**
      * Returns the render target for the given resource
      * 
-     * @param RenderResource $resource
+     * @param RenderTargetResource $resource
      * 
      * @return RenderTarget
      */
-    public function getRenderTarget(RenderResource $resource): RenderTarget
+    public function getRenderTarget(RenderTargetResource $resource): RenderTarget
     {
         $this->resourceUseTick[$resource->name] = $this->tickIndex;
 
+        // render target not found, create it
         if (!isset($this->renderTargets[$resource->name])) {
-            throw new PipelineResourceException("Render target not found for resource handle: " . $resource->handle . ' name: ' . $resource->name);
+            $this->createRenderTarget($resource);
+        }
+
+        // if it exists, check if it the dimensions match otherwise destroy and recreate
+        $target = $this->renderTargets[$resource->name];
+        if ($target->width() !== $resource->width || $target->height() !== $resource->height) {
+            $this->destroyRenderTarget($resource);
+            $this->createRenderTarget($resource);
         }
 
         return $this->renderTargets[$resource->name];

@@ -14,6 +14,7 @@ use VISU\Graphics\ShaderProgram;
 use VISU\Graphics\ShaderStage;
 use VISU\Graphics\Texture;
 use VISU\OS\Input;
+use VISU\OS\Key;
 use VISU\OS\Window;
 use VISU\Runtime\GameLoop;
 use VISU\Signal\Dispatcher;
@@ -30,8 +31,15 @@ $input = new Input($window, $dispatcher);
 
 $window->setEventHandler($input);
 
-$dispatcher->register('input.key', function (KeySignal $signal) {
-    var_dump($signal->scancode);
+$resolution = 16;
+
+$dispatcher->register('input.key', function (KeySignal $signal) use(&$resolution) {
+    if ($signal->key === Key::UP) {
+        $resolution++;
+    } elseif ($signal->key === Key::DOWN) {
+        $resolution--;
+    }
+    var_dump($resolution);
 });
 
 $testTexture  = new Texture('test');
@@ -103,10 +111,10 @@ class Game implements VISU\Runtime\GameLoopDelegate
 
         $pipeline = new RenderPipeline($this->renderResources, $data, $windowRenderTarget);
 
-        global $testTexture, $shader;
+        global $testTexture, $shader, $resolution;
         $texRes = $pipeline->importTexture('test', $testTexture);
 
-        $intermedia = $pipeline->createRenderTarget('intermediate', 128, 128);
+        $intermedia = $pipeline->createRenderTarget('intermediate', $resolution, $resolution);
         $intermediaColor = $pipeline->createColorAttachment($intermedia, 'color', GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE);
         
         $pipeline->addPass(new ClearPass($data->get(BackbufferData::class)->target));
