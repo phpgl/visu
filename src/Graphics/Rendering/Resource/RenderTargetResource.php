@@ -15,4 +15,11 @@ class RenderTargetResource extends RenderResource
      * The render targets height (in pixels)
      */
     public int $height = 720;
+
+    /**
+     * An array of TextureResource objects that are attached to the render target
+     * 
+     * @var array<int, TextureResource>
+     */
+    public array $colorAttachments = [];
 }

@@ -110,6 +110,24 @@ class RenderPipeline
     }
 
     /**
+     * Createa a color attachment for a render target resource
+     * 
+     * @param RenderTargetResource $target
+     * @param string $name
+     * 
+     * @return TextureResource
+     */
+    public function createColorAttachment(RenderTargetResource $target, string $name): TextureResource
+    {   
+        /** @var TextureResource */
+        $resource = $this->createResource(TextureResource::class, $target->name . '.attachment.color_' . $name);
+
+        $target->colorAttachments[] = $resource;
+
+        return $resource;
+    }
+
+    /**
      * Imports a texture resource
      * 
      * @param string $resourceName

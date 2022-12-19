@@ -106,8 +106,15 @@ class Game implements VISU\Runtime\GameLoopDelegate
         global $testTexture, $shader;
         $texRes = $pipeline->importTexture('test', $testTexture);
 
+        $intermedia = $pipeline->createRenderTarget('intermediate', 128, 128);
+        $intermediaColor = $pipeline->createColorAttachment($intermedia, 'color', GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE);
+        
         $pipeline->addPass(new ClearPass($data->get(BackbufferData::class)->target));
-        $pipeline->addPass(new FullscreenQuadPass($data->get(BackbufferData::class)->target, $texRes, $shader));
+
+        
+        $pipeline->addPass(new FullscreenQuadPass($intermedia, $texRes, $shader));
+
+        $pipeline->addPass(new FullscreenQuadPass($data->get(BackbufferData::class)->target, $intermediaColor, $shader));
 
         // $pipeline->addPass(new ShadowMapPass($renderables));
 
