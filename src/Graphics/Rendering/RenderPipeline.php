@@ -7,6 +7,7 @@ use VISU\Graphics\Rendering\Resource\RenderTargetResource;
 use VISU\Graphics\Rendering\Resource\TextureResource;
 use VISU\Graphics\RenderTarget;
 use VISU\Graphics\Texture;
+use VISU\Graphics\TextureOptions;
 
 class RenderPipeline
 {
@@ -115,13 +116,14 @@ class RenderPipeline
      * 
      * @param RenderTargetResource $target
      * @param string $name
+     * @param TextureOptions|null $options Optional texture options for the attachment
      * 
      * @return TextureResource
      */
-    public function createColorAttachment(RenderTargetResource $target, string $name): TextureResource
+    public function createColorAttachment(RenderTargetResource $target, string $name, ?TextureOptions $options = null): TextureResource
     {   
         /** @var TextureResource */
-        $resource = $this->createResource(TextureResource::class, $target->name . '.attachment.color_' . $name, $target->width, $target->height);
+        $resource = $this->createResource(TextureResource::class, $target->name . '.attachment.color_' . $name, $target->width, $target->height, $options);
 
         $target->colorAttachments[] = $resource;
 

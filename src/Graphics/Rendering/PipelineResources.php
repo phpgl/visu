@@ -103,10 +103,15 @@ class PipelineResources
 
         foreach($resource->colorAttachments as $i => $colorAttachmentTextureResource) {
             $texture = new Texture($colorAttachmentTextureResource->name);
-            $options = new TextureOptions;
+            $options = $colorAttachmentTextureResource->options ?? new TextureOptions;
+
+            // if min filter is using a mipmap, fallback to linear
+            if ($options->minFilter === GL_NEAREST_MIPMAP_NEAREST || $options->minFilter === GL_NEAREST_MIPMAP_LINEAR) {
+                $options->minFilter = GL_NEAREST;
+            } elseif ($options->minFilter === GL_LINEAR_MIPMAP_NEAREST || $options->minFilter === GL_LINEAR_MIPMAP_LINEAR) {
+                $options->minFilter = GL_LINEAR;
+            }
             $options->generateMipmaps = false;
-            $options->minFilter = GL_LINEAR;
-            $options->magFilter = GL_LINEAR;
             $texture->allocateEmpty(
                 $colorAttachmentTextureResource->width, 
                 $colorAttachmentTextureResource->height,

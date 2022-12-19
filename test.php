@@ -13,6 +13,7 @@ use VISU\Graphics\Rendering\RenderPipeline;
 use VISU\Graphics\ShaderProgram;
 use VISU\Graphics\ShaderStage;
 use VISU\Graphics\Texture;
+use VISU\Graphics\TextureOptions;
 use VISU\OS\Input;
 use VISU\OS\Key;
 use VISU\OS\Window;
@@ -115,7 +116,10 @@ class Game implements VISU\Runtime\GameLoopDelegate
         $texRes = $pipeline->importTexture('test', $testTexture);
 
         $intermedia = $pipeline->createRenderTarget('intermediate', $resolution, $resolution);
-        $intermediaColor = $pipeline->createColorAttachment($intermedia, 'color', GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE);
+        $colorOptions = new TextureOptions;
+        $colorOptions->minFilter = GL_NEAREST;
+        $colorOptions->magFilter = GL_NEAREST;
+        $intermediaColor = $pipeline->createColorAttachment($intermedia, 'color');
         
         $pipeline->addPass(new ClearPass($data->get(BackbufferData::class)->target));
 

@@ -3,6 +3,7 @@
 namespace VISU\Graphics\Rendering\Resource;
 
 use VISU\Graphics\Rendering\RenderResource;
+use VISU\Graphics\TextureOptions;
 
 class TextureResource extends RenderResource
 {   
@@ -17,6 +18,7 @@ class TextureResource extends RenderResource
         string $name,
         public readonly int $width,
         public readonly int $height,
+        public ?TextureOptions $options = null
     )
     {
         parent::__construct($handle, $name);
