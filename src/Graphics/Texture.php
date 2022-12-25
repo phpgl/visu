@@ -58,6 +58,10 @@ class Texture
     public function __destruct()
     {
         glDeleteTextures(1, $this->id);
+
+        if ($this->gl->currentTexture === $this->id) {
+            $this->gl->currentTexture = 0;
+        }
     }
 
     /**
@@ -92,13 +96,11 @@ class Texture
     public function bind(int $unit = GL_TEXTURE0): void
     {
         if ($this->gl->currentTextureUnit !== $unit) {
-            var_dump('texture unit changed to ' . $unit);
             glActiveTexture($unit);
             $this->gl->currentTextureUnit = $unit;
         }
 
         if ($this->gl->currentTexture !== $this->id) {
-            var_dump('texture bound to ' . $this->id);
             glBindTexture($this->target, $this->id);
             $this->gl->currentTexture = $this->id;
         }
