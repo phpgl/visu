@@ -26,7 +26,9 @@ class GLState
     public ?Window $window = null;
 
     /**
-     * Currently used shader program object
+     * Currently used shader program object.
+     * 
+     * **Note:** You should never manually manipulate this value.
      * 
      * @var int
      */
@@ -35,12 +37,16 @@ class GLState
     /**
      * Currently bound READ framebuffer object
      * 
+     * **Note:** You should never manually manipulate this value.
+     * 
      * @var int
      */
     public int $currentReadFramebuffer = 0;
 
     /**
      * Currently bound DRAW framebuffer object
+     * 
+     * **Note:** You should never manually manipulate this value.
      * 
      * @var int
      */
@@ -49,12 +55,16 @@ class GLState
     /**
      * Currently bound vertex array object
      * 
+     * **Note:** You should never manually manipulate this value.
+     * 
      * @var int
      */
     public int $currentVertexArray = 0;
 
     /**
      * Currently bound vertex buffer object
+     * 
+     * **Note:** You should never manually manipulate this value.
      * 
      * @var int
      */
@@ -63,6 +73,8 @@ class GLState
     /**
      * Currently bound index buffer object
      * 
+     * **Note:** You should never manually manipulate this value.
+     * 
      * @var int
      */
     public int $currentIndexBuffer = 0;
@@ -70,7 +82,18 @@ class GLState
     /**
      * Currently bound texture object
      * 
+     * **Note:** You should never manually manipulate this value.
+     * 
      * @var int
      */
     public int $currentTexture = 0;
+
+    /**
+     * Currently bound texture unit
+     * 
+     * **Note:** You should never manually manipulate this value.
+     * 
+     * @var int
+     */
+    public int $currentTextureUnit = 0;
 }

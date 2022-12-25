@@ -16,6 +16,11 @@ class Texture
     public readonly int $id;
 
     /**
+     * The texture target
+     */
+    public readonly int $target;
+
+    /**
      * The textures width (copied from the options)
      */
     private int $width = 0;
@@ -37,11 +42,14 @@ class Texture
      * @return void 
      */
     public function __construct(
-        public string $name
+        private GLState $gl, 
+        public string $name,
+        int $target = GL_TEXTURE_2D,
     )
     {
         glGenTextures(1, $id);
         $this->id = $id;
+        $this->target = $target;
     }
 
     /**
@@ -75,6 +83,26 @@ class Texture
     {
         return new Vec2($this->width, $this->height);
     }
+
+    /**
+     * Binds the texture to the current context and sets the active texture unit 
+     * 
+     * @param int $unit The texture unit to bind the texture to
+     */
+    public function bind(int $unit = GL_TEXTURE0): void
+    {
+        if ($this->gl->currentTextureUnit !== $unit) {
+            var_dump('texture unit changed to ' . $unit);
+            glActiveTexture($unit);
+            $this->gl->currentTextureUnit = $unit;
+        }
+
+        if ($this->gl->currentTexture !== $this->id) {
+            var_dump('texture bound to ' . $this->id);
+            glBindTexture($this->target, $this->id);
+            $this->gl->currentTexture = $this->id;
+        }
+    }
     
     /**
      * Applies the textures minification and magnification filter parameters
@@ -92,8 +120,8 @@ class Texture
             }
         }
 
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, $this->options->minFilter);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, $this->options->magFilter);
+        glTexParameteri($this->target, GL_TEXTURE_MIN_FILTER, $this->options->minFilter);
+        glTexParameteri($this->target, GL_TEXTURE_MAG_FILTER, $this->options->magFilter);
     }
 
     /**
@@ -101,9 +129,9 @@ class Texture
      */
     private function applyWrapParameters(): void
     {
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, $this->options->wrapS);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, $this->options->wrapT);
-        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_R, $this->options->wrapR);
+        glTexParameteri($this->target, GL_TEXTURE_WRAP_S, $this->options->wrapS);
+        glTexParameteri($this->target, GL_TEXTURE_WRAP_T, $this->options->wrapT);
+        glTexParameteri($this->target, GL_TEXTURE_WRAP_R, $this->options->wrapR);
     }
 
     /**
@@ -128,7 +156,7 @@ class Texture
         $this->height = $options->height;
 
         // bind 
-        glBindTexture(GL_TEXTURE_2D, $this->id);
+        $this->bind();
 
         // apply the texture paramters
         $this->applyFilterParameters();
@@ -158,7 +186,7 @@ class Texture
         }
 
         glTexImage2D(
-            GL_TEXTURE_2D,
+            $this->target,
             0,
             $options->internalFormat,
             $this->width,
@@ -171,7 +199,7 @@ class Texture
 
         // generate mipmaps if requested
         if ($options->generateMipmaps) {
-            glGenerateMipmap(GL_TEXTURE_2D);
+            glGenerateMipmap($this->target);
         }
     }
 

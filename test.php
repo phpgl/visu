@@ -43,7 +43,7 @@ $dispatcher->register('input.key', function (KeySignal $signal) use(&$resolution
     var_dump($resolution);
 });
 
-$testTexture  = new Texture('test');
+$testTexture  = new Texture($gl, 'test');
 // $testTexture->loadFromFile(__DIR__ . '/resources/fonts/cozette/cozette.png');
 $testTexture->loadFromFile(__DIR__ . '/resources/phplogo.png');
 

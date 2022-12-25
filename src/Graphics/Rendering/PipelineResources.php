@@ -27,13 +27,6 @@ class PipelineResources
     private array $textures = [];
 
     /**
-     * Internal array of buffers
-     * 
-     * @var array<string, Buffer>
-     */
-    private array $buffers = [];
-
-    /**
      * Holder of mixed generic static resources 
      * 
      * @var array<string, mixed>
@@ -102,7 +95,7 @@ class PipelineResources
         $target = new RenderTarget($resource->width, $resource->height, new Framebuffer($this->glState));
 
         foreach($resource->colorAttachments as $i => $colorAttachmentTextureResource) {
-            $texture = new Texture($colorAttachmentTextureResource->name);
+            $texture = new Texture($this->glState, $colorAttachmentTextureResource->name);
             $options = $colorAttachmentTextureResource->options ?? new TextureOptions;
 
             // if min filter is using a mipmap, fallback to linear
@@ -122,7 +115,7 @@ class PipelineResources
             $this->textures[$colorAttachmentTextureResource->name] = $texture;
 
             $target->framebuffer()->bind();
-            
+
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + $i, GL_TEXTURE_2D, $texture->id, 0);  
         }
 
@@ -192,6 +185,23 @@ class PipelineResources
     }
 
     /**
+     * Returns a texture for the given resource
+     * 
+     * @param RenderResource $resource
+     * @return Texture
+     */
+    public function getTexture(RenderResource $resource): Texture
+    {
+        $this->resourceUseTick[$resource->name] = $this->tickIndex;
+
+        if (!isset($this->textures[$resource->name])) {
+            throw new PipelineResourceException("Texture not found for resource handle: " . $resource->handle . ' name: ' . $resource->name);
+        }
+
+        return $this->textures[$resource->name];
+    }
+
+    /**
      * Returns a texture ID for the given resource
      * The texture ID is the raw GL handle
      * 
@@ -200,13 +210,7 @@ class PipelineResources
      */
     public function getTextureID(RenderResource $resource): int
     {
-        $this->resourceUseTick[$resource->name] = $this->tickIndex;
-
-        if (!isset($this->textures[$resource->name])) {
-            throw new PipelineResourceException("Texture not found for resource handle: " . $resource->handle . ' name: ' . $resource->name);
-        }
-
-        return $this->textures[$resource->name]->id;
+        return $this->getTexture($resource)->id;
     }
 
     /**
