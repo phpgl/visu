@@ -43,6 +43,9 @@ class RenderPipeline
     {
         $backbufferData = $data->create(BackbufferData::class);
         $backbufferData->target = $this->importRenderTarget('backbuffer', $this->backbuffer);
+
+        // activate the backbuffer as the default render target
+        $resourceAllocator->activateRenderTarget($backbufferData->target);
     }
 
     /**

@@ -12,6 +12,16 @@ class RenderTarget
     private AbstractFramebuffer $framebuffer;
 
     /**
+     * The render targets pixel density (for high dpi displays) on the x axis
+     */
+    public float $contentScaleX = 1.0;
+
+    /**
+     * The render targets pixel density (for high dpi displays) on the y axis
+     */
+    public float $contentScaleY = 1.0;
+
+    /**
      * Constrcutor
      */
     public function __construct(

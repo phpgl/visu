@@ -20,6 +20,13 @@ class PipelineResources
     private array $renderTargets = [];
 
     /**
+     * Currently bound render target
+     * 
+     * @var RenderTarget|null
+     */
+    private ?RenderTarget $activeRenderTarget = null;
+
+    /**
      * Internal array of textures
      * 
      * @var array<string, Texture>
@@ -169,6 +176,34 @@ class PipelineResources
         }
 
         return $this->renderTargets[$resource->name];
+    }
+
+    /**
+     * Activates the given render target
+     * 
+     * @param RenderTargetResource $resource
+     * 
+     * @return void
+     */
+    public function activateRenderTarget(RenderTargetResource $resource): void
+    {
+        $target = $this->getRenderTarget($resource);
+        $target->preparePass();
+        $this->activeRenderTarget = $target;
+    }
+
+    /**
+     * Returns the currently active render target, throws an exception if none is active
+     * 
+     * @return RenderTarget
+     */
+    public function getActiveRenderTarget(): RenderTarget
+    {
+        if ($this->activeRenderTarget === null) {
+            throw new PipelineResourceException("No active render target");
+        }
+
+        return $this->activeRenderTarget;
     }
 
     /**

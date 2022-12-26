@@ -46,8 +46,7 @@ class FullscreenQuadPass extends RenderPass
      */
     public function execute(PipelineContainer $data, PipelineResources $resources): void
     {
-        $renderTarget = $resources->getRenderTarget($this->renderTargetRes);
-        $renderTarget->preparePass();
+        $resources->activateRenderTarget($this->renderTargetRes);
 
         /** @var QuadVertexArray */
         $quadVA = $resources->cacheStaticResource('quadva', function(GLState $gl) {

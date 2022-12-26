@@ -2,13 +2,19 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
+define('DS', DIRECTORY_SEPARATOR);
+define('VISU_PATH_FRAMEWORK_RESOURCES_FONT', __DIR__ . '/resources/fonts');
+
 use GL\Math\Vec4;
+use VISU\Graphics\Font\DebugFontRenderer;
 use VISU\Graphics\GLState;
 use VISU\Graphics\Rendering\Pass\BackbufferData;
 use VISU\Graphics\Rendering\Pass\ClearPass;
 use VISU\Graphics\Rendering\Pass\FullscreenQuadPass;
 use VISU\Graphics\Rendering\PipelineContainer;
 use VISU\Graphics\Rendering\PipelineResources;
+use VISU\Graphics\Rendering\Renderer\DebugOverlayText;
+use VISU\Graphics\Rendering\Renderer\DebugOverlayTextRenderer;
 use VISU\Graphics\Rendering\RenderPipeline;
 use VISU\Graphics\ShaderProgram;
 use VISU\Graphics\ShaderStage;
@@ -86,6 +92,7 @@ class Game implements VISU\Runtime\GameLoopDelegate
 {
     private GameLoop $loop;
     private PipelineResources $renderResources; 
+    private DebugOverlayTextRenderer $debugOverlay;
 
     private int $tick = 0;
 
@@ -96,6 +103,7 @@ class Game implements VISU\Runtime\GameLoopDelegate
     {
         $this->loop = new GameLoop($this);
         $this->renderResources = new PipelineResources($gl);
+        $this->debugOverlay = new DebugOverlayTextRenderer($gl, DebugOverlayTextRenderer::loadDebugFontAtlas());
     }
 
     public function update(): void
@@ -127,6 +135,13 @@ class Game implements VISU\Runtime\GameLoopDelegate
         $pipeline->addPass(new FullscreenQuadPass($intermedia, $texRes, $shader));
 
         $pipeline->addPass(new FullscreenQuadPass($data->get(BackbufferData::class)->target, $intermediaColor, $shader));
+
+        $this->debugOverlay->attachPass(
+            $pipeline, 
+            [
+                new DebugOverlayText('FPS: ' . $this->loop->getAverageFps()),
+            ]
+        );
 
         // $pipeline->addPass(new ShadowMapPass($renderables));
 

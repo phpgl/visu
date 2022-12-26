@@ -168,10 +168,17 @@ class Window
      */
     public function getRenderTarget() : RenderTarget
     {
+        $glfwWindow = $this->requiresInitialization();
+
         $width = $this->getFramebufferWidth();
         $height = $this->getFramebufferHeight();
 
-        return new RenderTarget($width, $height, $this->framebuffer);
+        $rt = new RenderTarget($width, $height, $this->framebuffer);
+
+        // also query the content scale
+        glfwGetWindowContentScale($glfwWindow, $rt->contentScaleX, $rt->contentScaleY);
+
+        return $rt;
     }
 
     /**
