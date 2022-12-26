@@ -28,6 +28,22 @@ class PipelineContainer
 
         return $this->storage[$className];
     }
+
+    /**
+     * Sets an instance of class T in the container.
+     * 
+     * @template T
+     * @param class-string<T> $className
+     * @param T $instance
+     */
+    public function set(string $className, $instance): void
+    {
+        if (isset($this->storage[$className])) {
+            throw new PipelineContainerException("Pipeline container already contains an instance of class: " . $className);
+        }
+
+        $this->storage[$className] = $instance;
+    }
     
     /**
      * Returns an instance of class T from the container.
