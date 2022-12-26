@@ -108,25 +108,21 @@ class Window
         $this->framebuffer = new WindowFramebuffer($state);
 
         // activate the window
-        $this->activate($state);
+        $this->activate();
     }
 
     /**
      * Active the windows GL context and make it the current context
      * This internally calls `glfwMakeContextCurrent`
      * 
-     * @param GLState $state The global GL state
      * @return void
      */
-    public function activate(GLState $state) : void
+    public function activate() : void
     {
         $handle = $this->requiresInitialization();
 
-        // only activate if the window is not already active
-        if ($state->window !== $this) {
-            glfwMakeContextCurrent($handle);
-            $state->window = $this;
-        }
+        // mark window as GL context
+        glfwMakeContextCurrent($handle);
     }
 
     /**
@@ -174,7 +170,7 @@ class Window
         $height = $this->getFramebufferHeight();
 
         $rt = new RenderTarget($width, $height, $this->framebuffer);
-
+        
         // also query the content scale
         glfwGetWindowContentScale($glfwWindow, $rt->contentScaleX, $rt->contentScaleY);
 

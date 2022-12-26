@@ -19,13 +19,6 @@ use VISU\OS\Window;
 class GLState
 {   
     /**
-     * The Window the current GL context belongs to.
-     * 
-     * @var null|Window
-     */
-    public ?Window $window = null;
-
-    /**
      * Currently used shader program object.
      * 
      * **Note:** You should never manually manipulate this value.
