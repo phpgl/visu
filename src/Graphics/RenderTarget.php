@@ -83,7 +83,8 @@ class RenderTarget
      */
     public function preparePass(): void
     {
-        $this->framebuffer->bind();
-        $this->updateViewport();
+        if ($this->framebuffer->bind()) {
+            $this->updateViewport(); // we only want to update the viewport if we actually bound the framebuffer
+        }
     }
 }

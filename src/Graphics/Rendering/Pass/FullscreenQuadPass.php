@@ -38,7 +38,8 @@ class FullscreenQuadPass extends RenderPass
      */
     public function setup(RenderPipeline $pipeline, PipelineContainer $data): void
     {
-        // $pipeline->reads($this->appliedTexture);
+        $pipeline->reads($this, $this->appliedTexture);
+        $pipeline->writes($this, $this->renderTargetRes);
     }
 
     /**

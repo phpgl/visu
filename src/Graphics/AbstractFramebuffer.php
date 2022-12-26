@@ -39,28 +39,34 @@ abstract class AbstractFramebuffer
      * Binds the framebuffer to the current context
      * 
      * @param FramebufferTarget $target Specifies the target to which the framebuffer is bound.
+     * @return bool Returns true if the framebuffer was bound, false if it was already bound
      */
-    public function bind(FramebufferTarget $target = FramebufferTarget::READ_DRAW): void
+    public function bind(FramebufferTarget $target = FramebufferTarget::READ_DRAW): bool
     {
         if ($target === FramebufferTarget::READ_DRAW) {
             if ($this->gl->currentReadFramebuffer !== $this->id || $this->gl->currentDrawFramebuffer !== $this->id) {
                 glBindFramebuffer(GL_FRAMEBUFFER, $this->id);
                 $this->gl->currentReadFramebuffer = $this->id;
                 $this->gl->currentDrawFramebuffer = $this->id;
+                return true;
             }
         }
         elseif ($target === FramebufferTarget::READ) {
             if ($this->gl->currentReadFramebuffer !== $this->id) {
                 glBindFramebuffer(GL_READ_FRAMEBUFFER, $this->id);
                 $this->gl->currentReadFramebuffer = $this->id;
+                return true;
             }
         }
         elseif ($target === FramebufferTarget::DRAW) {
             if ($this->gl->currentDrawFramebuffer !== $this->id) {
                 glBindFramebuffer(GL_DRAW_FRAMEBUFFER, $this->id);
                 $this->gl->currentDrawFramebuffer = $this->id;
+                return true;
             }
         }
+
+        return false;
     }
 
     /**

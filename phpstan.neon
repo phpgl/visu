@@ -6,3 +6,4 @@ parameters:
         - src
     ignoreErrors:
         - '/Access to an undefined property GL\\Math\\Vec[2-4]::\$[x|y|z|w|r|g|b|a]\./'
+        - '/Cannot access property \$([a-zA-Z0-9]+) on VISU\\Graphics\\TextureOptions\|null\./'

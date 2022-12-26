@@ -50,7 +50,7 @@ class PipelineResources
     /**
      * A map storing the tick each resource was last accessed
      * 
-     * @var array
+     * @var array<string, int>
      */
     private array $resourceUseTick = [];
 
@@ -183,13 +183,14 @@ class PipelineResources
      * 
      * @param RenderTargetResource $resource
      * 
-     * @return void
+     * @return RenderTarget
      */
-    public function activateRenderTarget(RenderTargetResource $resource): void
+    public function activateRenderTarget(RenderTargetResource $resource): RenderTarget
     {
         $target = $this->getRenderTarget($resource);
         $target->preparePass();
         $this->activeRenderTarget = $target;
+        return $target;
     }
 
     /**

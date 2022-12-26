@@ -22,7 +22,7 @@ class ClearPass extends RenderPass
      */
     public function setup(RenderPipeline $pipeline, PipelineContainer $data): void
     {
-        // $pipeline->writes($this->renderTargetRes);
+        $pipeline->writes($this, $this->renderTargetRes);
     }
 
     /**

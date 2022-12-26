@@ -68,7 +68,7 @@ class GLState
      * 
      * @var int
      */
-    public int $currentVertexBuffer = 0;
+    public int $currentVertexArrayBuffer = 0;
 
     /**
      * Currently bound index buffer object
@@ -96,4 +96,61 @@ class GLState
      * @var int
      */
     public int $currentTextureUnit = 0;
+
+    /**
+     * State aware bind of a vertex array object.
+     * 
+     * This method will only call glBindVertexArray if the passed vao is not the currently bound one.
+     * Use this method instead of glBindVertexArray to avoid redundant calls to OpenGL.
+     * 
+     * This obviously only works if you use this class to manage your GL state. This is more costly 
+     * then just calling glBindVertexArray...
+     * 
+     * @param int $vao The vertex array object to bind.
+     */
+    public function bindVertexArray(int $vao) : void
+    {
+        if ($this->currentVertexArray !== $vao) {
+            $this->currentVertexArray = $vao;
+            glBindVertexArray($vao);
+        }
+    }
+
+    /**
+     * State aware bind of a vertex buffer object.
+     * 
+     * This method will only call glBindBuffer if the passed vbo is not the currently bound one.
+     * Use this method instead of glBindBuffer to avoid redundant calls to OpenGL.
+     * 
+     * This obviously only works if you use this class to manage your GL state. This is more costly 
+     * then just calling glBindBuffer...
+     * 
+     * @param int $vbo The vertex buffer object to bind.
+     */
+    public function bindVertexArrayBuffer(int $vbo) : void
+    {
+        if ($this->currentVertexArrayBuffer !== $vbo) {
+            $this->currentVertexArrayBuffer = $vbo;
+            glBindBuffer(GL_ARRAY_BUFFER, $vbo);
+        }
+    }
+
+    /**
+     * State aware bind of a index buffer object.
+     * 
+     * This method will only call glBindBuffer if the passed ibo is not the currently bound one.
+     * Use this method instead of glBindBuffer to avoid redundant calls to OpenGL.
+     * 
+     * This obviously only works if you use this class to manage your GL state. This is more costly 
+     * then just calling glBindBuffer...
+     * 
+     * @param int $ibo The index buffer object to bind.
+     */
+    public function bindIndexBuffer(int $ibo) : void
+    {
+        if ($this->currentIndexBuffer !== $ibo) {
+            $this->currentIndexBuffer = $ibo;
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, $ibo);
+        }
+    }
 }

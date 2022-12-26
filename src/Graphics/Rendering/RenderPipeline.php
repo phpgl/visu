@@ -57,6 +57,28 @@ class RenderPipeline
     {
         return $this->resourceHandleIndex++;
     }
+    
+    /**
+     * Marks the given render pass as writing to the given render resource
+     * 
+     * @param RenderPass $pass 
+     * @param RenderResource $target 
+     */
+    public function writes(RenderPass $pass, RenderResource $target) : void
+    {
+        // @todo
+    }
+
+    /**
+     * Marks the given render pass as reading from the given render resource
+     * 
+     * @param RenderPass $pass
+     * @param RenderResource $source
+     */
+    public function reads(RenderPass $pass, RenderResource $source) : void
+    {
+        // @todo
+    }
 
     /**
      * Creates a new render resource of given type with name

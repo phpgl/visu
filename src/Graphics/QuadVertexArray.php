@@ -35,13 +35,8 @@ class QuadVertexArray
 
         glGenVertexArrays(1, $this->vertexArray);
         glGenBuffers(1, $this->vertexBuffer);
-        glBindVertexArray($this->vertexArray);
-        glBindBuffer(GL_ARRAY_BUFFER, $this->vertexBuffer);
-
-        // as we don't use the vertex array abstraction, we have to update
-        // our gl state manually
-        $this->state->currentVertexArray = $this->vertexArray;
-        $this->state->currentVertexBuffer = $this->vertexBuffer;
+        $this->state->bindVertexArray($this->vertexArray);
+        $this->state->bindVertexArrayBuffer($this->vertexBuffer);
 
         // two triangles
         $buffer = new FloatBuffer([
@@ -82,10 +77,7 @@ class QuadVertexArray
      */
     public function bind() : void
     {
-        if ($this->state->currentVertexArray !== $this->vertexArray) {
-            glBindVertexArray($this->vertexArray);
-            $this->state->currentVertexArray = $this->vertexArray;
-        }
+        $this->state->bindVertexArray($this->vertexArray);
     }
 
     /**

@@ -4,6 +4,7 @@ namespace VISU\Graphics\Rendering\Renderer;
 
 use GL\Buffer\FloatBuffer;
 use GL\Math\Mat4;
+use GL\Math\Vec3;
 use VISU\Graphics\Exception\BitmapFontException;
 use VISU\Graphics\Font\BitmapFontAtlas;
 use VISU\Graphics\GLState;
@@ -12,10 +13,12 @@ use VISU\Graphics\Rendering\PipelineContainer;
 use VISU\Graphics\Rendering\PipelineResources;
 use VISU\Graphics\Rendering\RenderPass;
 use VISU\Graphics\Rendering\RenderPipeline;
+use VISU\Graphics\Rendering\Resource\RenderTargetResource;
 use VISU\Graphics\RenderTarget;
 use VISU\Graphics\ShaderProgram;
 use VISU\Graphics\ShaderStage;
 use VISU\Graphics\Texture;
+use VISU\Graphics\TextureOptions;
 
 class DebugOverlayTextRenderer
 {   
@@ -65,7 +68,10 @@ class DebugOverlayTextRenderer
 
         // load the font texture 
         $this->fontTexture = new Texture($this->glstate, 'debug_font');
-        $this->fontTexture->loadFromFile($this->fontAtlas->texturePath);
+        $fontTextureOpt = new TextureOptions;
+        $fontTextureOpt->minFilter = GL_NEAREST;
+        $fontTextureOpt->magFilter = GL_NEAREST;
+        $this->fontTexture->loadFromFile($this->fontAtlas->texturePath, $fontTextureOpt);
 
         // build the vertex array and buffer objects
         $this->createVAO();
@@ -98,10 +104,16 @@ class DebugOverlayTextRenderer
         in vec2 v_uv;
 
         uniform sampler2D font;
+        uniform vec3 text_color = vec3(1.0f, 1.0f, 1.0f);
 
         void main()
         {
-            fragment_color = vec4(vec3(texture(font, v_uv).a), 1.0f);
+            float alpha = texture(font, v_uv).a;
+            fragment_color = vec4(text_color, alpha);
+
+            if (alpha < 0.1f) {
+                discard;
+            }
         }
         GLSL));
         $this->shaderProgram->link();
@@ -115,8 +127,8 @@ class DebugOverlayTextRenderer
         glGenVertexArrays(1, $this->VAO);
         glGenBuffers(1, $this->VBO);
 
-        glBindVertexArray($this->VAO);
-        glBindBuffer(GL_ARRAY_BUFFER, $this->VBO);
+        $this->glstate->bindVertexArray($this->VAO);
+        $this->glstate->bindVertexArrayBuffer($this->VBO);
 
         // vertex attributes for the text
         // position
@@ -126,9 +138,6 @@ class DebugOverlayTextRenderer
         // uv
         glEnableVertexAttribArray(1);
         glVertexAttribPointer(1, 2, GL_FLOAT, false, GL_SIZEOF_FLOAT * 4, GL_SIZEOF_FLOAT * 2);
-
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-        glBindVertexArray(0);
     }
 
     /**
@@ -136,19 +145,17 @@ class DebugOverlayTextRenderer
      * 
      * @return int The number of vertices that were written to the buffer.
      */
-    private function fillVertexBufferForText(RenderTarget $renderTarget, FloatBuffer $vertices, string $text) : int
+    private function fillVertexBufferForText(RenderTarget $renderTarget, FloatBuffer $vertices, DebugOverlayText $dtext) : int
     {
-        $leftMargin = 0;
-        $topMargin = 0;
-        $maxWidth = 800;
+        $maxWidth = $renderTarget->width();
 
-        $x = $leftMargin;
-        $y = $topMargin;
+        $x = $dtext->offsetX;
+        $y = $dtext->offsetY;
         $scale = $renderTarget->contentScaleX; 
         $lineHeight = 20;
 
         // determine the text length
-        $textLen = mb_strlen($text);
+        $textLen = mb_strlen($dtext->text);
 
         // the vertex count has to be counted 
         // in the loop because some chars are not in the atlas
@@ -160,12 +167,12 @@ class DebugOverlayTextRenderer
         // for every character in the text
         for($i = 0; $i < $textLen; $i++) 
         {
-            $char = mb_substr($text, $i, 1);
+            $char = mb_substr($dtext->text, $i, 1);
             $charData = $this->fontAtlas->getCharacterForC($char);
 
             // on linebreak
             if ($char === "\n") {
-                $x = $leftMargin;
+                $x = $dtext->offsetX;
                 $y += $lineHeight * $scale;
                 continue;
             }
@@ -200,7 +207,7 @@ class DebugOverlayTextRenderer
             // advance the cursor
             $x += $charData->xAdvance * $scale;
             if ($x > $maxWidth) {
-                $x = $leftMargin;
+                $x = $dtext->offsetX;
                 $y += $lineHeight * $scale;
             }
         }
@@ -216,18 +223,21 @@ class DebugOverlayTextRenderer
      */
     public function attachPass(
         RenderPipeline $pipeline, 
+        RenderTargetResource $renderTarget,
         array $texts
     ) : void
     {
         $pipeline->addPass(new CallbackPass(
-            function(RenderPipeline $pipeline, PipelineContainer $data) {
+            function(RenderPass $pass, RenderPipeline $pipeline, PipelineContainer $data) use ($renderTarget) {
+                $pipeline->writes($pass, $renderTarget);
             },
-            function(PipelineContainer $data, PipelineResources $resources) use ($texts) 
+            function(PipelineContainer $data, PipelineResources $resources) use ($texts, $renderTarget) 
             {
-                $renderTarget = $resources->getActiveRenderTarget();
+                $renderTarget = $resources->activateRenderTarget($renderTarget);
 
                 $width = $renderTarget->width();
                 $height = $renderTarget->height();
+                $defaultColor = new Vec3(1, 1, 1);
 
                 $projection = new Mat4;
                 $projection->ortho(0, $width, $height, 0, -1, 1);
@@ -244,25 +254,36 @@ class DebugOverlayTextRenderer
                 $vertices = new FloatBuffer();
 
                 // fill the buffer with the vertices for the text
-                $vertexCount = $this->fillVertexBufferForText($renderTarget, $vertices, $texts[0]->text);
+                $vertexOffsets = [];
+                $colors = [];
 
-                // bind the vertex array and buffer
-                if ($this->glstate->currentVertexArray !== $this->VAO) {
-                    $this->glstate->currentVertexArray = $this->VAO;
-                    glBindVertexArray($this->VAO);
+                // fill the buffer with the vertices for the text
+                foreach ($texts as $text) {
+                    $vertexOffsets[] = $this->fillVertexBufferForText($renderTarget, $vertices, $text);
+                    $colors[] = $text->color ?? $defaultColor;
                 }
 
-                glBindBuffer(GL_ARRAY_BUFFER, $this->VBO);
+                // bind the vertex array and buffer
+                $this->glstate->bindVertexArray($this->VAO);
+                $this->glstate->bindVertexArrayBuffer($this->VBO);
 
                 // fill the buffer with the vertices
                 glBufferData(GL_ARRAY_BUFFER, $vertices, GL_DYNAMIC_DRAW);
 
+                // pipeline settings 
+                glDisable(GL_DEPTH_TEST);
+                glDisable(GL_BLEND);
+                
                 // draw the text
-                glDrawArrays(GL_TRIANGLES, 0, $vertexCount);
+                $offset = 0;
+                for ($i = 0; $i < count($vertexOffsets); $i++) {
+                    // update the color uniform
+                    $this->shaderProgram->setUniformVec3('text_color', $colors[$i]);
 
-                // unbind the vertex array and buffer
-                glBindBuffer(GL_ARRAY_BUFFER, 0);
-                glBindVertexArray(0);
+                    // draw the text
+                    glDrawArrays(GL_TRIANGLES, $offset, $vertexOffsets[$i]);
+                    $offset += $vertexOffsets[$i];
+                }
             },
         ));
     }    

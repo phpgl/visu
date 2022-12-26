@@ -22,7 +22,7 @@ class CallbackPass extends RenderPass
      */
     public function setup(RenderPipeline $pipeline, PipelineContainer $data): void
     {
-        ($this->setupCallback)($pipeline, $data);
+        ($this->setupCallback)($this, $pipeline, $data);
     }
 
     /**
