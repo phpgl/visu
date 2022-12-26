@@ -4,12 +4,13 @@ namespace VISU\Tests\Graphics\Font;
 
 use VISU\Graphics\Font\BitmapFontAtlas;
 use VISU\Graphics\Font\DebugFontRenderer;
+use VISU\Graphics\Rendering\Renderer\DebugOverlayTextRenderer;
 
 class DebugFontRendererTest extends \PHPUnit\Framework\TestCase
 {
     public function testLoadingDebugFontAtlas()
     {
-        $atlas = DebugFontRenderer::loadDebugFontAtlas();
+        $atlas = DebugOverlayTextRenderer::loadDebugFontAtlas();
         $this->assertInstanceOf(BitmapFontAtlas::class, $atlas);
 
         // test reading some charactes props from the atlas.
