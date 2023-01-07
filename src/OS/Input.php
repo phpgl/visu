@@ -43,6 +43,13 @@ class Input implements WindowEventHandlerInterface
     private \GLFWwindow $glfwWindowHandle;
 
     /**
+     * The last polled cursor position
+     * 
+     * @var Vec2
+     */
+    private Vec2 $lastCursorPosition;
+
+    /**
      * Constructor for the Input class.
      * 
      * @param Window $window The window instance to handle input for.
@@ -55,6 +62,7 @@ class Input implements WindowEventHandlerInterface
         private DispatcherInterface $dispatcher
     ) {
         $this->glfwWindowHandle = $window->getGLFWHandle();
+        $this->lastCursorPosition = new Vec2(0.0, 0.0);
     }
 
     /**
@@ -183,6 +191,16 @@ class Input implements WindowEventHandlerInterface
     }
 
     /**
+     * Get the last recieved cursor position
+     * This represents the last position the cursor was at before the current position,
+     * !Note: This will be overwritten after the `input.cursor` events are dispatched.
+     */
+    public function getLastCursorPosition() : Vec2
+    {
+        return $this->lastCursorPosition;
+    }
+
+    /**
      * Set the cursor position
      * 
      * @param Vec2 $position The position to set the cursor to
@@ -294,6 +312,10 @@ class Input implements WindowEventHandlerInterface
     public function handleWindowCursorPos(Window $window, float $xpos, float $ypos): void
     {
         $this->dispatcher->dispatch("input.cursor", new CursorPosSignal($window, $xpos, $ypos));
+
+        // update the last cursor position
+        $this->lastCursorPosition->x = $xpos;
+        $this->lastCursorPosition->y = $ypos;
     }
 
     /**
