@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         operating-system: ['ubuntu-latest']
-        php-versions: ['8.1']
+        php-versions: ['8.1', '8.2']
         phpunit-versions: ['latest']
     
     steps:
@@ -47,3 +47,8 @@ jobs:
       
     - name: Run PHPUnit 
       run: xvfb-run --auto-servernum php ./vendor/bin/phpunit
+
+    - name: Run PHPStan 
+      if: ${{ matrix.php-versions == '8.2' }}
+      run: php vendor/bin/phpstan analyse src --error-format=github -l8
+      

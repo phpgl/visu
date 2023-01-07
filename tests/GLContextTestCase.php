@@ -11,6 +11,8 @@ abstract class GLContextTestCase extends \PHPUnit\Framework\TestCase
 
     protected static GLState $glstate;
 
+    protected static ?Window $globalWindow = null;
+
     protected const TEST_VIEW_WIDTH = 480;
     protected const TEST_VIEW_HEIGHT = 360;
 
@@ -29,8 +31,13 @@ abstract class GLContextTestCase extends \PHPUnit\Framework\TestCase
 
     public function createWindow() : Window
     {
-        $window = new Window("PHPUnit Offscreen", self::TEST_VIEW_WIDTH, self::TEST_VIEW_HEIGHT);
-        $window->initailize(self::$glstate);
-        return $window;
+        if (self::$globalWindow === null) {
+            $window = new Window("PHPUnit Offscreen", self::TEST_VIEW_WIDTH, self::TEST_VIEW_HEIGHT);
+            $window->initailize(self::$glstate);
+
+            self::$globalWindow = $window;
+        }
+
+        return self::$globalWindow;
     }
 }

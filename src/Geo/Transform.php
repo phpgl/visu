@@ -7,7 +7,6 @@ use GL\Math\Mat4;
 use GL\Math\Vec3;
 use GL\Math\Vec4;
 use GL\Math\Quat;
-use TowerDefense\Debug\DebugTextOverlay;
 
 class Transform
 {
