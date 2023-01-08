@@ -33,11 +33,12 @@ class PipelineContainer
      * Sets an instance of class T in the container.
      * 
      * @template T
-     * @param class-string<T> $className
      * @param T $instance
      */
-    public function set(string $className, $instance): void
+    public function set($instance): void
     {
+        $className = get_class($instance);
+
         if (isset($this->storage[$className])) {
             throw new PipelineContainerException("Pipeline container already contains an instance of class: " . $className);
         }
