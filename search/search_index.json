@@ -1,0 +1,1 @@
+{"config":{"lang":["en"],"separator":"[\\s\\-]+","pipeline":["stopWordFilter"]},"docs":[{"location":"index.html","title":"VISU - A Modern OpenGL Framework for PHP","text":"<p>VISU is a collection of components and systems to make interating with OpenGL in PHP simpler. This framework is built around the extension PHP-GLFW. formerly php-game-framework</p>"}]}
