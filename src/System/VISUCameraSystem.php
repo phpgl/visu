@@ -9,6 +9,7 @@ use VISU\Exception\VISUException;
 use VISU\Graphics\Camera;
 use VISU\Graphics\Rendering\Pass\CameraData;
 use VISU\Graphics\Rendering\RenderContext;
+use VISU\OS\CursorMode;
 use VISU\OS\Input;
 use VISU\OS\Key;
 use VISU\OS\MouseButton;
@@ -67,8 +68,12 @@ class VISUCameraSystem implements SystemInterface
             $cursorOffset = new Vec2($signal->x - $lastCurserPos->x, $signal->y - $lastCurserPos->y);
             
             if ($this->input->isMouseButtonPressed(MouseButton::LEFT)) {
-                $this->cameraEuler->x = $this->cameraEuler->x + $cursorOffset->x * 0.1;
-                $this->cameraEuler->y = $this->cameraEuler->y + $cursorOffset->y * 0.1;
+                $this->input->setCursorMode(CursorMode::DISABLED);
+                $this->cameraEuler->x = $this->cameraEuler->x - $cursorOffset->x * 0.1;
+                $this->cameraEuler->y = $this->cameraEuler->y - $cursorOffset->y * 0.1;
+            }
+            else {
+                $this->input->setCursorMode(CursorMode::NORMAL);
             }
         });
     }
@@ -113,17 +118,20 @@ class VISUCameraSystem implements SystemInterface
         $input = $this->input;
         $camera = $this->getActiveCamera($entities);
 
+        // update interpolation states
+        $camera->finalizeFrame();
+
         if ($input->isKeyPressed(Key::W)) {
-            $camera->transform->moveForward(0.5);
+            $camera->transform->moveForward(2.5);
         }
         if ($input->isKeyPressed(Key::S)) {
-            $camera->transform->moveBackward(0.5);
+            $camera->transform->moveBackward(2.5);
         }
         if ($input->isKeyPressed(Key::A)) {
-            $camera->transform->moveLeft(0.5);
+            $camera->transform->moveLeft(2.5);
         }
         if ($input->isKeyPressed(Key::D)) {
-            $camera->transform->moveRight(0.5);
+            $camera->transform->moveRight(2.5);
         }
 
         // update the camera rotation
@@ -146,10 +154,9 @@ class VISUCameraSystem implements SystemInterface
     public function render(EntitiesInterface $entities, RenderContext $context) : void
     {
         $camera = $this->getActiveCamera($entities);
-
         // get current render target
         $renderTarget = $context->resources->getActiveRenderTarget();
-
+        
         // extract the camera view and projection matrices
         $viewMatrix = $camera->getViewMatrix($context->compensation);
         $projectionMatrix = $camera->getProjectionMatrix($renderTarget);
@@ -161,8 +168,5 @@ class VISUCameraSystem implements SystemInterface
             projection: $projectionMatrix,
             view: $viewMatrix,
         ));
-
-        // update interpolation states
-        $camera->finalizeFrame();
     }
 }

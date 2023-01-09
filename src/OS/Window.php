@@ -619,4 +619,14 @@ class Window
     {
         glfwRequestWindowAttention($this->requiresInitialization());
     }
+
+    /**
+     * Enables / disalbes the current contexts swap interval aka vsync
+     * 
+     * @param int $interval The swap interval, 0 for no vsync, 1 for vsync
+     */
+    public function setSwapInterval(int $interval) : void
+    {
+        glfwSwapInterval($interval);
+    }
 } 
