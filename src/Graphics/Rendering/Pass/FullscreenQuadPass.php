@@ -2,7 +2,6 @@
 
 namespace VISU\Graphics\Rendering\Pass;
 
-use GL\Math\Vec4;
 use VISU\Graphics\GLState;
 use VISU\Graphics\QuadVertexArray;
 use VISU\Graphics\Rendering\PipelineContainer;
