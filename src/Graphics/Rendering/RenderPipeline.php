@@ -156,6 +156,22 @@ class RenderPipeline
     }
 
     /**
+     * Creates a depth attachment for a render target resource
+     * 
+     * @param RenderTargetResource $target
+     * @param TextureOptions|null $options Optional texture options for the attachment
+     */
+    public function createDepthAttachment(RenderTargetResource $target, ?TextureOptions $options = null): TextureResource
+    {
+        /** @var TextureResource */
+        $resource = $this->createResource(TextureResource::class, $target->name . '.attachment.depth', $target->width, $target->height, $options);
+
+        $target->depthAttachment = $resource;
+
+        return $resource;
+    }
+
+    /**
      * Imports a texture resource
      * 
      * @param string $resourceName

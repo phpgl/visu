@@ -60,6 +60,8 @@ class FullscreenQuadPass extends RenderPass
         $glTexture = $resources->getTexture($this->appliedTexture);
         $this->shader->setUniform1i($this->textureUniformName, 0);
 
+        glDisable(GL_DEPTH_TEST);
+
         $glTexture->bind();
         $quadVA->draw();
     }

@@ -32,6 +32,16 @@ class CameraData
     public readonly Mat4 $view;
 
     /**
+     * Current rendering resolution (X / width)
+     */
+    public readonly int $resolutionX;
+
+    /**
+     * Current rendering resolution (Y / height)
+     */
+    public readonly int $resolutionY;
+
+    /**
      * Constructor
      */
     public function __construct(
@@ -39,11 +49,15 @@ class CameraData
         Camera $renderCamera,
         Mat4 $projection,
         Mat4 $view,
+        int $resolutionX,
+        int $resolutionY,
     )
     {
         $this->frameCamera = $frameCamera;
         $this->renderCamera = $renderCamera;
         $this->projection = $projection;
         $this->view = $view;
+        $this->resolutionX = $resolutionX;
+        $this->resolutionY = $resolutionY;
     }
 }

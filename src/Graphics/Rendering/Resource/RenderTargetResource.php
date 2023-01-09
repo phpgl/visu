@@ -22,4 +22,9 @@ class RenderTargetResource extends RenderResource
      * @var array<int, TextureResource>
      */
     public array $colorAttachments = [];
+
+    /**
+     * Depth attachment
+     */
+    public ?TextureResource $depthAttachment;
 }

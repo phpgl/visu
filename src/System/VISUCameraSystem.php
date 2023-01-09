@@ -154,6 +154,7 @@ class VISUCameraSystem implements SystemInterface
     public function render(EntitiesInterface $entities, RenderContext $context) : void
     {
         $camera = $this->getActiveCamera($entities);
+        
         // get current render target
         $renderTarget = $context->resources->getActiveRenderTarget();
         
@@ -167,6 +168,8 @@ class VISUCameraSystem implements SystemInterface
             renderCamera: $camera,
             projection: $projectionMatrix,
             view: $viewMatrix,
+            resolutionX: $renderTarget->width(),
+            resolutionY: $renderTarget->height(),
         ));
     }
 }

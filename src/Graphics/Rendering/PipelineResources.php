@@ -101,6 +101,9 @@ class PipelineResources
     {
         $target = new RenderTarget($resource->width, $resource->height, new Framebuffer($this->glState));
 
+        $drawBuffers = [];
+
+        // attach color attachments
         foreach($resource->colorAttachments as $i => $colorAttachmentTextureResource) {
             $texture = new Texture($this->glState, $colorAttachmentTextureResource->name);
             $options = $colorAttachmentTextureResource->options ?? new TextureOptions;
@@ -123,7 +126,45 @@ class PipelineResources
 
             $target->framebuffer()->bind();
 
-            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + $i, GL_TEXTURE_2D, $texture->id, 0);  
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + $i, $texture->target, $texture->id, 0);  
+
+            $drawBuffers[] = GL_COLOR_ATTACHMENT0 + $i;
+        }
+
+        glDrawBuffers(count($drawBuffers), ...$drawBuffers);
+
+        // attach depth attachment
+        if ($resource->depthAttachment !== null) {
+            $texture = new Texture($this->glState, $resource->depthAttachment->name);
+
+            // default depth texture options
+            if ($resource->depthAttachment->options === null) {
+                $options = new TextureOptions;
+                $options->internalFormat = GL_DEPTH_COMPONENT;
+                $options->dataFormat = GL_DEPTH_COMPONENT;
+                $options->dataType = GL_FLOAT;
+                $options->minFilter = GL_NEAREST;
+                $options->magFilter = GL_NEAREST;
+                $options->wrapS = GL_CLAMP_TO_EDGE;
+                $options->wrapT = GL_CLAMP_TO_EDGE;
+                $resource->depthAttachment->options = $options;
+            }
+
+            $options = $resource->depthAttachment->options;
+            $options->generateMipmaps = false;
+
+            $texture->allocateEmpty(
+                $resource->depthAttachment->width, 
+                $resource->depthAttachment->height,
+                $options
+            );
+
+            // store the texture
+            $this->textures[$resource->depthAttachment->name] = $texture;
+
+            $target->framebuffer()->bind();
+
+            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, $texture->target, $texture->id, 0);  
         }
 
         if (!$target->framebuffer()->isValid($status, $error)) {
