@@ -9,6 +9,7 @@ use VISU\Exception\VISUException;
 use VISU\Graphics\Camera;
 use VISU\Graphics\Rendering\Pass\CameraData;
 use VISU\Graphics\Rendering\RenderContext;
+use VISU\Graphics\RenderTarget;
 use VISU\OS\CursorMode;
 use VISU\OS\Input;
 use VISU\OS\Key;
@@ -145,6 +146,24 @@ class VISUCameraSystem implements SystemInterface
         $camera->transform->markDirty();
     }
 
+    public function getCameraData(EntitiesInterface $entities, RenderTarget $renderTarget, float $compensation) : CameraData
+    {
+        $camera = $this->getActiveCamera($entities);
+
+        // extract the camera view and projection matrices
+        $viewMatrix = $camera->getViewMatrix($compensation);
+        $projectionMatrix = $camera->getProjectionMatrix($renderTarget);
+
+        return new CameraData(
+            frameCamera: $camera,
+            renderCamera: $camera,
+            projection: $projectionMatrix,
+            view: $viewMatrix,
+            resolutionX: $renderTarget->width(),
+            resolutionY: $renderTarget->height(),
+        );
+    }
+
     /**
      * Handles rendering of the scene, here you can attach additional render passes,
      * modify the render pipeline or customize rendering related data.
@@ -153,23 +172,10 @@ class VISUCameraSystem implements SystemInterface
      */
     public function render(EntitiesInterface $entities, RenderContext $context) : void
     {
-        $camera = $this->getActiveCamera($entities);
-        
         // get current render target
         $renderTarget = $context->resources->getActiveRenderTarget();
-        
-        // extract the camera view and projection matrices
-        $viewMatrix = $camera->getViewMatrix($context->compensation);
-        $projectionMatrix = $camera->getProjectionMatrix($renderTarget);
 
         // store the camera data for the frame
-        $context->data->set(new CameraData(
-            frameCamera: $camera,
-            renderCamera: $camera,
-            projection: $projectionMatrix,
-            view: $viewMatrix,
-            resolutionX: $renderTarget->width(),
-            resolutionY: $renderTarget->height(),
-        ));
+        $context->data->set($this->getCameraData($entities, $renderTarget, $context->compensation));
     }
 }

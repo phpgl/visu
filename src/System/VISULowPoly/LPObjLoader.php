@@ -5,6 +5,7 @@ namespace VISU\System\VISULowPoly;
 use GL\Buffer\FloatBuffer;
 use GL\Geometry\ObjFileParser;
 use VISU\Exception\VISUException;
+use VISU\Geo\AABB;
 use VISU\Graphics\GLState;
 
 class LPObjLoader
@@ -45,7 +46,11 @@ class LPObjLoader
                 $material,
                 $vb,
                 $vertexOffset,
-                $sourceMesh->vertices->size() / 6
+                $sourceMesh->vertices->size() / 6,
+                new AABB(
+                    $sourceMesh->aabbMin,
+                    $sourceMesh->aabbMax,
+                )
             );
 
             $vertexOffset += $sourceMesh->vertices->size() / 6;

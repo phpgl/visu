@@ -4,7 +4,9 @@ namespace VISU\System\VISULowPoly;
 
 use GL\Math\{GLM, Quat, Vec2, Vec3};
 use VISU\Component\VISULowPoly\DynamicRenderableModel;
+use VISU\D3D;
 use VISU\ECS\EntitiesInterface;
+use VISU\ECS\Picker\DevEntityPickerRenderInterface;
 use VISU\ECS\SystemInterface;
 use VISU\Geo\Transform;
 use VISU\Graphics\GLState;
@@ -24,7 +26,7 @@ use VISU\Graphics\Rendering\Resource\RenderTargetResource;
 use VISU\Graphics\ShaderProgram;
 use VISU\Graphics\ShaderStage;
 
-class LPRenderingSystem implements SystemInterface
+class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterface
 {
     /**
      * The render target the renderer should render to
@@ -49,6 +51,8 @@ class LPRenderingSystem implements SystemInterface
     private FullscreenDebugDepthRenderer $fullscreenDebugDepthRenderer;
 
     private ShaderProgram $objectShader;
+
+    private ShaderProgram $devPickingShader;
 
     /**
      * Constructor
@@ -111,6 +115,49 @@ class LPRenderingSystem implements SystemInterface
         }
         GLSL));
         $this->objectShader->link();
+
+        // simple entity picking shader
+
+        $this->devPickingShader = new ShaderProgram($this->gl);
+
+        // attach a simple vertex shader
+        $this->devPickingShader->attach(new ShaderStage(ShaderStage::VERTEX, <<< 'GLSL'
+        #version 330 core
+        layout (location = 0) in vec3 a_position;
+
+        uniform mat4 projection;
+        uniform mat4 view;
+        uniform mat4 model;
+
+        void main()
+        {
+            gl_Position = projection * view * model * vec4(a_position, 1.0f);
+        }
+        GLSL));
+
+        // also attach a simple fragment shader
+        $this->devPickingShader->attach(new ShaderStage(ShaderStage::FRAGMENT, <<< 'GLSL'
+        #version 330 core
+        layout (location = 0) out vec3 enitity_color;
+        //out uint fragment_color;
+
+        uniform int entity_id; 
+
+        vec3 id_to_color(int color)
+        {
+            int r = (color & 0x000000FF) >>  0;
+            int g = (color & 0x0000FF00) >>  8;
+            int b = (color & 0x00FF0000) >> 16;
+
+            return vec3(r/255.0f, g/255.0f, b/255.0f);	
+        }
+
+        void main()
+        { 	
+            enitity_color = id_to_color(entity_id);
+        }
+        GLSL));
+        $this->devPickingShader->link();
     }
 
     /**
@@ -151,6 +198,11 @@ class LPRenderingSystem implements SystemInterface
      */
     public function update(EntitiesInterface $entities) : void
     {
+        // all dynamic renderables need an up to date aabb
+        foreach($entities->view(DynamicRenderableModel::class) as $entity => $renerable) 
+        {
+            
+        }
     }
 
     /**
@@ -164,7 +216,6 @@ class LPRenderingSystem implements SystemInterface
     {
         $this->currentRenderTargetRes = $renderTargetRes;
     }
-
     
     /**
      * Handles rendering of the scene, here you can attach additional render passes,
@@ -219,6 +270,8 @@ class LPRenderingSystem implements SystemInterface
                         $this->objectShader->setUniformVec3('color', $mesh->material->color);
                         
                         glDrawArrays(GL_TRIANGLES, $mesh->vertexOffset, $mesh->vertexCount);
+
+                        D3D::aabb($transform->position, $mesh->aabb->min * $transform->scale, $mesh->aabb->max * $transform->scale, D3D::$colorGreen);
                     }
                 }
             }
@@ -228,5 +281,36 @@ class LPRenderingSystem implements SystemInterface
 
         // reset the render target
         $this->currentRenderTargetRes = null;
+    }
+
+
+    /**
+     * Renders all entites to a picking framebuffer 
+     * 
+     * @param EntitiesInterface $entities 
+     * @param CameraData $cameraData 
+     * @return void 
+     */
+    public function renderEntityIdsForPicking(EntitiesInterface $entities, CameraData $cameraData) : void
+    {
+        glEnable(GL_DEPTH_TEST);
+
+        $this->devPickingShader->use();
+        $this->devPickingShader->setUniformMat4('projection', false, $cameraData->projection);
+        $this->devPickingShader->setUniformMat4('view', false, $cameraData->view);
+
+        foreach($entities->view(DynamicRenderableModel::class) as $entity => $renderable) 
+        {
+            $transform = $entities->get($entity, Transform::class);
+            $this->devPickingShader->setUniformMatrix4f('model', false, $transform->getLocalMatrix());
+            $this->devPickingShader->setUniform1i('entity_id', $entity);
+
+            // render each mesh 
+            foreach($renderable->model->meshes as $mesh) 
+            {
+                $mesh->vertexBuffer->bind();
+                glDrawArrays(GL_TRIANGLES, $mesh->vertexOffset, $mesh->vertexCount);
+            }
+        }
     }
 }

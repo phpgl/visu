@@ -2,6 +2,8 @@
 
 namespace VISU\System\VISULowPoly;
 
+use VISU\Geo\AABB;
+
 class LPMesh
 {
     /**
@@ -14,6 +16,7 @@ class LPMesh
         public readonly  LPVertexBuffer $vertexBuffer,
         public readonly int $vertexOffset,
         public readonly int $vertexCount,
+        public readonly AABB $aabb,
     )
     {
     }
