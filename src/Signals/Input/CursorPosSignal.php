@@ -44,4 +44,15 @@ class CursorPosSignal extends Signal
         $this->x = $x;
         $this->y = $y;
     }
+
+    /**
+     * Omits the window property from the debug output
+     */
+    public function __debugInfo()
+    {
+        return [
+            'x' => $this->x,
+            'y' => $this->y,
+        ];
+    }   
 }

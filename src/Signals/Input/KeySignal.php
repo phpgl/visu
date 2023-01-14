@@ -95,4 +95,16 @@ class KeySignal extends Signal
         return ($this->mods & GLFW_MOD_NUM_LOCK) === GLFW_MOD_NUM_LOCK;
     }
 
+    /**
+     * Omits the window property from the debug output
+     */
+    public function __debugInfo()
+    {
+        return [
+            'key' => $this->key,
+            'scancode' => $this->scancode,
+            'action' => $this->action,
+            'mods' => $this->mods,
+        ];
+    }   
 }

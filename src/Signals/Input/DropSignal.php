@@ -33,5 +33,5 @@ class DropSignal extends Signal
     ) {
         $this->window = $window;
         $this->paths = $paths;
-    }
+    }   
 }

@@ -104,4 +104,16 @@ class MouseButtonSignal extends Signal
     {
         return $this->button === MouseButton::MIDDLE && $this->action === Input::PRESS;
     }
+
+    /**
+     * Omits the window property from the debug output
+     */
+    public function __debugInfo()
+    {
+        return [
+            'button' => $this->button,
+            'action' => $this->action,
+            'mods' => $this->mods,
+        ];
+    }
 }
