@@ -32,10 +32,10 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
      * Rendering debug mode 
      */
     const DEBUG_MODE_NONE = 0;
-    const DEBUG_MODE_NORMALS = 1;
-    const DEBUG_MODE_DEPTH = 2;
-    const DEBUG_MODE_ALBEDO = 3;
-    const DEBUG_MODE_POSITION = 4;
+    const DEBUG_MODE_POSITION = 1;
+    const DEBUG_MODE_NORMALS = 2;
+    const DEBUG_MODE_DEPTH = 3;
+    const DEBUG_MODE_ALBEDO = 4;
     public int $debugMode = self::DEBUG_MODE_NONE;
 
     /**
