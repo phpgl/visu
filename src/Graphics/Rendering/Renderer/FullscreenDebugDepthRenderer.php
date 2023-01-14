@@ -23,7 +23,7 @@ class FullscreenDebugDepthRenderer
      * @param GLState $glstate The current GL state.
      */
     public function __construct(
-        private GLState $glstate,
+        GLState $glstate,
     )
     {
         // create the shader program
@@ -77,7 +77,8 @@ class FullscreenDebugDepthRenderer
      * Attaches a render pass to the pipeline
      * 
      * @param RenderPipeline $pipeline 
-     * @param array<DebugOverlayText> $texts 
+     * @param RenderTargetResource $renderTarget
+     * @param TextureResource $depthTexture
      */
     public function attachPass(
         RenderPipeline $pipeline, 

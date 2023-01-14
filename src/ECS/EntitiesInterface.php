@@ -110,6 +110,7 @@ interface EntitiesInterface
     /**
      * Returns boolean if a singleton component exists
      * 
+     * @template T
      * @param class-string<T>           $componentClassName
      * @return bool
      */
@@ -118,6 +119,7 @@ interface EntitiesInterface
     /**
      * Removes a singleton component from the entity registry
      * 
+     * @template T
      * @param class-string<T>           $componentClassName
      */
     public function removeSingleton(string $componentClassName) : void;

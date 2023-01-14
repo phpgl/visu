@@ -79,7 +79,7 @@ class LPObjLoader
         $indexOffset = 0;
 
         $models = [];
-        $files = scandir($directory);
+        $files = scandir($directory) ?: [];
 
         foreach ($files as $file) {
             if (substr($file, -4) === '.obj') {

@@ -58,6 +58,8 @@ class MouseClickSignal extends Signal
 
     /**
      * Omits the window property from the debug output
+     * 
+     * @return array<string, mixed>
      */
     public function __debugInfo()
     {

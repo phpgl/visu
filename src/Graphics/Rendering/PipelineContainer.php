@@ -32,7 +32,7 @@ class PipelineContainer
     /**
      * Sets an instance of class T in the container.
      * 
-     * @template T
+     * @template T of object
      * @param T $instance
      */
     public function set($instance): void

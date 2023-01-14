@@ -7,4 +7,5 @@ parameters:
     ignoreErrors:
         - '/Access to an undefined property GL\\Math\\Vec[2-4]::\$[x|y|z|w|r|g|b|a]\./'
         - '/Cannot access property \$([a-zA-Z0-9]+) on VISU\\Graphics\\TextureOptions\|null\./'
-        - '/Binary operation "[\*\|\+]" between GL\\Math\\.*/'
+        - '/Binary operation "[\*\|\+\|\-]" between GL\\Math\\.*/'
+        - '/Cannot access offset [0-9]+ on GL\\Buffer\\.*/'

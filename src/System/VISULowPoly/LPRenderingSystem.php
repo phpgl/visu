@@ -29,6 +29,16 @@ use VISU\Graphics\ShaderStage;
 class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterface
 {
     /**
+     * Rendering debug mode 
+     */
+    const DEBUG_MODE_NONE = 0;
+    const DEBUG_MODE_NORMALS = 1;
+    const DEBUG_MODE_DEPTH = 2;
+    const DEBUG_MODE_ALBEDO = 3;
+    const DEBUG_MODE_POSITION = 4;
+    public int $debugMode = self::DEBUG_MODE_NONE;
+
+    /**
      * The render target the renderer should render to
      */
     private ?RenderTargetResource $currentRenderTargetRes = null;
@@ -277,6 +287,26 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
             }
         ));
 
+        // depending on the debug mode we pass some gbuffer textures 
+        // directly to our target framebuffer and exit this pass
+        if ($this->debugMode === self::DEBUG_MODE_NORMALS) {
+            $this->fullscreenRenderer->attachPass($context->pipeline, $this->currentRenderTargetRes, $gbuffer->normalTexture);
+            return;
+        }
+        elseif ($this->debugMode === self::DEBUG_MODE_POSITION) {
+            $this->fullscreenRenderer->attachPass($context->pipeline, $this->currentRenderTargetRes, $gbuffer->worldSpacePositionTexture);
+            return;
+        }
+        elseif ($this->debugMode === self::DEBUG_MODE_DEPTH) {
+            $this->fullscreenDebugDepthRenderer->attachPass($context->pipeline, $this->currentRenderTargetRes, $gbuffer->depthTexture);
+            return;
+        }
+        elseif ($this->debugMode === self::DEBUG_MODE_ALBEDO) {
+            $this->fullscreenRenderer->attachPass($context->pipeline, $this->currentRenderTargetRes, $gbuffer->albedoTexture);
+            return;
+        }
+
+        // default render albedo
         $this->fullscreenRenderer->attachPass($context->pipeline, $this->currentRenderTargetRes, $gbuffer->albedoTexture);
 
         // reset the render target

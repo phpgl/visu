@@ -222,6 +222,23 @@ class Input implements WindowEventHandlerInterface
     }
 
     /**
+     * Returns the last mouse down position
+     */
+    public function getLastLeftMouseDownPosition() : Vec2
+    {
+        return $this->lastLeftMouseDownPosition;
+    }
+
+    /**
+     * Returns the last mouse release position
+     */
+    public function getLastLeftMouseReleasePosition() : Vec2
+    {
+        return $this->lastLeftMouseReleasePosition;
+    }
+
+
+    /**
      * Set the cursor position
      * 
      * @param Vec2 $position The position to set the cursor to

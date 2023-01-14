@@ -33,7 +33,7 @@ class Framebuffer extends AbstractFramebuffer
     /**
      * Creates a render buffer attachent
      */
-    public function createRenderbufferAttachment(int $format, int $attachment, int $width, int $height)
+    public function createRenderbufferAttachment(int $format, int $attachment, int $width, int $height) : void
     {
         // delete and remove an old renderbuffer attachment when it already exists
         if (isset($this->renderbufferAttachments[$attachment])) {

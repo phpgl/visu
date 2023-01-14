@@ -50,7 +50,7 @@ class LPVertexBuffer
     /**
      * Uploads the given data to the GPU
      */
-    public function uploadData(FloatBuffer $buffer)
+    public function uploadData(FloatBuffer $buffer) : void
     {
         $this->state->bindVertexArray($this->vertexArray);
         $this->state->bindVertexArrayBuffer($this->vertexBuffer);
@@ -60,7 +60,7 @@ class LPVertexBuffer
     /**
      * Binds the vertex array
      */
-    public function bind()
+    public function bind() : void
     {
         $this->state->bindVertexArray($this->vertexArray);
     }

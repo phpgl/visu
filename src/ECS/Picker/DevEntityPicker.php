@@ -43,6 +43,8 @@ class DevEntityPicker
 
     /**
      * Constructor
+     * 
+     * @param array<DevEntityPickerRenderInterface> $systems Array of systems that can produce pickable geometry
      */
     public function __construct(
         private DevEntityPickerDelegate $delegate,
@@ -76,7 +78,7 @@ class DevEntityPicker
     /**
      * Handles mouse click events
      */
-    public function handleMouseClick(MouseClickSignal $signal)
+    public function handleMouseClick(MouseClickSignal $signal) : void
     {
         if (!$this->enabled) {
             return;
@@ -103,9 +105,9 @@ class DevEntityPicker
      * 
      * @param EntitiesInterface $entities
      * @param CameraData $cameraData 
-     * @param array $systems<DevEntityPickerRenderInterface> Array of systems that can produce pickable geometry
-     * @param mixed $x In screen coordinates not pixels
-     * @param mixed $y In screen coordinates not pixels
+     * @param array<DevEntityPickerRenderInterface> $systems Array of systems that can produce pickable geometry
+     * @param int $x In screen coordinates not pixels
+     * @param int $y In screen coordinates not pixels
      * @return int 
      */
     public static function pickEntity(EntitiesInterface $entities, RenderTarget $renderTarget, CameraData $cameraData, array $systems, int $x, int $y) : int
@@ -124,8 +126,8 @@ class DevEntityPicker
         
         $buffer = new UByteBuffer();
         glReadPixels(
-            $x * $renderTarget->contentScaleX, 
-            $renderTarget->height() - ($y * $renderTarget->contentScaleY), 
+            (int) ($x * $renderTarget->contentScaleX), 
+            (int) ($renderTarget->height() - ($y * $renderTarget->contentScaleY)), 
             1, 1, GL_RGB, GL_UNSIGNED_BYTE, $buffer
         );
 

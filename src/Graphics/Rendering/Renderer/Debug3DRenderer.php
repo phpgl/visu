@@ -205,7 +205,7 @@ class Debug3DRenderer
      * Attaches a render pass to the pipeline
      * 
      * @param RenderPipeline $pipeline 
-     * @param array<DebugOverlayText> $texts 
+     * @param RenderTargetResource $renderTarget
      */
     public function attachPass(
         RenderPipeline $pipeline, 

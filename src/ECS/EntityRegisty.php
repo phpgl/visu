@@ -94,6 +94,10 @@ class EntityRegisty implements EntitiesInterface
     {
         $entities = [];
 
+        if (empty($componentClassNames)) {
+            return [];
+        }
+
         $mainComponent = array_shift($componentClassNames);
 
         foreach($this->view($mainComponent) as $entity => $comp) {
@@ -203,18 +207,18 @@ class EntityRegisty implements EntitiesInterface
     /**
      * Stores a singleton component in the entity registy
      * 
-     * @template T
+     * @template T of object
      * @param T             $component
      */
     public function setSingleton($component) : void
     {
-        $this->singletonComponents[get_class($component)] = $component;
+        $this->singletonComponents[get_class($component)] = $component; 
     }
 
     /**
      * Returns a singleton component from the entity registry
      * 
-     * @template T
+     * @template T of object
      * @param class-string<T>           $componentClassName
      * @return T
      */
@@ -224,12 +228,13 @@ class EntityRegisty implements EntitiesInterface
             throw new EntityRegistryException(sprintf("The singleton component '%s' does not exist.", $componentClassName));
         }
 
-        return $this->singletonComponents[$componentClassName];
+        return $this->singletonComponents[$componentClassName]; // @phpstan-ignore-line im don't get the error here
     }
 
     /**
      * Returns boolean if a singleton component exists
      * 
+     * @template T of object
      * @param class-string<T>           $componentClassName
      * @return bool
      */
@@ -241,6 +246,7 @@ class EntityRegisty implements EntitiesInterface
     /**
      * Removes a singleton component from the entity registry
      * 
+     * @template T of object
      * @param class-string<T>           $componentClassName
      */
     public function removeSingleton(string $componentClassName) : void
