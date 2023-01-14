@@ -15,6 +15,7 @@ use VISU\Signals\Input\{
     DropSignal,
     KeySignal,
     MouseButtonSignal,
+    MouseClickSignal,
     ScrollSignal
 };
 
@@ -48,6 +49,26 @@ class Input implements WindowEventHandlerInterface
      * @var Vec2
      */
     private Vec2 $lastCursorPosition;
+
+    /**
+     * Last left mouse button pressed down cursor position
+     * 
+     * This is needed to calculate the delta needed to cancel click events
+     */
+    private Vec2 $lastLeftMouseDownPosition;
+
+    /**
+     * Last left mouse button released cursor position
+     * 
+     * This is needed to calculate the delta needed to cancel click events
+     */
+    private Vec2 $lastLeftMouseReleasePosition;
+
+    /**
+     * The maximum distance the cursor can move between a mouse down and mouse up event
+     * to still trigger a mouse click event.
+     */
+    private float $mouseClickMaxDistanceFromStart = 10.0;
 
     /**
      * Constructor for the Input class.
@@ -297,6 +318,28 @@ class Input implements WindowEventHandlerInterface
     public function handleWindowMouseButton(Window $window, int $button, int $action, int $mods): void
     {
         $this->dispatcher->dispatch("input.mouse_button", new MouseButtonSignal($window, $button, $action, $mods));
+
+        // generate mouse click events if the mouse button is released
+        if ($button == GLFW_MOUSE_BUTTON_LEFT) {
+            if ($action == GLFW_PRESS) {
+                $this->lastLeftMouseDownPosition = $this->lastCursorPosition->copy();
+            } else if ($action == GLFW_RELEASE) {
+                $this->lastLeftMouseReleasePosition = $this->lastCursorPosition->copy();    
+
+                $currentPos = $this->lastCursorPosition->copy();
+                $dist = $currentPos->distanceTo($this->lastLeftMouseDownPosition);
+
+                if ($dist < $this->mouseClickMaxDistanceFromStart) {
+                    $this->dispatcher->dispatch("input.mouse_click", new MouseClickSignal(
+                        $window, 
+                        $mods, 
+                        $currentPos, 
+                        $this->lastLeftMouseDownPosition->copy(), 
+                        $dist
+                    ));
+                }
+            }
+        }
     }
 
     /**
