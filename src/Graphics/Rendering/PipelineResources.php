@@ -131,7 +131,10 @@ class PipelineResources
             $drawBuffers[] = GL_COLOR_ATTACHMENT0 + $i;
         }
 
-        glDrawBuffers(count($drawBuffers), ...$drawBuffers);
+        if (!empty($drawBuffers)) {
+            glDrawBuffers(count($drawBuffers), ...$drawBuffers);
+        }
+
 
         // attach depth attachment
         if ($resource->depthAttachment !== null) {
@@ -165,6 +168,21 @@ class PipelineResources
             $target->framebuffer()->bind();
 
             glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, $texture->target, $texture->id, 0);  
+        }
+
+        // create a renderbuffer attachment
+        if ($resource->createRenderbuffer) {
+            $framebuffer = $target->framebuffer();
+            
+            if (!$framebuffer instanceof Framebuffer) {
+                throw new PipelineResourceException("Cannot attach a renderbuffer to the given type of framebuffer.");
+            } 
+
+            // bind the frame buffer before attaching additon render buffers
+            $framebuffer->bind();
+
+            $framebuffer->createRenderbufferAttachment(GL_DEPTH24_STENCIL8, GL_DEPTH_STENCIL_ATTACHMENT, $resource->width, $resource->height);
+            $framebuffer->createRenderbufferAttachment(GL_RGB, GL_COLOR_ATTACHMENT0, $resource->width, $resource->height);
         }
 
         if (!$target->framebuffer()->isValid($status, $error)) {

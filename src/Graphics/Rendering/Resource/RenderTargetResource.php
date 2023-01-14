@@ -26,5 +26,10 @@ class RenderTargetResource extends RenderResource
     /**
      * Depth attachment
      */
-    public ?TextureResource $depthAttachment;
+    public ?TextureResource $depthAttachment = null;
+
+    /**
+     * Create a Renderbuffer
+     */
+    public bool $createRenderbuffer = false;
 }
