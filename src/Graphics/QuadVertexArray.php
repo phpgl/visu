@@ -38,16 +38,16 @@ class QuadVertexArray
         $this->state->bindVertexArray($this->vertexArray);
         $this->state->bindVertexArrayBuffer($this->vertexBuffer);
 
-        // two triangles
+        // two triangles to form a quad (CCW)
         $buffer = new FloatBuffer([
             // positions     // texture Coords
             -1.0,  1.0, 0.0,  0.0, 1.0, // top left
             -1.0, -1.0, 0.0,  0.0, 0.0, // bottom left
-             1.0, -1.0, 0.0,  1.0, 0.0, // bottom right
-             
+             1.0,  1.0, 0.0,  1.0, 1.0, // top right
+
              1.0, -1.0, 0.0,  1.0, 0.0, // bottom right
              1.0,  1.0, 0.0,  1.0, 1.0, // top right
-            -1.0,  1.0, 0.0,  0.0, 1.0  // top left
+            -1.0, -1.0, 0.0,  0.0, 0.0, // bottom left
         ]);
 
         glBufferData(GL_ARRAY_BUFFER, $buffer, GL_STATIC_DRAW);

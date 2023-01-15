@@ -10,11 +10,15 @@ use VISU\ECS\Picker\DevEntityPickerRenderInterface;
 use VISU\ECS\SystemInterface;
 use VISU\Geo\Transform;
 use VISU\Graphics\GLState;
+use VISU\Graphics\QuadVertexArray;
 use VISU\Graphics\Rendering\Pass\CallbackPass;
 use VISU\Graphics\Rendering\Pass\CameraData;
+use VISU\Graphics\Rendering\Pass\DeferredLightPass;
+use VISU\Graphics\Rendering\Pass\FullscreenQuadPass;
 use VISU\Graphics\Rendering\Pass\GBufferGeometryPassInterface;
 use VISU\Graphics\Rendering\Pass\GBufferPass;
 use VISU\Graphics\Rendering\Pass\GBufferPassData;
+use VISU\Graphics\Rendering\Pass\DeferredLightPassData;
 use VISU\Graphics\Rendering\PipelineContainer;
 use VISU\Graphics\Rendering\PipelineResources;
 use VISU\Graphics\Rendering\RenderContext;
@@ -25,7 +29,6 @@ use VISU\Graphics\Rendering\RenderPipeline;
 use VISU\Graphics\Rendering\Resource\RenderTargetResource;
 use VISU\Graphics\ShaderCollection;
 use VISU\Graphics\ShaderProgram;
-use VISU\Graphics\ShaderStage;
 
 class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterface
 {
@@ -61,9 +64,12 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
      */
     private FullscreenDebugDepthRenderer $fullscreenDebugDepthRenderer;
 
+    /**
+     * Shader programs
+     */
     private ShaderProgram $objectShader;
-
     private ShaderProgram $devPickingShader;
+    private ShaderProgram $lightingShader;
 
     /**
      * Constructor
@@ -79,6 +85,7 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
         // load the required shaders
         $this->objectShader = $this->shaders->get('lowpoly/deferred_single_mesh');
         $this->devPickingShader = $this->shaders->get('lowpoly/devpicking');
+        $this->lightingShader = $this->shaders->get('lowpoly/deferred_lightpass');
     }
 
     /**
@@ -217,8 +224,14 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
             return;
         }
 
-        // default render albedo
-        $this->fullscreenRenderer->attachPass($context->pipeline, $this->currentRenderTargetRes, $gbuffer->albedoTexture);
+        // add a light pass
+        $context->pipeline->addPass(new DeferredLightPass($this->lightingShader));
+
+        // read the light pass data
+        $lightpass = $context->data->get(DeferredLightPassData::class);
+
+        // copy over to the main render target
+        $this->fullscreenRenderer->attachPass($context->pipeline, $this->currentRenderTargetRes, $lightpass->output);
 
         // reset the render target
         $this->currentRenderTargetRes = null;

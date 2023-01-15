@@ -57,11 +57,11 @@ class PipelineResources
     /**
      * Constructor
      * 
-     * @param GLState $glState 
+     * @param GLState $gl 
      * @return void 
      */
     public function __construct(
-        private GLState $glState
+        public GLState $gl
     )
     {
     }
@@ -99,13 +99,13 @@ class PipelineResources
      */
     private function createRenderTarget(RenderTargetResource $resource) : void
     {
-        $target = new RenderTarget($resource->width, $resource->height, new Framebuffer($this->glState));
+        $target = new RenderTarget($resource->width, $resource->height, new Framebuffer($this->gl));
 
         $drawBuffers = [];
 
         // attach color attachments
         foreach($resource->colorAttachments as $i => $colorAttachmentTextureResource) {
-            $texture = new Texture($this->glState, $colorAttachmentTextureResource->name);
+            $texture = new Texture($this->gl, $colorAttachmentTextureResource->name);
             $options = $colorAttachmentTextureResource->options ?? new TextureOptions;
 
             // if min filter is using a mipmap, fallback to linear
@@ -138,7 +138,7 @@ class PipelineResources
 
         // attach depth attachment
         if ($resource->depthAttachment !== null) {
-            $texture = new Texture($this->glState, $resource->depthAttachment->name);
+            $texture = new Texture($this->gl, $resource->depthAttachment->name);
 
             // default depth texture options
             if ($resource->depthAttachment->options === null) {
@@ -347,7 +347,7 @@ class PipelineResources
     public function cacheStaticResource(string $name, callable $callback): mixed
     {
         if (!isset($this->staticStorage[$name])) {
-            $this->staticStorage[$name] = $callback($this->glState);
+            $this->staticStorage[$name] = $callback($this->gl);
         }
 
         return $this->staticStorage[$name];

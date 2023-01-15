@@ -193,13 +193,14 @@ class DebugOverlayTextRenderer
             $uvW = (float) $charData->width / $this->fontAtlas->textureWidth;
             $uvH = (float) $charData->height / $this->fontAtlas->textureHeight;
 
+            // triangles are CCW so we can cull backfaces
             $vertices->pushArray([
-                $xpos, $ypos, $uvX, $uvY,
-                $xpos + $w, $ypos, $uvX + $uvW, $uvY,
                 $xpos, $ypos + $h, $uvX, $uvY + $uvH,
                 $xpos + $w, $ypos, $uvX + $uvW, $uvY,
+                $xpos, $ypos, $uvX, $uvY,
                 $xpos, $ypos + $h, $uvX, $uvY + $uvH,
                 $xpos + $w, $ypos + $h, $uvX + $uvW, $uvY + $uvH,
+                $xpos + $w, $ypos, $uvX + $uvW, $uvY
             ]);
 
             $vertexCount += 6;
@@ -273,6 +274,9 @@ class DebugOverlayTextRenderer
                 // pipeline settings 
                 glDisable(GL_DEPTH_TEST);
                 glDisable(GL_BLEND);
+                glEnable(GL_CULL_FACE);
+                glCullFace(GL_BACK);
+                glFrontFace(GL_CCW);
                 
                 // draw the text
                 $offset = 0;
