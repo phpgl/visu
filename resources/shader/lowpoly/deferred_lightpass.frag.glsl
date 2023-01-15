@@ -159,6 +159,12 @@ void main()
     // gamma correction
     // color = color / (color + vec3(1.0));
     // color = pow(color, vec3(1.0/2.2));  
+
+    // tmp blueish sky if albedo is 0 
+    // this is a hack till we build a proper skybox renderer
+    if (buffer_albedo == vec3(0.0)) {
+        color = vec3(0.654, 0.68, 0.8);
+    }
    
     fragment_color = vec4(color, 1.0);
 
