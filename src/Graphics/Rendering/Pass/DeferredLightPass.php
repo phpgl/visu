@@ -2,6 +2,9 @@
 
 namespace VISU\Graphics\Rendering\Pass;
 
+use GL\Math\Vec3;
+use VISU\Component\DirectionalLightComponent;
+use VISU\D3D;
 use VISU\Graphics\GLState;
 use VISU\Graphics\QuadVertexArray;
 use VISU\Graphics\Rendering\PipelineContainer;
@@ -16,7 +19,8 @@ class DeferredLightPass extends RenderPass
      * Constructor
      */
     public function __construct(
-        private ShaderProgram $lightingShader
+        private ShaderProgram $lightingShader,
+        private DirectionalLightComponent $sun
     )
     {
     }
@@ -59,6 +63,21 @@ class DeferredLightPass extends RenderPass
         $this->lightingShader->setUniformVec3('camera_position', $cameraData->renderCamera->transform->position);
         $this->lightingShader->setUniform2f('camera_resolution', $cameraData->resolutionX, $cameraData->resolutionY);
 
+        // set sun properties
+        $this->sun->direction->x = -1.0;
+        $this->sun->direction->y = 1.0;
+        $this->sun->intensity = 2.0;
+        $this->sun->direction->normalize();
+
+        D3D::ray(new Vec3(0.0), $this->sun->direction, D3D::$colorYellow, 200.0);
+        D3D::cross(new Vec3(0.0), D3D::$colorYellow, 50.0);
+
+
+        $this->lightingShader->setUniformVec3('sun_direction', $this->sun->direction);
+        $this->lightingShader->setUniformVec3('sun_color', $this->sun->color);
+        $this->lightingShader->setUniform1f('sun_intensity', $this->sun->intensity);
+
+        // bind the gbuffer textures
         foreach([
             [$gbufferData->worldSpacePositionTexture, 'position'],
             [$gbufferData->normalTexture, 'normal'],

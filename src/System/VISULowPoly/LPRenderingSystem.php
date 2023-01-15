@@ -3,6 +3,7 @@
 namespace VISU\System\VISULowPoly;
 
 use GL\Math\{GLM, Quat, Vec2, Vec3};
+use VISU\Component\DirectionalLightComponent;
 use VISU\Component\VISULowPoly\DynamicRenderableModel;
 use VISU\D3D;
 use VISU\ECS\EntitiesInterface;
@@ -10,11 +11,9 @@ use VISU\ECS\Picker\DevEntityPickerRenderInterface;
 use VISU\ECS\SystemInterface;
 use VISU\Geo\Transform;
 use VISU\Graphics\GLState;
-use VISU\Graphics\QuadVertexArray;
 use VISU\Graphics\Rendering\Pass\CallbackPass;
 use VISU\Graphics\Rendering\Pass\CameraData;
 use VISU\Graphics\Rendering\Pass\DeferredLightPass;
-use VISU\Graphics\Rendering\Pass\FullscreenQuadPass;
 use VISU\Graphics\Rendering\Pass\GBufferGeometryPassInterface;
 use VISU\Graphics\Rendering\Pass\GBufferPass;
 use VISU\Graphics\Rendering\Pass\GBufferPassData;
@@ -108,6 +107,9 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
     {
         $entities->registerComponent(DynamicRenderableModel::class);
         $entities->registerComponent(Transform::class);
+
+        // create single directional light
+        $entities->setSingleton(new DirectionalLightComponent);
     }
 
     /**
@@ -225,7 +227,10 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
         }
 
         // add a light pass
-        $context->pipeline->addPass(new DeferredLightPass($this->lightingShader));
+        $context->pipeline->addPass(new DeferredLightPass(
+            $this->lightingShader,
+            $entities->getSingleton(DirectionalLightComponent::class)
+        ));
 
         // read the light pass data
         $lightpass = $context->data->get(DeferredLightPassData::class);
