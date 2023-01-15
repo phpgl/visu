@@ -23,6 +23,7 @@ use VISU\Graphics\Rendering\Renderer\FullscreenTextureRenderer;
 use VISU\Graphics\Rendering\RenderPass;
 use VISU\Graphics\Rendering\RenderPipeline;
 use VISU\Graphics\Rendering\Resource\RenderTargetResource;
+use VISU\Graphics\ShaderCollection;
 use VISU\Graphics\ShaderProgram;
 use VISU\Graphics\ShaderStage;
 
@@ -69,105 +70,15 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
      */
     public function __construct(
         private GLState $gl,
+        private ShaderCollection $shaders,
     )
     {
         $this->fullscreenRenderer = new FullscreenTextureRenderer($this->gl);
         $this->fullscreenDebugDepthRenderer = new FullscreenDebugDepthRenderer($this->gl);
 
-        // create the terrain shader
-        // create the shader program
-        $this->objectShader = new ShaderProgram($this->gl);
-
-        // attach a simple vertex shader
-        $this->objectShader->attach(new ShaderStage(ShaderStage::VERTEX, <<< 'GLSL'
-        #version 330 core
-        layout (location = 0) in vec3 a_position;
-        layout (location = 1) in vec3 a_normal;
-
-        out vec3 v_normal;
-        out vec3 v_position;
-
-        uniform mat4 projection;
-        uniform mat4 view;
-        uniform mat4 model;
-
-        void main()
-        {
-            v_normal = a_normal;
-
-            v_position = vec3(model * vec4(a_position, 1.0f));
-            gl_Position = projection * view * model * vec4(a_position, 1.0f);
-        }
-        GLSL));
-
-        // also attach a simple fragment shader
-        $this->objectShader->attach(new ShaderStage(ShaderStage::FRAGMENT, <<< 'GLSL'
-        #version 330 core
-        
-        layout (location = 0) out vec3 gbuffer_position;
-        layout (location = 1) out vec3 gbuffer_normal;
-        layout (location = 2) out vec4 gbuffer_albedo;
-
-        in vec3 v_normal;
-        in vec3 v_position;
-
-        uniform vec3 color;
-
-        void main()
-        {
-            // basic phong lighting
-            vec3 lightDir = normalize(vec3(0.0f, 1.0f, 1.0f));
-            float diffuse = max(dot(v_normal, lightDir), 0.0f);
-
-            gbuffer_albedo = vec4(color, 1.0f) * diffuse;
-            gbuffer_normal = v_normal;
-            gbuffer_position = v_position;
-        }
-        GLSL));
-        $this->objectShader->link();
-
-        // simple entity picking shader
-
-        $this->devPickingShader = new ShaderProgram($this->gl);
-
-        // attach a simple vertex shader
-        $this->devPickingShader->attach(new ShaderStage(ShaderStage::VERTEX, <<< 'GLSL'
-        #version 330 core
-        layout (location = 0) in vec3 a_position;
-
-        uniform mat4 projection;
-        uniform mat4 view;
-        uniform mat4 model;
-
-        void main()
-        {
-            gl_Position = projection * view * model * vec4(a_position, 1.0f);
-        }
-        GLSL));
-
-        // also attach a simple fragment shader
-        $this->devPickingShader->attach(new ShaderStage(ShaderStage::FRAGMENT, <<< 'GLSL'
-        #version 330 core
-        layout (location = 0) out vec3 enitity_color;
-        //out uint fragment_color;
-
-        uniform int entity_id; 
-
-        vec3 id_to_color(int color)
-        {
-            int r = (color & 0x000000FF) >>  0;
-            int g = (color & 0x0000FF00) >>  8;
-            int b = (color & 0x00FF0000) >> 16;
-
-            return vec3(r/255.0f, g/255.0f, b/255.0f);	
-        }
-
-        void main()
-        { 	
-            enitity_color = id_to_color(entity_id);
-        }
-        GLSL));
-        $this->devPickingShader->link();
+        // load the required shaders
+        $this->objectShader = $this->shaders->get('lowpoly/deferred_single_mesh');
+        $this->devPickingShader = $this->shaders->get('lowpoly/devpicking');
     }
 
     /**
