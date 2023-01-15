@@ -70,6 +70,35 @@ class ShaderFileLoader
     }
 
     /**
+     * Will load and process a shader file and return the final source code
+     * 
+     * @param string                            $shaderFile The relative path to the shader file
+     * @param array<string, int|float|string>   $defines An array of macros that will be injected into the shader
+     * @param bool                              $rootFile Whether or not this is the root file that is being processed, This file
+     * contains the additional defines passed over $defines.
+     * 
+     * @return string 
+     */
+    public function loadShader(string $shaderFile, array $defines = [], bool $rootFile = true) : string
+    {
+        $shaderFilePath = $this->shaderFileDir . $shaderFile;
+        if (file_exists($shaderFilePath) === false) {
+            $shaderFilePath = $shaderFile;
+        }
+
+        if (file_exists($shaderFilePath) === false) {
+            throw new ShaderException("Could not find shader file {$shaderFile}' in '{$this->shaderFileDir}'");
+        }
+
+        $shaderContents = file_get_contents($shaderFilePath);
+        if ($shaderContents === false) {
+            throw new ShaderException("Could not load shader file '{$shaderFilePath}'");
+        }
+
+        return $this->processShader($shaderContents, $defines, $rootFile);
+    }
+
+    /**
      * Will process includes and macros in the shader source code and return the final source code
      * 
      * @param string                            $shaderContents 

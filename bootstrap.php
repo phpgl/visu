@@ -76,6 +76,10 @@ $container = $factory->create('GameContainer', function($builder)
 $container->setParameter('env', $container->getParameter('env', 'undefined'));
 $container->setParameter('debug', $container->getParameter('debug', false));
 
+// also add some paths to the container
+$container->setParameter('visu.path.resources.shader', $container->getParameter('visu.path.resources.shader', VISU_PATH_RESOURCES_SHADER));
+$container->setParameter('visu.path.framework.resources.shader', $container->getParameter('visu.path.framework.resources.shader', VISU_PATH_FRAMEWORK_RESOURCES_SHADER));
+
 /**
  * Build Bootstrap Signal
  */
