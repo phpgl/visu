@@ -11,11 +11,12 @@
  *     PBR_GEOMETRY_KELEMAN
  */
 #define PBR_DISTRIBUTION_GGX
-#define PBR_GEOMETRY_SCHLICK
+#define PBR_GEOMETRY_COOK_TORRANCE
 
 in vec2 v_texture_cords;
 out vec4 fragment_color;
 
+// gbuffer textures
 uniform sampler2D gbuffer_position;
 uniform sampler2D gbuffer_normal;
 uniform sampler2D gbuffer_depth;
@@ -30,12 +31,13 @@ uniform vec3 sun_direction;
 uniform vec3 sun_color;
 uniform float sun_intensity;
 
+const float gamma = 2.2;
 const float PI = 3.14159265359;
+const float exposure = 2.0;
 
-vec3 fresnel(vec3 albedo, float metalness, float b) 
+vec3 fresnel(vec3 F0, float b) 
 {
-    vec3 F0 = mix(vec3(0.04), albedo, metalness);
-    return F0 + (1.0 - F0) * pow(1.0 - b, 5.0);
+    return F0 + (1.0 - F0) *  pow(clamp(1.0 - b, 0.0, 1.0), 5.0);
 }
 
 float GGX(float NdotH, float roughness) 
@@ -76,7 +78,7 @@ float geometry_kelman(float NdotL, float NdotV, float VdotH)
     return (NdotL * NdotV) / (VdotH * VdotH);
 }
 
-vec3 cook_torrance(vec3 N, vec3 V, vec3 H, vec3 L, vec3 albedo, float metalness, float roughness) 
+vec3 pbr_specular(vec3 N, vec3 V, vec3 H, vec3 L, vec3 F0, float roughness) 
 {
     float NdotH = max(0.0, dot(N, H));
     float NdotV = max(1e-7, dot(N, V));
@@ -100,9 +102,27 @@ vec3 cook_torrance(vec3 N, vec3 V, vec3 H, vec3 L, vec3 albedo, float metalness,
     float G = geometry_kelman(NdotL, NdotV, VdotH);
 #endif
     
-    vec3 F = fresnel(albedo, metalness, VdotH);
+    vec3 F = fresnel(F0, VdotH);
     
     return (D * F * G) / (4.0 * NdotL * NdotV);
+}
+
+vec3 tone_mapping_ACESFilm(vec3 x)
+{
+    x *= exposure;
+
+    float a = 2.51f;
+    float b = 0.03f;
+    float c = 2.43f;
+    float d = 0.59f;
+    float e = 0.14f;
+
+    return clamp((x*(a*x+b))/(x*(c*x+d)+e), 0.0, 1.0);
+}
+
+vec3 gamma_correct(vec3 color)
+{
+    return pow(color, vec3(1.0 / gamma));
 }
 
 void main()
@@ -113,75 +133,44 @@ void main()
     vec3 buffer_albedo = texture(gbuffer_albedo, v_texture_cords).rgb;
     vec3 buffer_emissive = vec3(0.0);
     float buffer_metal = 0.0;
-    float buffer_roughness = 0.5;
+    float buffer_roughness = 1.0;
     float buffer_ao = 1.0f;
+
+    float inverse_metal = 1.0f - buffer_metal;
 
     // lighting
     vec3 N = normalize(buffer_normal);
     vec3 V = normalize(camera_position - buffer_pos);
     vec3 L = normalize(sun_direction);
     vec3 R = normalize(reflect(-L, N));
-
-    vec3 Lo = sun_color * sun_intensity;
-    vec3 radiance = vec3(0.0f);
-    float visibility = 1;
-    float attenuation = 1;
-
-    float inverse_metal = 1.0f - buffer_metal;
-
-    vec3 lambertBRDF = (buffer_albedo / PI) * inverse_metal;
-
-    attenuation = max(0, dot(N, L));
-    
-    // @todo calculate visibility
-    // shadows ...
-
     vec3 H = normalize(L + V);
 
-    vec3 CookBRDF = clamp(cook_torrance(N, V, H, L, buffer_albedo, buffer_metal, buffer_roughness), 0, 1);
+    float visibility = 1.0;
+    float attenuation = 1.0;
+    vec3 radiance = sun_color * sun_intensity * attenuation;
 
-    radiance += (lambertBRDF + CookBRDF) * Lo * attenuation;
+    vec3 F0 = mix(vec3(0.04), buffer_albedo, buffer_metal);
+    vec3 F = fresnel(F0, max(0.0, dot(H, V)));
+    vec3 specular = pbr_specular(N, V, H, L, F0, buffer_roughness);
 
-    // ambient
-    vec3 ambient_diffuse_color = buffer_albedo * inverse_metal;
-    vec3 specular_color = mix(vec3(0.04), buffer_albedo, buffer_metal);
+    float NdotL = max(dot(N, L), 0.0);     	
+    vec3 kD = (1.0 - F) * inverse_metal; 
 
-    // we currently have no probes setup 
-    // vec3 irradiance = texture(env_irradiance, N).rgb;
-    // so we simulate irradiance with ambient color
-    vec3 irradiance = vec3(0.3);
+    vec3 Lo = (kD * buffer_albedo / PI + specular) * radiance * NdotL;
 
-    vec3 indirect_diffuse = ambient_diffuse_color * irradiance;
+    vec3 ambient = vec3(0.05) * buffer_albedo;
 
-    vec3 diffuse = (indirect_diffuse + buffer_emissive) * buffer_ao;
-    vec3 color = diffuse + (radiance * visibility) * visibility;
+    vec3 fragment = ambient + Lo;
 
-    // gamma correction
-    // color = color / (color + vec3(1.0));
-    // color = pow(color, vec3(1.0/2.2));  
+    // HDR tonemapping
+    fragment = tone_mapping_ACESFilm(fragment);
+    fragment = gamma_correct(fragment);
 
     // tmp blueish sky if albedo is 0 
     // this is a hack till we build a proper skybox renderer
     if (buffer_albedo == vec3(0.0)) {
-        color = vec3(0.654, 0.68, 0.8);
+        fragment = vec3(0.654, 0.68, 0.8);
     }
-   
-    fragment_color = vec4(color, 1.0);
 
-    // fragment_color = vec4(vec3(attenuation), 1.0f);
-
-    // // some distance fog (depth needs to be linearized)
-    // float depth = texture(gbuffer_depth, v_texture_cords).r;
-    // // linerize depth
-    // float near = 0.1;
-    // float far = 1000.0;
-    // depth = near * far / (far - depth * (far - near));
-    // depth = depth / far;
-
-    // if (depth < 0.9) {
-    //     color = mix(color, vec3(1.0, 1.0, 1.0), depth);
-    // }
-
-    // output to screen
-    // fragment_color = vec4(color, 1.0);
+    fragment_color = vec4(fragment, 1.0);
 }

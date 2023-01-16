@@ -66,7 +66,7 @@ class DeferredLightPass extends RenderPass
         // set sun properties
         $this->sun->direction->x = -2.0;
         $this->sun->direction->y = 1.0;
-        $this->sun->intensity = 3.0;
+        $this->sun->intensity = 1.0;
         $this->sun->direction->normalize();
 
         D3D::ray(new Vec3(0.0), $this->sun->direction, D3D::$colorYellow, 200.0);

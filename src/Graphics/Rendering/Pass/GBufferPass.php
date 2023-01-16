@@ -6,6 +6,7 @@ use VISU\Graphics\Rendering\PipelineContainer;
 use VISU\Graphics\Rendering\PipelineResources;
 use VISU\Graphics\Rendering\RenderPass;
 use VISU\Graphics\Rendering\RenderPipeline;
+use VISU\Graphics\TextureOptions;
 
 class GBufferPass extends RenderPass
 {
@@ -19,10 +20,16 @@ class GBufferPass extends RenderPass
 
         $gbufferData->renderTarget = $pipeline->createRenderTarget('gbuffer', $cameraData->resolutionX, $cameraData->resolutionY);
 
+        $spaceTextureOptions = new TextureOptions;
+        $spaceTextureOptions->internalFormat = GL_RG32F;
+
         $gbufferData->depthTexture = $pipeline->createDepthAttachment($gbufferData->renderTarget);
-        $gbufferData->worldSpacePositionTexture = $pipeline->createColorAttachment($gbufferData->renderTarget, 'position');
+        $gbufferData->worldSpacePositionTexture = $pipeline->createColorAttachment($gbufferData->renderTarget, 'position', $spaceTextureOptions);
         $gbufferData->normalTexture = $pipeline->createColorAttachment($gbufferData->renderTarget, 'normal');
-        $gbufferData->albedoTexture = $pipeline->createColorAttachment($gbufferData->renderTarget, 'albedo');
+
+        $albedoTextureOptions = new TextureOptions;
+        $albedoTextureOptions->internalFormat = GL_SRGB;
+        $gbufferData->albedoTexture = $pipeline->createColorAttachment($gbufferData->renderTarget, 'albedo', $albedoTextureOptions);
     }
 
     /**
