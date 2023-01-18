@@ -95,7 +95,7 @@ class Texture
      */
     public function bind(int $unit = GL_TEXTURE0): void
     {
-        if ($this->gl->currentTextureUnit !== $unit) {
+        if ($this->gl->currentTextureUnit !== $unit || 0) { // TODO: changing buffer, will reset texture unit..
             glActiveTexture($unit);
             $this->gl->currentTextureUnit = $unit;
         }
@@ -143,7 +143,7 @@ class Texture
      * @param BufferInterface|null $buffer 
      * @return void 
      */
-    private function uploadBuffer(TextureOptions $options, ?BufferInterface $buffer = null) : void
+    public function uploadBuffer(TextureOptions $options, ?BufferInterface $buffer = null) : void
     {
         // store the options
         $this->options = $options;

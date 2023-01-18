@@ -21,6 +21,7 @@ uniform sampler2D gbuffer_position;
 uniform sampler2D gbuffer_normal;
 uniform sampler2D gbuffer_depth;
 uniform sampler2D gbuffer_albedo;
+uniform sampler2D gbuffer_ao;
 
 // camera uniforms
 uniform vec3 camera_position;
@@ -33,7 +34,7 @@ uniform float sun_intensity;
 
 const float gamma = 2.2;
 const float PI = 3.14159265359;
-const float exposure = 2.0;
+const float exposure = 1.5;
 
 vec3 fresnel(vec3 F0, float b) 
 {
@@ -131,10 +132,10 @@ void main()
     vec3 buffer_pos = texture(gbuffer_position, v_texture_cords).rgb;
     vec3 buffer_normal = texture(gbuffer_normal, v_texture_cords).rgb;
     vec3 buffer_albedo = texture(gbuffer_albedo, v_texture_cords).rgb;
+    vec3 buffer_ao = texture(gbuffer_ao, v_texture_cords).rgb;
     vec3 buffer_emissive = vec3(0.0);
     float buffer_metal = 0.0;
     float buffer_roughness = 1.0;
-    float buffer_ao = 1.0f;
 
     float inverse_metal = 1.0f - buffer_metal;
 
@@ -156,7 +157,7 @@ void main()
     float NdotL = max(dot(N, L), 0.0);     	
     vec3 kD = (1.0 - F) * inverse_metal; 
 
-    vec3 Lo = (kD * buffer_albedo / PI + specular) * radiance * NdotL;
+    vec3 Lo = (kD * buffer_albedo / PI + specular) * radiance * NdotL * buffer_ao.r;
 
     vec3 ambient = vec3(0.05) * buffer_albedo;
 

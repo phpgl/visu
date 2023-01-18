@@ -20,12 +20,21 @@ class GBufferPass extends RenderPass
 
         $gbufferData->renderTarget = $pipeline->createRenderTarget('gbuffer', $cameraData->resolutionX, $cameraData->resolutionY);
 
-        $spaceTextureOptions = new TextureOptions;
-        $spaceTextureOptions->internalFormat = GL_RG32F;
-
+        // depth
         $gbufferData->depthTexture = $pipeline->createDepthAttachment($gbufferData->renderTarget);
+
+        $spaceTextureOptions = new TextureOptions;
+        $spaceTextureOptions->internalFormat = GL_RGB32F;
+        $spaceTextureOptions->generateMipmaps = false;
         $gbufferData->worldSpacePositionTexture = $pipeline->createColorAttachment($gbufferData->renderTarget, 'position', $spaceTextureOptions);
-        $gbufferData->normalTexture = $pipeline->createColorAttachment($gbufferData->renderTarget, 'normal');
+        $gbufferData->viewSpacePositionTexture = $pipeline->createColorAttachment($gbufferData->renderTarget, 'view_position', $spaceTextureOptions);
+
+        $normalTextureOptions = new TextureOptions;
+        $normalTextureOptions->internalFormat = GL_RGB16F;
+        $normalTextureOptions->dataFormat = GL_RGB;
+        $normalTextureOptions->dataType = GL_FLOAT;
+        $normalTextureOptions->generateMipmaps = false;
+        $gbufferData->normalTexture = $pipeline->createColorAttachment($gbufferData->renderTarget, 'normal', $normalTextureOptions);
 
         $albedoTextureOptions = new TextureOptions;
         $albedoTextureOptions->internalFormat = GL_SRGB;

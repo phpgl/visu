@@ -50,6 +50,7 @@ class DeferredLightPass extends RenderPass
         $gbufferData = $data->get(GBufferPassData::class);
         $cameraData = $data->get(CameraData::class);
         $lightpassData = $data->get(DeferredLightPassData::class);
+        $ssaoData = $data->get(SSAOData::class);
 
         $resources->activateRenderTarget($lightpassData->renderTarget);
 
@@ -64,7 +65,7 @@ class DeferredLightPass extends RenderPass
         $this->lightingShader->setUniform2f('camera_resolution', $cameraData->resolutionX, $cameraData->resolutionY);
 
         // set sun properties
-        $this->sun->direction->x = -2.0;
+        $this->sun->direction->x = sin((glfwGetTime() - 1000) * 0.001) * 3;
         $this->sun->direction->y = 1.0;
         $this->sun->intensity = 1.0;
         $this->sun->direction->normalize();
@@ -82,7 +83,8 @@ class DeferredLightPass extends RenderPass
             [$gbufferData->worldSpacePositionTexture, 'position'],
             [$gbufferData->normalTexture, 'normal'],
             [$gbufferData->depthTexture, 'depth'],
-            [$gbufferData->albedoTexture, 'albedo']
+            [$gbufferData->albedoTexture, 'albedo'],
+            [$ssaoData->blurTexture, 'ao'],
         ] as $i => $tuple) {
             list($texture, $name) = $tuple;
             $glTexture = $resources->getTexture($texture);

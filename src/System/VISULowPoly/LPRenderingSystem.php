@@ -18,11 +18,13 @@ use VISU\Graphics\Rendering\Pass\GBufferGeometryPassInterface;
 use VISU\Graphics\Rendering\Pass\GBufferPass;
 use VISU\Graphics\Rendering\Pass\GBufferPassData;
 use VISU\Graphics\Rendering\Pass\DeferredLightPassData;
+use VISU\Graphics\Rendering\Pass\SSAOData;
 use VISU\Graphics\Rendering\PipelineContainer;
 use VISU\Graphics\Rendering\PipelineResources;
 use VISU\Graphics\Rendering\RenderContext;
 use VISU\Graphics\Rendering\Renderer\FullscreenDebugDepthRenderer;
 use VISU\Graphics\Rendering\Renderer\FullscreenTextureRenderer;
+use VISU\Graphics\Rendering\Renderer\SSAORenderer;
 use VISU\Graphics\Rendering\RenderPass;
 use VISU\Graphics\Rendering\RenderPipeline;
 use VISU\Graphics\Rendering\Resource\RenderTargetResource;
@@ -36,9 +38,11 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
      */
     const DEBUG_MODE_NONE = 0;
     const DEBUG_MODE_POSITION = 1;
-    const DEBUG_MODE_NORMALS = 2;
-    const DEBUG_MODE_DEPTH = 3;
-    const DEBUG_MODE_ALBEDO = 4;
+    const DEBUG_MODE_VIEW_POSITION = 2;
+    const DEBUG_MODE_NORMALS = 3;
+    const DEBUG_MODE_DEPTH = 4;
+    const DEBUG_MODE_ALBEDO = 5;
+    const DEBUG_MODE_SSAO = 6;
     public int $debugMode = self::DEBUG_MODE_NONE;
 
     /**
@@ -64,6 +68,11 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
     private FullscreenDebugDepthRenderer $fullscreenDebugDepthRenderer;
 
     /**
+     * Screen Space Ambient Occlusion (SSAO) Renderer
+     */
+    private SSAORenderer $ssaoRenderer;
+
+    /**
      * Shader programs
      */
     private ShaderProgram $objectShader;
@@ -80,11 +89,12 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
     {
         $this->fullscreenRenderer = new FullscreenTextureRenderer($this->gl);
         $this->fullscreenDebugDepthRenderer = new FullscreenDebugDepthRenderer($this->gl);
+        $this->ssaoRenderer = new SSAORenderer($this->gl, $this->shaders);
 
         // load the required shaders
-        $this->objectShader = $this->shaders->get('lowpoly/deferred_single_mesh');
-        $this->devPickingShader = $this->shaders->get('lowpoly/devpicking');
-        $this->lightingShader = $this->shaders->get('lowpoly/deferred_lightpass');
+        $this->objectShader = $this->shaders->get('visu/lowpoly/deferred_single_mesh');
+        $this->devPickingShader = $this->shaders->get('visu/lowpoly/devpicking');
+        $this->lightingShader = $this->shaders->get('visu/lowpoly/deferred_lightpass');
     }
 
     /**
@@ -207,6 +217,10 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
             }
         ));
 
+        // make ssao pass
+        $this->ssaoRenderer->attachPass($context->pipeline);
+        $ssaoData = $context->data->get(SSAOData::class);
+
         // depending on the debug mode we pass some gbuffer textures 
         // directly to our target framebuffer and exit this pass
         if ($this->debugMode === self::DEBUG_MODE_NORMALS) {
@@ -217,12 +231,20 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
             $this->fullscreenRenderer->attachPass($context->pipeline, $this->currentRenderTargetRes, $gbuffer->worldSpacePositionTexture);
             return;
         }
+        elseif ($this->debugMode === self::DEBUG_MODE_VIEW_POSITION) {
+            $this->fullscreenRenderer->attachPass($context->pipeline, $this->currentRenderTargetRes, $gbuffer->viewSpacePositionTexture);
+            return;
+        }
         elseif ($this->debugMode === self::DEBUG_MODE_DEPTH) {
             $this->fullscreenDebugDepthRenderer->attachPass($context->pipeline, $this->currentRenderTargetRes, $gbuffer->depthTexture);
             return;
         }
         elseif ($this->debugMode === self::DEBUG_MODE_ALBEDO) {
             $this->fullscreenRenderer->attachPass($context->pipeline, $this->currentRenderTargetRes, $gbuffer->albedoTexture);
+            return;
+        }
+        elseif ($this->debugMode === self::DEBUG_MODE_SSAO) {
+            $this->fullscreenRenderer->attachPass($context->pipeline, $this->currentRenderTargetRes, $ssaoData->blurTexture, true);
             return;
         }
 
