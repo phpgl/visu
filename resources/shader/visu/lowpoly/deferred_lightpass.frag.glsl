@@ -157,9 +157,9 @@ void main()
     float NdotL = max(dot(N, L), 0.0);     	
     vec3 kD = (1.0 - F) * inverse_metal; 
 
-    vec3 Lo = (kD * buffer_albedo / PI + specular) * radiance * NdotL * buffer_ao.r;
+    vec3 Lo = (kD * buffer_albedo / PI + specular) * radiance * NdotL;
 
-    vec3 ambient = vec3(0.05) * buffer_albedo;
+    vec3 ambient = vec3(0.05) * buffer_albedo * buffer_ao.r;
 
     vec3 fragment = ambient + Lo;
 

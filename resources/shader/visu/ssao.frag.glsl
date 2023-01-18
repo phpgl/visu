@@ -13,7 +13,7 @@ uniform vec3 samples[64];
 uniform int kernel_size = 64;
 uniform float radius = 0.5;
 uniform float bias = 0.025;
-uniform float strength = 3.0;
+uniform float strength = 6.0;
 
 uniform ivec2 screen_size;
 uniform mat4 projection;
