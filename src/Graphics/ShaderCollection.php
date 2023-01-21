@@ -203,9 +203,13 @@ class ShaderCollection
                 $programFiles[$shaderName][ShaderStage::TESS_EVALUATION] = $absolutePath;
             }
         }
-
+        
         // register all found shader files
         foreach($programFiles as $name => $files) {
+            // on windows we replace the backslashes with forward slashes
+            // so the naming is consistent across platforms
+            $name = str_replace('\\', '/', $name);
+
             $this->registerFromFiles($name, $files);
         }
     }
