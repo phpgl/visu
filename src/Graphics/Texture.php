@@ -95,7 +95,7 @@ class Texture
      */
     public function bind(int $unit = GL_TEXTURE0): void
     {
-        if ($this->gl->currentTextureUnit !== $unit || 0) { // TODO: changing buffer, will reset texture unit..
+        if ($this->gl->currentTextureUnit !== $unit) { // TODO: changing buffer, will reset texture unit..
             glActiveTexture($unit);
             $this->gl->currentTextureUnit = $unit;
         }
