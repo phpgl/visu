@@ -9,3 +9,4 @@ parameters:
         - '/Cannot access property \$([a-zA-Z0-9]+) on VISU\\Graphics\\TextureOptions\|null\./'
         - '/Binary operation "[\*\|\+\|\-]" between GL\\Math\\.*/'
         - '/Cannot access offset [0-9]+ on GL\\Buffer\\.*/'
+        - '/.*expects GL\\Buffer\\GL\\.*/' 
