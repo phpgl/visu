@@ -51,7 +51,8 @@ class SSAORenderer
     /**
      * Constructor 
      * 
-     * @param GLState $glstate The current GL state.
+     * @param GLState $gl The current GL state.
+     * @param ShaderCollection $shaders The shader collection to use.
      */
     public function __construct(
         private GLState $gl,
@@ -122,8 +123,6 @@ class SSAORenderer
      * Attaches a render pass to the pipeline
      * 
      * @param RenderPipeline $pipeline 
-     * @param RenderTargetResource $renderTarget
-     * @param TextureResource $texture
      */
     public function attachPass(
         RenderPipeline $pipeline, 
