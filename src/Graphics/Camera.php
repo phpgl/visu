@@ -4,7 +4,10 @@ namespace VISU\Graphics;
 
 use GL\Math\Mat4;
 use GL\Math\Quat;
+use GL\Math\Vec2;
 use GL\Math\Vec3;
+use GL\Math\Vec4;
+use VISU\Geo\Ray;
 use VISU\Geo\Transform;
 
 class Camera
@@ -136,6 +139,39 @@ class Camera
         }
 
         return Mat4::inverted($this->transform->getLocalMatrix());
+    }
+
+    /**
+     * Calculates and returns the cameras view projection matrix.
+     */
+    public function getViewProjectionMatrix(RenderTarget $renderTarget, float $deltaTime = 0.0) : Mat4
+    {
+        return $this->getProjectionMatrix($renderTarget) * $this->getViewMatrix($deltaTime);
+    }
+
+    /**
+     * Calculates and returns the ray direction of the camera at the given screen position.
+     * Warning: This method is rather expensive, use it sparingly.
+     */
+    public function getSSDirection(RenderTarget $renderTarget, Vec2 $screenPos) : Vec3
+    {
+        $invVP = Mat4::inverted($this->getViewProjectionMatrix($renderTarget));
+        $p = $invVP * new Vec4($screenPos->x, -$screenPos->y, 1.0, 1.0);
+
+        $p->x = $p->x / $p->w;
+        $p->y = $p->y / $p->w;
+        $p->z = $p->z / $p->w;
+
+        return Vec3::normalized(new Vec3($p->x, $p->y, $p->z) - $this->transform->position);
+    }
+
+    /**
+     * Creates a Ray instance from the camera at the given screen position.
+     * Warning: This method is rather expensive, use it sparingly.
+     */
+    public function getSSRay(RenderTarget $renderTarget, Vec2 $screenPos) : Ray
+    {
+        return new Ray($this->transform->position, $this->getSSDirection($renderTarget, $screenPos));
     }
 
     /**

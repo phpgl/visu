@@ -3,6 +3,8 @@
 namespace VISU\Graphics\Heightmap;
 
 use GL\Buffer\FloatBuffer;
+use GL\Math\Vec3;
+use VISU\Geo\Ray;
 
 class Heightmap
 {
@@ -16,6 +18,13 @@ class Heightmap
         
     }
 
+    /**
+     * Returns the height at the given world space x and z coordinates
+     * 
+     * @param float $x 
+     * @param float $y 
+     * @return float 
+     */
     public function getHeightAt(float $x, float $y) : float
     {
         $x = $x * $this->ppu;
@@ -30,5 +39,29 @@ class Heightmap
         $index = $y * $this->width + $x;
 
         return $this->data[$index];
+    }
+
+    /**
+     * Casts a ray against the heightmap and returns the intersection point
+     * 
+     * @param Ray $ray
+     * @return Vec3|null 
+     */
+    public function castRay(Ray $ray, float $maxDistance = 1000, int $lookups = 16) : ?Vec3
+    {
+        $r = $ray->copy();
+        $testpoint = $ray->origin->copy();
+
+        for ($i = 0; $i < $lookups; $i++) {
+            $maxDistance *= 0.5;
+
+            $testpoint = $r->pointAt($maxDistance);
+
+            if ($this->getHeightAt($testpoint->x, $testpoint->z) < $testpoint->y) {
+                $r->origin = $testpoint;
+            }
+        }
+
+        return $testpoint;
     }
 }

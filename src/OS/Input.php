@@ -212,6 +212,26 @@ class Input implements WindowEventHandlerInterface
     }
 
     /**
+     * Returns the normalized cursor position
+     * 
+     * This is the cursor position normalized to the range of -1.0 to 1.0
+     * 
+     * @return Vec2 The normalized cursor position
+     */
+    public function getNormalizedCursorPosition() : Vec2
+    {
+        $w = 0.0;
+        $h = 0.0;
+        glfwGetWindowSize($this->glfwWindowHandle, $w, $h);
+        $cursorPosition = $this->getCursorPosition();
+
+        return new Vec2(
+            $cursorPosition->x / ($w * 0.5) - 1.0,
+            $cursorPosition->y / ($h * 0.5) - 1.0
+        );
+    }
+
+    /**
      * Get the last recieved cursor position
      * This represents the last position the cursor was at before the current position,
      * !Note: This will be overwritten after the `input.cursor` events are dispatched.
