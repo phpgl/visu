@@ -60,9 +60,9 @@ class GPUHeightmapRenderer
      * 
      * @param EntitiesInterface $entities
      * @param array<GPUHeightmapGeometryPassInterface> $heightGeometryProducers 
-     * @return FloatBuffer 
+     * @return Heightmap 
      */
-    public function caputreHeightmap(EntitiesInterface $entities, array $heightGeometryProducers) : FloatBuffer
+    public function caputreHeightmap(EntitiesInterface $entities, array $heightGeometryProducers) : Heightmap
     {
         $renderTarget = new RenderTarget($this->width, $this->height, $this->framebuffer);
         $renderTarget->preparePass();
@@ -84,11 +84,9 @@ class GPUHeightmapRenderer
             $heightGeometryProducer->renderToHeightmap($entities, $renderTarget, $vp);
         }
 
-        $heightmap = new FloatBuffer();
-        // glReadPixels(0, 0, $this->width, $this->height, GL_RED, GL_FLOAT, $heightmap);
+        $heightmapData = new FloatBuffer();
+        glReadPixels(0, 0, $this->width, $this->height, GL_RED, GL_FLOAT, $heightmapData);
 
-        // var_dump($heightmap); die;
-
-        return $heightmap;
+        return new Heightmap($heightmapData, $this->width, $this->height, $this->ppu);
     }
 }
