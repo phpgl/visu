@@ -89,6 +89,15 @@ interface EntitiesInterface
      * @return \Generator<int, T>
      */
     public function view(string $componentClassName) : Generator;
+    
+    /**
+     * Returns the first component of the given class name
+     * 
+     * @template T
+     * @param class-string<T>           $componentClassName
+     * @return ?T
+     */
+    public function first(string $componentClassName);
 
     /**
      * Stores a singleton component in the entity registy

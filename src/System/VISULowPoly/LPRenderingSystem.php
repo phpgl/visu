@@ -210,8 +210,6 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
                         $this->objectShader->setUniformVec3('color', $mesh->material->color);
                         
                         glDrawArrays(GL_TRIANGLES, $mesh->vertexOffset, $mesh->vertexCount);
-
-                        D3D::aabb($transform->position, $mesh->aabb->min * $transform->scale, $mesh->aabb->max * $transform->scale, D3D::$colorGreen);
                     }
                 }
             }

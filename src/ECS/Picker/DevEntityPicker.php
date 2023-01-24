@@ -34,7 +34,7 @@ class DevEntityPicker
     /**
      * If enabled the picker will run on mouse click events
      */
-    public bool $enabled = true;
+    public bool $enabled = false;
 
     /**
      * Function id for "handleMouseClick" handler
