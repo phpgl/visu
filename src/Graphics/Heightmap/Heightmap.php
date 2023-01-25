@@ -25,7 +25,7 @@ class Heightmap
      * @param float $y 
      * @return float 
      */
-    public function getHeightAt(float $x, float $y) : float
+    public function getHeightAt(float $x, float $y) : ?float
     {
         $x = $x * $this->ppu;
         $y = $y * $this->ppu;

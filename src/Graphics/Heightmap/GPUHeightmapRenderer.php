@@ -50,6 +50,8 @@ class GPUHeightmapRenderer
         $this->framebuffer->createRenderbufferAttachment(GL_DEPTH_COMPONENT, GL_DEPTH_ATTACHMENT, $this->width, $this->height);
         $this->framebuffer->createRenderbufferAttachment(GL_R32F, GL_COLOR_ATTACHMENT0, $this->width, $this->height);
 
+        glDrawBuffers(1, GL_COLOR_ATTACHMENT0);
+
         if (!$this->framebuffer->isValid($status, $error)) {
             throw new VISUException("Framebuffer is invalid: $error");
         }
@@ -66,6 +68,10 @@ class GPUHeightmapRenderer
     {
         $renderTarget = new RenderTarget($this->width, $this->height, $this->framebuffer);
         $renderTarget->preparePass();
+        $renderTarget->framebuffer()->clear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        glEnable(GL_DEPTH_TEST);
+        glDisable(GL_CULL_FACE);
 
         // create a orthographic projection matrix looking down top down on the y axis
         $projectionMatrix = new Mat4;

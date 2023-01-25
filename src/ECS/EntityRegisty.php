@@ -116,7 +116,7 @@ class EntityRegisty implements EntitiesInterface
     /**
      * Destroyes an entity by its ID
      */
-    public function destory(int $entity) : void
+    public function destroy(int $entity) : void
     {
         $componentClasses = array_keys($this->entityComponents[$entity]);
         unset($this->entityComponents[$entity]);
@@ -187,6 +187,17 @@ class EntityRegisty implements EntitiesInterface
     public function has(int $entity, string $componentClassName) : bool
     {
         return isset($this->entityComponents[$entity][$componentClassName]);
+    }
+
+    /**
+     * Returns an array of all components for the given entity
+     * 
+     * @param int                    $entity The entitiy ID of the component
+     * @return array<class-string, object>
+     */
+    public function components(int $entity) : array
+    {
+        return $this->entityComponents[$entity];
     }
 
     /**

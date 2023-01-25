@@ -42,7 +42,7 @@ interface EntitiesInterface
     /**
      * Destroyes an entity by its ID
      */
-    public function destory(int $entity) : void;
+    public function destroy(int $entity) : void;
 
     /**
      * Attaches the given component to the given entity
@@ -80,6 +80,14 @@ interface EntitiesInterface
      * @param class-string           $componentClassName
      */
     public function has(int $entity, string $componentClassName) : bool;
+
+    /**
+     * Returns an array of all components for the given entity
+     * 
+     * @param int                    $entity The entitiy ID of the component
+     * @return array<class-string, object>
+     */
+    public function components(int $entity) : array;
 
     /**
      * Iterates over all available components of the given class name
