@@ -2,11 +2,11 @@
 
 namespace VISU\Geo;
 
-use GL\Math\GLM;
 use GL\Math\Mat4;
 use GL\Math\Vec3;
-use GL\Math\Vec4;
 use GL\Math\Quat;
+use VISU\ECS\EntitiesInterface;
+use VISU\ECS\EntityRegisty;
 
 class Transform
 {
@@ -84,6 +84,11 @@ class Transform
     public Vec3 $scale;
 
     /**
+     * Parent entity id.
+     */
+    public ?int $parent = null;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -92,6 +97,36 @@ class Transform
         $this->position = new Vec3();
         $this->orientation = new Quat();
         $this->scale = new Vec3(1.0, 1.0, 1.0);
+    }
+
+    /**
+     * Sets the parent entity id.
+     * 
+     * @param EntitiesInterface $entities The entity registry the parent entity is stored in.
+     * @param int $parent 
+     */
+    public function setParent(EntitiesInterface $entites, int $parent) : void
+    {
+        if (!$entites->has($parent, Transform::class)) {
+            throw new \InvalidArgumentException("Entity $parent must have a Transform component attached to it.");
+        }
+
+        $this->parent = $parent;
+    }
+
+    /**
+     * Returns the parent Transform component.
+     * 
+     * @param EntitiesInterface $entities The entity registry the parent entity is stored in.
+     * @return Transform|null 
+     */
+    public function getParent(EntitiesInterface $entites) : ?Transform
+    {
+        if ($this->parent === null) {
+            return null;
+        }
+
+        return $entites->get($this->parent, Transform::class);
     }
 
     /**
@@ -111,6 +146,91 @@ class Transform
         }
 
         return $this->matrix;
+    }
+
+    /**
+     * Returns the world matrix.
+     * 
+     * @param EntitiesInterface $entities The entity registry the parent entity is stored in.
+     * @return Mat4 
+     */
+    public function getWorldMatrix(EntityRegisty $entities) : Mat4
+    {
+        $matrix = $this->getLocalMatrix();
+        $parent = $this->getParent($entities);
+
+        if ($parent !== null) {
+            $parentWorld = $parent->getWorldMatrix($entities);
+            return $parentWorld * $matrix;
+        }
+
+        return $matrix;
+    }
+
+    /**
+     * Returns the position in world space.
+     * 
+     * @param EntitiesInterface $entities The entity registry the parent entity is stored in.
+     * @return Vec3 
+     */
+    public function getWorldPosition(EntitiesInterface $entities) : Vec3
+    {
+        if ($parent = $this->getParent($entities)) {
+            return $parent->getWorldPosition($entities) + $this->position;
+        }
+
+        return $this->position;
+    }
+
+    /**
+     * Returns the orientation in world space.
+     * 
+     * @param EntitiesInterface $entities The entity registry the parent entity is stored in.
+     * @return Quat 
+     */
+    public function getWorldOrientation(EntitiesInterface $entities) : Quat
+    {
+        if ($parent = $this->getParent($entities)) {
+            return $parent->getWorldOrientation($entities) * $this->orientation;
+        }
+
+        return $this->orientation;
+    }
+
+    /**
+     * Returns the scale in world space.
+     * 
+     * @param EntitiesInterface $entities The entity registry the parent entity is stored in.
+     * @return Vec3 
+     */
+    public function getWorldScale(EntitiesInterface $entities) : Vec3
+    {
+        if ($parent = $this->getParent($entities)) {
+            return $parent->getWorldScale($entities) * $this->scale;
+        }
+
+        return $this->scale;
+    }
+
+    /**
+     * Retruns the orientation as euler angles.
+     * 
+     * @return Vec3 
+     */
+    public function getLocalEulerAngles() : Vec3
+    {
+        return $this->orientation->eulerAngles();
+    }
+
+    /**
+     * Returns the orientation as euler angles in world space.
+     * 
+     * @param EntitiesInterface $entities The entity registry the parent entity is stored in.
+     * @return Vec3 
+     */
+    public function getWorldEulerAngles(EntitiesInterface $entities) : Vec3
+    {
+        return $this->getWorldOrientation($entities)->eulerAngles();
     }
 
     /**

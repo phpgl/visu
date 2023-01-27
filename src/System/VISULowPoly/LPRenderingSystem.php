@@ -201,7 +201,7 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
                 {
                     $transform = $entities->get($entity, Transform::class);
 
-                    $this->objectShader->setUniformMatrix4f('model', false, $transform->getLocalMatrix());
+                    $this->objectShader->setUniformMatrix4f('model', false, $transform->getWorldMatrix($entities));
 
                     // render each mesh 
                     foreach($renderable->model->meshes as $mesh) 
@@ -281,7 +281,7 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
         foreach($entities->view(DynamicRenderableModel::class) as $entity => $renderable) 
         {
             $transform = $entities->get($entity, Transform::class);
-            $this->devPickingShader->setUniformMatrix4f('model', false, $transform->getLocalMatrix());
+            $this->devPickingShader->setUniformMatrix4f('model', false, $transform->getWorldMatrix($entities));
             $this->devPickingShader->setUniform1i('entity_id', $entity);
 
             // render each mesh 
