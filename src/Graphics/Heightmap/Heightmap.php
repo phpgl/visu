@@ -42,7 +42,7 @@ class Heightmap
     }
 
     /**
-     * Casts a ray against the heightmap and returns the intersection point
+     * Casts a ray against the heightmap and returns the intersection point (binary search)
      * 
      * @param Ray $ray
      * @return Vec3|null 

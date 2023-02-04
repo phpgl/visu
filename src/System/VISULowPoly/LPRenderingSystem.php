@@ -215,10 +215,6 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
             }
         ));
 
-        // make ssao pass
-        $this->ssaoRenderer->attachPass($context->pipeline);
-        $ssaoData = $context->data->get(SSAOData::class);
-
         // depending on the debug mode we pass some gbuffer textures 
         // directly to our target framebuffer and exit this pass
         if ($this->debugMode === self::DEBUG_MODE_NORMALS) {
@@ -241,7 +237,12 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
             $this->fullscreenRenderer->attachPass($context->pipeline, $this->currentRenderTargetRes, $gbuffer->albedoTexture);
             return;
         }
-        elseif ($this->debugMode === self::DEBUG_MODE_SSAO) {
+
+        // make ssao pass
+        $this->ssaoRenderer->attachPass($context->pipeline);
+        $ssaoData = $context->data->get(SSAOData::class);
+        
+        if ($this->debugMode === self::DEBUG_MODE_SSAO) {
             $this->fullscreenRenderer->attachPass($context->pipeline, $this->currentRenderTargetRes, $ssaoData->blurTexture, true);
             return;
         }

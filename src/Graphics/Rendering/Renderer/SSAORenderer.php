@@ -3,6 +3,7 @@
 namespace VISU\Graphics\Rendering\Renderer;
 
 use GL\Buffer\FloatBuffer;
+use GL\Math\Mat4;
 use GL\Math\Vec3;
 use VISU\Graphics\GLState;
 use VISU\Graphics\QuadVertexArray;
@@ -47,6 +48,34 @@ class SSAORenderer
      * Kernel for SSAO
      */
     private FloatBuffer $kernel;
+
+    /**
+     * SSAO radius
+     * this is the radius of the sphere that is used to sample
+     */
+    private float $radius = 0.5;
+
+    /**
+     * SSAO bias
+     * this is the bias that is used to prevent self occlusion
+     */
+    private float $bias = 0.025;
+
+    /**
+     * SSAO intensity
+     * this is the intensity of the SSAO effect
+     */
+    private float $intensity = 5.0;
+
+    /**
+     * SSAO scale, this is the resolution scale of the SSAO pass
+     */
+    private float $scale = 1.0;
+
+    /**
+     * SSAO blur scale, this is the resolution scale of the SSAO blur pass
+     */
+    private float $blurScale = 1.0;
 
     /**
      * Constructor 
@@ -135,8 +164,8 @@ class SSAORenderer
                 $ssaoData = $data->create(SSAOData::class);
                 $gbufferData = $data->get(GBufferPassData::class);
 
-                $downSscale = 16;
-                $downSscaleBlur = 8;
+                $downSscale = $this->scale;
+                $downSscaleBlur = $this->blurScale;
 
                 $ssaoData->ssaoTarget = $pipeline->createRenderTarget('ssao_pass', $gbufferData->renderTarget->width / $downSscale, $gbufferData->renderTarget->height / $downSscale);
                 
@@ -171,10 +200,18 @@ class SSAORenderer
                 $this->ssaoShaderProgram->use();
                 $this->ssaoShaderProgram->setUniformIvec2('screen_size', $ssaoData->ssaoTarget->width, $ssaoData->ssaoTarget->height);
                 $this->ssaoShaderProgram->setUniformMat4('projection', false, $cameradData->projection);
+                $this->ssaoShaderProgram->setUniform1f('radius', $this->radius);
+                $this->ssaoShaderProgram->setUniform1f('bias', $this->bias);
+                $this->ssaoShaderProgram->setUniform1f('strength', $this->intensity);
+
+                $normalMatrix = $cameradData->view->copy();
+                $normalMatrix->transpose();
+                $normalMatrix->inverse();
+                $this->ssaoShaderProgram->setUniformMat4('normal_matrix', false, $cameradData->view);
                 $this->ssaoShaderProgram->setUniformVec3Array('samples', $this->kernel);
                 
                 foreach([
-                    [$gbufferData->viewSpacePositionTexture, 'position'],
+                    [$gbufferData->viewSpacePositionTexture, 'position'], // @todo, use world space position and reconstruct view space position in shader
                     [$gbufferData->normalTexture, 'normal'],
                 ] as $i => $tuple) {
                     list($texture, $name) = $tuple;

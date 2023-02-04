@@ -129,6 +129,20 @@ class Debug3DRenderer
     }
 
     /**
+     * Draws a 2 control point bezier curve
+     * 
+     * @param Vec3 $origin The origin of the curve
+     * @param Vec3 $p0 The first control point
+     * @param Vec3 $destination The destination of the curve
+     * @param Vec3 $color The color of the curve
+     * @param int $segments The number of segments to draw
+     */
+    public static function bezier(Vec3 $origin, Vec3 $p0, Vec3 $destination, Vec3 $color, int $segments = 10) : void
+    {
+        static::getGlobalInstance()->addBezierCurve($origin, $p0, $destination, $color, $segments);
+    }
+
+    /**
      * Constructor 
      * 
      * @param GLState $glstate The current GL state.
@@ -321,5 +335,36 @@ class Debug3DRenderer
         $this->addLine($origin + new Vec3($min->x, $min->y, $max->z), $origin + new Vec3($min->x, $max->y, $max->z), $color);
         $this->addLine($origin + new Vec3($max->x, $min->y, $min->z), $origin + new Vec3($max->x, $max->y, $min->z), $color);
         $this->addLine($origin + new Vec3($max->x, $min->y, $min->z), $origin + new Vec3($max->x, $min->y, $max->z), $color);
+    }
+
+    /**
+     * Draws a bezier curve
+     * 
+     * @param Vec3 $origin The origin of the curve
+     * @param Vec3 $p0 The first control point
+     * @param Vec3 $destination The destination of the curve
+     * @param Vec3 $color The color of the curve
+     * @param int $segments The number of segments to draw
+     */
+    public function addBezierCurve(
+        Vec3 $origin, 
+        Vec3 $p0, 
+        Vec3 $destination, 
+        Vec3 $color, 
+        int $segments = 10
+    ) : void
+    {
+        $t = 0;
+        $step = 1 / $segments;
+        $last = $origin->copy();
+        for ($i = 0; $i < $segments; $i++) {
+            $t += $step;
+            $current = $origin * (1 - $t) * (1 - $t) + $p0 * 2 * (1 - $t) * $t + $destination * $t * $t;
+            $this->addLine($last, $current, $color);
+            $last = $current->copy();
+        }
+
+        $this->addLine($last, $destination, static::$colorGreen);
+        $this->addCross($p0, static::$colorMagenta);
     }
 }

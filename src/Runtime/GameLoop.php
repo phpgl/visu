@@ -41,7 +41,7 @@ class GameLoop
      * 
      * @var int
      */
-    public int $frameTimeSampleCount = 16;
+    public int $frameTimeSampleCount = 32;
 
     /**
      * An array of the last tick count per frame to calculate the average tick count.
@@ -55,7 +55,7 @@ class GameLoop
      * 
      * @var int
      */
-    public int $tickCountSampleCount = 16;
+    public int $tickCountSampleCount = 32;
 
     /**
      * Constructor

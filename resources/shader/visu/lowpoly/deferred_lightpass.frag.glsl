@@ -161,6 +161,9 @@ void main()
 
     vec3 ambient = vec3(0.05) * buffer_albedo * buffer_ao.r;
 
+    // also apply ao to Lo
+    Lo *= buffer_ao.r;
+
     vec3 fragment = ambient + Lo;
 
     // HDR tonemapping
