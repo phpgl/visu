@@ -91,4 +91,21 @@ interface WindowEventHandlerInterface
      */
     public function handleWindowDrop(Window $window, array $paths): void;
 
+    /**
+     * Callback before new evenets are polled
+     * This method is invoked before new events are polled think of it as a pre-update method.
+     * 
+     * @param Window $window The window that received the event
+     * @return void
+     */
+    public function handleWindowWillPollEvents(Window $window): void;
+
+    /**
+     * Callback after new evenets are polled
+     * This method is invoked after new events are polled think of it as a post-update method.
+     * 
+     * @param Window $window The window that received the event
+     * @return void
+     */
+    public function handleWindowDidPollEvents(Window $window): void;
 }

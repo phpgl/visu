@@ -225,8 +225,10 @@ class EntityRegisty implements EntitiesInterface
     public function first(string $componentClassName)
     {
         foreach($this->components[$componentClassName] ?? [] as $entity => $component) {
-            return $component;
+            return $component; // @phpstan-ignore-line
         }
+
+        return null;
     }
 
     /**

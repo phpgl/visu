@@ -6,7 +6,6 @@ use GL\Math\Mat4;
 use GL\Math\Vec3;
 use GL\Math\Quat;
 use VISU\ECS\EntitiesInterface;
-use VISU\ECS\EntityRegisty;
 
 class Transform
 {
@@ -105,9 +104,9 @@ class Transform
      * @param EntitiesInterface $entities The entity registry the parent entity is stored in.
      * @param int $parent 
      */
-    public function setParent(EntitiesInterface $entites, int $parent) : void
+    public function setParent(EntitiesInterface $entities, int $parent) : void
     {
-        if (!$entites->has($parent, Transform::class)) {
+        if (!$entities->has($parent, Transform::class)) {
             throw new \InvalidArgumentException("Entity $parent must have a Transform component attached to it.");
         }
 
@@ -120,13 +119,13 @@ class Transform
      * @param EntitiesInterface $entities The entity registry the parent entity is stored in.
      * @return Transform|null 
      */
-    public function getParent(EntitiesInterface $entites) : ?Transform
+    public function getParent(EntitiesInterface $entities) : ?Transform
     {
         if ($this->parent === null) {
             return null;
         }
 
-        return $entites->get($this->parent, Transform::class);
+        return $entities->get($this->parent, Transform::class);
     }
 
     /**
@@ -154,7 +153,7 @@ class Transform
      * @param EntitiesInterface $entities The entity registry the parent entity is stored in.
      * @return Mat4 
      */
-    public function getWorldMatrix(EntityRegisty $entities) : Mat4
+    public function getWorldMatrix(EntitiesInterface $entities) : Mat4
     {
         $matrix = $this->getLocalMatrix();
         $parent = $this->getParent($entities);

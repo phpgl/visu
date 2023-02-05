@@ -167,7 +167,11 @@ class SSAORenderer
                 $downSscale = $this->scale;
                 $downSscaleBlur = $this->blurScale;
 
-                $ssaoData->ssaoTarget = $pipeline->createRenderTarget('ssao_pass', $gbufferData->renderTarget->width / $downSscale, $gbufferData->renderTarget->height / $downSscale);
+                $ssaoData->ssaoTarget = $pipeline->createRenderTarget(
+                    'ssao_pass', 
+                    (int) ($gbufferData->renderTarget->width / $downSscale), 
+                    (int) ($gbufferData->renderTarget->height / $downSscale)
+                );
                 
                 $ssaoTextureOptions = new TextureOptions;
                 $ssaoTextureOptions->dataFormat = GL_RED;
@@ -178,7 +182,11 @@ class SSAORenderer
                 $ssaoData->ssaoTexture = $pipeline->createColorAttachment($ssaoData->ssaoTarget, 'ssao_output', $ssaoTextureOptions);
 
                 // blur render target 
-                $ssaoData->blurTarget = $pipeline->createRenderTarget('ssao_blur_pass', $gbufferData->renderTarget->width / $downSscaleBlur, $gbufferData->renderTarget->height / $downSscaleBlur);
+                $ssaoData->blurTarget = $pipeline->createRenderTarget(
+                    'ssao_blur_pass', 
+                    (int) ($gbufferData->renderTarget->width / $downSscaleBlur), 
+                    (int) ($gbufferData->renderTarget->height / $downSscaleBlur)
+                );
 
                 $ssaoBlurTextureOptions = new TextureOptions;
                 $ssaoBlurTextureOptions->dataFormat = GL_RED;

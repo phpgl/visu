@@ -71,6 +71,20 @@ class Input implements WindowEventHandlerInterface
     private float $mouseClickMaxDistanceFromStart = 10.0;
 
     /**
+     * An array of all mouse buttons that have been pressed since the last poll
+     * 
+     * @var array<int, bool>
+     */
+    private array $mouseButtonsDidPress = [];
+
+    /**
+     * An array of all mouse buttons that have been released since the last poll
+     * 
+     * @var array<int, bool>
+     */
+    private array $mouseButtonsDidRelease = [];
+
+    /**
      * The event names the input class will dispatch on
      */
     const EVENT_KEY = 'input.key';
@@ -208,6 +222,38 @@ class Input implements WindowEventHandlerInterface
     public function isMouseButtonReleased(int $button) : bool
     {
         return $this->getMouseButtonState($button) === self::RELEASE;
+    }
+
+    /**
+     * Returns boolean if the given mouse button was pressed since the last poll
+     * 
+     * Example:
+     * ```php
+     * $input->hasMouseButtonBeenPressed(MouseButton::LEFT);
+     * ```
+     * 
+     * @param int $button The mouse button to check
+     * @return bool True if the mouse button was pressed, false otherwise
+     */
+    public function hasMouseButtonBeenPressed(int $button) : bool
+    {
+        return $this->mouseButtonsDidPress[$button] ?? false;
+    }
+
+    /**
+     * Returns boolean if the given mouse button was released since the last poll
+     * 
+     * Example:
+     * ```php
+     * $input->hasMouseButtonBeenReleased(MouseButton::LEFT);
+     * ```
+     * 
+     * @param int $button The mouse button to check
+     * @return bool True if the mouse button was released, false otherwise
+     */
+    public function hasMouseButtonBeenReleased(int $button) : bool
+    {
+        return $this->mouseButtonsDidRelease[$button] ?? false;
     }
 
     /**
@@ -367,6 +413,14 @@ class Input implements WindowEventHandlerInterface
      */
     public function handleWindowMouseButton(Window $window, int $button, int $action, int $mods): void
     {
+        // record for did press and did release
+        if ($action === GLFW_PRESS) {
+            $this->mouseButtonsDidPress[$button] = true;
+        } else if ($action === GLFW_RELEASE) {
+            $this->mouseButtonsDidRelease[$button] = true;
+        }
+
+        // dispatch event
         $this->dispatcher->dispatch(self::EVENT_MOUSE_BUTTON, new MouseButtonSignal($window, $button, $action, $mods));
 
         // generate mouse click events if the mouse button is released
@@ -452,5 +506,30 @@ class Input implements WindowEventHandlerInterface
     public function handleWindowDrop(Window $window, array $paths): void
     {
         $this->dispatcher->dispatch(self::EVENT_DROP, new DropSignal($window, $paths));
+    }
+
+    /**
+     * Callback before new evenets are polled
+     * This method is invoked before new events are polled think of it as a pre-update method.
+     * 
+     * @param Window $window The window that received the event
+     * @return void
+     */
+    public function handleWindowWillPollEvents(Window $window): void
+    {
+        $this->mouseButtonsDidPress = [];
+        $this->mouseButtonsDidRelease = [];
+    }
+
+    /**
+     * Callback after new evenets are polled
+     * This method is invoked after new events are polled think of it as a post-update method.
+     * 
+     * @param Window $window The window that received the event
+     * @return void
+     */
+    public function handleWindowDidPollEvents(Window $window): void
+    {
+
     }
 }

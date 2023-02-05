@@ -293,7 +293,9 @@ class Window
     public function pollEvents() : void
     {
         $this->requiresInitialization();
+        $this->eventHandler->handleWindowWillPollEvents($this);
         glfwPollEvents();
+        $this->eventHandler->handleWindowDidPollEvents($this);
     }
 
     /**
