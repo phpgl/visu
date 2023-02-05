@@ -123,16 +123,16 @@ class VISUCameraSystem implements SystemInterface
         $camera->finalizeFrame();
 
         if ($input->isKeyPressed(Key::W)) {
-            $camera->transform->moveForward(2.5);
+            $camera->transform->moveForward(0.5);
         }
         if ($input->isKeyPressed(Key::S)) {
-            $camera->transform->moveBackward(2.5);
+            $camera->transform->moveBackward(0.5);
         }
         if ($input->isKeyPressed(Key::A)) {
-            $camera->transform->moveLeft(2.5);
+            $camera->transform->moveLeft(0.5);
         }
         if ($input->isKeyPressed(Key::D)) {
-            $camera->transform->moveRight(2.5);
+            $camera->transform->moveRight(0.5);
         }
 
         // update the camera rotation
