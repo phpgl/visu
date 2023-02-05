@@ -337,4 +337,16 @@ class Transform
         $this->position += $dir * $distance;
         $this->isDirty = true;
     }
+
+    /**
+     * Look at a point in world space.
+     */
+    public function lookAt(Vec3 $point) : void
+    {
+        $mat = new Mat4();
+        $mat->lookAt($this->position, $point, self::worldUp());
+
+        $this->orientation = Quat::fromMat4($mat);
+        $this->isDirty = true;
+    }
 }
