@@ -71,6 +71,19 @@ class Input implements WindowEventHandlerInterface
     private float $mouseClickMaxDistanceFromStart = 10.0;
 
     /**
+     * The event names the input class will dispatch on
+     */
+    const EVENT_KEY = 'input.key';
+    const EVENT_MOUSE_BUTTON = 'input.mouse_button';
+    const EVENT_MOUSE_CLICK = 'input.mouse_click';
+    const EVENT_CURSOR = 'input.cursor';
+    const EVENT_CURSOR_ENTER = 'input.cursor_enter';
+    const EVENT_SCROLL = 'input.scroll';
+    const EVENT_DROP = 'input.drop';
+    const EVENT_CHAR = 'input.char';
+    const EVENT_CHAR_MOD = 'input.char_mods';
+
+    /**
      * Constructor for the Input class.
      * 
      * @param Window $window The window instance to handle input for.
@@ -309,7 +322,7 @@ class Input implements WindowEventHandlerInterface
      */
     public function handleWindowKey(Window $window, int $key, int $scancode, int $action, int $mods): void
     {
-        $this->dispatcher->dispatch("input.key", new KeySignal($window, $key, $scancode, $action, $mods));
+        $this->dispatcher->dispatch(self::EVENT_KEY, new KeySignal($window, $key, $scancode, $action, $mods));
     }
 
     /**
@@ -323,7 +336,7 @@ class Input implements WindowEventHandlerInterface
      */
     public function handleWindowChar(Window $window, int $char): void
     {
-        $this->dispatcher->dispatch("input.char", new CharSignal($window, $char));
+        $this->dispatcher->dispatch(self::EVENT_CHAR, new CharSignal($window, $char));
     }
 
     /**
@@ -338,7 +351,7 @@ class Input implements WindowEventHandlerInterface
      */
     public function handleWindowCharMods(Window $window, int $char, int $mods): void
     {
-        $this->dispatcher->dispatch("input.char_mods", new CharModSignal($window, $char, $mods));
+        $this->dispatcher->dispatch(self::EVENT_CHAR_MOD, new CharModSignal($window, $char, $mods));
     }
 
     /**
@@ -354,7 +367,7 @@ class Input implements WindowEventHandlerInterface
      */
     public function handleWindowMouseButton(Window $window, int $button, int $action, int $mods): void
     {
-        $this->dispatcher->dispatch("input.mouse_button", new MouseButtonSignal($window, $button, $action, $mods));
+        $this->dispatcher->dispatch(self::EVENT_MOUSE_BUTTON, new MouseButtonSignal($window, $button, $action, $mods));
 
         // generate mouse click events if the mouse button is released
         if ($button == GLFW_MOUSE_BUTTON_LEFT) {
@@ -367,7 +380,7 @@ class Input implements WindowEventHandlerInterface
                 $dist = $currentPos->distanceTo($this->lastLeftMouseDownPosition);
 
                 if ($dist < $this->mouseClickMaxDistanceFromStart) {
-                    $this->dispatcher->dispatch("input.mouse_click", new MouseClickSignal(
+                    $this->dispatcher->dispatch(self::EVENT_MOUSE_CLICK, new MouseClickSignal(
                         $window, 
                         $mods, 
                         $currentPos, 
@@ -391,7 +404,7 @@ class Input implements WindowEventHandlerInterface
      */
     public function handleWindowCursorPos(Window $window, float $xpos, float $ypos): void
     {
-        $this->dispatcher->dispatch("input.cursor", new CursorPosSignal($window, $xpos, $ypos));
+        $this->dispatcher->dispatch(self::EVENT_CURSOR, new CursorPosSignal($window, $xpos, $ypos));
 
         // update the last cursor position
         $this->lastCursorPosition->x = $xpos;
@@ -409,7 +422,7 @@ class Input implements WindowEventHandlerInterface
      */
     public function handleWindowCursorEnter(Window $window, int $entered): void
     {
-        $this->dispatcher->dispatch("input.cursor_enter", new CursorEnterSignal($window, $entered));
+        $this->dispatcher->dispatch(self::EVENT_CURSOR_ENTER, new CursorEnterSignal($window, $entered));
     }
 
     /**
@@ -424,7 +437,7 @@ class Input implements WindowEventHandlerInterface
      */
     public function handleWindowScroll(Window $window, float $xoffset, float $yoffset): void
     {
-        $this->dispatcher->dispatch("input.scroll", new ScrollSignal($window, $xoffset, $yoffset));
+        $this->dispatcher->dispatch(self::EVENT_SCROLL, new ScrollSignal($window, $xoffset, $yoffset));
     }
 
     /**
@@ -438,6 +451,6 @@ class Input implements WindowEventHandlerInterface
      */
     public function handleWindowDrop(Window $window, array $paths): void
     {
-        $this->dispatcher->dispatch("input.drop", new DropSignal($window, $paths));
+        $this->dispatcher->dispatch(self::EVENT_DROP, new DropSignal($window, $paths));
     }
 }
