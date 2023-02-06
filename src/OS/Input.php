@@ -458,7 +458,10 @@ class Input implements WindowEventHandlerInterface
      */
     public function handleWindowCursorPos(Window $window, float $xpos, float $ypos): void
     {
-        $this->dispatcher->dispatch(self::EVENT_CURSOR, new CursorPosSignal($window, $xpos, $ypos));
+        $offsetX = $xpos - $this->lastCursorPosition->x;
+        $offsetY = $ypos - $this->lastCursorPosition->y;
+
+        $this->dispatcher->dispatch(self::EVENT_CURSOR, new CursorPosSignal($window, $xpos, $ypos, $offsetX, $offsetY));
 
         // update the last cursor position
         $this->lastCursorPosition->x = $xpos;

@@ -273,6 +273,54 @@ class Transform
     }
 
     /**
+     * Returns the forward direction of the transform
+     */
+    public function dirForward() : Vec3
+    {
+        return Quat::multiplyVec3($this->orientation, self::worldForward());
+    }
+
+    /**
+     * Returns the backward direction of the transform
+     */
+    public function dirBackward() : Vec3
+    {
+        return Quat::multiplyVec3($this->orientation, self::worldBackward());
+    }
+
+    /**
+     * Returns the right direction of the transform
+     */
+    public function dirRight() : Vec3
+    {
+        return Quat::multiplyVec3($this->orientation, self::worldRight());
+    }
+
+    /**
+     * Returns the left direction of the transform
+     */
+    public function dirLeft() : Vec3
+    {
+        return Quat::multiplyVec3($this->orientation, self::worldLeft());
+    }
+
+    /**
+     * Returns the up direction of the transform
+     */
+    public function dirUp() : Vec3
+    {
+        return Quat::multiplyVec3($this->orientation, self::worldUp());
+    }
+
+    /**
+     * Returns the down direction of the transform
+     */
+    public function dirDown() : Vec3
+    {
+        return Quat::multiplyVec3($this->orientation, self::worldDown());
+    }
+
+    /**
      * Translates forward in local space.
      */
     public function moveForward(float $distance) : void
@@ -345,8 +393,25 @@ class Transform
     {
         $mat = new Mat4();
         $mat->lookAt($this->position, $point, self::worldUp());
-
+        
         $this->orientation = Quat::fromMat4($mat);
+
+        // because we have no conjugate method yet
+        $this->orientation = new Quat(
+            -$this->orientation->w,
+            $this->orientation->x,
+            $this->orientation->y,
+            $this->orientation->z,
+        );
+
         $this->isDirty = true;
+    }
+
+    /**
+     * Look in a direction in world space.
+     */
+    public function lookIn(Vec3 $direction) : void
+    {
+        $this->lookAt($this->position + $direction);
     }
 }

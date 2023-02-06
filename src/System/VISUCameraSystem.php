@@ -15,6 +15,7 @@ use VISU\OS\Input;
 use VISU\OS\Key;
 use VISU\OS\MouseButton;
 use VISU\Signal\Dispatcher;
+use VISU\Signal\SignalQueue;
 use VISU\Signals\Input\CursorPosSignal;
 
 class VISUCameraSystem implements SystemInterface
@@ -23,11 +24,6 @@ class VISUCameraSystem implements SystemInterface
      * The currently active camera entity
      */
     public int $activeCameraEntity = 0;
-
-    /**
-     * Function id of the event handler
-     */
-    private int $eventHandlerIdInputCursor = -1;
 
     /**
      * Euler angles for default camera
@@ -44,6 +40,13 @@ class VISUCameraSystem implements SystemInterface
      * Current camera mode, this basically determines the subroutine that is used to update the camera
      */
     protected int $visuCameraMode = self::CAMERA_MODE_FLYING;
+
+    /**
+     * Cursor input queue
+     * 
+     * @var SignalQueue<CursorPosSignal>
+     */
+    private SignalQueue $inputCursorQueue;
 
     /**
      * Constructor
@@ -73,7 +76,7 @@ class VISUCameraSystem implements SystemInterface
     {
         $entities->registerComponent(Camera::class);
 
-        $this->eventHandlerIdInputCursor = $this->dispatcher->register('input.cursor', [$this, 'handleCursorPos']);
+        $this->inputCursorQueue = $this->dispatcher->createSignalQueue('input.cursor');
     }
 
     /**
@@ -81,11 +84,11 @@ class VISUCameraSystem implements SystemInterface
      * 
      * @param CursorPosSignal $signal
      */
-    public function handleCursorPos(CursorPosSignal $signal) : void
+    public function handleCursorPos(EntitiesInterface $entities, CursorPosSignal $signal) : void
     {
         switch ($this->visuCameraMode) {
             case self::CAMERA_MODE_GAME:
-                $this->handleCursorPosVISUGame($signal);
+                $this->handleCursorPosVISUGame($entities, $signal);
                 break;
             case self::CAMERA_MODE_FLYING:
                 $this->handleCursorPosVISUFlying($signal);
@@ -99,7 +102,7 @@ class VISUCameraSystem implements SystemInterface
      * @param CursorPosSignal $signal 
      * @return void 
      */
-    protected function handleCursorPosVISUGame(CursorPosSignal $signal) : void
+    protected function handleCursorPosVISUGame(EntitiesInterface $entities, CursorPosSignal $signal) : void
     {
         throw new VISUException('You need to override this method to handle the cursor position in game mode');
     }
@@ -111,15 +114,13 @@ class VISUCameraSystem implements SystemInterface
      */
     private function handleCursorPosVISUFlying(CursorPosSignal $signal) : void
     {
-        $lastCurserPos = $this->input->getLastCursorPosition();
-
         // to avoid a jump when the mouse button is pressed, we need to reset the last cursor position
         // initially when the click starts
         if ($this->input->hasMouseButtonBeenPressed(MouseButton::LEFT)) {
             return;
         }
 
-        $cursorOffset = new Vec2($signal->x - $lastCurserPos->x, $signal->y - $lastCurserPos->y);
+        $cursorOffset = new Vec2($signal->offsetX, $signal->offsetY);
         
         if ($this->input->isMouseButtonPressed(MouseButton::LEFT)) {
             $this->cameraEuler->x = $this->cameraEuler->x - $cursorOffset->x * 0.1;
@@ -137,7 +138,7 @@ class VISUCameraSystem implements SystemInterface
      */
     public function unregister(EntitiesInterface $entities) : void
     {
-        $this->dispatcher->unregister('input.cursor', $this->eventHandlerIdInputCursor);
+        $this->dispatcher->destroySignalQueue($this->inputCursorQueue);
     }
 
     /**
@@ -167,6 +168,10 @@ class VISUCameraSystem implements SystemInterface
      */
     public function update(EntitiesInterface $entities) : void
     {
+        while($cursorSignal = $this->inputCursorQueue->shift()) {
+            $this->handleCursorPos($entities, $cursorSignal);
+        }
+
         $camera = $this->getActiveCamera($entities);
 
         // update interpolation states

@@ -58,6 +58,21 @@ class GameLoop
     public int $tickCountSampleCount = 32;
 
     /**
+     * An array of tick time samples in nanoseconds.
+     * This represents the time it took to execute a single game update tick.
+     * 
+     * @var array<int>
+     */
+    private array $tickTimeSamples = [];
+
+    /**
+     * The amount of samples that are collected to determine the average tick time.
+     * 
+     * @var int
+     */
+    public int $tickTimeSampleCount = 60;
+
+    /**
      * Constructor
      * 
      * @param GameLoopDelegate $delegate The game loop delegate to handle update, draw etc.
@@ -143,6 +158,57 @@ class GameLoop
     }
 
     /**
+     * Returns the average tick time in nanoseconds. 
+     * This represents the time it took to execute a single game update tick.
+     * 
+     * @return float
+     */
+    public function getAverageTickTime() : float
+    {
+        if (count($this->tickTimeSamples) === 0) {
+            return 0.0;
+        }
+
+        return array_sum($this->tickTimeSamples) / count($this->tickTimeSamples);
+    }
+
+    private function formatNStoHuman(int $ns) : string
+    {
+        if ($ns < 1000) {
+            return sprintf("%.2f ns", $ns);
+        }
+        elseif ($ns < 1000000) {
+            return sprintf("%.2f µs", $ns / 1000);
+        }
+        elseif ($ns < 1000000000) {
+            return sprintf("%.2f ms", $ns / 1000000);
+        }
+        else {
+            return sprintf("%.2f s", $ns / 1000000000);
+        }
+    }
+
+    /**
+     * Returns the average tick time in a human readable format.
+     * 
+     * @return string 
+     */
+    public function getAverageTickTimeFormatted() : string
+    {
+        return $this->formatNStoHuman((int) $this->getAverageTickTime());
+    }
+
+    /**
+     * Returns the average frametime in a human readable format.
+     * 
+     * @return string 
+     */
+    public function getAverageFrameTimeFormatted() : string
+    {
+        return $this->formatNStoHuman((int) $this->getAverageFrameTime());
+    }
+
+    /**
      * Starts and runs the game loop
      * 
      * @return void 
@@ -175,7 +241,12 @@ class GameLoop
                 $lag -= $this->timestepNs;
 
                 // update the game state
+                $updateStart = Clock::now64();
                 $this->delegate->update();
+                $this->tickTimeSamples[] = Clock::now64() - $updateStart;
+                if (count($this->tickTimeSamples) > $this->tickTimeSampleCount) {
+                    array_shift($this->tickTimeSamples);
+                }
 
                 // increment the ticker
                 $frameTickCount++;

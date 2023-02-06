@@ -12,6 +12,11 @@ use GL\Math\Vec3;
  */
 class Math
 {
+    public static function sgn(float $val) : int
+    {
+        return ($val > 0) - ($val < 0);
+    }
+
     /**
      * Projects a vector onto a plane with the given normal
      * 

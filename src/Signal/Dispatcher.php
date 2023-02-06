@@ -84,6 +84,62 @@ class Dispatcher implements DispatcherInterface
     }
 
     /**
+     * Creates a signal queue for the given key
+     * A signal queue is a special signal handler, that aggregates the recieved signals 
+     * until the user pops them from the queue, or the queue is flushed.
+     * 
+     * Don't forget to destroy the queue with `destroySignalQueue` when you are done with it.
+     * 
+     * @param string        $key
+     * @param int           $priority
+     * @return SignalQueue
+     */
+    public function createSignalQueue(string $key, int $priority = 0) : SignalQueue
+    {
+        $queue = new SignalQueue($key, $this->handlerId++);
+
+        $this->register($key, function(Signal $signal) use($queue) {
+            $queue->push($signal);
+        }, $priority, $queue->handlerId);
+
+        return $queue;
+    }
+
+    /**
+     * Creates a limited signal queue for the given key
+     * This is the same as `createSignalQueue` but the queue is limited to the given size, and drops all signals after that.
+     * 
+     * Don't forget to destroy the queue with `destroySignalQueue` when you are done with it.
+     * 
+     * @param string        $key
+     * @param int           $size The maximum size of the queue
+     * @param int           $priority
+     * @return SignalQueue
+     */
+    public function createLimitedSignalQueue(string $key, int $size = 1024, int $priority = 0) : SignalQueue
+    {
+        $queue = new SignalQueueLimited($key, $this->handlerId++);
+        $queue->maxSignals = $size;
+
+        $this->register($key, function(Signal $signal) use($queue, $size) {
+            $queue->push($signal);
+        }, $priority, $queue->handlerId);
+
+        return $queue;
+    }
+
+    /**
+     * Desroys a signal queue and removes the handler bound to it.
+     * 
+     * @param SignalQueue $queue
+     * @return void
+     */
+    public function destroySignalQueue(SignalQueue $queue) : void
+    {
+        $this->unregister($queue->signalKey, $queue->handlerId);
+    }
+
+    /**
      * Remove a signal handler
      *
      * @param string        $key
