@@ -42,11 +42,11 @@ jobs:
         grep -qxF 'extension=glfw.so' /etc/php/${{ matrix.php-versions }}/cli/php.ini ||
         echo 'extension=glfw.so' >> /etc/php/${{ matrix.php-versions }}/cli/php.ini
     
-    - name: Install PHPUnit
-      run: composer require "phpunit/phpunit"
+    #- name: Install PHPUnit
+    #  run: composer require "phpunit/phpunit"
       
     - name: Run PHPUnit 
-      run: xvfb-run --auto-servernum php ./vendor/bin/phpunit
+      run: xvfb-run --auto-servernum phpunit
 
     - name: Run PHPStan 
       if: ${{ matrix.php-versions == '8.2' }}
