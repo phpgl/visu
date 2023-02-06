@@ -1,6 +1,6 @@
 <?php
 
-namespace VISU\Animation;
+namespace VISU\Animation\Transition;
 
 /**
  * A sequence of animations, played one after the other.

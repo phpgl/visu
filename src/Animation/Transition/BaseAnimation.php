@@ -1,6 +1,6 @@
 <?php
 
-namespace VISU\Animation;
+namespace VISU\Animation\Transition;
 
 /**
  * Base for animations

@@ -4,24 +4,24 @@ namespace VISU\System;
 
 use GL\Math\Quat;
 use GL\Math\Vec3;
-use VISU\Animation\AnimationEasingType;
-use VISU\Animation\AnimationSequence;
-use VISU\Animation\BaseAnimation;
-use VISU\Animation\BaseAnimationContainer;
-use VISU\Animation\ParallelAnimations;
-use VISU\Animation\TransformOrientationAnimation;
-use VISU\Animation\TransformPositionAnimation;
-use VISU\Animation\TransformScaleAnimation;
+use VISU\Animation\Transition\AnimationEasingType;
+use VISU\Animation\Transition\AnimationSequence;
+use VISU\Animation\Transition\BaseAnimation;
+use VISU\Animation\Transition\BaseAnimationContainer;
+use VISU\Animation\Transition\ParallelAnimations;
+use VISU\Animation\Transition\TransformOrientationAnimation;
+use VISU\Animation\Transition\TransformPositionAnimation;
+use VISU\Animation\Transition\TransformScaleAnimation;
 use VISU\Component\AnimationComponent;
 use VISU\ECS\EntitiesInterface;
 use VISU\ECS\SystemInterface;
 use VISU\Geo\Transform;
 use VISU\Graphics\Rendering\RenderContext;
 
-class VISUAnimationSystem implements SystemInterface
+class VISUTransitionAnimationSystem implements SystemInterface
 {
     /**
-     * @var VISUAnimationSystemDelegate[] $animationDelegates The list of animation delegates
+     * @var VISUTransitionAnimationSystemDelegate[] $animationDelegates The list of animation delegates
      */
     private $animationDelegates = [];
 
@@ -74,10 +74,10 @@ class VISUAnimationSystem implements SystemInterface
     /**
      * Adds an animation delegate
      *
-     * @param VISUAnimationSystemDelegate $delegate
+     * @param VISUTransitionAnimationSystemDelegate $delegate
      * @return void
      */
-    public function addAnimationDelegate(VISUAnimationSystemDelegate $delegate): void
+    public function addAnimationDelegate(VISUTransitionAnimationSystemDelegate $delegate): void
     {
         $this->animationDelegates[] = $delegate;
     }
@@ -85,10 +85,10 @@ class VISUAnimationSystem implements SystemInterface
     /**
      * Adds an animation delegate
      *
-     * @param VISUAnimationSystemDelegate $delegate
+     * @param VISUTransitionAnimationSystemDelegate $delegate
      * @return void
      */
-    public function removeAnimationDelegate(VISUAnimationSystemDelegate $delegate): void
+    public function removeAnimationDelegate(VISUTransitionAnimationSystemDelegate $delegate): void
     {
         if (($key = array_search($delegate, $this->animationDelegates, true)) !== false) {
             unset($this->animationDelegates[$key]);

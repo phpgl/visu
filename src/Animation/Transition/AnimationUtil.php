@@ -1,6 +1,6 @@
 <?php
 
-namespace VISU\Animation;
+namespace VISU\Animation\Transition;
 
 use GL\Math\Quat;
 use GL\Math\Vec3;

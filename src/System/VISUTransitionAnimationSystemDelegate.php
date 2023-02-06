@@ -2,13 +2,13 @@
 
 namespace VISU\System;
 
-use VISU\Animation\BaseAnimation;
-use VISU\Animation\BaseAnimationContainer;
+use VISU\Animation\Transition\BaseAnimation;
+use VISU\Animation\Transition\BaseAnimationContainer;
 
 /**
  * Interface for animation system delegates
  */
-interface VISUAnimationSystemDelegate
+interface VISUTransitionAnimationSystemDelegate
 {
     /**
      * Called when an animation starts
