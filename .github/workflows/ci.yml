@@ -14,7 +14,7 @@ jobs:
       matrix:
         operating-system: ['ubuntu-latest']
         php-versions: ['8.1', '8.2']
-        phpunit-versions: ['latest']
+        phpunit-versions: ['9.6']
     
     steps:
     - uses: actions/checkout@v3
@@ -25,7 +25,7 @@ jobs:
         php-version: ${{ matrix.php-versions }}
         extensions: :glfw
         coverage: xdebug
-        tools: cs2pr
+        tools: cs2pr, phpunit:${{ matrix.phpunit-versions }}
         
     - name: Install dependenies
       run: sudo apt-get update && sudo apt-get install -y php-dev build-essential cmake libglfw3-dev xvfb libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev gdb
