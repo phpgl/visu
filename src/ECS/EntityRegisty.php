@@ -232,6 +232,21 @@ class EntityRegisty implements EntitiesInterface
     }
 
     /**
+     * Returns the first entity that has the given component
+     * 
+     * @param class-string           $componentClassName
+     * @return ?int
+     */
+    public function firstWith(string $componentClassName) : ?int
+    {
+        foreach($this->components[$componentClassName] ?? [] as $entity => $component) {
+            return $entity;
+        }
+
+        return null;
+    }
+
+    /**
      * Stores a singleton component in the entity registy
      * 
      * @template T of object

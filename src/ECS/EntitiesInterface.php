@@ -108,6 +108,14 @@ interface EntitiesInterface
     public function first(string $componentClassName);
 
     /**
+     * Returns the first entity that has the given component
+     * 
+     * @param class-string           $componentClassName
+     * @return ?int
+     */
+    public function firstWith(string $componentClassName) : ?int;
+
+    /**
      * Stores a singleton component in the entity registy
      * 
      * @template T
