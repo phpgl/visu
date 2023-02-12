@@ -18,6 +18,30 @@ class Math
     }
 
     /**
+     * Clamps the given value between the given min and max
+     * 
+     * @param float $val The value to clamp
+     * @param float $min The minimum value
+     * @param float $max The maximum value
+     */
+    public static function clamp(float $val, float $min, float $max) : float
+    {
+        return max($min, min($max, $val));
+    }
+
+    /**
+     * Lerps between two values
+     * 
+     * @param float $a The start value
+     * @param float $b The end value
+     * @param float $t The interpolation value
+     */
+    public static function lerp(float $a, float $b, float $t) : float
+    {
+        return $a + ($b - $a) * $t;
+    }
+
+    /**
      * Projects a vector onto a plane with the given normal
      * 
      * @param Vec3 $dir 
@@ -26,7 +50,12 @@ class Math
      */
     public static function projectOnPlane(Vec3 $dir, Vec3 $normal) : Vec3
     {
-        return Vec3::normalized($dir - Vec3::dot($dir, $normal) * $normal);
+        $dot = Vec3::dot($dir, $normal) * $normal;
+        if ($dot->length() >= 1) {
+            return $dir;
+        }
+
+        return Vec3::normalized($dir - $dot);
     }
 
     /**

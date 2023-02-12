@@ -17,6 +17,7 @@ use VISU\OS\MouseButton;
 use VISU\Signal\Dispatcher;
 use VISU\Signal\SignalQueue;
 use VISU\Signals\Input\CursorPosSignal;
+use VISU\Signals\Input\ScrollSignal;
 
 class VISUCameraSystem implements SystemInterface
 {
@@ -49,6 +50,13 @@ class VISUCameraSystem implements SystemInterface
     private SignalQueue $inputCursorQueue;
 
     /**
+     * Mouse Scroll input queue
+     * 
+     * @var SignalQueue<ScrollSignal>
+     */
+    private SignalQueue $inputScrollQueue;
+
+    /**
      * Constructor
      */
     public function __construct(
@@ -76,7 +84,8 @@ class VISUCameraSystem implements SystemInterface
     {
         $entities->registerComponent(Camera::class);
 
-        $this->inputCursorQueue = $this->dispatcher->createSignalQueue('input.cursor');
+        $this->inputCursorQueue = $this->dispatcher->createSignalQueue(Input::EVENT_CURSOR);
+        $this->inputScrollQueue = $this->dispatcher->createSignalQueue(Input::EVENT_SCROLL);
     }
 
     /**
@@ -97,6 +106,23 @@ class VISUCameraSystem implements SystemInterface
     }
 
     /**
+     * Scroll wheel handler
+     * 
+     * @param ScrollSignal $signal
+     */
+    public function handleScroll(EntitiesInterface $entities, ScrollSignal $signal) : void
+    {
+        switch ($this->visuCameraMode) {
+            case self::CAMERA_MODE_GAME:
+                $this->handleScrollVISUGame($entities, $signal);
+                break;
+            case self::CAMERA_MODE_FLYING:
+                $this->handleScrollVISUFlying($signal);
+                break;
+        }
+    }
+
+    /**
      * Override this method to handle the cursor position in game mode
      * 
      * @param CursorPosSignal $signal 
@@ -105,6 +131,17 @@ class VISUCameraSystem implements SystemInterface
     protected function handleCursorPosVISUGame(EntitiesInterface $entities, CursorPosSignal $signal) : void
     {
         throw new VISUException('You need to override this method to handle the cursor position in game mode');
+    }
+
+    /**
+     * Override this method to handle the scroll wheel in game mode
+     * 
+     * @param ScrollSignal $signal
+     * @return void 
+     */
+    protected function handleScrollVISUGame(EntitiesInterface $entities, ScrollSignal $signal) : void
+    {
+        throw new VISUException('You need to override this method to handle the scroll wheel in game mode');
     }
 
     /**
@@ -129,6 +166,16 @@ class VISUCameraSystem implements SystemInterface
         else {
             $this->input->setCursorMode(CursorMode::NORMAL);
         }
+    }
+
+    /**
+     * Scroll wheel handler
+     * 
+     * @param ScrollSignal $signal
+     */
+    private function handleScrollVISUFlying(ScrollSignal $signal) : void
+    {
+        // ... 
     }
 
     /**
@@ -170,6 +217,10 @@ class VISUCameraSystem implements SystemInterface
     {
         while($cursorSignal = $this->inputCursorQueue->shift()) {
             $this->handleCursorPos($entities, $cursorSignal);
+        }
+
+        while($scrollSignal = $this->inputScrollQueue->shift()) {
+            $this->handleScroll($entities, $scrollSignal);
         }
 
         $camera = $this->getActiveCamera($entities);
