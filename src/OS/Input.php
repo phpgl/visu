@@ -34,6 +34,13 @@ class Input implements WindowEventHandlerInterface
     public const REPEAT = GLFW_REPEAT;
 
     /**
+     * Current input context is just represented by a string.
+     * The input context can be used as mutex like flag so that 
+     * different systems can use the input class without interfering with each other.
+     */
+    private ?string $currentInputContext = null;
+
+    /**
      * GLFW window instance.
      * required to fetch key states. We copy a reference to the raw window
      * so we don't always have to use `getGLFWHandle` everytime we want to check 
@@ -533,6 +540,64 @@ class Input implements WindowEventHandlerInterface
      */
     public function handleWindowDidPollEvents(Window $window): void
     {
+    }
 
+    /**
+     * Is the input context currently claimed?
+     */
+    public function isContextUnclaimed(): bool
+    {
+        return $this->currentInputContext === null;
+    }
+
+    /**
+     * Claim the input context
+     * 
+     * @param string $context The context string to claim
+     * @return void
+     */
+    public function claimContext(string $context): void
+    {
+        if ($this->currentInputContext !== null) {
+            throw new \Exception("Input context already claimed by: " . $this->currentInputContext);
+        }
+
+        $this->currentInputContext = $context;
+    }
+
+    /**
+     * Release the input context
+     * 
+     * @param string $context The context string to release
+     * @return void
+     */
+    public function releaseContext(string $context): void
+    {
+        if ($this->currentInputContext !== $context) {
+            throw new \Exception("Input context already claimed by: " . $this->currentInputContext);
+        }
+
+        $this->currentInputContext = null;
+    }
+
+    /**
+     * Get the current input context
+     * 
+     * @return string|null The current input context or null if no context is claimed
+     */
+    public function getCurrentContext(): ?string
+    {
+        return $this->currentInputContext;
+    }
+
+    /**
+     * Returns true if the given input context is currently claimed
+     * 
+     * @param string $context The context string to check
+     * @return bool True if the given input context is currently claimed
+     */
+    public function isClaimedContext(string $context): bool
+    {
+        return $this->currentInputContext === $context;
     }
 }

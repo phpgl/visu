@@ -95,6 +95,10 @@ class VISUCameraSystem implements SystemInterface
      */
     public function handleCursorPos(EntitiesInterface $entities, CursorPosSignal $signal) : void
     {
+        if (!$this->input->isContextUnclaimed()) {
+            return;
+        }
+
         switch ($this->visuCameraMode) {
             case self::CAMERA_MODE_GAME:
                 $this->handleCursorPosVISUGame($entities, $signal);
@@ -112,6 +116,10 @@ class VISUCameraSystem implements SystemInterface
      */
     public function handleScroll(EntitiesInterface $entities, ScrollSignal $signal) : void
     {
+        if (!$this->input->isContextUnclaimed()) {
+            return;
+        }
+        
         switch ($this->visuCameraMode) {
             case self::CAMERA_MODE_GAME:
                 $this->handleScrollVISUGame($entities, $signal);

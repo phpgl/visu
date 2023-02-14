@@ -106,6 +106,30 @@ class MouseButtonSignal extends Signal
     }
 
     /**
+     * Returns boolean if the left mouse button was released
+     */
+    public function isLeftUp(): bool
+    {
+        return $this->button === MouseButton::LEFT && $this->action === Input::RELEASE;
+    }
+
+    /**
+     * Returns boolean if the right mouse button was released
+     */
+    public function isRightUp(): bool
+    {
+        return $this->button === MouseButton::RIGHT && $this->action === Input::RELEASE;
+    }
+
+    /**
+     * Returns boolean if the middle mouse button was released
+     */
+    public function isMiddleUp(): bool
+    {
+        return $this->button === MouseButton::MIDDLE && $this->action === Input::RELEASE;
+    }
+
+    /**
      * Omits the window property from the debug output
      * 
      * @return array<string, mixed>
