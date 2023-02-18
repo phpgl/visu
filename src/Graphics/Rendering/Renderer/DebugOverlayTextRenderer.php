@@ -51,6 +51,11 @@ class DebugOverlayTextRenderer
     private ShaderProgram $shaderProgram;
 
     /**
+     * The line height of the font
+     */
+    public int $lineHeight = 20;
+
+    /**
      * Constructor 
      * 
      * @param GLState $glstate The current GL state.
@@ -152,7 +157,7 @@ class DebugOverlayTextRenderer
         $x = $dtext->offsetX;
         $y = $dtext->offsetY;
         $scale = $renderTarget->contentScaleX; 
-        $lineHeight = 20;
+        $lineHeight = $this->lineHeight;
 
         // determine the text length
         $textLen = mb_strlen($dtext->text);

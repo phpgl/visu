@@ -236,6 +236,11 @@ class VISUCameraSystem implements SystemInterface
         // update interpolation states
         $camera->finalizeFrame();
 
+        // if the context is claimed, we don't want to update the camera
+        if (!$this->input->isContextUnclaimed()) {
+            return;
+        }
+
         // update the camera
         switch ($this->visuCameraMode) {
             case self::CAMERA_MODE_GAME:

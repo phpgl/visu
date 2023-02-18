@@ -21,6 +21,17 @@ class AABB
     }
 
     /**
+     * Returns a copy of the current AABB
+     */
+    public function copy() : AABB 
+    {
+        return new AABB(
+            $this->min->copy(),
+            $this->max->copy()
+        );
+    }
+
+    /**
      * Returns the center of the AABB
      */
     public function getCenter() : Vec3
@@ -29,12 +40,29 @@ class AABB
     }
 
     /**
-     * Retuns the intersection of this AABB and Ray
+     * Returns the intersection point of the current AABB and the given Ray
+     *
+     * @param Ray $ray
+     * @return Vec3|null
+     */
+    public function intersectRay(Ray $ray) : ?Vec3
+    {
+        $t = $this->intersectRayDistance($ray);
+
+        if ($t === null) {
+            return null;
+        }
+
+        return $ray->origin + $ray->direction * $t;
+    }
+
+    /**
+     * Retuns the intersection distance of this AABB and Ray
      * 
      * @param Ray $ray
      * @return float|null
      */
-    public function intersectRay(Ray $ray) : ?float
+    public function intersectRayDistance(Ray $ray) : ?float
     {
         $tmin = ($this->min->x - $ray->origin->x) / $ray->direction->x;
         $tmax = ($this->max->x - $ray->origin->x) / $ray->direction->x;

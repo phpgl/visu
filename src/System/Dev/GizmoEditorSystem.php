@@ -6,10 +6,10 @@ use GL\Buffer\FloatBuffer;
 use GL\Geometry\ObjFileParser;
 use GL\Math\{GLM, Mat4, Quat, Vec2, Vec3};
 use VISU\Component\Dev\GizmoComponent;
-use VISU\D3D;
 use VISU\ECS\EntitiesInterface;
 use VISU\ECS\SystemInterface;
 use VISU\Geo\AABB;
+use VISU\Geo\Transform;
 use VISU\Graphics\BasicVertexArray;
 use VISU\Graphics\Camera;
 use VISU\Graphics\GLState;
@@ -25,9 +25,9 @@ use VISU\Graphics\RenderTarget;
 use VISU\Graphics\ShaderCollection;
 use VISU\Graphics\ShaderProgram;
 use VISU\OS\Input;
-use VISU\OS\MouseButton;
 use VISU\Signal\Dispatcher;
 use VISU\Signal\SignalQueue;
+use VISU\Signals\Input\CursorPosSignal;
 use VISU\Signals\Input\MouseButtonSignal;
 
 class GizmoEditorSystem implements SystemInterface
@@ -61,11 +61,39 @@ class GizmoEditorSystem implements SystemInterface
      */
     private RenderTarget $lastFrameRenderTarget;
 
-
+    /**
+     * The active gizmo entity, entity currently beeing edited
+     */
     private int $activeGizmoEntity = 0;
 
     /**
+     * The currently translated axis
+     * 
+     * @var int 0 = none, 1 = x, 2 = y, 3 = z
+     */
+    private int $activeAxis = 0;
+
+    /**
+     * The inital world space position of the gizmo intersection
+     */
+    private ?Vec3 $gizmoIntersectionPos = null;
+
+    /**
+     * The inital world space translation of the gizmo entity
+     * 
+     * @var null|Vec3
+     */
+    private ?Vec3 $gizmoTranslationInitial = null;
+
+    /**
+     * The distance of the gizmo intersection to the camera when the gizmo was selected
+     */
+    private float $gizmoIntersectionDistance = 0;
+
+    /**
      * Mouse position queue
+     * 
+     * @var SignalQueue<CursorPosSignal>
      */
     private SignalQueue $cursorPositionQueue;
 
@@ -73,6 +101,11 @@ class GizmoEditorSystem implements SystemInterface
      * The input contetx string for the gizmo
      */
     private const INPUT_CONTEXT = 'visu/dev/gizmo';
+
+    /**
+     * The mouse click event listener id
+     */
+    private ?int $mouseClickListenerId = null;
 
     /**
      * Constructor
@@ -88,7 +121,8 @@ class GizmoEditorSystem implements SystemInterface
 
         $this->gizmoVA = new BasicVertexArray($this->gl, [
             3, // postion
-            3 // normal
+            3, // normal
+            3 // color 
         ]);
 
         $vertexOffset = 0;
@@ -105,43 +139,64 @@ class GizmoEditorSystem implements SystemInterface
             $vertices = $model->getVertices('pn');
 
             $vertexCount = $vertices->size() / 6;
-            $this->vaLocations[$name] = [$vertexOffset, $vertexCount];
 
-            foreach($vertices as $vertex) {
-                $buffer->push($vertex);
+            $this->vaLocations[$name] = [$vertexOffset, $vertexCount * 3];
+
+            // preprocess the indicator for each axis
+            foreach([ 
+                'x' => [new Vec3(0, 0, 1), new Vec3(1.0, 0.071, 0.29)],
+                'y' => [new Vec3(0, 1, 0), new Vec3(0.0, 1.0, 0.0)],
+                'z' => [new Vec3(1, 0, 0), new Vec3(0.0, 0.0, 1.0)],
+            ] as $axis => $tuple) 
+            {
+                // rotate the vertex according to the axis
+                list($rotation, $color) = $tuple;
+
+                $model = new Mat4;
+                $model->rotate(GLM::radians(90), $rotation);
+
+                $aabbName = $name . ':' . $axis;
+                $aabbs[$aabbName] = new AABB(new Vec3(0, 0, 0), new Vec3(0, 0, 0));
+
+                for($i = 0; $i < $vertexCount * 6; $i+=6) 
+                {    
+                    $position = new Vec3(
+                        $vertices[$i+0],
+                        $vertices[$i+1],
+                        $vertices[$i+2],
+                    );
+
+                    $position = $model * $position;
+
+                    $buffer->pushVec3($position);
+
+                    // buffer the normal as is as we don't use it right now
+                    // and but i want to use it in the future..
+                    $buffer->push($vertices[$i+3]);
+                    $buffer->push($vertices[$i+4]);
+                    $buffer->push($vertices[$i+5]);
+
+                    // push the color
+                    $buffer->pushVec3($color);
+
+                    // update the bounding box
+                    $aabbs[$aabbName]->min->x = min($aabbs[$aabbName]->min->x, $position->x);
+                    $aabbs[$aabbName]->min->y = min($aabbs[$aabbName]->min->y, $position->y);
+                    $aabbs[$aabbName]->min->z = min($aabbs[$aabbName]->min->z, $position->z);
+
+                    $aabbs[$aabbName]->max->x = max($aabbs[$aabbName]->max->x, $position->x);
+                    $aabbs[$aabbName]->max->y = max($aabbs[$aabbName]->max->y, $position->y);
+                    $aabbs[$aabbName]->max->z = max($aabbs[$aabbName]->max->z, $position->z);
+
+                    // update the vertex offset
+                    $vertexOffset++;
+                }
             }
 
-            $aabbs[$name] = new AABB(new Vec3(0, 0, 0), new Vec3(0, 0, 0));
-
-            for($i = 0; $i < $vertexCount; $i+=6) {
-                $pos = new Vec3($buffer[$i], $buffer[$i+1], $buffer[$i+2]);
-
-                $aabbs[$name]->min->x = min($aabbs[$name]->min->x, $pos->x);
-                $aabbs[$name]->min->y = min($aabbs[$name]->min->y, $pos->y);
-                $aabbs[$name]->min->z = min($aabbs[$name]->min->z, $pos->z);
-
-                $aabbs[$name]->max->x = max($aabbs[$name]->max->x, $pos->x);
-                $aabbs[$name]->max->y = max($aabbs[$name]->max->y, $pos->y);
-                $aabbs[$name]->max->z = max($aabbs[$name]->max->z, $pos->z);
-            }
-
-            $vertexOffset += $vertexCount;
+            $this->gizmoAABB = $aabbs;
         }
 
-        $this->gizmoAABB = $aabbs;
-
         $this->gizmoVA->upload($buffer);
-    }
-
-    /**
-     * Returns a FloatBuffer containing the vertices of the given dev geometry.
-     */
-    private function loadDevGeometry(string $path) : FloatBuffer
-    {
-        $model = new ObjFileParser($path);
-        $vertices = $model->getVertices('pn');
-
-        return $vertices;
     }
 
     /**
@@ -157,11 +212,19 @@ class GizmoEditorSystem implements SystemInterface
 
         // register an mouse button event handler, so we know when to 
         // move things around
-        $this->dispatcher->register(Input::EVENT_MOUSE_BUTTON, function(MouseButtonSignal $signal) use($entities)
+        $this->mouseClickListenerId = $this->dispatcher->register(Input::EVENT_MOUSE_BUTTON, function(MouseButtonSignal $signal) use($entities)
         {
-            if($signal->isLeftUp() && $this->input->isClaimedContext(self::INPUT_CONTEXT)) {
+            // is the context already claimed?
+            if ($signal->isLeftUp() && $this->input->isClaimedContext(self::INPUT_CONTEXT)) {
                 $this->input->releaseContext(self::INPUT_CONTEXT);
                 $signal->stopPropagation();
+                $this->activeGizmoEntity = 0;
+                $this->activeAxis = 0;
+                return;
+            }
+
+            // if not a mouse down event or the input context is already claimed, we don't need to do anything
+            if (!($signal->isLeftDown() && $this->input->isContextUnclaimed())) {
                 return;
             }
 
@@ -171,16 +234,42 @@ class GizmoEditorSystem implements SystemInterface
             $cursorPos = $this->input->getNormalizedCursorPosition();
             $ray = $camera->getSSRay($this->lastFrameRenderTarget, $cursorPos);
 
-            $intersection = $this->gizmoAABB['pos']->intersectRay($ray);
-
-            // if no AABB was hit, we don't need to do anything
-            if ($intersection === null) {
-                return;
+            foreach($entities->view(GizmoComponent::class) as $entity => $gizmoComponent) 
+            {
+                // if we have a ray intersection with a gizmo AABB, we can start moving things around
+                // this means we claim the input context and stop the propagation of the event
+                if ($this->gizmoIntersectionPos = $gizmoComponent->aabbTranslateX->intersectRay($ray)) {
+                    $this->input->claimContext(self::INPUT_CONTEXT);
+                    $signal->stopPropagation();
+                    $this->activeGizmoEntity = $entity;
+                    $this->activeAxis = 1;
+                    break;
+                }
+                elseif ($this->gizmoIntersectionPos = $gizmoComponent->aabbTranslateY->intersectRay($ray)) {
+                    $this->input->claimContext(self::INPUT_CONTEXT);
+                    $signal->stopPropagation();
+                    $this->activeGizmoEntity = $entity;
+                    $this->activeAxis = 2;
+                    break;
+                }
+                elseif ($this->gizmoIntersectionPos = $gizmoComponent->aabbTranslateZ->intersectRay($ray)) {
+                    $this->input->claimContext(self::INPUT_CONTEXT);
+                    $signal->stopPropagation();
+                    $this->activeGizmoEntity = $entity;
+                    $this->activeAxis = 3;
+                    break;
+                }
             }
 
-            if ($signal->isLeftDown() && $this->input->isContextUnclaimed()) {
-                $this->input->claimContext(self::INPUT_CONTEXT);
-                $signal->stopPropagation();
+            // additionally store the distance between the camera 
+            // and the interaction point, we need this information to properly apply
+            // an offset from the cameras position
+            if ($this->activeGizmoEntity) {
+                $this->gizmoIntersectionDistance = $this->gizmoIntersectionPos->distanceTo($camera->transform->position);
+                $this->gizmoTranslationInitial = $entities->get($this->activeGizmoEntity, Transform::class)->position->copy();
+            } else {
+                $this->gizmoIntersectionDistance = 0;
+                $this->gizmoIntersectionPos = null;
             }
         });
     }
@@ -192,6 +281,7 @@ class GizmoEditorSystem implements SystemInterface
      */
     public function unregister(EntitiesInterface $entities) : void
     {
+        $this->dispatcher->unregister(Input::EVENT_MOUSE_BUTTON, $this->mouseClickListenerId);
     }
 
     /**
@@ -202,13 +292,55 @@ class GizmoEditorSystem implements SystemInterface
     public function update(EntitiesInterface $entities) : void
     {
         if (!$this->input->isClaimedContext(self::INPUT_CONTEXT)) {
+            $this->cursorPositionQueue->flush(); // always clear the input queues
             return;
         }
 
-        foreach($entities->view(GizmoComponent::class) as $entity => $gizmoComponent) 
-        {
-            // var_dump($gizmoComponent);
+        if (!$entities->valid($this->activeGizmoEntity)) {
+            $this->cursorPositionQueue->flush();
+            return;
         }
+
+        if (!$entities->has($this->activeGizmoEntity, Transform::class)) {
+            $this->cursorPositionQueue->flush();
+            return;
+        }
+
+        // get the camera to create a ray from the current cursor position
+        $camera = $entities->first(Camera::class);
+
+        // create a ray from the camera to the cursor position
+        $cursorPos = $this->input->getNormalizedCursorPosition();
+        $ray = $camera->getSSRay($this->lastFrameRenderTarget, $cursorPos);
+
+        // determine the world space position of our mouse ray using 
+        // the distance from the camera to the gizmo when the interaction started
+        // @todo it would probably make more sense to do an intersection test on an infinite
+        // plain for the given axis intead. Because this way depening on the cameras position
+        // to the gizmo the movement is limited by the inital distance.. :mario
+        $rayPos = $ray->pointAt($this->gizmoIntersectionDistance);
+
+        // get the transform of the active gizmo
+        $transform = $entities->get($this->activeGizmoEntity, Transform::class);
+
+        // translate x axis
+        if ($this->activeAxis === 1) {
+            $transform->position->x = $this->gizmoTranslationInitial->x + ($rayPos->x - $this->gizmoIntersectionPos->x);
+        }
+
+        // translate y axis
+        elseif ($this->activeAxis === 2) {
+            $transform->position->y = $this->gizmoTranslationInitial->y + ($rayPos->y - $this->gizmoIntersectionPos->y);
+        }
+
+        // translate z axis
+        elseif ($this->activeAxis === 3) {
+            $transform->position->z = $this->gizmoTranslationInitial->z + ($rayPos->z - $this->gizmoIntersectionPos->z);
+        }
+
+        $transform->markDirty();
+
+        $this->cursorPositionQueue->flush(); // <- @todo remove the cursor queue as we use the relative distance
     }
     
     /**
@@ -220,26 +352,57 @@ class GizmoEditorSystem implements SystemInterface
     public function render(EntitiesInterface $entities, RenderContext $context) : void
     {
         $backbuffer = $context->data->get(BackbufferData::class);
-        $this->lastFrameRenderTarget = $context->resources->getRenderTarget($backbuffer->target);   
+        $this->lastFrameRenderTarget = $context->resources->getRenderTarget($backbuffer->target); 
 
-        D3D::aabb(new Vec3, $this->gizmoAABB['pos']->min, $this->gizmoAABB['pos']->max, D3D::$colorCyan);
+        // caluclate distance from the camera
+        $cameraData = $context->data->get(CameraData::class);
+
+        // update the AABBs for every gizmo
+        // this is not really efficient, but the gizmo system is not meant to be used
+        // in a normal game loop anyway
+        foreach($entities->view(GizmoComponent::class) as $entity => $gizmoComponent) 
+        {
+            $transform = $entities->get($entity, Transform::class);
+
+            // determine the distance from the camera to the gizmo
+            $distance = $transform->position->distanceTo($cameraData->frameCamera->transform->position);
+
+            // scale the distance by a predefined factor that i thought looked good
+            $distance /= 96;
+            $gizmoComponent->scale = $distance;
+
+            // scale and translate the AABBs based on the distance to the camera
+            $gizmoComponent->aabbTranslateX->min = $this->gizmoAABB['pos:x']->min * $distance + $transform->position;
+            $gizmoComponent->aabbTranslateX->max = $this->gizmoAABB['pos:x']->max * $distance + $transform->position;
+            $gizmoComponent->aabbTranslateY->min = $this->gizmoAABB['pos:y']->min * $distance + $transform->position;
+            $gizmoComponent->aabbTranslateY->max = $this->gizmoAABB['pos:y']->max * $distance + $transform->position;
+            $gizmoComponent->aabbTranslateZ->min = $this->gizmoAABB['pos:z']->min * $distance + $transform->position;
+            $gizmoComponent->aabbTranslateZ->max = $this->gizmoAABB['pos:z']->max * $distance + $transform->position;
+
+            // D3D::aabb(new Vec3, $gizmoComponent->aabbTranslateX->min, $gizmoComponent->aabbTranslateX->max, D3D::$colorRed);
+            // D3D::aabb(new Vec3, $gizmoComponent->aabbTranslateY->min, $gizmoComponent->aabbTranslateY->max, D3D::$colorGreen);
+            // D3D::aabb(new Vec3, $gizmoComponent->aabbTranslateZ->min, $gizmoComponent->aabbTranslateZ->max, D3D::$colorBlue);
+        }
+
 
         $context->pipeline->addPass(new CallbackPass(
             // setup
             function(RenderPass $pass, RenderPipeline $pipeline, PipelineContainer $data)
             {
-
+                $pipeline->writes($pass, $data->get(BackbufferData::class)->target);
             },
             // execute
-            function(PipelineContainer $data, PipelineResources $resources) 
+            function(PipelineContainer $data, PipelineResources $resources) use($entities)
             {
+                $target = $resources->getRenderTarget($data->get(BackbufferData::class)->target);
+                $target->preparePass();
+
                 $cameraData = $data->get(CameraData::class);
 
                 $this->gizmoShader->use();
 
                 $this->gizmoShader->setUniformMat4('projection', false, $cameraData->projection);
                 $this->gizmoShader->setUniformMat4('view', false, $cameraData->view);
-                $this->gizmoShader->setUniformVec3('view_position', $cameraData->renderCamera->transform->position);
 
                 $this->gizmoVA->bind();
 
@@ -248,25 +411,18 @@ class GizmoEditorSystem implements SystemInterface
                 glDisable(GL_DEPTH_TEST);
                 glDisable(GL_CULL_FACE);
 
-                foreach([
-                    [new Vec3(1, 0, 0), new Vec3(1.0, 0.071, 0.29)],
-                    [new Vec3(0, 1, 0), new Vec3(0.0, 1.0, 0.0)],
-                    [new Vec3(0, 0, 1), new Vec3(0.0, 0.0, 1.0)],
-                ] as $tuple) 
+                foreach($entities->view(GizmoComponent::class) as $entity => $gizmoComponent) 
                 {
-                    list($rotation, $color) = $tuple;
-
+                    $transform = $entities->get($entity, Transform::class);
+                    
                     $model = new Mat4;
-                    $model->rotate(GLM::radians(90), $rotation);
+                    $model->translate($transform->position);
+                    $model->scale(new Vec3($gizmoComponent->scale));
 
-                    $this->gizmoShader->setUniformVec3('color', $color);
                     $this->gizmoShader->setUniformMat4('model', false, $model);
                     $this->gizmoVA->draw($offset, $size);
                 }
-
             }
         ));
-
-
     }
 }

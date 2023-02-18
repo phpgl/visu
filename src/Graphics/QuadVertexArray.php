@@ -86,6 +86,6 @@ class QuadVertexArray
     public function draw() : void
     {
         $this->bind();
-        glDrawArrays(GL_TRIANGLE_STRIP, 0, 6);
+        glDrawArrays(GL_TRIANGLES, 0, 6);
     }
 }
