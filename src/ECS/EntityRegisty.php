@@ -71,7 +71,8 @@ class EntityRegisty implements EntitiesInterface
     public function registerComponent(string $componentClassName) : void
     {
         if (isset($this->components[$componentClassName])) {
-            throw new EntityRegistryException(sprintf("The component '%s' is already registered.", $componentClassName));
+            // if the component is already registered, we do nothing
+            return;
         }
 
         $this->components[$componentClassName] = [];
@@ -139,7 +140,7 @@ class EntityRegisty implements EntitiesInterface
     {
         $className = get_class($component);
         if (!isset($this->components[$className])) {
-            throw new EntityRegistryException(sprintf("Pleaese register your component (%s) with registry first!", $className));
+            throw new EntityRegistryException(sprintf("Please register your component (%s) with registry first!", $className));
         }
 
         $this->components[$className][$entity] = $component;
@@ -298,21 +299,65 @@ class EntityRegisty implements EntitiesInterface
 
     /**
      * Serializes the registry to a string
+     * 
+     * @param array<class-string> $componentNames The component names to be serialized
+     * @param ?string             $requiredComponent The component name that is required to be present in the entity to be serialized
      */
-    public function serialize() : string
+    public function serialize(array $componentNames, ?string $requiredComponent = null) : string
     {
-        $buffer = '';
+        // make a hash map of the component names for faster lookup
+        $componentNamesMap = array_flip($componentNames);
 
-        // there is no need to store the full entityComponents array as it 
-        // is just an additinal reference map for fast lookups and can be 
-        // rebuild with just the entityIds and the components data...
-        $buffer .= serialize([$this->freelist, $this->entityPointer, $this->components, array_keys($this->entityComponents)]);
+        // copy the freelist 
+        $freelistCopy = $this->freelist;
 
-        if (!$buffer = gzencode($buffer, 9)) {
-            throw new EntityRegistryException('Could not serialize and compress registry...');
+
+        $toBeSerializedEntities = [];
+        if ($requiredComponent !== null) {
+            foreach($this->components[$requiredComponent] ?? [] as $entityId => $component) {
+                $toBeSerializedEntities[$entityId] = true;
+            }
+        } else {
+            foreach($this->entityComponents as $entityId => $components) {
+                $toBeSerializedEntities[$entityId] = true;
+            }
         }
 
-        return $buffer;
+        $serializedComponentData = [];
+        foreach($this->entityComponents as $entityId => $components) {
+            if (!isset($toBeSerializedEntities[$entityId])) {
+                $freelistCopy[] = $entityId;
+                continue;
+            }
+
+            $serializedComponentData[$entityId] = [];
+
+            foreach($components as $componentName => $component) {
+                if (!isset($componentNamesMap[$componentName])) {
+                    continue;
+                }
+
+                $serializedComponentData[$entityId][$componentName] = serialize($component);
+            }
+        }
+
+        // remove all serialized entities that have no components
+        // and add them to the freelist
+        foreach($serializedComponentData as $entityId => $components) {
+            if (count($components) === 0) {
+                unset($serializedComponentData[$entityId]);
+                $freelistCopy[] = $entityId;
+            }
+        }
+
+        // we only store the per entity component data, as we can reconstruct the entityComponents array
+        // This makes ita bit easier to handle the possible component filtering. But makes serialization slower.
+        // but hey its PHP soooo....
+        return serialize([
+            $this->entityPointer,
+            $freelistCopy,
+            $serializedComponentData,
+        ]);
     }
 
     /**
@@ -320,18 +365,27 @@ class EntityRegisty implements EntitiesInterface
      */
     public function deserialize(string $buffer) : void
     {
-        if (!$buffer = gzdecode($buffer)) {
-            throw new EntityRegistryException('Could not decode registry state :(');
+        list($this->entityPointer, $this->freelist, $componentsData) = unserialize($buffer);
+
+        $componentNames = [];
+
+        $this->entityComponents = [];
+        foreach($componentsData as $entityId => $components) {
+            $this->entityComponents[$entityId] = [];
+            foreach($components as $componentName => $componentData) {
+                $this->entityComponents[$entityId][$componentName] = unserialize($componentData);
+                $componentNames[$componentName] = true;
+            }
         }
 
-        list($this->freelist, $this->entityPointer, $this->components, $validEntities) = unserialize($buffer);
+        $this->components = [];
+        foreach($componentNames as $componentName => $true) {
+            $this->components[$componentName] = [];
+        }
 
-        // rebuild entity components
-        $this->entityComponents = array_combine($validEntities, array_fill(0, count($validEntities), []));
-
-        foreach($this->components as $classString => $entityObjectTuples) {
-            foreach($entityObjectTuples as $entityId => $component) {
-                $this->entityComponents[$entityId][$classString] = $component; // @phpstan-ignore-line
+        foreach($this->entityComponents as $entityId => $components) {
+            foreach($components as $componentName => $component) {
+                $this->components[$componentName][$entityId] = $component;
             }
         }
     }

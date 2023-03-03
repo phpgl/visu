@@ -89,6 +89,17 @@ class VISUCameraSystem implements SystemInterface
     }
 
     /**
+     * Unregisters the system, this is where you can handle any cleanup.
+     * 
+     * @return void 
+     */
+    public function unregister(EntitiesInterface $entities) : void
+    {
+        $this->dispatcher->destroySignalQueue($this->inputCursorQueue);
+        $this->dispatcher->destroySignalQueue($this->inputScrollQueue);
+    }
+
+    /**
      * Cursor position handler
      * 
      * @param CursorPosSignal $signal
@@ -184,16 +195,6 @@ class VISUCameraSystem implements SystemInterface
     private function handleScrollVISUFlying(ScrollSignal $signal) : void
     {
         // ... 
-    }
-
-    /**
-     * Unregisters the system, this is where you can handle any cleanup.
-     * 
-     * @return void 
-     */
-    public function unregister(EntitiesInterface $entities) : void
-    {
-        $this->dispatcher->destroySignalQueue($this->inputCursorQueue);
     }
 
     /**
