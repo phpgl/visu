@@ -85,6 +85,7 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
     public function __construct(
         private GLState $gl,
         private ShaderCollection $shaders,
+        private LPModelCollection $modelCollection,
     )
     {
         $this->fullscreenRenderer = new FullscreenTextureRenderer($this->gl);
@@ -203,8 +204,12 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
 
                     $this->objectShader->setUniformMatrix4f('model', false, $transform->getWorldMatrix($entities));
 
+                    if (!isset($this->modelCollection->models[$renderable->modelName])) {
+                        throw new \Exception('Model not found: ' . $renderable->modelName);
+                    }
+
                     // render each mesh 
-                    foreach($renderable->model->meshes as $mesh) 
+                    foreach($this->modelCollection->models[$renderable->modelName]->meshes as $mesh) 
                     {
                         $mesh->vertexBuffer->bind();
                         $this->objectShader->setUniformVec3('color', $mesh->material->color);
@@ -285,8 +290,12 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
             $this->devPickingShader->setUniformMatrix4f('model', false, $transform->getWorldMatrix($entities));
             $this->devPickingShader->setUniform1i('entity_id', $entity);
 
+            if (!isset($this->modelCollection->models[$renderable->modelName])) {
+                throw new \Exception('Model not found: ' . $renderable->modelName);
+            }
+
             // render each mesh 
-            foreach($renderable->model->meshes as $mesh) 
+            foreach($this->modelCollection->models[$renderable->modelName]->meshes as $mesh) 
             {
                 $mesh->vertexBuffer->bind();
                 glDrawArrays(GL_TRIANGLES, $mesh->vertexOffset, $mesh->vertexCount);

@@ -64,10 +64,11 @@ class LPObjLoader
     /**
      * Loads all object files in a given directory and returns them in assoc array
      * 
-     * @param string $directory 
-     * @return array<string, LPModel>
+     * @param string $directory The directory to load the files from
+     * @param LPModelCollection $collection The collection to store the models in
+     * @return void
      */
-    public function loadAllInDirectory(string $directory): array
+    public function loadAllInDirectory(string $directory, LPModelCollection $collection): void
     {
         if (!is_dir($directory)) {
             throw new VISUException('Cannot load objects, directory does not exist: ' . $directory);
@@ -78,18 +79,15 @@ class LPObjLoader
         $vertices = new FloatBuffer();
         $indexOffset = 0;
 
-        $models = [];
         $files = scandir($directory) ?: [];
 
         foreach ($files as $file) {
             if (substr($file, -4) === '.obj') {
-                $model = $this->loadFile($directory . '/' . $file, $vertices, $vb, $indexOffset);
-                $models[$model->name] = $model;
+                $collection->add($this->loadFile($directory . '/' . $file, $vertices, $vb, $indexOffset));
             }
         }
 
+        // upload the data to the GPU
         $vb->uploadData($vertices);
-
-        return $models;
     }
 }

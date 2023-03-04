@@ -7,9 +7,9 @@ use VISU\System\VISULowPoly\LPModel;
 class DynamicRenderableModel
 {
     /**
-     * The model that is being rendered
+     * The name of the model to render
      */
-    public LPModel $model;
+    public string $modelName;
 
     /**
      * Should this object cast shadows?
