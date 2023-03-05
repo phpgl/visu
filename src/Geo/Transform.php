@@ -415,6 +415,14 @@ class Transform
         $this->lookAt($this->position + $direction);
     }
 
+    public function __clone() 
+    {
+        // be sure to make a deep copy of the internal objects
+        $this->position = unserialize(serialize($this->position));
+        $this->orientation = unserialize(serialize($this->orientation));
+        $this->scale = unserialize(serialize($this->scale));
+        $this->matrix = unserialize(serialize($this->matrix));
+    }
 
     public static function serialize(Transform $transform) : array
     {

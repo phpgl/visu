@@ -28,6 +28,11 @@ class GizmoComponent
     public float $scale = 1.0;
 
     /**
+     * The current snapping grid
+     */
+    public float $snapGrid = 0.0; // 0.0 = no snapping
+
+    /**
      * Constructor
      */
     public function __construct()

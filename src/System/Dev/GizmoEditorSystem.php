@@ -338,6 +338,14 @@ class GizmoEditorSystem implements SystemInterface
             $transform->position->z = $this->gizmoTranslationInitial->z + ($rayPos->z - $this->gizmoIntersectionPos->z);
         }
 
+        // snap to grid if enabled
+        $gizmoComponent = $entities->get($this->activeGizmoEntity, GizmoComponent::class);
+        if ($gizmoComponent->snapGrid > 0) {
+            $transform->position->x = round($transform->position->x / $gizmoComponent->snapGrid) * $gizmoComponent->snapGrid;
+            $transform->position->y = round($transform->position->y / $gizmoComponent->snapGrid) * $gizmoComponent->snapGrid;
+            $transform->position->z = round($transform->position->z / $gizmoComponent->snapGrid) * $gizmoComponent->snapGrid;
+        }
+
         $transform->markDirty();
 
         $this->cursorPositionQueue->flush(); // <- @todo remove the cursor queue as we use the relative distance
