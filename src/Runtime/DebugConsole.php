@@ -18,6 +18,7 @@ use VISU\Graphics\ShaderProgram;
 use VISU\Graphics\ShaderStage;
 use VISU\OS\Input;
 use VISU\OS\Key;
+use VISU\OS\Logger;
 use VISU\Signal\Dispatcher;
 use VISU\Signals\Input\CharSignal;
 use VISU\Signals\Input\KeySignal;
@@ -169,7 +170,7 @@ class DebugConsole
                 }
                 
                 // dispatch the signal
-                echo "Executing command: " . $commandSignal->commandString . PHP_EOL;
+                Logger::info("Executing command: " . $commandSignal->commandString);
                 $this->dispatcher->dispatch(self::EVENT_CONSOLE_COMMAND, $commandSignal);
             }
 
@@ -205,7 +206,7 @@ class DebugConsole
                 $this->dispatcher->unregister(Input::EVENT_CHAR, $this->charInputListenerId);
             }
 
-            echo "Console enabled: " . var_export($this->enabled, true) . PHP_EOL;
+            Logger::info("Console enabled: " . var_export($this->enabled, true));
         }
     }
 
