@@ -58,6 +58,9 @@ class LPObjLoader
             $model->meshes[] = $mesh;
         }
 
+        // dont forget to recalculate the AABB
+        $model->recalculateAABB();
+
         return $model;
     }
 

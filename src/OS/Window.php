@@ -280,9 +280,10 @@ class Window
      * This methods assumes that `setEventHandler` has been called before. 
      * You can call this method yourself to simulate a drop event.
      * 
+     * @param int                 $num
      * @param array<string>       $paths
      */
-    public function triggerWindowDropEvent(array $paths) : void
+    public function triggerWindowDropEvent(int $num, array $paths) : void
     {
         $this->eventHandler->handleWindowDrop($this, $paths);
     }

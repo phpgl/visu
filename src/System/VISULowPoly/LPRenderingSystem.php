@@ -204,12 +204,12 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
 
                     $this->objectShader->setUniformMatrix4f('model', false, $transform->getWorldMatrix($entities));
 
-                    if (!isset($this->modelCollection->models[$renderable->modelName])) {
-                        throw new \Exception('Model not found: ' . $renderable->modelName);
+                    if (!isset($this->modelCollection->models[$renderable->modelIdentifier])) {
+                        throw new \Exception('Model not found: ' . $renderable->modelIdentifier);
                     }
 
                     // render each mesh 
-                    foreach($this->modelCollection->models[$renderable->modelName]->meshes as $mesh) 
+                    foreach($this->modelCollection->models[$renderable->modelIdentifier]->meshes as $mesh) 
                     {
                         $mesh->vertexBuffer->bind();
                         $this->objectShader->setUniformVec3('color', $mesh->material->color);
@@ -290,12 +290,12 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
             $this->devPickingShader->setUniformMatrix4f('model', false, $transform->getWorldMatrix($entities));
             $this->devPickingShader->setUniform1i('entity_id', $entity);
 
-            if (!isset($this->modelCollection->models[$renderable->modelName])) {
-                throw new \Exception('Model not found: ' . $renderable->modelName);
+            if (!isset($this->modelCollection->models[$renderable->modelIdentifier])) {
+                throw new \Exception('Model not found: ' . $renderable->modelIdentifier);
             }
 
             // render each mesh 
-            foreach($this->modelCollection->models[$renderable->modelName]->meshes as $mesh) 
+            foreach($this->modelCollection->models[$renderable->modelIdentifier]->meshes as $mesh) 
             {
                 $mesh->vertexBuffer->bind();
                 glDrawArrays(GL_TRIANGLES, $mesh->vertexOffset, $mesh->vertexCount);

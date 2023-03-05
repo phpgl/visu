@@ -9,7 +9,7 @@ class DynamicRenderableModel
     /**
      * The name of the model to render
      */
-    public string $modelName;
+    public string $modelIdentifier;
 
     /**
      * Should this object cast shadows?

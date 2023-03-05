@@ -21,6 +21,30 @@ class AABB
     }
 
     /**
+     * Returns the width of the AABB
+     */
+    public function width() : float
+    {
+        return $this->max->x - $this->min->x;
+    }
+
+    /**
+     * Returns the height of the AABB
+     */
+    public function height() : float
+    {
+        return $this->max->y - $this->min->y;
+    }
+
+    /**
+     * Returns the depth of the AABB
+     */
+    public function depth() : float
+    {
+        return $this->max->z - $this->min->z;
+    }
+
+    /**
      * Returns a copy of the current AABB
      */
     public function copy() : AABB 
@@ -54,6 +78,20 @@ class AABB
         }
 
         return $ray->origin + $ray->direction * $t;
+    }
+
+    /**
+     * Extends the current AABB to include the given AABB
+     */
+    public function extend(AABB $aabb) : void
+    {
+        $this->min->x = min($this->min->x, $aabb->min->x);
+        $this->min->y = min($this->min->y, $aabb->min->y);
+        $this->min->z = min($this->min->z, $aabb->min->z);
+
+        $this->max->x = max($this->max->x, $aabb->max->x);
+        $this->max->y = max($this->max->y, $aabb->max->y);
+        $this->max->z = max($this->max->z, $aabb->max->z);
     }
 
     /**

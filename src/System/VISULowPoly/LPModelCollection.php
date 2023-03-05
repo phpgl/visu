@@ -27,6 +27,14 @@ class LPModelCollection
     }
 
     /**
+     * Returns true if the model exists in the collection
+     */
+    public function has(string $name) : bool
+    {
+        return isset($this->models[$name]);
+    }
+
+    /**
      * Returns a model by name, throws an exception if the model doesn't exist
      */
     public function get(string $name) : LPModel
