@@ -234,6 +234,7 @@ class DebugOverlayTextRenderer
     ) : void
     {
         $pipeline->addPass(new CallbackPass(
+            'DebugOverlayText',
             function(RenderPass $pass, RenderPipeline $pipeline, PipelineContainer $data) use ($renderTarget) {
                 $pipeline->writes($pass, $renderTarget);
             },

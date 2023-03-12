@@ -8,6 +8,7 @@ use VISU\Graphics\Rendering\Resource\TextureResource;
 use VISU\Graphics\RenderTarget;
 use VISU\Graphics\Texture;
 use VISU\Graphics\TextureOptions;
+use VISU\Instrument\ProfilerInterface;
 
 class RenderPipeline
 {
@@ -209,14 +210,17 @@ class RenderPipeline
      *                       This is used to determine the order in which this pipeline is executed.
      *                       The paramter is rather important as for example the garbage collector
      *                       uses this to determine when to free resources.
+     * @param ProfilerInterface|null $profiler An optional profiler can be passed to mesure pass cost
      * @return void 
      */
-    public function execute(int $tickIndex): void
+    public function execute(int $tickIndex, ?ProfilerInterface $profiler = null): void
     {
         $this->resourceAllocator->setCurrentTick($tickIndex);
 
         foreach ($this->passes as $pass) {
+            if ($profiler) $profiler->start($pass->name(), true);
             $pass->execute($this->data, $this->resourceAllocator);
+            if ($profiler) $profiler->end($pass->name());
         }
 
         $this->resourceAllocator->collectGarbage();

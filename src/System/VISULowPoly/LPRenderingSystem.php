@@ -183,6 +183,7 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
         // create a simple render pass for our models 
         // just to test if everything works @todo move this into seperate system
         $context->pipeline->addPass(new CallbackPass(
+            'LPModels',
             // setup
             function(RenderPass $pass, RenderPipeline $pipeline, PipelineContainer $data) use($gbuffer) 
             {

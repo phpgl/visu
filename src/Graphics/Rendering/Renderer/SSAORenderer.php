@@ -158,6 +158,7 @@ class SSAORenderer
     ) : void
     {
         $pipeline->addPass(new CallbackPass(
+            'SSAO',
             // setup
             function(RenderPass $pass, RenderPipeline $pipeline, PipelineContainer $data)
             {

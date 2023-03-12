@@ -11,11 +11,20 @@ use VISU\Graphics\Rendering\RenderPipeline;
 class CallbackPass extends RenderPass
 {
     public function __construct(
+        private string $name, // the name of the pass for identification (profiling, debugging, etc.)
         private Closure $setupCallback,
         private Closure $executeCallback,
     )
     {
     }   
+
+    /**
+     * Returns the name of the render pass, if not overriden this will return the class name.
+     */
+    public function name() : string 
+    {
+        return $this->name;
+    }
 
     /**
      * Executes the render pass

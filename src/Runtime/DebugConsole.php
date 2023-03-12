@@ -245,6 +245,7 @@ class DebugConsole
 
         // render a simple 
         $pipeline->addPass(new CallbackPass(
+            'DebugConsole',
             function(RenderPass $pass, RenderPipeline $pipeline, PipelineContainer $data) use($rt) {
                 $pipeline->writes($pass, $rt);
             },

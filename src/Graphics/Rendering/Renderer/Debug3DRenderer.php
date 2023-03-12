@@ -227,6 +227,7 @@ class Debug3DRenderer
     ) : void
     {
         $pipeline->addPass(new CallbackPass(
+            'D3D',
             function(RenderPass $pass, RenderPipeline $pipeline, PipelineContainer $data) use ($renderTarget) {
                 $pipeline->writes($pass, $renderTarget);
             },

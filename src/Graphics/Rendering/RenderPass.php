@@ -5,6 +5,14 @@ namespace VISU\Graphics\Rendering;
 abstract class RenderPass
 {
     /**
+     * Returns the name of the render pass, if not overriden this will return the class name.
+     * @return string 
+     */
+    public function name() : string {
+        return basename(str_replace("\\", '/', get_class($this)));
+    }
+
+    /**
      * Build / Setup the render pass
      * 
      * In this step the pass should declare its in and outputs and allocate resources. 

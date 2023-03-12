@@ -394,6 +394,7 @@ class GizmoEditorSystem implements SystemInterface
 
 
         $context->pipeline->addPass(new CallbackPass(
+            'GIZMO',
             // setup
             function(RenderPass $pass, RenderPipeline $pipeline, PipelineContainer $data)
             {
