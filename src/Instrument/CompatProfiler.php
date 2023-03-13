@@ -198,6 +198,12 @@ class CompatProfiler implements ProfilerInterface
             $this->queries[$scope] = [];
         }
 
+        // because our mesurement might be wrong
+        // if the GPU is still processing the previous frame
+        // we wait for the GPU to finish. This can kill the performance so obviously only
+        // profile in while debugging...
+        glFinish();
+
         // generate the query objects
         glGenQueries(2, $timeQuery, $triangleQuery);
 
@@ -248,6 +254,10 @@ class CompatProfiler implements ProfilerInterface
         // if the profiler is disabled do nothing
         if (!$this->enabled) {
             return;
+        }
+
+        if ($this->currentScope !== null) {
+            throw new \RuntimeException("Cannot finalize profiling while a scope '{$this->currentScope}' is still active");
         }
 
         // sum the CPU samples for each scope

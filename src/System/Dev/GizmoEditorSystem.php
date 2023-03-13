@@ -419,6 +419,7 @@ class GizmoEditorSystem implements SystemInterface
 
                 glDisable(GL_DEPTH_TEST);
                 glDisable(GL_CULL_FACE);
+                glDisable(GL_BLEND);
 
                 foreach($entities->view(GizmoComponent::class) as $entity => $gizmoComponent) 
                 {
