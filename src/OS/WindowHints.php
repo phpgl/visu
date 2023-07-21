@@ -332,4 +332,327 @@ class WindowHints
             }
         }
     }
+    
+    /**
+     * Sets the resizable hint. (GLFW_RESIZABLE)
+     * 
+     * Should the user be able to resize the window?
+     * If null, the glfw default value is used
+     */
+    public function setResizable(bool $resizable) : void
+    {
+        $this->resizable = $resizable;
+    }
+
+    /**
+     * Sets the visible hint. (GLFW_VISIBLE)
+     * 
+     * Should the window be visible?
+     * If null, the glfw default value is used
+     */
+    public function setVisible(?bool $visible) : void
+    {
+        $this->visible = $visible;
+    }
+
+    /**
+     * Sets the decorated hint. (GLFW_DECORATED)
+     * 
+     * Should the window have a menu bar (border, close button etc.)?
+     * If null, the glfw default value is used
+     */
+    public function setDecorated(?bool $decorated) : void
+    {
+        $this->decorated = $decorated;
+    }
+
+    /**
+     * Sets the focused hint. (GLFW_FOCUSED)
+     * 
+     * Should the window be focused?
+     * If null, the glfw default value is used
+     */
+    public function setFocused(?bool $focused) : void
+    {
+        $this->focused = $focused;
+    }
+
+    /**
+     * Sets the autoIconify hint. (GLFW_AUTO_ICONIFY)
+     * 
+     * Should the window be iconified when it loses focus?
+     * If null, the glfw default value is used
+     */
+    public function setAutoIconify(?bool $autoIconify) : void
+    {
+        $this->autoIconify = $autoIconify;
+    }
+
+    /**
+     * Sets the floating hint. (GLFW_FLOATING)
+     * 
+     * Should the window be floating above other windows? This is also called topmost or always-on-top.
+     * If null, the glfw default value is used
+     */
+    public function setFloating(?bool $floating) : void
+    {
+        $this->floating = $floating;
+    }
+
+    /**
+     * Sets the maximized hint. (GLFW_MAXIMIZED)
+     * 
+     * Should the window be maximized when created?
+     * If null, the glfw default value is used
+     */
+    public function setMaximized(?bool $maximized) : void
+    {
+        $this->maximized = $maximized;
+    }
+
+    /**
+     * Sets the centerCursor hint. (GLFW_CENTER_CURSOR)
+     * 
+     * Should the cursor be centered over the window when created?
+     * If null, the glfw default value is used
+     */
+    public function setCenterCursor(?bool $centerCursor) : void
+    {
+        $this->centerCursor = $centerCursor;
+    }
+
+    /**
+     * Sets the transparentFramebuffer hint. (GLFW_TRANSPARENT_FRAMEBUFFER)
+     * 
+     * Should the framebuffer be transparent?
+     * If null, the glfw default value is used
+     */
+    public function setTransparentFramebuffer(?bool $transparentFramebuffer) : void
+    {
+        $this->transparentFramebuffer = $transparentFramebuffer;
+    }
+
+    /**
+     * Sets the focusOnShow hint. (GLFW_FOCUS_ON_SHOW)
+     * 
+     * Should the window be focused when it is shown?
+     * If null, the glfw default value is used
+     */
+    public function setFocusOnShow(?bool $focusOnShow) : void
+    {
+        $this->focusOnShow = $focusOnShow;
+    }
+
+    /**
+     * Sets the scaleToMonitor hint. (GLFW_SCALE_TO_MONITOR)
+     * 
+     * Should the window content scale be changed when the window is moved to a different monitor?
+     * If null, the glfw default value is used
+     */
+    public function setScaleToMonitor(?bool $scaleToMonitor) : void
+    {
+        $this->scaleToMonitor = $scaleToMonitor;
+    }
+
+       /**
+     * Sets the stereoscopic hint. (GLFW_STEREO)
+     * 
+     * Should the framebuffer be stereoscopic?
+     * If null, the glfw default value is used
+     */
+    public function setStereoscopic(?bool $stereoscopic) : void
+    {
+        $this->stereoscopic = $stereoscopic;
+    }
+
+    /**
+     * Sets the samples hint. (GLFW_SAMPLES)
+     * 
+     * The number of samples to use for multisampling. Zero disables multisampling.
+     * If null, the glfw default value is used
+     */
+    public function setSamples(?int $samples) : void
+    {
+        $this->samples = $samples;
+    }
+
+    /**
+     * Sets the sRGBCapable hint. (GLFW_SRGB_CAPABLE)
+     * 
+     * Should the framebuffer be sRGB capable?
+     * If null, the glfw default value is used
+     */
+    public function setSRGBCapable(?bool $sRGBCapable) : void
+    {
+        $this->sRGBCapable = $sRGBCapable;
+    }
+
+    /**
+     * Sets the doubleBuffer hint. (GLFW_DOUBLEBUFFER)
+     * 
+     * Should the framebuffer be double buffered? You almost always want this enabled.
+     * If null, the glfw default value is used
+     */
+    public function setDoubleBuffer(?bool $doubleBuffer) : void
+    {
+        $this->doubleBuffer = $doubleBuffer;
+    }
+
+    /**
+     * Sets the refreshRate hint. (GLFW_REFRESH_RATE)
+     * 
+     * The desired refresh rate for the fullscreen window, in Hz. This hint is ignored for windowed mode windows.
+     * If GLFW_DONT_CARE is specified, the highest available refresh rate will be used.
+     * If null, the glfw default value is used.
+     */
+    public function setRefreshRate(?int $refreshRate) : void
+    {
+        $this->refreshRate = $refreshRate;
+    }
+
+    /**
+     * Sets the clientAPI hint. (GLFW_CLIENT_API)
+     * 
+     * The client API to use. Possible values are GLFW_OPENGL_API, GLFW_OPENGL_ES_API and GLFW_NO_API.
+     * If null, the glfw default value is used. 
+     * This is a hard constraint.
+     */ 
+    public function setClientAPI(?int $clientAPI) : void
+    {
+        $this->clientAPI = $clientAPI;
+    }
+
+    /**
+     * Sets the contextCreationAPI hint. (GLFW_CONTEXT_CREATION_API)
+     * 
+     * The context creation api that should be used. Possible values are GLFW_NATIVE_CONTEXT_API, GLFW_EGL_CONTEXT_API, GLFW_OSMESA_CONTEXT_API.
+     * If null, the glfw default value is used.
+     * This is a hard constraint.
+     */
+    public function setContextCreationAPI(?int $contextCreationAPI) : void
+    {
+        $this->contextCreationAPI = $contextCreationAPI;
+    }
+
+    /**
+     * Sets the contextVersionMajor hint. (GLFW_CONTEXT_VERSION_MAJOR)
+     * 
+     * The major version of the client API context to create. In PHP-GLFW this is by default 4.
+     * If null, the glfw default value is used.
+     * This is a hard constraint.
+     */
+    public function setContextVersionMajor(?int $contextVersionMajor) : void
+    {
+        $this->contextVersionMajor = $contextVersionMajor;
+    }
+
+    /**
+     * Sets the contextVersionMinor hint. (GLFW_CONTEXT_VERSION_MINOR)
+     * 
+     * The minor version of the client API context to create. In PHP-GLFW this is by default 6.
+     * If null, the glfw default value is used.
+     * This is a hard constraint.
+     */
+    public function setContextVersionMinor(?int $contextVersionMinor) : void
+    {
+        $this->contextVersionMinor = $contextVersionMinor;
+    }
+    /**
+     * Sets the forwardCompatible hint. (GLFW_OPENGL_FORWARD_COMPAT)
+     * 
+     * Should the OpenGL context be forward compatible? In PHP-GLFW this is by default true.
+     * If null, the glfw default value is used.
+     */
+    public function setForwardCompatible(?bool $forwardCompatible) : void
+    {
+        $this->forwardCompatible = $forwardCompatible;
+    }
+
+    /**
+     * Sets the debugContext hint. (GLFW_OPENGL_DEBUG_CONTEXT)
+     * 
+     * Should the OpenGL context be a debug context?
+     * If null, the glfw default value is used.
+     */
+    public function setDebugContext(?bool $debugContext) : void
+    {
+        $this->debugContext = $debugContext;
+    }
+
+    /**
+     * Sets the profile hint. (GLFW_OPENGL_PROFILE)
+     * 
+     * The OpenGL profile to create the context for. Possible values are GLFW_OPENGL_ANY_PROFILE, GLFW_OPENGL_CORE_PROFILE and GLFW_OPENGL_COMPAT_PROFILE.
+     * If null, the glfw default value is used.
+     * In PHP-GLFW this is by default GLFW_OPENGL_CORE_PROFILE.
+     */
+    public function setProfile(?int $profile) : void
+    {
+        $this->profile = $profile;
+    }
+
+    /**
+     * Sets the robustness hint. (GLFW_CONTEXT_ROBUSTNESS)
+     * 
+     * The robustness strategy to be used by the context. Possible values are GLFW_NO_ROBUSTNESS, GLFW_NO_RESET_NOTIFICATION and GLFW_LOSE_CONTEXT_ON_RESET.
+     * If null, the glfw default value is used.
+     */
+    public function setRobustness(?int $robustness) : void
+    {
+        $this->robustness = $robustness;
+    }
+
+    /**
+     * Sets the releaseBehavior hint. (GLFW_CONTEXT_RELEASE_BEHAVIOR)
+     * 
+     * The release behavior to be used by the context. Possible values are GLFW_ANY_RELEASE_BEHAVIOR, GLFW_RELEASE_BEHAVIOR_FLUSH and GLFW_RELEASE_BEHAVIOR_NONE.
+     * If null, the glfw default value is used.
+     */
+    public function setReleaseBehavior(?int $releaseBehavior) : void
+    {
+        $this->releaseBehavior = $releaseBehavior;
+    }
+
+    /**
+     * Sets the noError hint. (GLFW_CONTEXT_NO_ERROR)
+     * 
+     * Should the context be created without error reporting?
+     * If null, the glfw default value is used.
+     */
+    public function setNoError(?bool $noError) : void
+    {
+        $this->noError = $noError;
+    }
+
+    /**
+     * Sets the cocoaRetinaFramebuffer hint. (GLFW_COCOA_RETINA_FRAMEBUFFER)
+     * 
+     * Should the framebuffer be in Retina mode? This means the framebuffer will have the same resolution as the screen.
+     * If null, the glfw default value is used.
+     */
+    public function setCocoaRetinaFramebuffer(?bool $cocoaRetinaFramebuffer) : void
+    {
+        $this->cocoaRetinaFramebuffer = $cocoaRetinaFramebuffer;
+    }
+
+    /**
+     * Sets the cocoaFrameName hint. (GLFW_COCOA_FRAME_NAME)
+     * 
+     * The name of the window frame. If null, the glfw default value is used.
+     */
+    public function setCocoaFrameName(?string $cocoaFrameName) : void
+    {
+        $this->cocoaframeName = $cocoaFrameName;
+    }
+
+    /**
+     * Sets the cocoaGraphicsSwitching hint. (GLFW_COCOA_GRAPHICS_SWITCHING)
+     * 
+     * This allows the context to be used by multiple GPUs simultaneously. This is useful for laptops with both an integrated and a discrete GPU.
+     * If null, the glfw default value is used.
+     */
+    public function setCocoaGraphicsSwitching(?bool $cocoaGraphicsSwitching) : void
+    {
+        $this->cocoaGraphicsSwitching = $cocoaGraphicsSwitching;
+    }
 }  
