@@ -8,9 +8,8 @@ interface ProfilerInterface
      * Starts a profiling scope
      * 
      * @param string $scope A unique name for the scope
-     * @param bool $gpu If true, the GPU metrics will be measured. Otherwise only the CPU time will be measured.
      */
-    public function start(string $scope, bool $gpu = false) : void;
+    public function start(string $scope) : void;
 
     /**
      * Ends the current profiling scope

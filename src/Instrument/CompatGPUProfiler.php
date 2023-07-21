@@ -9,7 +9,7 @@ namespace VISU\Instrument;
  * glBeginQuery / glEndQuery calls instead. Which suck for performance, not being able 
  * to nest etc. But it's better than nothing.
  */
-class CompatProfiler implements ProfilerInterface
+class CompatGPUProfiler implements ProfilerInterface
 {
     /**
      * Enable / disable the profiler
@@ -19,7 +19,7 @@ class CompatProfiler implements ProfilerInterface
     /**
      * The number of samples collected for each query.
      */
-    public int $sampleCount = 16;
+    public int $sampleCount = 64;
 
     /**
      * An array of query handles per scope
@@ -170,10 +170,11 @@ class CompatProfiler implements ProfilerInterface
      * Starts a profiling scope
      * 
      * @param string $scope
-     * @param bool $gpu If true, the GPU time will be measured. Otherwise only the CPU time will be measured.
      */
-    public function start(string $scope, bool $gpu = false) : void
+    public function start(string $scope) : void
     {
+        $gpu = true; // im lazy and this profiler is now only used for the GPU so render pass profiling
+
         // if the profiler is disabled do nothing
         if (!$this->enabled) {
             return;

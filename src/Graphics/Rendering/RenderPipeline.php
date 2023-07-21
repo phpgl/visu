@@ -218,7 +218,7 @@ class RenderPipeline
         $this->resourceAllocator->setCurrentTick($tickIndex);
 
         foreach ($this->passes as $pass) {
-            if ($profiler) $profiler->start($pass->name(), true);
+            if ($profiler) $profiler->start($pass->name());
             $pass->execute($this->data, $this->resourceAllocator);
             if ($profiler) $profiler->end($pass->name());
         }
