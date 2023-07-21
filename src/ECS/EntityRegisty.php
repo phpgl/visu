@@ -115,6 +115,18 @@ class EntityRegisty implements EntitiesInterface
     }
 
     /**
+     * Returns an array of components for the given component class name.
+     * In most cases you want to use the `view` method instead.
+     * 
+     * @param class-string              $componentClassName
+     * @return array<int, object>
+     */
+    public function listComponents(string $componentClassName) : array
+    {
+        return $this->components[$componentClassName] ?? [];
+    }
+
+    /**
      * Destroyes an entity by its ID
      */
     public function destroy(int $entity) : void

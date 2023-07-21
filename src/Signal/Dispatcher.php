@@ -229,4 +229,12 @@ class Dispatcher implements DispatcherInterface
             }
         }
     }
+
+    /**
+     * Override debug info as this functions has references all over the place.
+     */
+    public function __debugInfo() : array
+    {
+        return [];
+    }
 }
