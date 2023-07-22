@@ -3,6 +3,7 @@
 namespace VISU\Graphics\Rendering\Pass;
 
 use GL\Math\Mat4;
+use GL\Math\Vec2;
 use VISU\Graphics\Camera;
 use VISU\Graphics\Rendering\RenderResource;
 
@@ -42,6 +43,16 @@ class CameraData
     public readonly int $resolutionY;
 
     /**
+     * Content scale factor (X)
+     */
+    public readonly float $contentScaleX;
+
+    /**
+     * Content scale factor (Y)
+     */
+    public readonly float $contentScaleY;
+
+    /**
      * Constructor
      */
     public function __construct(
@@ -51,6 +62,8 @@ class CameraData
         Mat4 $view,
         int $resolutionX,
         int $resolutionY,
+        float $contentScaleX,
+        float $contentScaleY
     )
     {
         $this->frameCamera = $frameCamera;
@@ -59,5 +72,23 @@ class CameraData
         $this->view = $view;
         $this->resolutionX = $resolutionX;
         $this->resolutionY = $resolutionY;
+        $this->contentScaleX = $contentScaleX;
+        $this->contentScaleY = $contentScaleY;
+    }
+
+    /**
+     * Returns the resolution in real pixels (not scaled)
+     */
+    public function getDeviceResolutionVec(): Vec2
+    {
+        return new Vec2($this->resolutionX, $this->resolutionY);
+    }
+
+    /**
+     * Returns the resolution in scaled pixels
+     */
+    public function getResolutionVec(): Vec2
+    {
+        return new Vec2($this->resolutionX / $this->contentScaleX, $this->resolutionY / $this->contentScaleY);
     }
 }

@@ -223,7 +223,11 @@ class VISUCameraSystem implements SystemInterface
      * @return void 
      */
     public function update(EntitiesInterface $entities) : void
-    {
+    {   
+        $camera = $this->getActiveCamera($entities);
+        // update interpolation states
+        $camera->finalizeFrame();
+
         while($cursorSignal = $this->inputCursorQueue->shift()) {
             $this->handleCursorPos($entities, $cursorSignal);
         }
@@ -232,10 +236,6 @@ class VISUCameraSystem implements SystemInterface
             $this->handleScroll($entities, $scrollSignal);
         }
 
-        $camera = $this->getActiveCamera($entities);
-
-        // update interpolation states
-        $camera->finalizeFrame();
 
         // if the context is claimed, we don't want to update the camera
         if (!$this->input->isContextUnclaimed()) {
@@ -251,6 +251,7 @@ class VISUCameraSystem implements SystemInterface
                 $this->updateVISUFlyingCamera($entities, $camera);
                 break;
         }
+
     }
 
     /**
@@ -277,9 +278,6 @@ class VISUCameraSystem implements SystemInterface
         if ($this->input->hasMouseButtonBeenPressed(MouseButton::LEFT)) {
             $this->input->setCursorMode(CursorMode::DISABLED);
         }
-
-        // update interpolation states
-        $camera->finalizeFrame();
 
         if ($input->isKeyPressed(Key::W)) {
             $camera->transform->moveForward(0.5);
@@ -329,6 +327,8 @@ class VISUCameraSystem implements SystemInterface
             view: $viewMatrix,
             resolutionX: $renderTarget->width(),
             resolutionY: $renderTarget->height(),
+            contentScaleX: $renderTarget->contentScaleX,
+            contentScaleY: $renderTarget->contentScaleY,
         );
     }
 

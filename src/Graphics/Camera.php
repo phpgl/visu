@@ -110,8 +110,8 @@ class Camera
         else {
             $this->projectionMatrixAlloc->ortho(
                 0.0,
-                $renderTarget->width(),
-                $renderTarget->height(),
+                $renderTarget->width() / $renderTarget->contentScaleX,
+                $renderTarget->height() / $renderTarget->contentScaleY,
                 0.0,
                 $this->nearPlane, 
                 $this->farPlane
