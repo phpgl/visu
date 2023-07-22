@@ -11,3 +11,12 @@ It comes with high level abstractions for common tasks but also allows you to ac
 ## Features 
 
  * Shader loading with macros and inclues
+
+## Usage 
+
+Want to build something with VISU?
+
+Checkout the starter project:
+https://github.com/phpgl/visu-starter
+
+
