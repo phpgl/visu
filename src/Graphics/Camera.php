@@ -54,6 +54,13 @@ class Camera
     public float $fieldOfView = 45.0;
 
     /**
+     * Fixed world height in units for orthographic static world projection mode
+     * 
+     * @var float
+     */
+    public float $staticWorldHeight = 100.0;
+
+    /**
      * Internal holder for the projection view matrix
      */
     private Mat4 $projectionMatrixAlloc;
@@ -107,7 +114,7 @@ class Camera
                 $this->farPlane
             );
         }
-        else {
+        elseif ($this->projectionMode === CameraProjectionMode::orthographicScreen) {
             $this->projectionMatrixAlloc->ortho(
                 0.0,
                 $renderTarget->width() / $renderTarget->contentScaleX,
@@ -117,8 +124,80 @@ class Camera
                 $this->farPlane
             );
         }
+        elseif ($this->projectionMode === CameraProjectionMode::orthographicWorld) {
+            $halfWidth = ($renderTarget->width() / $renderTarget->contentScaleX) * 0.5;
+            $halfHeight = ($renderTarget->height() / $renderTarget->contentScaleY) * 0.5;
+            $this->projectionMatrixAlloc->ortho(
+                -$halfWidth,
+                $halfWidth,
+                -$halfHeight,
+                $halfHeight,
+                $this->nearPlane, 
+                $this->farPlane
+            );
+        }
+        elseif ($this->projectionMode === CameraProjectionMode::orthographicStaticWorld) {
+            $halfHeight = $this->staticWorldHeight * 0.5;
+            $aspectRatio = $renderTarget->width() / $renderTarget->height();
+            $halfWidth = $halfHeight * $aspectRatio;
+            
+            $this->projectionMatrixAlloc->ortho(
+                -$halfWidth,
+                $halfWidth,
+                -$halfHeight,
+                $halfHeight,
+                $this->nearPlane, 
+                $this->farPlane
+            );
+        }
+        else {
+            throw new \Exception('Unknown projection mode');
+        }
 
         return $this->projectionMatrixAlloc->copy();
+    }
+
+    /**
+     * Returns a viewport for the given render target
+     * This will only work for orthographic projection modes.
+     * 
+     * @param RenderTarget $renderTarget The render target to calculate the viewport for
+     * @return Viewport The calculated viewport
+     */
+    public function getViewport(RenderTarget $renderTarget) : Viewport
+    {
+        if ($this->projectionMode === CameraProjectionMode::orthographicScreen) {
+            return new Viewport(
+                0.0,
+                $renderTarget->width() / $renderTarget->contentScaleX,
+                $renderTarget->height() / $renderTarget->contentScaleY,
+                0.0,
+            );
+        }
+        elseif ($this->projectionMode === CameraProjectionMode::orthographicWorld) {
+            $halfWidth = ($renderTarget->width() / $renderTarget->contentScaleX) * 0.5;
+            $halfHeight = ($renderTarget->height() / $renderTarget->contentScaleY) * 0.5;
+            return new Viewport(
+                -$halfWidth,
+                $halfWidth,
+                -$halfHeight,
+                $halfHeight,
+            );
+        }
+        elseif ($this->projectionMode === CameraProjectionMode::orthographicStaticWorld) {
+            $halfHeight = $this->staticWorldHeight * 0.5;
+            $aspectRatio = $renderTarget->width() / $renderTarget->height();
+            $halfWidth = $halfHeight * $aspectRatio;
+            return new Viewport(
+                -$halfWidth,
+                $halfWidth,
+                -$halfHeight,
+                $halfHeight,
+            );
+        }
+        else {
+            throw new \Exception('Unknown or unsupported projection mode');
+        }
     }
 
     /**

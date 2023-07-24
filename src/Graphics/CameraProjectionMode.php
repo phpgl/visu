@@ -4,5 +4,7 @@ namespace VISU\Graphics;
 
 enum CameraProjectionMode {
     case perspective;
-    case orthographic;
+    case orthographicWorld;
+    case orthographicScreen;
+    case orthographicStaticWorld;
 }

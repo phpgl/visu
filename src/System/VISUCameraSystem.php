@@ -7,6 +7,7 @@ use VISU\ECS\EntitiesInterface;
 use VISU\ECS\SystemInterface;
 use VISU\Exception\VISUException;
 use VISU\Graphics\Camera;
+use VISU\Graphics\CameraProjectionMode;
 use VISU\Graphics\Rendering\Pass\CameraData;
 use VISU\Graphics\Rendering\RenderContext;
 use VISU\Graphics\RenderTarget;
@@ -329,6 +330,7 @@ class VISUCameraSystem implements SystemInterface
             resolutionY: $renderTarget->height(),
             contentScaleX: $renderTarget->contentScaleX,
             contentScaleY: $renderTarget->contentScaleY,
+            viewport: $camera->projectionMode !== CameraProjectionMode::perspective ? $camera->getViewport($renderTarget) : null,
         );
     }
 

@@ -6,6 +6,7 @@ use GL\Math\Mat4;
 use GL\Math\Vec2;
 use VISU\Graphics\Camera;
 use VISU\Graphics\Rendering\RenderResource;
+use VISU\Graphics\Viewport;
 
 class CameraData
 {
@@ -53,6 +54,11 @@ class CameraData
     public readonly float $contentScaleY;
 
     /**
+     * Viewport instance for orthographic projections
+     */
+    public readonly ?Viewport $viewport;
+
+    /**
      * Constructor
      */
     public function __construct(
@@ -63,7 +69,8 @@ class CameraData
         int $resolutionX,
         int $resolutionY,
         float $contentScaleX,
-        float $contentScaleY
+        float $contentScaleY,
+        ?Viewport $viewport = null
     )
     {
         $this->frameCamera = $frameCamera;
@@ -74,6 +81,7 @@ class CameraData
         $this->resolutionY = $resolutionY;
         $this->contentScaleX = $contentScaleX;
         $this->contentScaleY = $contentScaleY;
+        $this->viewport = $viewport;
     }
 
     /**
