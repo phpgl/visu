@@ -34,6 +34,11 @@ class CameraData
     public readonly Mat4 $view;
 
     /**
+     * Compensation / alpha value for the current frame
+     */
+    public readonly float $compensation;
+
+    /**
      * Current rendering resolution (X / width)
      */
     public readonly int $resolutionX;
@@ -66,6 +71,7 @@ class CameraData
         Camera $renderCamera,
         Mat4 $projection,
         Mat4 $view,
+        float $compensation,
         int $resolutionX,
         int $resolutionY,
         float $contentScaleX,
@@ -77,6 +83,7 @@ class CameraData
         $this->renderCamera = $renderCamera;
         $this->projection = $projection;
         $this->view = $view;
+        $this->compensation = $compensation;
         $this->resolutionX = $resolutionX;
         $this->resolutionY = $resolutionY;
         $this->contentScaleX = $contentScaleX;

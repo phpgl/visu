@@ -326,6 +326,7 @@ class VISUCameraSystem implements SystemInterface
             renderCamera: $camera,
             projection: $projectionMatrix,
             view: $viewMatrix,
+            compensation: $compensation,
             resolutionX: $renderTarget->width(),
             resolutionY: $renderTarget->height(),
             contentScaleX: $renderTarget->contentScaleX,

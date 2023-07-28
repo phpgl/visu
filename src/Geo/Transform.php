@@ -88,6 +88,13 @@ class Transform
     public ?int $parent = null;
 
     /**
+     * Prvious transform
+     * Can story a copy of the current transform before it was modified.
+     * This can be used for interpolation of the transformation between frames.
+     */
+    private ?Transform $previous = null;
+
+    /**
      * Constructor
      */
     public function __construct()
@@ -413,6 +420,78 @@ class Transform
     public function lookIn(Vec3 $direction) : void
     {
         $this->lookAt($this->position + $direction);
+    }
+
+    /**
+     * Calling this function will store a copy of the current transform as the previous transform.
+     */
+    public function storePrevious() : void
+    {
+        $this->previous = new Transform();
+        $this->previous->position = $this->position->copy();
+        $this->previous->orientation = $this->orientation->copy();
+        $this->previous->scale = $this->scale->copy();
+    }
+
+    /**
+     * Resets the previous transform.
+     */
+    public function resetPrevious() : void
+    {
+        $this->previous = null;
+    }
+
+    /**
+     * Returns the interpolated position between the previous and current transform.
+     */
+    public function getInterpolatedPosition(float $alpha) : Vec3
+    {
+        if ($this->previous === null) {
+            return $this->position;
+        }
+
+        return Vec3::lerp($this->previous->position, $this->position, $alpha);
+    }
+
+    /**
+     * Returns the interpolated orientation between the previous and current transform.
+     */
+    public function getInterpolatedOrientation(float $alpha) : Quat
+    {
+        if ($this->previous === null) {
+            return $this->orientation;
+        }
+
+        return Quat::slerp($this->previous->orientation, $this->orientation, $alpha);
+    }
+
+    /**
+     * Returns the interpolated scale between the previous and current transform.
+     */
+    public function getInterpolatedScale(float $alpha) : Vec3
+    {
+        if ($this->previous === null) {
+            return $this->scale;
+        }
+
+        return Vec3::lerp($this->previous->scale, $this->scale, $alpha);
+    }
+
+    /**
+     * Returns a interpolated matrix between the previous and current transform.
+     */
+    public function getInterpolatedLocalMatrix(float $alpha) : Mat4
+    {
+        if ($this->previous === null) {
+            return $this->getLocalMatrix();
+        }
+
+        $matrix = new Mat4();
+        $matrix->translate(Vec3::lerp($this->previous->position, $this->position, $alpha));
+        $matrix = Mat4::multiplyQuat($matrix, Quat::slerp($this->previous->orientation, $this->orientation, $alpha));
+        $matrix->scale(Vec3::lerp($this->previous->scale, $this->scale, $alpha));
+
+        return $matrix;
     }
 
     public function __clone() 
