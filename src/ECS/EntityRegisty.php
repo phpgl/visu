@@ -176,6 +176,20 @@ class EntityRegisty implements EntitiesInterface
     }
 
     /**
+     * Dettaches all components from the given entity
+     *
+     * @param int                    $entity The entitiy ID of the component to be detached
+     */
+    public function detachAll(int $entity) : void
+    {
+        foreach($this->entityComponents[$entity] as $componentClassName => $component) {
+            unset($this->components[$componentClassName][$entity]);
+        }
+
+        unset($this->entityComponents[$entity]);
+    }
+
+    /**
      * Returns a component for the given entity 
      * ! Warning: This method does no error checking and assumes you made sure the component needs to actually exist!
      * 

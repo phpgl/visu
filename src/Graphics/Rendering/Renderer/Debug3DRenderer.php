@@ -3,6 +3,7 @@
 namespace VISU\Graphics\Rendering\Renderer;
 
 use GL\Buffer\FloatBuffer;
+use GL\Math\Vec2;
 use GL\Math\Vec3;
 use VISU\Graphics\GLState;
 use VISU\Graphics\Rendering\Pass\CallbackPass;
@@ -126,6 +127,19 @@ class Debug3DRenderer
     public static function aabb(Vec3 $origin, Vec3 $min, Vec3 $max, Vec3 $color) : void
     {
         static::getGlobalInstance()->addAABB($origin, $min, $max, $color);
+    }
+
+    /**
+     * Draws a 2D axis aligned bounding box
+     * 
+     * @param Vec2 $origin The origin of the box
+     * @param Vec2 $min The minimum point of the box
+     * @param Vec2 $max The maximum point of the box
+     * @param Vec3 $color The color of the box
+     */
+    public static function aabb2D(Vec2 $origin, Vec2 $min, Vec2 $max, Vec3 $color) : void
+    {
+        static::getGlobalInstance()->addAABB2D($origin, $min, $max, $color);
     }
 
     /**
@@ -336,6 +350,22 @@ class Debug3DRenderer
         $this->addLine($origin + new Vec3($min->x, $min->y, $max->z), $origin + new Vec3($min->x, $max->y, $max->z), $color);
         $this->addLine($origin + new Vec3($max->x, $min->y, $min->z), $origin + new Vec3($max->x, $max->y, $min->z), $color);
         $this->addLine($origin + new Vec3($max->x, $min->y, $min->z), $origin + new Vec3($max->x, $min->y, $max->z), $color);
+    }
+
+    /**
+     * Draws a 2D axis aligned bounding box
+     * 
+     * @param Vec2 $origin The origin of the box
+     * @param Vec2 $min The minimum point of the box
+     * @param Vec2 $max The maximum point of the box
+     * @param Vec3 $color The color of the box
+     */
+    public function addAABB2D(Vec2 $origin, Vec2 $min, Vec2 $max, Vec3 $color) : void
+    {
+        $this->addLine(new Vec3($origin->x + $min->x, $origin->y + $min->y, 0), new Vec3($origin->x + $max->x, $origin->y + $min->y, 0), $color);
+        $this->addLine(new Vec3($origin->x + $min->x, $origin->y + $min->y, 0), new Vec3($origin->x + $min->x, $origin->y + $max->y, 0), $color);
+        $this->addLine(new Vec3($origin->x + $max->x, $origin->y + $max->y, 0), new Vec3($origin->x + $min->x, $origin->y + $max->y, 0), $color);
+        $this->addLine(new Vec3($origin->x + $max->x, $origin->y + $max->y, 0), new Vec3($origin->x + $max->x, $origin->y + $min->y, 0), $color);
     }
 
     /**

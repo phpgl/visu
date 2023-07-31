@@ -72,6 +72,13 @@ interface EntitiesInterface
     public function detach(int $entity, string $componentClassName) : void;
 
     /**
+     * Dettaches all components from the given entity
+     *
+     * @param int                    $entity The entitiy ID of the component to be detached
+     */
+    public function detachAll(int $entity) : void;
+
+    /**
      * Returns a component for the given entity 
      * 
      * @template T
