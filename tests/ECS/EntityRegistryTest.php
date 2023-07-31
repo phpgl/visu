@@ -130,7 +130,7 @@ class EntityRegistryTest extends \PHPUnit\Framework\TestCase
         $entites->attach($e2, new \Exception('e2'));
         $entites->attach($e2, new \Error('e2'));
 
-        $buffer = $entites->serialize();
+        $buffer = $entites->serialize([\Exception::class, \Error::class]);
 
         $this->assertIsString($buffer);
 
