@@ -90,9 +90,10 @@ class Dispatcher implements DispatcherInterface
      * 
      * Don't forget to destroy the queue with `destroySignalQueue` when you are done with it.
      * 
-     * @param string        $key
+     * @param string     $key
      * @param int           $priority
-     * @return SignalQueue
+     * 
+     * @return SignalQueue<Signal>
      */
     public function createSignalQueue(string $key, int $priority = 0) : SignalQueue
     {
@@ -114,14 +115,15 @@ class Dispatcher implements DispatcherInterface
      * @param string        $key
      * @param int           $size The maximum size of the queue
      * @param int           $priority
-     * @return SignalQueue
+     * 
+     * @return SignalQueue<Signal>
      */
     public function createLimitedSignalQueue(string $key, int $size = 1024, int $priority = 0) : SignalQueue
     {
         $queue = new SignalQueueLimited($key, $this->handlerId++);
         $queue->maxSignals = $size;
 
-        $this->register($key, function(Signal $signal) use($queue, $size) {
+        $this->register($key, function(Signal $signal) use($queue) {
             $queue->push($signal);
         }, $priority, $queue->handlerId);
 
@@ -131,7 +133,7 @@ class Dispatcher implements DispatcherInterface
     /**
      * Desroys a signal queue and removes the handler bound to it.
      * 
-     * @param SignalQueue $queue
+     * @param SignalQueue<Signal> $queue
      * @return void
      */
     public function destroySignalQueue(SignalQueue $queue) : void
@@ -232,6 +234,8 @@ class Dispatcher implements DispatcherInterface
 
     /**
      * Override debug info as this functions has references all over the place.
+     * 
+     * @return array<string, mixed>
      */
     public function __debugInfo() : array
     {

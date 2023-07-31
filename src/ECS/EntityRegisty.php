@@ -393,6 +393,9 @@ class EntityRegisty implements EntitiesInterface
     {
         list($this->entityPointer, $this->freelist, $componentsData) = unserialize($buffer);
 
+        /** @var array<int, array<class-string, string>> */
+        $componentsData = $componentsData ?? [];
+
         $componentNames = [];
 
         $this->entityComponents = [];

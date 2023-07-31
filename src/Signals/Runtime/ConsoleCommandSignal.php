@@ -14,6 +14,8 @@ class ConsoleCommandSignal extends Signal
 
     /**
      * The command parts simply split by spaces
+     * 
+     * @var array<string>
      */
     public readonly array $commandParts;
 

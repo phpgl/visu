@@ -4,6 +4,9 @@ namespace VISU\Signal;
 
 /**
  * The same as SignalQueue, but with a maximum number of signals to queue
+ * 
+ * @template T of Signal
+ * @extends SignalQueue<T>
  */
 class SignalQueueLimited extends SignalQueue
 {

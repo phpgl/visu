@@ -8,12 +8,12 @@ use VISU\ECS\Exception\EntityRegistryException;
 
 class EntityRegistryTest extends \PHPUnit\Framework\TestCase
 {
-    public function testConstruct()
+    public function testConstruct() : void
     {
         $this->assertInstanceOf(EntityRegisty::class, new EntityRegisty);
     }
 
-    public function testCreateAndValid()
+    public function testCreateAndValid() : void
     {
         $entites = new EntityRegisty();
 
@@ -28,7 +28,7 @@ class EntityRegistryTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($entites->valid(42));
     }
 
-    public function testNotRegisterComponents()
+    public function testNotRegisterComponents() : void
     {
         $this->expectException(EntityRegistryException::class);
 
@@ -37,7 +37,7 @@ class EntityRegistryTest extends \PHPUnit\Framework\TestCase
         $entites->attach($entity, new \Error('test'));
     }
 
-    public function testAttachAndDetach()
+    public function testAttachAndDetach() : void
     {
         $entites = new EntityRegisty();
         $entites->registerComponent(\Error::class);
@@ -56,7 +56,7 @@ class EntityRegistryTest extends \PHPUnit\Framework\TestCase
         $this->assertFalse($entites->has($entity, \Error::class));
     }
 
-    public function testView()
+    public function testView() : void
     {
         $entites = new EntityRegisty();
         $entites->registerComponent(\Exception::class);
@@ -93,7 +93,7 @@ class EntityRegistryTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expectedExceptionBuffer, $actualExceptionBuffer);
     }
 
-    public function testListWith()
+    public function testListWith() : void
     {
         $entites = new EntityRegisty();
         $entites->registerComponent(\Exception::class);
@@ -117,7 +117,7 @@ class EntityRegistryTest extends \PHPUnit\Framework\TestCase
     }
 
 
-    public function testSerialization()
+    public function testSerialization() : void
     {
         $entites = new EntityRegisty();
         $entites->registerComponent(\Exception::class);

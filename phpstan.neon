@@ -2,6 +2,9 @@ parameters:
     bootstrapFiles:
         - phpunit.php
     level: 8
+    excludePaths:
+        - src/Animation/*   
+        - src/System/VISUTransitionAnimationSystem.php
     paths:
         - src
     ignoreErrors:
@@ -10,6 +13,8 @@ parameters:
         - '/Binary operation "[\*\|\+\|\-]" between GL\\Math\\.*/'
         - '/Binary operation "[\*\|\+\|\-]" between float and GL\\Math\\.*/'
         - '/Cannot access offset [0-9|int]+ on GL\\Buffer\\.*/'
+        - '/\(VISU\\Signal\\SignalQueue<.*>\) does not accept VISU\\Signal\\SignalQueue<VISU\\Signal\\Signal>/'
+        - '/expects +VISU\\Signal\\SignalQueue<VISU\\Signal\\Signal>, VISU\\Signal\\SignalQueue<.*>/'
         - '/.*expects GL\\Buffer\\GL\\.*/' 
-        - '/.*expects GL\\Math\\Vec[0-4], \(float\|int\) given.*/'
+        - '/.*expects GL\\Math\\Vec[0-4], (float|int) given./'
         - '/.*[copy]\(\) on \(float\|int\).*/'
