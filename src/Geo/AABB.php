@@ -58,7 +58,7 @@ class AABB
     /**
      * Returns the center of the AABB
      */
-    public function getCenter() : Vec3
+    public function getCenter() : float|Vec3
     {
         return ($this->min + $this->max) * 0.5;
     }

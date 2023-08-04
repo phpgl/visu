@@ -70,7 +70,7 @@ class AABB2D
     /**
      * Returns the center of the AABB
      */
-    public function getCenter() : Vec2
+    public function getCenter() : float|Vec2
     {
         return ($this->min + $this->max) * 0.5;
     }
