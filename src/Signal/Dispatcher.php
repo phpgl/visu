@@ -144,11 +144,11 @@ class Dispatcher implements DispatcherInterface
     /**
      * Remove a signal handler
      *
-     * @param string        $key
-     * @param int           $id
+     * @param string $key
+     * @param integer|null $id
      * @return void
      */
-    public function unregister(string $key, int $id) : void
+    public function unregister(string $key, ?int $id) : void
     {
         if (isset($this->signalHandlers[$key][$id])) {
             unset($this->signalHandlers[$key][$id]);

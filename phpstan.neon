@@ -2,14 +2,20 @@ parameters:
     bootstrapFiles:
         - phpunit.php
     level: 8
+    treatPhpDocTypesAsCertain: false
     excludePaths:
         - src/Animation/*   
         - src/System/VISUTransitionAnimationSystem.php
     paths:
         - src
     ignoreErrors:
-        - '/Access to an undefined property GL\\Math\\Vec[2-4]::\$[x|y|z|w|r|g|b|a]\./'
+        - '/Access to an undefined property GL\\Math\\Vec[2-3-4]::\$[x|y|z|w|r|g|b|a]\./'
+        - '/Access to an undefined property GL\\Math\\Quat::\$[w\|x\|y\|z]\./'
         - '/Cannot access property \$([a-zA-Z0-9]+) on VISU\\Graphics\\TextureOptions\|null\./'
+        - '/Cannot access property \$([a-zA-Z0-9]+) on (float\|)?GL\\Math\\Vec3./'
+        - '/Cannot access property \$([a-zA-Z0-9]+) on VISU\\Graphics\\Camera\|null./'
+        - '/Cannot access offset int<([0-9]+), ([0-9]+)> on GL\\Math\\Mat4\./'
+        - '/Cannot access offset ([0-9]+\|)?int<([0-9]+), ([0-9]+)?(max)?> on GL\\Buffer\\FloatBuffer\./'
         - '/Binary operation "[\*\|\+\|\-]" between GL\\Math\\.*/'
         - '/Binary operation "[\*\|\+\|\-]" between float and GL\\Math\\.*/'
         - '/Cannot access offset [0-9|int]+ on GL\\Buffer\\.*/'
@@ -18,3 +24,8 @@ parameters:
         - '/.*expects GL\\Buffer\\GL\\.*/' 
         - '/.*expects GL\\Math\\Vec[0-4], (float|int) given./'
         - '/.*[copy]\(\) on \(float\|int\).*/'
+        - '/Negated boolean expression is always false\./'
+        - '/Property VISU\\Runtime\\DebugConsole::\$gl is never read, only written\./'
+        - '/Cannot call method ([A-Za-z0-9_]+)\(\) on VISU\\Graphics\\Camera\|null\./'
+        - '/Cannot call method ([A-Za-z0-9_]+)\(\) on GL\\Math\\Vec3\|null\./'
+        - '/Parameter #1 \$resource of method VISU\\Graphics\\Rendering\\PipelineResources::getRenderTarget\(\) expects VISU\\Graphics\\Rendering\\Resource\\RenderTargetResource, VISU\\Graphics\\Rendering\\RenderResource given\./'

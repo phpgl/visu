@@ -43,16 +43,22 @@ class DebugConsole
 
     /**
      * Is the console currently enabled?
+     *
+     * @var boolean
      */
     private $enabled = false;
 
     /**
      * The string that is currently beeing written to
+     * 
+     * @var string
      */
     private $inputLine = "";
 
     /**
      * The input line history
+     * 
+     * @var array<string>
      */
     private array $inputLineHistory = [];
 
@@ -138,8 +144,9 @@ class DebugConsole
      * This will simply append it to the input line history
      * 
      * @param string $line
+     * @return void
      */
-    public function writeLine(string $line)
+    public function writeLine(string $line): void
     {
         $this->inputLineHistory[] = $line;
         $this->inputLineHistoryIndex = count($this->inputLineHistory);
@@ -147,8 +154,10 @@ class DebugConsole
 
     /**
      * Keyboard event handler
+     * 
+     * @return void
      */
-    public function handleKeyboardInputSignal(KeySignal $signal)
+    public function handleKeyboardInputSignal(KeySignal $signal): void
     {
         // if the console is enabled we need to handle some special commands
         // like backspace and enter
@@ -212,8 +221,10 @@ class DebugConsole
 
     /**
      * Char input handler
+     * 
+     * @return void
      */
-    public function handleKeyboardCharSignal(CharSignal $signal)
+    public function handleKeyboardCharSignal(CharSignal $signal): void
     {
         $this->inputLine .= $signal->getString();
     }
@@ -221,8 +232,11 @@ class DebugConsole
     /**
      * Handles rendering of the scene, here you can attach additional render passes,
      * modify the render pipeline or customize rendering related data.
-     * 
-     * @param RenderContext $context
+     *
+     * @param RenderPipeline $pipeline
+     * @param PipelineResources $resources
+     * @param RenderTargetResource $rt
+     * @return void
      */
     public function attachPass(RenderPipeline $pipeline, PipelineResources $resources, RenderTargetResource $rt) : void
     {
@@ -279,7 +293,7 @@ class DebugConsole
         $height = $this->debugTextRenderer->lineHeight * $target->contentScaleX * count($historySlice);
 
         $this->debugTextRenderer->attachPass($pipeline, $rt, [
-            new DebugOverlayText($history, 10, $y - $height, new Vec3(1.0, 1.0, 1.0)),
+            new DebugOverlayText($history, 10, intval($y - $height), new Vec3(1.0, 1.0, 1.0)),
             new DebugOverlayText($text, 10, $y, new Vec3(1.0, 0.494, 0.459))
         ]);
     }

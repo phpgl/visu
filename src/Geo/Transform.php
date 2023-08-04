@@ -503,6 +503,12 @@ class Transform
         $this->matrix = unserialize(serialize($this->matrix));
     }
 
+    /**
+     * serialize
+     *
+     * @param Transform $transform
+     * @return array<mixed>
+     */
     public static function serialize(Transform $transform) : array
     {
         return [
@@ -513,6 +519,12 @@ class Transform
         ];
     }
 
+    /**
+     * unserialize
+     *
+     * @param array<mixed> $data
+     * @return Transform
+     */
     public static function unserialize(array $data) : Transform
     {
         $transform = new Transform();

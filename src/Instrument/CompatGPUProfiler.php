@@ -24,7 +24,7 @@ class CompatGPUProfiler implements ProfilerInterface
     /**
      * An array of query handles per scope
      * 
-     * @var array<string, array<array<int, int>>
+     * @var array<string, array<array<int, int>>>
      */
     private array $queries = [];
 
@@ -50,6 +50,8 @@ class CompatGPUProfiler implements ProfilerInterface
     /**
      * An array of scopes that have been sampled within the current frame
      * This array is generated based on the "startedScopes" array when finalize() is called
+     *
+     * @var array<string>
      */
     private array $sampledScopes = [];
 
@@ -105,6 +107,8 @@ class CompatGPUProfiler implements ProfilerInterface
 
     /**
      * Returns an array of sampled scopes for the current frame
+     * 
+     * @return array<string>
      */
     public function getSampledScopes() : array
     {
@@ -149,6 +153,8 @@ class CompatGPUProfiler implements ProfilerInterface
 
     /**
      * Returns the averages for each scope and metric
+     * 
+     * @return array<array<mixed>>
      */
     public function getAveragesPerScope() : array
     {
