@@ -25,6 +25,11 @@ class TextLabelRenderGroup
         public readonly string $fontHandle,
 
         /**
+         * Wherever this group is static or not.
+         */
+        public readonly bool $isStatic,
+
+        /**
          * Simple vertex array to store the transformed character vertices of the entire group.
          */
         public readonly BasicVertexArray $vertexArray

@@ -17,6 +17,7 @@ use VISU\Graphics\Rendering\Pass\CameraData;
 use VISU\Graphics\Rendering\PipelineContainer;
 use VISU\Graphics\Rendering\PipelineResources;
 use VISU\Graphics\Rendering\Renderer\TextLabelRenderer\TextLabel;
+use VISU\Graphics\Rendering\Renderer\TextLabelRenderer\TextLabelAlign;
 use VISU\Graphics\Rendering\Renderer\TextLabelRenderer\TextLabelRenderGroup;
 use VISU\Graphics\Rendering\RenderPass;
 use VISU\Graphics\Rendering\RenderPipeline;
@@ -81,11 +82,16 @@ class TextLabelRenderer
 
         uniform mat4 projection;
         uniform mat4 view;
+        uniform bool is_static;
 
         void main()
         {
             v_uv = vec2(a_uv.x, 1.0f - a_uv.y);
             v_color = a_color;
+            if (is_static) {
+                gl_Position = projection * vec4(a_position, 1.0f);
+                return;
+            }
             gl_Position = projection * view * vec4(a_position, 1.0f);
         }
         GLSL));
@@ -167,7 +173,13 @@ class TextLabelRenderer
      * Labels with the same render group will be rendered together in one draw call.
      * This means when you change only one label in a group, the entire group will be re-rendered and uploaded to the GPU.
      */
-    public function createLabel(string $text, ?string $fontHandle = null, $renderGroup = 'default', ?Transform $transform = null) : TextLabel
+    public function createLabel(
+        string $text, 
+        ?string $fontHandle = null, 
+        $renderGroup = 'default', 
+        ?Transform $transform = null, 
+        bool $isStatic = false
+    ) : TextLabel
     {
         if ($fontHandle === null) {
             $fontHandle = $this->getDefaultFontHandle();
@@ -177,10 +189,10 @@ class TextLabelRenderer
             throw new \Exception("Font with handle '$fontHandle' not loaded");
         }
 
-        $renderGroupHandle = $renderGroup . ':' . $fontHandle;
+        $renderGroupHandle = $renderGroup . ':' . $fontHandle . ':s' . (int) $isStatic;
 
         if (!isset($this->renderGroups[$renderGroupHandle])) {
-            $this->renderGroups[$renderGroupHandle] = new TextLabelRenderGroup($fontHandle, new BasicVertexArray($this->gl, [3, 2, 4]));
+            $this->renderGroups[$renderGroupHandle] = new TextLabelRenderGroup($fontHandle, $isStatic, new BasicVertexArray($this->gl, [3, 2, 4]));
         }
 
         if ($transform === null) {
@@ -223,7 +235,13 @@ class TextLabelRenderer
 
             // if the entity has no internal label state yet, create it
             if (!$entities->has($entity, TextLabel::class)) {
-                $internalLabel = $entities->attach($entity, $this->createLabel($dynamicLabel->text, $dynamicLabel->fontHandle, $dynamicLabel->renderGroup, $transform));
+                $internalLabel = $entities->attach($entity, $this->createLabel(
+                    $dynamicLabel->text, 
+                    $dynamicLabel->fontHandle, 
+                    $dynamicLabel->renderGroup, 
+                    $transform, 
+                    $dynamicLabel->isStatic
+                ));
             } else {
                 $internalLabel = $entities->get($entity, TextLabel::class);
             }
@@ -262,6 +280,19 @@ class TextLabelRenderer
             // fetch the matrix
             $matrix = $label->transform->getLocalMatrix();
 
+            // first we need to calculate the bounds of the text
+            // to be able to align it correctly
+            $textWidth = 0;
+            $textHeight = 0;
+            for($i = 0; $i < $textLen; $i++) 
+            {
+                $char = mb_substr($label->text, $i, 1);
+                if ($charData = $font->getCharacterForC($char)) {
+                    $textWidth += $charData->xAdvance * $scale;
+                    $textHeight = max($textHeight, $charData->height * $scale);
+                }
+            }
+
             // for every character in the text
             for($i = 0; $i < $textLen; $i++) 
             {
@@ -281,11 +312,21 @@ class TextLabelRenderer
                 }
 
                 // create 2 triangles for the character
-                // precalucalte the correct uv coordinates for the character
                 $xpos = $x + $charData->xOffset * $scale;
-                $ypos = $y + $charData->yOffset * $scale;
+                $ypos = $y + -$charData->yOffset * $scale;
                 $w = $charData->width * $scale;
-                $h = $charData->height * $scale;
+                $h = -$charData->height * $scale;
+
+                if ($label->align === TextLabelAlign::center) {
+                    $xpos -= $textWidth / 2;
+                } else if ($label->align === TextLabelAlign::right) {
+                    $xpos -= $textWidth;
+                }
+
+                // for now always align in vertical center
+                $ypos += $textHeight / 2;
+
+                // precalucalte the correct uv coordinates for the character
                 $uvX = (float) $charData->x / $font->textureWidth;
                 $uvY = (float) $charData->y / $font->textureHeight;
                 $uvW = (float) $charData->width / $font->textureWidth;
@@ -376,7 +417,7 @@ class TextLabelRenderer
                 // pipeline settings 
                 glDisable(GL_DEPTH_TEST);
                 glDisable(GL_BLEND);
-                glDisable(GL_CULL_FACE);
+                glEnable(GL_CULL_FACE);
                 
                 foreach($this->renderGroups as $renderGroup) 
                 {
@@ -385,6 +426,8 @@ class TextLabelRenderer
                     }
 
                     $this->loadedFontTextures[$renderGroup->fontHandle]->bind(GL_TEXTURE0);
+
+                    $this->shaderProgram->setUniform1i('is_static', $renderGroup->isStatic);
 
                     $renderGroup->vertexArray->bind();
                     $renderGroup->vertexArray->drawAll();

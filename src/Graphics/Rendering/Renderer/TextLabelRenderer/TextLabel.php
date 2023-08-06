@@ -18,6 +18,17 @@ class TextLabel
     public Vec4 $color;
 
     /**
+     * Alignment of the text.
+     */
+    public TextLabelAlign $align = TextLabelAlign::center;
+
+    /**
+     * Is this label static?
+     * Meaing the label is not influenced by the camera transform.
+     */
+    public bool $isStatic = false;
+
+    /**
      * Constructor
      * 
      * @param Transform $transform 
