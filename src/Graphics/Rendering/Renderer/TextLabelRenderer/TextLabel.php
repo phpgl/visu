@@ -15,7 +15,7 @@ class TextLabel
     /**
      * The color of the text.
      */
-    public Vec4 $color;
+    public ?Vec4 $color;
 
     /**
      * Alignment of the text.
@@ -81,7 +81,7 @@ class TextLabel
     /**
      * Updates the color and sets the dirty flag.
      */
-    public function updateColor(Vec4 $color) : void
+    public function updateColor(?Vec4 $color) : void
     {
         if ($this->color === $color) {
             return;

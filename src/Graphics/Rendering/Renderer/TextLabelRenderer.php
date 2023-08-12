@@ -137,7 +137,7 @@ class TextLabelRenderer
         $fontTextureOpt = new TextureOptions;
         $fontTextureOpt->minFilter = GL_NEAREST;
         $fontTextureOpt->magFilter = GL_NEAREST;
-        $this->loadedFontTextures[$handle]->loadFromFile($fontAtlas->texturePath, $fontTextureOpt);
+        $this->loadedFontTextures[$handle]->loadFromFile((string)$fontAtlas->texturePath, $fontTextureOpt);
     }
 
     /**
@@ -176,7 +176,7 @@ class TextLabelRenderer
     public function createLabel(
         string $text, 
         ?string $fontHandle = null, 
-        $renderGroup = 'default', 
+        ?string $renderGroup = 'default', 
         ?Transform $transform = null, 
         bool $isStatic = false
     ) : TextLabel

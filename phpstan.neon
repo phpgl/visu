@@ -31,3 +31,5 @@ parameters:
         - '/Parameter #1 \$resource of method VISU\\Graphics\\Rendering\\PipelineResources::getRenderTarget\(\) expects VISU\\Graphics\\Rendering\\Resource\\RenderTargetResource, VISU\\Graphics\\Rendering\\RenderResource given\./'
         - '/Method VISU\\Geo\\AABB(2D)?::getCenter\(\) should return GL\\Math\\Vec[2-3] but returns float\./'
         - '/Parameter #2 \$destination of method VISU\\Graphics\\Rendering\\Renderer\\Debug3DRenderer::addLine\(\) expects GL\\Math\\Vec3, \(float\|int\) given\./'
+        - '/(.*) has an unused parameter \$([0-9a-zA-Z_]+)/'
+        - '/Parameter #2 \$value of method VISU\\Graphics\\ShaderProgram::setUniform1i\(\) expects (int|float), bool given\./'
