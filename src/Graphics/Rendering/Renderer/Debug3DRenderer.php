@@ -300,12 +300,12 @@ class Debug3DRenderer
     /**
      * Draws a line from the given origin to the given destination
      *
-     * @param Vec3|float $origin
-     * @param Vec3|float $destination
-     * @param Vec3|float $color
+     * @param Vec3 $origin
+     * @param Vec3 $destination
+     * @param Vec3 $color
      * @return void
      */
-    public function addLine(Vec3|float $origin, Vec3|float $destination, Vec3|float $color) : void
+    public function addLine(Vec3 $origin, Vec3 $destination, Vec3 $color) : void
     {
         $this->vertices->pushArray([
             $origin->x, $origin->y, $origin->z,  // vertex 1 position

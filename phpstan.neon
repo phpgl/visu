@@ -29,3 +29,5 @@ parameters:
         - '/Cannot call method ([A-Za-z0-9_]+)\(\) on VISU\\Graphics\\Camera\|null\./'
         - '/Cannot call method ([A-Za-z0-9_]+)\(\) on GL\\Math\\Vec3\|null\./'
         - '/Parameter #1 \$resource of method VISU\\Graphics\\Rendering\\PipelineResources::getRenderTarget\(\) expects VISU\\Graphics\\Rendering\\Resource\\RenderTargetResource, VISU\\Graphics\\Rendering\\RenderResource given\./'
+        - '/Method VISU\\Geo\\AABB(2D)?::getCenter\(\) should return GL\\Math\\Vec[2-3] but returns float\./'
+        - '/Parameter #2 \$destination of method VISU\\Graphics\\Rendering\\Renderer\\Debug3DRenderer::addLine\(\) expects GL\\Math\\Vec3, \(float\|int\) given\./'
