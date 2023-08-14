@@ -1,9 +1,15 @@
-site_name: VISU
+site_name: VISU / Make PHP Games
 repo_url: https://github.com/phpgl/visu
 site_url: https://visu.phpgl.net
 use_directory_urls: false
 nav:
   - Home: index.md
+  - Getting Started:
+    - Installation & Requirements: getting-started/installation.md
+    - Project Setup: getting-started/project-setup.md
+  - User Guide: 'user-guide/'
+  - Games: 'games/'
+  - PHP-GLFW →: https://phpgl.net
 plugins:
   - search
   - include_dir_to_nav
@@ -12,7 +18,7 @@ plugins:
 theme:
   name: material
   custom_dir: docs/overrides
-  logo: ./logo_phpglfw_s.png
+  logo: ./logo_s.png
   font:
     text: Source Sans Pro
   palette:
@@ -20,11 +26,17 @@ theme:
     primary: black
   features:
     - navigation.tabs
+    - navigation.footer
 extra_css:
   - stylesheets/extra.css
-copyright: Copyright &copy; 2022 Mario Döring / @see <a target="_blank" href="https://github.com/phpgl/visu/blob/master/LICENSE">LICENSE</a>
+copyright: Copyright &copy; 2023 Mario Döring / @see <a target="_blank" href="https://github.com/phpgl/visu/blob/master/LICENSE">LICENSE</a>
 extra:
   generator: false
+  social:
+  - icon: fontawesome/brands/github 
+    link: https://github.com/phpgl
+  - icon: fontawesome/brands/twitter
+    link: https://twitter.com/mario_deluna
 markdown_extensions:
   - attr_list
   - md_in_html
@@ -34,6 +46,9 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.extra
   - pymdownx.tabbed
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
   - pymdownx.superfences:
       custom_fences:
         - name: mermaid
