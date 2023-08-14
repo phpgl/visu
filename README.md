@@ -16,6 +16,8 @@ It comes with high level abstractions for common tasks but also allows you to ac
 
 Want to build something with VISU?
 
+Check out the docs: visu.phpgl.net/
+
 Checkout the starter project:
 https://github.com/phpgl/visu-starter
 
