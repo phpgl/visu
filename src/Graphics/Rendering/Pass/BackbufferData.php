@@ -2,9 +2,9 @@
 
 namespace VISU\Graphics\Rendering\Pass;
 
-use VISU\Graphics\Rendering\RenderResource;
+use VISU\Graphics\Rendering\Resource\RenderTargetResource;
 
 class BackbufferData
 {
-    public RenderResource $target;
+    public RenderTargetResource $target;
 }

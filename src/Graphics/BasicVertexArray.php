@@ -111,10 +111,10 @@ class BasicVertexArray
     /**
      * Draws all vertices
      */
-    public function drawAll() : void
+    public function drawAll(int $renderMode = GL_TRIANGLES) : void
     {
         $this->bind();
-        glDrawArrays(GL_TRIANGLES, 0, $this->vertexCount);
+        glDrawArrays($renderMode, 0, $this->vertexCount);
     }
 
     /**
@@ -123,9 +123,9 @@ class BasicVertexArray
      * @param int $offset The offset
      * @param int $count The count
      */
-    public function draw(int $offset, int $count) : void
+    public function draw(int $offset, int $count, int $renderMode = GL_TRIANGLES) : void
     {
         $this->bind();
-        glDrawArrays(GL_TRIANGLES, $offset, $count);
+        glDrawArrays($renderMode, $offset, $count);
     }
 }

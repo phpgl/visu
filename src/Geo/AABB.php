@@ -64,6 +64,78 @@ class AABB
     }
 
     /**
+     * Extends the current AABB to include the given AABB
+     */
+    public function extend(AABB $aabb) : void
+    {
+        $this->min->x = min($this->min->x, $aabb->min->x);
+        $this->min->y = min($this->min->y, $aabb->min->y);
+        $this->min->z = min($this->min->z, $aabb->min->z);
+
+        $this->max->x = max($this->max->x, $aabb->max->x);
+        $this->max->y = max($this->max->y, $aabb->max->y);
+        $this->max->z = max($this->max->z, $aabb->max->z);
+    }
+
+    /**
+     * Returns true if the given AABB intersects with the current AABB
+     */
+    public function intersects(AABB $aabb) : bool
+    {
+        return !(
+            $this->min->x > $aabb->max->x ||
+            $this->max->x < $aabb->min->x ||
+            $this->min->y > $aabb->max->y ||
+            $this->max->y < $aabb->min->y ||
+            $this->min->z > $aabb->max->z ||
+            $this->max->z < $aabb->min->z
+        );
+    }
+
+    /**
+     * Returns true if the given point is inside the current AABB
+     */
+    public function contains(Vec3 $point) : bool
+    {
+        return !(
+            $point->x < $this->min->x ||
+            $point->x > $this->max->x ||
+            $point->y < $this->min->y ||
+            $point->y > $this->max->y ||
+            $point->z < $this->min->z ||
+            $point->z > $this->max->z
+        );
+    }
+
+    /**
+     * Returns a Vec3 representing a translation that could be applied to the current AABB to make it not intersect with the given AABB
+     */
+    public function getTranslationToAvoidIntersection(AABB $aabb) : Vec3
+    {
+        $translation = new Vec3(0, 0, 0);
+
+        if ($this->max->x > $aabb->min->x && $this->min->x < $aabb->min->x) {
+            $translation->x = $aabb->min->x - $this->max->x;
+        } else if ($this->min->x < $aabb->max->x && $this->max->x > $aabb->max->x) {
+            $translation->x = $aabb->max->x - $this->min->x;
+        }
+
+        if ($this->max->y > $aabb->min->y && $this->min->y < $aabb->min->y) {
+            $translation->y = $aabb->min->y - $this->max->y;
+        } else if ($this->min->y < $aabb->max->y && $this->max->y > $aabb->max->y) {
+            $translation->y = $aabb->max->y - $this->min->y;
+        }
+
+        if ($this->max->z > $aabb->min->z && $this->min->z < $aabb->min->z) {
+            $translation->z = $aabb->min->z - $this->max->z;
+        } else if ($this->min->z < $aabb->max->z && $this->max->z > $aabb->max->z) {
+            $translation->z = $aabb->max->z - $this->min->z;
+        }
+
+        return $translation;
+    }
+
+    /**
      * Returns the intersection point of the current AABB and the given Ray
      *
      * @param Ray $ray
@@ -78,20 +150,6 @@ class AABB
         }
 
         return $ray->origin + $ray->direction * $t;
-    }
-
-    /**
-     * Extends the current AABB to include the given AABB
-     */
-    public function extend(AABB $aabb) : void
-    {
-        $this->min->x = min($this->min->x, $aabb->min->x);
-        $this->min->y = min($this->min->y, $aabb->min->y);
-        $this->min->z = min($this->min->z, $aabb->min->z);
-
-        $this->max->x = max($this->max->x, $aabb->max->x);
-        $this->max->y = max($this->max->y, $aabb->max->y);
-        $this->max->z = max($this->max->z, $aabb->max->z);
     }
 
     /**
