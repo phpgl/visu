@@ -19,6 +19,11 @@ use VISU\Runtime\GameLoopDelegate;
 use VISU\Signal\Dispatcher;
 
 use GL\VectorGraphics\{VGContext, VGColor};
+use VISU\Graphics\Rendering\Renderer\FullscreenTextureRenderer;
+use VISU\Graphics\RenderTarget;
+use VISU\Graphics\TextureOptions;
+use VISU\OS\InputActionMap;
+use VISU\OS\InputContextMap;
 
 class QuickstartApp implements GameLoopDelegate
 {
@@ -43,6 +48,11 @@ class QuickstartApp implements GameLoopDelegate
     public Input $input;
 
     /**
+     * An input action mapper
+     */
+    public InputContextMap $inputActions;
+
+    /**
      * Rendering pipeline resources
      */
     public PipelineResources $renderResources;
@@ -61,6 +71,11 @@ class QuickstartApp implements GameLoopDelegate
      * The current frame index
      */
     public int $frameIndex = 0;
+
+    /**
+     * Fullscreen Texture Renderer
+     */
+    private FullscreenTextureRenderer $fullscreenTextureRenderer;
 
     /**
      * QuickstartApp constructor.
@@ -97,6 +112,9 @@ class QuickstartApp implements GameLoopDelegate
         // create the input instance
         $this->input = new Input($this->window, $this->dispatcher);
 
+        // create the input action mapper
+        $this->inputActions = new InputContextMap($this->dispatcher);
+
         // register the input as the windows main event handler
         $this->window->setEventHandler($this->input);
 
@@ -108,6 +126,20 @@ class QuickstartApp implements GameLoopDelegate
 
         // create the vector graphics context
         $this->vg = new VGContext(VGContext::ANTIALIAS);
+
+        // create the fullscreen texture renderer
+        $this->fullscreenTextureRenderer = new FullscreenTextureRenderer($this->gl);
+    }
+
+    /**
+     * A function that is invoked once the app is ready to run.
+     * This happens exactly just before the game loop starts.
+     * 
+     * Here you can prepare your game state, register services, callbacks etc.
+     */
+    public function ready() : void
+    {
+        $this->options->ready?->__invoke($this);
     }
 
     /**
@@ -150,32 +182,49 @@ class QuickstartApp implements GameLoopDelegate
         $pipeline = new RenderPipeline($this->renderResources, $data, $windowRenderTarget);
         $context = new RenderContext($pipeline, $data, $this->renderResources, $deltaTime);
 
-        // backbuffer render target
-        $backbuffer = $data->get(BackbufferData::class)->target;
+        // create an intermediate render target with a texture attachment
+        $appContentScale = $windowRenderTarget->contentScaleX;
+        $appRenderTarget = $context->pipeline->createRenderTarget(
+            'quickstartTarget', 
+            $windowRenderTarget->width(), 
+            $windowRenderTarget->height()
+        );
+
+        // depth
+        $sceneDepthAtt = $context->pipeline->createDepthAttachment($appRenderTarget);
+
+        $sceneColorOptions = new TextureOptions;
+        $sceneColorOptions->internalFormat = GL_RGBA;
+        $sceneColorAtt = $context->pipeline->createColorAttachment($appRenderTarget, 'quickstartColor', $sceneColorOptions);
 
         // run the render callback if available
         $this->options->render?->__invoke($this, $context);
 
         $pipeline->addPass(new CallbackPass(
             'QuickstartApp::draw',
-            function(RenderPass $pass, RenderPipeline $pipeline, PipelineContainer $data) use($backbuffer) {
-                $pipeline->writes($pass, $backbuffer);
+            function(RenderPass $pass, RenderPipeline $pipeline, PipelineContainer $data) use($appRenderTarget) {
+                $pipeline->writes($pass, $appRenderTarget);
             },
-            function(PipelineContainer $data, PipelineResources $resources) use($backbuffer, $context) 
+            function(PipelineContainer $data, PipelineResources $resources) use($appRenderTarget, $appContentScale, $context) 
             {
-                $renderTarget = $resources->getRenderTarget($backbuffer);
+                $renderTarget = $resources->getRenderTarget($appRenderTarget);
                 $renderTarget->preparePass();
 
                 $this->vg->beginFrame(
-                    $renderTarget->width() / $renderTarget->contentScaleX, 
-                    $renderTarget->height() /$renderTarget->contentScaleX, 
-                    $renderTarget->contentScaleX
+                    $renderTarget->width() / $appContentScale, 
+                    $renderTarget->height() / $appContentScale, 
+                    $appContentScale
                 );
-                $this->options->draw?->__invoke($this, $context, $renderTarget);
+                
+                $this->draw($context, $renderTarget);
 
                 $this->vg->endFrame();
             }
         ));
+
+        // create a fullscreen quad render pass
+        $backbuffer = $data->get(BackbufferData::class)->target;
+        $this->fullscreenTextureRenderer->attachPass($context->pipeline, $backbuffer, $sceneColorAtt);
         
         // render debug text
         // $this->dbg3D->attachPass($pipeline, $backbuffer);
@@ -183,9 +232,25 @@ class QuickstartApp implements GameLoopDelegate
 
         // execute the pipeline
         $pipeline->execute($this->frameIndex++, null);
+        $this->gl->reset();
 
         // swap the winows back and front buffer
         $this->window->swapBuffers();
+    }
+
+    /**
+     * Draw the scene. (You most definetly want to use this)
+     * 
+     * This is called from within the Quickstart render pass where the pipeline is already
+     * prepared, a VG frame is also already started.
+     * 
+     * @param RenderContext $context
+     * @param RenderTarget $renderTarget
+     * @return void 
+     */
+    public function draw(RenderContext $context, RenderTarget $renderTarget) : void
+    {
+        $this->options->draw?->__invoke($this, $context, $renderTarget);
     }
 
     /**

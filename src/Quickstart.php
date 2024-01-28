@@ -49,7 +49,14 @@ class Quickstart
         $appBuilder($options);
 
         // construct the quickstart app
-        $this->app = new QuickstartApp($container, $options);
+        $className = $options->appClass;
+        
+        // sanity check that the class name is a subclass of QuickstartApp
+        if ($className !== QuickstartApp::class && !is_subclass_of($className, QuickstartApp::class)) {
+            throw new VISUException("The app class '{$className}' is not a subclass of QuickstartApp, this is required for the quickstart bootstrap.");
+        }
+
+        $this->app = new $className($container, $options);
 
         // register a game loop in the container
         $container->set('loop', new GameLoop($this->app, $options->gameLoopTickRate, $options->gameLoopMaxUpdatesPerFrame));
@@ -61,7 +68,7 @@ class Quickstart
     public function run() : void
     {
         // run ready callback
-        $this->app->options->ready?->call($this->app, $this->app);
+        $this->app->ready();
 
         // start the game loop
         $this->app->container->getTyped(GameLoop::class, 'loop')->start();

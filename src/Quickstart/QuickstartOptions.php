@@ -9,6 +9,13 @@ use VISU\Graphics\RenderTarget;
 class QuickstartOptions
 {
     /**
+     * Application class
+     * The class that is being constructed as the quickstart app instance. 
+     * This NEEDS to be a subclass of QuickstartApp.
+     */
+    public string $appClass = QuickstartApp::class;
+
+    /**
      * The targeted amount of game update ticks per second of the game loop.
      */
     public float $gameLoopTickRate = 60.0;

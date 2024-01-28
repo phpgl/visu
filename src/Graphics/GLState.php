@@ -91,6 +91,21 @@ class GLState
     public int $currentTextureUnit = 0;
 
     /**
+     * Resets the state of this object.
+     */
+    public function reset() : void
+    {
+        $this->currentProgram = 0;
+        $this->currentReadFramebuffer = 0;
+        $this->currentDrawFramebuffer = 0;
+        $this->currentVertexArray = 0;
+        $this->currentVertexArrayBuffer = 0;
+        $this->currentIndexBuffer = 0;
+        $this->currentTexture = 0;
+        $this->currentTextureUnit = 0;
+    }
+
+    /**
      * State aware bind of a vertex array object.
      * 
      * This method will only call glBindVertexArray if the passed vao is not the currently bound one.
