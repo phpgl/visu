@@ -2,6 +2,7 @@
 
 namespace VISU\Quickstart;
 
+use ClanCats\Container\Container;
 use Closure;
 use VISU\Graphics\Rendering\RenderContext;
 use VISU\Graphics\RenderTarget;
@@ -14,6 +15,11 @@ class QuickstartOptions
      * This NEEDS to be a subclass of QuickstartApp.
      */
     public string $appClass = QuickstartApp::class;
+
+    /**
+     * A prexisting instance of a service container, if none is given a new one will be created.
+     */
+    public ?Container $container = null;
 
     /**
      * The targeted amount of game update ticks per second of the game loop.
@@ -73,7 +79,7 @@ class QuickstartOptions
      * A callable that is called once per frame to configure the rendering pipeline
      * This is where you can attach render passes, use if you need higher / complex control over the rendering pipeline.
      * 
-     * @var null|Closure(QuickstartApp, RenderContext): void
+     * @var null|Closure(QuickstartApp, RenderContext, RenderTarget): void
      */
     public ?Closure $render = null;
 

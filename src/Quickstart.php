@@ -41,12 +41,12 @@ class Quickstart
             throw new VISUException("Could not initalize glfw, please report this issue to php-glfw.");
         }
 
-        // create an app container to store all our services
-        $container = new Container();
-
         // create the quickstart app options and let the user configure it
         $options = new QuickstartOptions();
         $appBuilder($options);
+
+        // create an app container to store all our services
+        $container = $options->container ?? new Container;
 
         // construct the quickstart app
         $className = $options->appClass;
