@@ -7,6 +7,7 @@ use GL\Math\Quat;
 use GL\Math\Vec2;
 use GL\Math\Vec3;
 use GL\Math\Vec4;
+use GL\VectorGraphics\VGContext;
 use VISU\Geo\Ray;
 use VISU\Geo\Transform;
 
@@ -59,6 +60,15 @@ class Camera
      * @var float
      */
     public float $staticWorldHeight = 100.0;
+
+    /**
+     * Flip the viewport on the y axis
+     * The camera by default uses y+ as up, this will flip the viewport to use y- as up.
+     * 
+     * When you want to use the camera with a vector graphics context you will want to
+     * flip the viewport.
+     */
+    public bool $flipViewportY = false;
 
     /**
      * Internal holder for the projection view matrix
@@ -127,6 +137,8 @@ class Camera
         elseif ($this->projectionMode === CameraProjectionMode::orthographicWorld) {
             $halfWidth = ($renderTarget->width() / $renderTarget->contentScaleX) * 0.5;
             $halfHeight = ($renderTarget->height() / $renderTarget->contentScaleY) * 0.5;
+            if ($this->flipViewportY) $halfHeight = -$halfHeight;
+
             $this->projectionMatrixAlloc->ortho(
                 -$halfWidth,
                 $halfWidth,
@@ -140,6 +152,7 @@ class Camera
             $halfHeight = $this->staticWorldHeight * 0.5;
             $aspectRatio = $renderTarget->width() / $renderTarget->height();
             $halfWidth = $halfHeight * $aspectRatio;
+            if ($this->flipViewportY) $halfHeight = -$halfHeight;
             
             $this->projectionMatrixAlloc->ortho(
                 -$halfWidth,
@@ -166,33 +179,44 @@ class Camera
      */
     public function getViewport(RenderTarget $renderTarget) : Viewport
     {
+        $screenSpaceWidth = $renderTarget->width() / $renderTarget->contentScaleX;
+        $screenSpaceHeight = $renderTarget->height() / $renderTarget->contentScaleY;
+
         if ($this->projectionMode === CameraProjectionMode::orthographicScreen) {
             return new Viewport(
                 0.0,
-                $renderTarget->width() / $renderTarget->contentScaleX,
-                $renderTarget->height() / $renderTarget->contentScaleY,
+                $screenSpaceWidth,
+                $screenSpaceHeight,
                 0.0,
+                $screenSpaceWidth,
+                $screenSpaceHeight,
             );
         }
         elseif ($this->projectionMode === CameraProjectionMode::orthographicWorld) {
-            $halfWidth = ($renderTarget->width() / $renderTarget->contentScaleX) * 0.5;
-            $halfHeight = ($renderTarget->height() / $renderTarget->contentScaleY) * 0.5;
+            $halfWidth = $screenSpaceWidth * 0.5;
+            $halfHeight = $screenSpaceHeight * 0.5;
+            if ($this->flipViewportY) $halfHeight = -$halfHeight;
             return new Viewport(
                 -$halfWidth,
                 $halfWidth,
                 -$halfHeight,
                 $halfHeight,
+                $screenSpaceWidth,
+                $screenSpaceHeight,
             );
         }
         elseif ($this->projectionMode === CameraProjectionMode::orthographicStaticWorld) {
             $halfHeight = $this->staticWorldHeight * 0.5;
             $aspectRatio = $renderTarget->width() / $renderTarget->height();
             $halfWidth = $halfHeight * $aspectRatio;
+            if ($this->flipViewportY) $halfHeight = -$halfHeight;
             return new Viewport(
                 -$halfWidth,
                 $halfWidth,
                 -$halfHeight,
                 $halfHeight,
+                $screenSpaceWidth,
+                $screenSpaceHeight,
             );
         }
         else {
@@ -251,6 +275,46 @@ class Camera
     public function getSSRay(RenderTarget $renderTarget, Vec2 $screenPos) : Ray
     {
         return new Ray($this->transform->position, $this->getSSDirection($renderTarget, $screenPos));
+    }
+
+    /**
+     * Returns a screen space position from the given world space position.
+     */
+    public function getSSPointFromWS(Viewport $viewport, Vec2 $viewSpacePos) : Vec2
+    {
+        return $viewport->viewSpaceToScreenSpace(new Vec2(
+            $viewSpacePos->x - $this->transform->position->x,
+            $viewSpacePos->y - $this->transform->position->y
+        ));
+    }
+
+    /**
+     * Returns a world space position from the given screen space position.
+     */
+    public function getWSPointFromSS(Viewport $viewport, Vec2 $screenSpacePos) : Vec2
+    {
+        return $viewport->screenSpaceToViewSpace($screenSpacePos) + new Vec2(
+            $this->transform->position->x,
+            $this->transform->position->y
+        );
+    }
+
+    /**
+     * Will translate and scale the given VGContext to match the cameras viewport.
+     */
+    public function transformVGSpace(Viewport $viewport, VGContext $vg) : void
+    {
+        $scaleFactorY = $viewport->screenSpaceHeight / $viewport->height;
+        $scaleFactorX = $viewport->screenSpaceWidth / $viewport->width;
+
+        $vg->scale($scaleFactorX, $scaleFactorY);
+
+        $offsetX = -$viewport->left;
+        $offsetY = -$viewport->top;
+        $offsetX -= $this->transform->position->x;
+        $offsetY -= $this->transform->position->y;
+
+        $vg->translate($offsetX, $offsetY);
     }
 
     /**

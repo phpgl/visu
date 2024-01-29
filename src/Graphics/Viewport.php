@@ -4,9 +4,25 @@ namespace VISU\Graphics;
 
 use GL\Math\Vec2;
 use VISU\Geo\AABB;
+use VISU\Geo\AABB2D;
 
 class Viewport
 {
+    /**
+     * Viewport width
+     */
+    public readonly float $width;
+
+    /**
+     * Viewport height
+     */
+    public readonly float $height;
+
+    /**
+     * AABB of the viewport
+     */
+    public readonly AABB2D $aabb;
+
     /**
      * Constructs a new viewport
      */
@@ -15,24 +31,35 @@ class Viewport
         public readonly float $right,
         public readonly float $bottom,
         public readonly float $top,
+        public readonly float $screenSpaceWidth,
+        public readonly float $screenSpaceHeight,
     )
     {
+        $this->width = $this->right - $this->left;
+        $this->height = $this->bottom - $this->top;
+
+        $this->aabb = new AABB2D(
+            new Vec2(min($this->left, $this->right), min($this->bottom, $this->top)), 
+            new Vec2(max($this->left, $this->right), max($this->bottom, $this->top))
+        );
     }
 
     /**
-     * Returns the width of the viewport
+     * Returns the absolute width of the viewport, the "width" can be negative
+     * If your viewport is flipped, you can use this method to get the absolute width
      */
     public function getWidth() : float
     {
-        return $this->right - $this->left;
+        return abs($this->width);
     }
 
     /**
-     * Returns the height of the viewport
+     * Returns the absolute height of the viewport, the "height" can be negative
+     * If your viewport is flipped, you can use this method to get the absolute height
      */
     public function getHeight() : float
     {
-        return $this->top - $this->bottom;
+        return abs($this->height);
     }
 
     /**
@@ -49,8 +76,8 @@ class Viewport
     public function getCenter() : Vec2
     {
         return new Vec2(
-            $this->left + $this->getWidth() / 2,
-            $this->bottom + $this->getHeight() / 2,
+            $this->left + $this->width / 2,
+            $this->bottom + $this->height / 2,
         );
     }
 
@@ -92,7 +119,7 @@ class Viewport
     public function getBottomCenter() : Vec2
     {
         return new Vec2(
-            $this->left + $this->getWidth() / 2,
+            $this->left + $this->width / 2,
             $this->bottom,
         );
     }
@@ -103,7 +130,7 @@ class Viewport
     public function getTopCenter() : Vec2
     {
         return new Vec2(
-            $this->left + $this->getWidth() / 2,
+            $this->left + $this->width / 2,
             $this->top,
         );
     }
@@ -115,7 +142,7 @@ class Viewport
     {
         return new Vec2(
             $this->left,
-            $this->bottom + $this->getHeight() / 2,
+            $this->bottom + $this->height / 2,
         );
     }
 
@@ -126,7 +153,7 @@ class Viewport
     {
         return new Vec2(
             $this->right,
-            $this->bottom + $this->getHeight() / 2,
+            $this->bottom + $this->height / 2,
         );
     }
 
@@ -135,53 +162,36 @@ class Viewport
      */
     public function contains(Vec2 $point) : bool
     {
-        return $point->x >= $this->left
-            && $point->x <= $this->right
-            && $point->y >= $this->bottom
-            && $point->y <= $this->top;
+        return $this->aabb->contains($point);
     }
 
     /**
      * Returns boolean indicating if the given AABB is inside the viewport
      */
-    public function containsAABB(AABB $aabb) : bool
+    public function containsAABB(AABB2D $aabb) : bool
     {
-        return $aabb->min->x >= $this->left
-            && $aabb->max->x <= $this->right
-            && $aabb->min->y >= $this->bottom
-            && $aabb->max->y <= $this->top;
+        return $this->aabb->containsAABB($aabb);
     }
 
     /**
-     * Returns boolean indicating if the given viewport is inside the viewport
+     * Converts the given screen space point to viewport space
      */
-    public function containsViewport(Viewport $viewport) : bool
+    public function screenSpaceToViewSpace(Vec2 $point) : Vec2
     {
-        return $viewport->left >= $this->left
-            && $viewport->right <= $this->right
-            && $viewport->bottom >= $this->bottom
-            && $viewport->top <= $this->top;
+        return new Vec2(
+            $this->left + $point->x * $this->width / $this->screenSpaceWidth,
+            $this->top + $point->y * $this->height / $this->screenSpaceHeight,
+        );
     }
 
     /**
-     * Returns boolean indicating if the given AABB intersects the viewport
+     * Converts the given viewport space point to screen space
      */
-    public function intersectsAABB(AABB $aabb) : bool
+    public function viewSpaceToScreenSpace(Vec2 $point) : Vec2
     {
-        return $aabb->min->x <= $this->right
-            && $aabb->max->x >= $this->left
-            && $aabb->min->y <= $this->top
-            && $aabb->max->y >= $this->bottom;
-    }
-
-    /**
-     * Returns boolean indicating if the given viewport intersects the viewport
-     */
-    public function intersectsViewport(Viewport $viewport) : bool
-    {
-        return $viewport->left <= $this->right
-            && $viewport->right >= $this->left
-            && $viewport->bottom <= $this->top
-            && $viewport->top >= $this->bottom;
+        return new Vec2(
+            ($point->x - $this->left) * $this->screenSpaceWidth / $this->width,
+            ($this->top - $point->y) * $this->screenSpaceHeight / $this->height,
+        );
     }
 }
