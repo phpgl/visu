@@ -100,6 +100,8 @@ class PipelineResources
     private function createRenderTarget(RenderTargetResource $resource) : void
     {
         $target = new RenderTarget($resource->width, $resource->height, new Framebuffer($this->gl));
+        $target->contentScaleX = $resource->contentScaleX;
+        $target->contentScaleY = $resource->contentScaleY;
 
         $drawBuffers = [];
 
@@ -171,7 +173,7 @@ class PipelineResources
         }
 
         // create a renderbuffer attachment
-        if ($resource->createRenderbuffer) {
+        if ($resource->createRenderbufferDepthStencil || $resource->createRenderbufferColor) {
             $framebuffer = $target->framebuffer();
             
             if (!$framebuffer instanceof Framebuffer) {
@@ -180,9 +182,11 @@ class PipelineResources
 
             // bind the frame buffer before attaching additon render buffers
             $framebuffer->bind();
-
-            $framebuffer->createRenderbufferAttachment(GL_DEPTH24_STENCIL8, GL_DEPTH_STENCIL_ATTACHMENT, $resource->width, $resource->height);
-            $framebuffer->createRenderbufferAttachment(GL_RGB, GL_COLOR_ATTACHMENT0, $resource->width, $resource->height);
+            if ($resource->createRenderbufferDepthStencil) {
+                $framebuffer->createRenderbufferAttachment(GL_DEPTH24_STENCIL8, GL_DEPTH_STENCIL_ATTACHMENT, $resource->width, $resource->height);
+            } elseif ($resource->createRenderbufferColor) {
+                $framebuffer->createRenderbufferAttachment(GL_RGBA, GL_COLOR_ATTACHMENT0, $resource->width, $resource->height);
+            }
         }
 
         if (!$target->framebuffer()->isValid($status, $error)) {

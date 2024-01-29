@@ -17,6 +17,16 @@ class RenderTargetResource extends RenderResource
     public int $height = 720;
 
     /**
+     * The render targets content scale on the x axis
+     */    
+    public float $contentScaleX = 1.0;
+
+    /**
+     * The render targets content scale on the y axis
+     */
+    public float $contentScaleY = 1.0;
+
+    /**
      * An array of TextureResource objects that are attached to the render target
      * 
      * @var array<int, TextureResource>
@@ -29,7 +39,12 @@ class RenderTargetResource extends RenderResource
     public ?TextureResource $depthAttachment = null;
 
     /**
-     * Create a Renderbuffer
+     * Create a depth stencil Renderbuffer
      */
-    public bool $createRenderbuffer = false;
+    public bool $createRenderbufferDepthStencil = false;
+
+    /**
+     * Create a color Renderbuffer
+     */
+    public bool $createRenderbufferColor = false;
 }
