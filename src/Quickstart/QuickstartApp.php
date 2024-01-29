@@ -3,27 +3,28 @@
 namespace VISU\Quickstart;
 
 use ClanCats\Container\Container;
+
 use VISU\ECS\EntityRegisty;
 use VISU\Graphics\GLState;
-use VISU\Graphics\Rendering\Pass\BackbufferData;
-use VISU\Graphics\Rendering\Pass\CallbackPass;
-use VISU\Graphics\Rendering\PipelineContainer;
-use VISU\Graphics\Rendering\PipelineResources;
-use VISU\Graphics\Rendering\RenderContext;
-use VISU\Graphics\Rendering\RenderPass;
-use VISU\Graphics\Rendering\RenderPipeline;
-use VISU\OS\Input;
-use VISU\OS\Window;
-use VISU\OS\WindowHints;
-use VISU\Runtime\GameLoopDelegate;
-use VISU\Signal\Dispatcher;
-
-use GL\VectorGraphics\{VGContext, VGColor};
-use VISU\Graphics\Rendering\Renderer\FullscreenTextureRenderer;
 use VISU\Graphics\RenderTarget;
 use VISU\Graphics\TextureOptions;
-use VISU\OS\InputActionMap;
+use VISU\Graphics\Rendering\Renderer\FullscreenTextureRenderer;
+use VISU\Graphics\Rendering\Pass\{BackbufferData, CallbackPass, ClearPass};
+use VISU\Graphics\Rendering\{
+    PipelineContainer, 
+    PipelineResources, 
+    RenderContext, 
+    RenderPass, 
+    RenderPipeline
+};
+use VISU\OS\Input;
+use VISU\OS\{Window, WindowHints};
+use VISU\Runtime\GameLoopDelegate;
+use VISU\Signal\Dispatcher;
 use VISU\OS\InputContextMap;
+use VISU\Quickstart\Render\QuickstartDebugMetricsOverlay;
+
+use GL\VectorGraphics\{VGContext, VGColor};
 
 class QuickstartApp implements GameLoopDelegate
 {
@@ -50,7 +51,7 @@ class QuickstartApp implements GameLoopDelegate
     /**
      * An input action mapper
      */
-    public InputContextMap $inputActions;
+    public InputContextMap $inputContext;
 
     /**
      * Rendering pipeline resources
@@ -76,6 +77,11 @@ class QuickstartApp implements GameLoopDelegate
      * Fullscreen Texture Renderer
      */
     private FullscreenTextureRenderer $fullscreenTextureRenderer;
+
+    /**
+     * Quickstart Debug Metrics Overlay
+     */
+    private QuickstartDebugMetricsOverlay $dbgOverlayRenderer;
 
     /**
      * QuickstartApp constructor.
@@ -107,13 +113,15 @@ class QuickstartApp implements GameLoopDelegate
 
         if ($options->windowVsync) {
             $this->window->setSwapInterval(1);
+        } else {
+            $this->window->setSwapInterval(0);
         }
 
         // create the input instance
         $this->input = new Input($this->window, $this->dispatcher);
 
         // create the input action mapper
-        $this->inputActions = new InputContextMap($this->dispatcher);
+        $this->inputContext = new InputContextMap($this->dispatcher);
 
         // register the input as the windows main event handler
         $this->window->setEventHandler($this->input);
@@ -126,9 +134,12 @@ class QuickstartApp implements GameLoopDelegate
 
         // create the vector graphics context
         $this->vg = new VGContext(VGContext::ANTIALIAS);
+        // rest GL state after creating the VG context as it might change some state
+        $this->gl->reset();
 
         // create the fullscreen texture renderer
         $this->fullscreenTextureRenderer = new FullscreenTextureRenderer($this->gl);
+        $this->dbgOverlayRenderer = new QuickstartDebugMetricsOverlay($this->container);
     }
 
     /**
@@ -155,6 +166,9 @@ class QuickstartApp implements GameLoopDelegate
      */
     public function update() : void
     {
+        // reset the input context for the next tick
+        $this->inputContext->reset();
+
         // poll for new events
         $this->window->pollEvents();
 
@@ -190,15 +204,18 @@ class QuickstartApp implements GameLoopDelegate
             $windowRenderTarget->height()
         );
 
-        // depth
-        $sceneDepthAtt = $context->pipeline->createDepthAttachment($appRenderTarget);
+        // copy the content scale
+        $appRenderTarget->contentScaleX = $appContentScale;
+        $appRenderTarget->contentScaleY = $appContentScale;
+        $appRenderTarget->createRenderbufferDepthStencil = true;
 
+        // create a color attachment
         $sceneColorOptions = new TextureOptions;
         $sceneColorOptions->internalFormat = GL_RGBA;
         $sceneColorAtt = $context->pipeline->createColorAttachment($appRenderTarget, 'quickstartColor', $sceneColorOptions);
 
         // run the render callback if available
-        $this->options->render?->__invoke($this, $context);
+        $this->options->render?->__invoke($this, $context, $appRenderTarget);
 
         $pipeline->addPass(new CallbackPass(
             'QuickstartApp::draw',
@@ -209,7 +226,7 @@ class QuickstartApp implements GameLoopDelegate
             {
                 $renderTarget = $resources->getRenderTarget($appRenderTarget);
                 $renderTarget->preparePass();
-
+                
                 $this->vg->beginFrame(
                     $renderTarget->width() / $appContentScale, 
                     $renderTarget->height() / $appContentScale, 
@@ -224,11 +241,15 @@ class QuickstartApp implements GameLoopDelegate
 
         // create a fullscreen quad render pass
         $backbuffer = $data->get(BackbufferData::class)->target;
+
+        // always clear the backbuffer
+        // $pipeline->addPass(new ClearPass($backbuffer));
+
+        // render the offscreen render target to the backbuffer
         $this->fullscreenTextureRenderer->attachPass($context->pipeline, $backbuffer, $sceneColorAtt);
         
-        // render debug text
-        // $this->dbg3D->attachPass($pipeline, $backbuffer);
-        // $this->dbgText->attachPass($pipeline, $this->pipelineResources, $backbuffer, $deltaTime);
+        // render debug text overlay on top
+        $this->dbgOverlayRenderer->attachPass($pipeline, $this->renderResources, $backbuffer, $deltaTime);
 
         // execute the pipeline
         $pipeline->execute($this->frameIndex++, null);
