@@ -118,6 +118,15 @@ class InputContextMap
     }
 
     /**
+     * Registers and activates the given action map to the given context
+     */
+    public function registerAndActivate(string $context, InputActionMap $actionMap) : void
+    {
+        $this->register($context, $actionMap);
+        $this->switchTo($context);
+    }
+
+    /**
      * Switches to the action map bound to the given context
      * 
      * @param string $context
