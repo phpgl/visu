@@ -243,7 +243,7 @@ class QuickstartApp implements GameLoopDelegate
         $backbuffer = $data->get(BackbufferData::class)->target;
 
         // always clear the backbuffer
-        // $pipeline->addPass(new ClearPass($backbuffer));
+        $pipeline->addPass(new ClearPass($backbuffer));
 
         // render the offscreen render target to the backbuffer
         $this->fullscreenTextureRenderer->attachPass($context->pipeline, $backbuffer, $sceneColorAtt);
