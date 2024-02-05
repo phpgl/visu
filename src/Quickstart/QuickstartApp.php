@@ -25,6 +25,7 @@ use VISU\OS\InputContextMap;
 use VISU\Quickstart\Render\QuickstartDebugMetricsOverlay;
 
 use GL\VectorGraphics\{VGContext, VGColor};
+use VISU\Graphics\Rendering\Resource\RenderTargetResource;
 
 class QuickstartApp implements GameLoopDelegate
 {
@@ -216,6 +217,7 @@ class QuickstartApp implements GameLoopDelegate
 
         // run the render callback if available
         $this->options->render?->__invoke($this, $context, $appRenderTarget);
+        $this->setupDrawBefore($context, $appRenderTarget);
 
         $pipeline->addPass(new CallbackPass(
             'QuickstartApp::draw',
@@ -243,6 +245,8 @@ class QuickstartApp implements GameLoopDelegate
             }
         ));
 
+        $this->setupDrawAfter($context, $appRenderTarget);
+
         // create a fullscreen quad render pass
         $backbuffer = $data->get(BackbufferData::class)->target;
 
@@ -261,6 +265,32 @@ class QuickstartApp implements GameLoopDelegate
 
         // swap the winows back and front buffer
         $this->window->swapBuffers();
+    }
+
+    /**
+     * Prepare / setup additional render passes before the quickstart draw pass 
+     * This is an "setup" method meaning you should not emit any draw calls here, but 
+     * rather add additional render passes to the pipeline.
+     * 
+     * @param RenderContext $context
+     * @param RenderTargetResource $renderTarget
+     * @return void 
+     */
+    public function setupDrawBefore(RenderContext $context, RenderTargetResource $renderTarget) : void
+    {
+    }
+
+    /**
+     * Prepare / setup additional render passes after the quickstart draw pass 
+     * This is an "setup" method meaning you should not emit any draw calls here, but 
+     * rather add additional render passes to the pipeline.
+     * 
+     * @param RenderContext $context
+     * @param RenderTargetResource $renderTarget
+     * @return void 
+     */
+    public function setupDrawAfter(RenderContext $context, RenderTargetResource $renderTarget) : void
+    {
     }
 
     /**
