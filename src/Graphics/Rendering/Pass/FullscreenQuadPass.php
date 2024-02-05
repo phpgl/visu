@@ -2,6 +2,7 @@
 
 namespace VISU\Graphics\Rendering\Pass;
 
+use GL\Math\Vec2;
 use VISU\Graphics\GLState;
 use VISU\Graphics\QuadVertexArray;
 use VISU\Graphics\Rendering\PipelineContainer;
@@ -18,6 +19,13 @@ class FullscreenQuadPass extends RenderPass
      * The name of the texture unform in the shader
      */
     public string $textureUniformName = 'u_texture';
+
+    /**
+     * An array of extra uniforms to be set on the shader
+     * 
+     * @var array<string, mixed>
+     */
+    public array $extraUniforms = [];
 
     /**
      * Constructor 
@@ -58,6 +66,7 @@ class FullscreenQuadPass extends RenderPass
 
         $glTexture = $resources->getTexture($this->appliedTexture);
         $this->shader->setUniform1i($this->textureUniformName, 0);
+        $this->shader->setUniformsKV($this->extraUniforms);
 
         glDisable(GL_DEPTH_TEST);
 

@@ -1339,6 +1339,56 @@ class ShaderProgram
         glUniform4fv($this->getUniformLocation($name), $values);
     }
 
-    
+    /**
+     * Sets an array of uniforms using their key as the location and guessed type of the value
+     * 
+     * Example:
+     *     $program->setUniformsKV([
+     *          "u_color" => new Vec4(1.0, 0.0, 0.0, 1.0),
+     *          "u_matrix" => new Mat4(),
+     *          "u_time" => 1.0
+     *          "u_resolution" => new Vec2(800, 600)
+     *      ]);
+     *  
+     * 
+     * @param array<string, mixed> $uniforms The uniforms to set
+     * @return void 
+     */
+    public function setUniformsKV(array $uniforms) : void
+    {
+        $this->use();
 
+        foreach($uniforms as $name => $value)
+        {
+            $location = $this->getUniformLocation($name);
+
+            if(is_int($value))
+            {
+                glUniform1i($location, $value);
+            }
+            else if(is_float($value))
+            {
+                glUniform1f($location, $value);
+            }
+            else if($value instanceof Vec2)
+            {
+                glUniformVec2f($location, $value);
+            }
+            else if($value instanceof Vec3)
+            {
+                glUniformVec3f($location, $value);
+            }
+            else if($value instanceof Vec4)
+            {
+                glUniformVec4f($location, $value);
+            }
+            else if($value instanceof Mat4)
+            {
+                glUniformMatrix4f($location, false, $value);
+            }
+            else {
+                throw new \InvalidArgumentException("Invalid uniform value type for uniform: $name");
+            }
+        }
+    }
 }
