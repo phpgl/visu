@@ -232,6 +232,10 @@ class QuickstartApp implements GameLoopDelegate
                     $renderTarget->height() / $appContentScale, 
                     $appContentScale
                 );
+
+                // store the VG context in the pipeline container
+                // this will allow subsystem to access the VG context as well
+                $data->set($this->vg);
                 
                 $this->draw($context, $renderTarget);
 
