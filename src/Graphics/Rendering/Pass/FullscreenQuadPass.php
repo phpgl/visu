@@ -28,6 +28,12 @@ class FullscreenQuadPass extends RenderPass
     public array $extraUniforms = [];
 
     /**
+     * Should the pass blend with the existing content of the render target?
+     */
+    public bool $shouldBlend = false;
+
+
+    /**
      * Constructor 
      * 
      * @return void 
@@ -69,6 +75,11 @@ class FullscreenQuadPass extends RenderPass
         $this->shader->setUniformsKV($this->extraUniforms);
 
         glDisable(GL_DEPTH_TEST);
+
+        if ($this->shouldBlend) {
+            glEnable(GL_BLEND);
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        }
 
         $glTexture->bind();
         $quadVA->draw();
