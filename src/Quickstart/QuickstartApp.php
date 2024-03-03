@@ -242,6 +242,8 @@ class QuickstartApp implements GameLoopDelegate
                 $this->draw($context, $renderTarget);
 
                 $this->vg->endFrame();
+                // because VG touches the GL state we need to reset it
+                $this->gl->reset();
             }
         ));
 
@@ -261,7 +263,6 @@ class QuickstartApp implements GameLoopDelegate
 
         // execute the pipeline
         $pipeline->execute($this->frameIndex++, null);
-        $this->gl->reset();
 
         // swap the winows back and front buffer
         $this->window->swapBuffers();
