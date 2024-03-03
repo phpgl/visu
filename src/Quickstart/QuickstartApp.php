@@ -266,6 +266,7 @@ class QuickstartApp implements GameLoopDelegate
 
         // swap the winows back and front buffer
         $this->window->swapBuffers();
+        $this->input->endFrame();
     }
 
     /**

@@ -92,6 +92,21 @@ class Input implements WindowEventHandlerInterface
     private array $mouseButtonsDidRelease = [];
 
     /**
+     * Same as "mouseButtonsDidPress" but for per frame state instead of per poll state
+     * 
+     * @var array<int, bool>
+     */
+    private array $mouseButtonsDidPressFrame = [];
+
+    /**
+     * Same as "mouseButtonsDidRelease" but for per frame state instead of per poll state
+     * 
+     * @var array<int, bool>
+     */
+    private array $mouseButtonsDidReleaseFrame = [];
+
+
+    /**
      * The event names the input class will dispatch on
      */
     const EVENT_KEY = 'input.key';
@@ -264,6 +279,38 @@ class Input implements WindowEventHandlerInterface
     }
 
     /**
+     * Returns boolean if the given mouse button was pressed since the last frame
+     * 
+     * Example:
+     * ```php
+     * $input->hasMouseButtonBeenPressedThisFrame(MouseButton::LEFT);
+     * ```
+     * 
+     * @param int $button The mouse button to check
+     * @return bool True if the mouse button was pressed, false otherwise
+     */
+    public function hasMouseButtonBeenPressedThisFrame(int $button) : bool
+    {
+        return $this->mouseButtonsDidPressFrame[$button] ?? false;
+    }
+
+    /**
+     * Returns boolean if the given mouse button was released since the last frame
+     * 
+     * Example:
+     * ```php
+     * $input->hasMouseButtonBeenReleasedThisFrame(MouseButton::LEFT);
+     * ```
+     * 
+     * @param int $button The mouse button to check
+     * @return bool True if the mouse button was released, false otherwise
+     */
+    public function hasMouseButtonBeenReleasedThisFrame(int $button) : bool
+    {
+        return $this->mouseButtonsDidReleaseFrame[$button] ?? false;
+    }
+
+    /**
      * Get the current cursor position
      * 
      * @return Vec2 The current cursor position
@@ -423,8 +470,10 @@ class Input implements WindowEventHandlerInterface
         // record for did press and did release
         if ($action === GLFW_PRESS) {
             $this->mouseButtonsDidPress[$button] = true;
+            $this->mouseButtonsDidPressFrame[$button] = true;
         } else if ($action === GLFW_RELEASE) {
             $this->mouseButtonsDidRelease[$button] = true;
+            $this->mouseButtonsDidReleaseFrame[$button] = true;
         }
 
         // dispatch event
@@ -540,6 +589,18 @@ class Input implements WindowEventHandlerInterface
      */
     public function handleWindowDidPollEvents(Window $window): void
     {
+    }
+
+    /**
+     * Invoke this method at the end of a frame to let the input manager
+     * apply state changes to the per frame state.
+     * 
+     * @return void 
+     */
+    public function endFrame(): void
+    {
+        $this->mouseButtonsDidPressFrame = [];
+        $this->mouseButtonsDidReleaseFrame = [];
     }
 
     /**
