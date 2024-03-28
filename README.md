@@ -10,7 +10,30 @@ It comes with high level abstractions for common tasks but also allows you to ac
 
 ## Features 
 
- * Shader loading with macros and inclues
+* Shader Management with Support for Macros and Includes
+* Transition Animation System
+* Command Line Interface for Creating Build Tools/Scripts
+* An Entity Component System (ECS)
+* Low-Poly Rendering Pipeline
+* Tons of Helpers and Geometric Abstractions like Bounding Boxes, Raycasting, Transformations, etc.
+* A Render Graph-ish Rendering Pipeline for Managing & Creating Complex and Deep Rendering Pipelines.
+* Render Resource Management.
+* Texture Manager, Loaders, and Helpers.
+* Font Rendering
+* Basic Heightmap Capturing
+* Gizmo Rendering
+* SSAO Render Pass
+* Basic 3D Debugging Helpers (Drawing Bounding Boxes, Rays, etc.)
+* Framebuffer Management and Abstractions.
+* Basic Profiling, GPU and CPU Time.
+* Fixed Timestep Game Loop
+* Input Handling (Mouse & Keyboard) with Key Binding Maps and Different Interaction Maps.
+* Event Dispatching.
+* Quickstart Collections to Rapidly Get an App Started.
+* In-Game Interactive Console.
+* Signal Queues.
+* Camera System for 2D and 3D.
+* And Much More.
 
 ## Usage 
 
