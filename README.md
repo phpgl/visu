@@ -18,7 +18,25 @@ Want to build something with VISU?
 
 Check out the docs: visu.phpgl.net/
 
-Checkout the starter project:
+### Quickstart
+
+https://github.com/phpgl/visu-quickstart
+
+Use Composer to create a new project based on visu-quickstart:
+
+```bash
+composer create-project phpgl/visu-quickstart -s dev --prefer-dist my-visu-project 
+```
+
+After the installation is complete, you can start the application by running:
+
+```bash
+cd my-visu-project
+php ./bin/start.php
+```
+
+### Scafolding
+
 https://github.com/phpgl/visu-starter
 
 
