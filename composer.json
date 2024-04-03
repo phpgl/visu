@@ -25,6 +25,7 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
+    "bin": ["bin/visu"],
     "scripts": {
         "post-autoload-dump": [
             "ClanCats\\Container\\ComposerContainerFileLoader::generateMap"
