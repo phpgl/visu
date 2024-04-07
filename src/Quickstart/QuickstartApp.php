@@ -114,6 +114,9 @@ class QuickstartApp implements GameLoopDelegate
             $windowHints->setVisible(false);
             $windowHints->setResizable(false);
             $windowHints->setFocusOnShow(false);
+            
+            $windowHints->setCocoaRetinaFramebuffer(false);
+            $windowHints->setScaleToMonitor(false);
         } else {
             $windowHints->setFocusOnShow(true);
             $windowHints->setResizable(true);
