@@ -53,6 +53,11 @@ class QuickstartOptions
     public bool $windowVsync = true;
 
     /**
+     * Should the app window be headless? (Offscreen rendering)
+     */
+    public bool $windowHeadless = false;
+
+    /**
      * Should the app automatically initalize and render a vector graphics frame in the draw call?
      */
     public bool $drawAutoRenderVectorGraphics = true;

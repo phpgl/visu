@@ -63,6 +63,14 @@ class Quickstart
     }
 
     /**
+     * Returns the app instance.
+     */
+    public function app() : QuickstartApp
+    {
+        return $this->app;
+    }
+
+    /**
      * Run the quickstart app.
      */
     public function run() : void

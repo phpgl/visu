@@ -75,6 +75,11 @@ class QuickstartApp implements GameLoopDelegate
     public int $frameIndex = 0;
 
     /**
+     * The current tick index
+     */
+    public int $tickIndex = 0;
+
+    /**
      * Fullscreen Texture Renderer
      */
     private FullscreenTextureRenderer $fullscreenTextureRenderer;
@@ -105,8 +110,14 @@ class QuickstartApp implements GameLoopDelegate
 
         // create & initialize the window
         $windowHints = new WindowHints();
-        $windowHints->setFocusOnShow(true);
-        $windowHints->setResizable(true);
+        if ($options->windowHeadless) {
+            $windowHints->setVisible(false);
+            $windowHints->setResizable(false);
+            $windowHints->setFocusOnShow(false);
+        } else {
+            $windowHints->setFocusOnShow(true);
+            $windowHints->setResizable(true);
+        }
 
         $this->window = new Window($options->windowTitle, $options->windowWidth, $options->windowHeight, $windowHints);
         $this->container->set('window', $this->window);
@@ -175,6 +186,9 @@ class QuickstartApp implements GameLoopDelegate
 
         // run the update callback if available
         $this->options->update?->__invoke($this);
+
+        // update the global tick index
+        $this->tickIndex++;
     }
 
     /**

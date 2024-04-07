@@ -291,12 +291,11 @@ class PipelineResources
      */
     public function getTexture(RenderResource $resource): Texture
     {
-        $this->resourceUseTick[$resource->name] = $this->tickIndex;
-
         if (!isset($this->textures[$resource->name])) {
             throw new PipelineResourceException("Texture not found for resource handle: " . $resource->handle . ' name: ' . $resource->name);
         }
 
+        $this->resourceUseTick[$resource->name] = $this->tickIndex;
         return $this->textures[$resource->name];
     }
 
@@ -310,6 +309,19 @@ class PipelineResources
     public function getTextureID(RenderResource $resource): int
     {
         return $this->getTexture($resource)->id;
+    }
+
+    /**
+     * Returns a texture by its name, will return null if not found
+     * This will also update the resource use tick
+     * 
+     * @param string $name
+     * @return Texture|null
+     */
+    public function findTextureByName(string $name): ?Texture
+    {
+        $this->resourceUseTick[$name] = $this->tickIndex;
+        return $this->textures[$name] ?? null;
     }
 
     /**
