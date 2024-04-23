@@ -2,12 +2,14 @@
 
 namespace VISU\Graphics;
 
+use GL\Math\GLM;
 use GL\Math\Mat4;
 use GL\Math\Quat;
 use GL\Math\Vec2;
 use GL\Math\Vec3;
 use GL\Math\Vec4;
 use GL\VectorGraphics\VGContext;
+use VISU\Geo\Frustum;
 use VISU\Geo\Ray;
 use VISU\Geo\Transform;
 
@@ -225,6 +227,25 @@ class Camera
     }
 
     /**
+     * Returns the model matrix of the camera
+     * This is basically the inverse of the cameras view matrix.
+     * 
+     * @return Mat4 The model matrix of the camera
+     */
+    public function getModelMatrix(float $deltaTime = 0.0) : Mat4
+    {
+        if ($this->allowInterpolation) {
+            $this->interpolationTransformAlloc->position = Vec3::mix($this->lfCameraPos, $this->transform->position, $deltaTime);
+            $this->interpolationTransformAlloc->orientation = Quat::slerp($this->lfCameraRot, $this->transform->orientation, $deltaTime);
+            $this->interpolationTransformAlloc->markDirty();
+    
+            return $this->interpolationTransformAlloc->getLocalMatrix();
+        }
+
+        return $this->transform->getLocalMatrix();
+    }
+
+    /**
      * Calculates and returns the cameras view matrix. The matrix is inverted on the fly 
      * so cache the result if you need to use it multiple times.
      * 
@@ -233,15 +254,7 @@ class Camera
      */
     public function getViewMatrix(float $deltaTime = 0.0) : Mat4
     {
-        if ($this->allowInterpolation) {
-            $this->interpolationTransformAlloc->position = Vec3::mix($this->lfCameraPos, $this->transform->position, $deltaTime);
-            $this->interpolationTransformAlloc->orientation = Quat::slerp($this->lfCameraRot, $this->transform->orientation, $deltaTime);
-            $this->interpolationTransformAlloc->markDirty();
-    
-            return Mat4::inverted($this->interpolationTransformAlloc->getLocalMatrix());
-        }
-
-        return Mat4::inverted($this->transform->getLocalMatrix());
+        return Mat4::inverted($this->getModelMatrix($deltaTime));
     }
 
     /**

@@ -3,7 +3,7 @@
 namespace VISU\Quickstart;
 
 use ClanCats\Container\Container;
-
+use GL\Math\Vec2;
 use VISU\ECS\EntityRegisty;
 use VISU\Graphics\GLState;
 use VISU\Graphics\RenderTarget;
@@ -26,6 +26,7 @@ use VISU\Quickstart\Render\QuickstartDebugMetricsOverlay;
 
 use GL\VectorGraphics\{VGContext, VGColor};
 use VISU\Graphics\Rendering\Resource\RenderTargetResource;
+use VISU\Graphics\Viewport;
 
 class QuickstartApp implements GameLoopDelegate
 {

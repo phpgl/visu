@@ -2,10 +2,11 @@
 
 namespace VISU\System;
 
-use GL\Math\{GLM, Quat, Vec2, Vec3};
+use GL\Math\{GLM, Mat4, Quat, Vec2, Vec3};
 use VISU\ECS\EntitiesInterface;
 use VISU\ECS\SystemInterface;
 use VISU\Exception\VISUException;
+use VISU\Geo\Frustum;
 use VISU\Graphics\Camera;
 use VISU\Graphics\CameraProjectionMode;
 use VISU\Graphics\Rendering\Pass\CameraData;
@@ -321,11 +322,17 @@ class VISUCameraSystem implements SystemInterface
         $viewMatrix = $camera->getViewMatrix($compensation);
         $projectionMatrix = $camera->getProjectionMatrix($renderTarget);
 
+        /** @var Mat4 */
+        $projectionViewMatrix = $projectionMatrix * $viewMatrix;
+        $inverseProjectionViewMatrix = Mat4::inverted($projectionViewMatrix);
         return new CameraData(
             frameCamera: $camera,
             renderCamera: $camera,
             projection: $projectionMatrix,
             view: $viewMatrix,
+            projectionView: $projectionViewMatrix,
+            inverseProjectionView: $inverseProjectionViewMatrix,
+            frustum: Frustum::fromMat4($projectionViewMatrix),
             compensation: $compensation,
             resolutionX: $renderTarget->width(),
             resolutionY: $renderTarget->height(),
