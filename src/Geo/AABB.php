@@ -213,4 +213,23 @@ class AABB
 
         return $tmin;
     }
+
+    /**
+     * Returns an array of 8 Vec3 representing the corners of the AABB
+     * 
+     * @return array<Vec3>
+     */
+    public function getCorners() : array
+    {
+        return [
+            new Vec3($this->min->x, $this->min->y, $this->min->z),
+            new Vec3($this->max->x, $this->min->y, $this->min->z),
+            new Vec3($this->max->x, $this->max->y, $this->min->z),
+            new Vec3($this->min->x, $this->max->y, $this->min->z),
+            new Vec3($this->min->x, $this->min->y, $this->max->z),
+            new Vec3($this->max->x, $this->min->y, $this->max->z),
+            new Vec3($this->max->x, $this->max->y, $this->max->z),
+            new Vec3($this->min->x, $this->max->y, $this->max->z),
+        ];
+    }
 }
