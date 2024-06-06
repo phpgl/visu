@@ -4,6 +4,7 @@ namespace VISU\Graphics\Rendering\Pass;
 
 use GL\Math\Mat4;
 use GL\Math\Vec2;
+use VISU\Geo\Frustum;
 use VISU\Graphics\Camera;
 use VISU\Graphics\Rendering\RenderResource;
 use VISU\Graphics\Viewport;
@@ -32,6 +33,21 @@ class CameraData
      * Current view matrix
      */
     public readonly Mat4 $view;
+
+    /**
+     * Projection view matrix
+     */
+    public readonly Mat4 $projectionView;
+
+    /**
+     * Inverse projection view matrix
+     */
+    public readonly Mat4 $inverseProjectionView;
+
+    /**
+     * Frustum of the current frame
+     */
+    public readonly Frustum $frustum;
 
     /**
      * Compensation / alpha value for the current frame
@@ -71,6 +87,9 @@ class CameraData
         Camera $renderCamera,
         Mat4 $projection,
         Mat4 $view,
+        Mat4 $projectionView,
+        Mat4 $inverseProjectionView,
+        Frustum $frustum,
         float $compensation,
         int $resolutionX,
         int $resolutionY,
@@ -83,6 +102,9 @@ class CameraData
         $this->renderCamera = $renderCamera;
         $this->projection = $projection;
         $this->view = $view;
+        $this->projectionView = $projectionView;
+        $this->inverseProjectionView = $inverseProjectionView;
+        $this->frustum = $frustum;
         $this->compensation = $compensation;
         $this->resolutionX = $resolutionX;
         $this->resolutionY = $resolutionY;

@@ -3,8 +3,11 @@
 namespace VISU\Graphics\Rendering\Renderer;
 
 use GL\Buffer\FloatBuffer;
+use GL\Math\Mat4;
 use GL\Math\Vec2;
 use GL\Math\Vec3;
+use GL\Math\Vec4;
+use VISU\Geo\Frustum;
 use VISU\Graphics\GLState;
 use VISU\Graphics\Rendering\Pass\CallbackPass;
 use VISU\Graphics\Rendering\Pass\CameraData;
@@ -154,6 +157,30 @@ class Debug3DRenderer
     public static function bezier(Vec3 $origin, Vec3 $p0, Vec3 $destination, Vec3 $color, int $segments = 10) : void
     {
         static::getGlobalInstance()->addBezierCurve($origin, $p0, $destination, $color, $segments);
+    }
+
+    /**
+     * Draws a line representation of the given frustum
+     * 
+     * @param Mat4 $ivp The inverse view projection matrix
+     * @param Vec3 $color The color of the frustum
+     */
+    public static function frustum(Mat4 $ivp, Vec3 $color) : void
+    {
+        static::getGlobalInstance()->addFrustum($ivp, $color);
+    }
+
+    /**
+     * Draws a plane in 3D space
+     * 
+     * @param Vec3 $origin The origin of the plane
+     * @param Vec3 $normal The normal of the plane
+     * @param float $size The size of the plane
+     * @param Vec3 $color The color of the plane
+     */
+    public static function plane(Vec3 $origin, Vec3 $normal, float $size, Vec3 $color) : void
+    {
+        static::getGlobalInstance()->addPlane($origin, $normal, $size, $color);
     }
 
     /**
@@ -397,5 +424,68 @@ class Debug3DRenderer
 
         $this->addLine($last, $destination, static::$colorGreen);
         $this->addCross($p0, static::$colorMagenta);
+    }
+
+    /**
+     * Draws a Frustum
+     * 
+     * @param Mat4 $mat The view projection matrix to build the frustum from
+     * @param Vec3 $color The color of the frustum
+     */
+    public function addFrustum(Mat4 $ivp, Vec3 $color)
+    {
+        static $planes = [
+            // near
+            new Vec4(-1, -1, -1, 1), new Vec4(1, -1, -1, 1),
+            new Vec4(1, 1, -1, 1), new Vec4(-1, 1, -1, 1),
+
+            // far
+            new Vec4(-1, -1, 1, 1), new Vec4(1, -1, 1, 1),
+            new Vec4(1, 1, 1, 1), new Vec4(-1, 1, 1, 1),
+        ];
+
+        $points = [];
+        foreach ($planes as $plane) {
+            $p = $ivp * $plane;
+            $points[] = new Vec3($p->x / $p->w, $p->y / $p->w, $p->z / $p->w);
+        }
+
+        $this->addLine($points[0], $points[1], $color);
+        $this->addLine($points[1], $points[2], $color);
+        $this->addLine($points[2], $points[3], $color);
+        $this->addLine($points[3], $points[0], $color);
+        
+        $this->addLine($points[4], $points[5], $color);
+        $this->addLine($points[5], $points[6], $color);
+        $this->addLine($points[6], $points[7], $color);
+        $this->addLine($points[7], $points[4], $color);
+
+        $this->addLine($points[0], $points[4], $color);
+        $this->addLine($points[1], $points[5], $color);
+        $this->addLine($points[2], $points[6], $color);
+        $this->addLine($points[3], $points[7], $color);
+    }
+
+    /**
+     * Draws a plane in 3D space
+     * 
+     * @param Vec3 $origin The origin of the plane
+     * @param Vec3 $normal The normal of the plane
+     * @param float $size The size of the plane
+     * @param Vec3 $color The color of the plane
+     */
+    public function addPlane(Vec3 $origin, Vec3 $normal, float $size, Vec3 $color) : void
+    {
+        $up = new Vec3(0, 1, 0);
+
+        $right = Vec3::cross($normal, $up);
+        $right->normalize();
+        $up = Vec3::cross($right, $normal);
+        $up->normalize();
+
+        $this->addLine($origin - $right * $size + $up * $size, $origin + $right * $size + $up * $size, $color);
+        $this->addLine($origin + $right * $size + $up * $size, $origin + $right * $size - $up * $size, $color);
+        $this->addLine($origin + $right * $size - $up * $size, $origin - $right * $size - $up * $size, $color);
+        $this->addLine($origin - $right * $size - $up * $size, $origin - $right * $size + $up * $size, $color);
     }
 }
