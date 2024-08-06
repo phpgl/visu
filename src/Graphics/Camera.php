@@ -326,8 +326,8 @@ class Camera
     {
         $offsetX = -$viewport->left;
         $offsetY = -$viewport->top;
-        $offsetX -= $this->transform->position->x;
-        $offsetY -= $this->transform->position->y;
+        $offsetX -= $this->transform->position->x * $this->zoom;
+        $offsetY -= $this->transform->position->y * $this->zoom;
 
         $vg->translate($offsetX, $offsetY);
 
