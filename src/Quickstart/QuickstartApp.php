@@ -233,6 +233,10 @@ class QuickstartApp implements GameLoopDelegate
         $sceneColorOptions->internalFormat = GL_RGBA;
         $sceneColorAtt = $context->pipeline->createColorAttachment($appRenderTarget, 'quickstartColor', $sceneColorOptions);
 
+        // store the VG context in the pipeline container
+        // this will allow subsystem to access the VG context as well
+        $data->set($this->vg);
+
         // run the render callback if available
         $this->options->render?->__invoke($this, $context, $appRenderTarget);
         $this->setupDrawBefore($context, $appRenderTarget);
@@ -252,10 +256,6 @@ class QuickstartApp implements GameLoopDelegate
                     $renderTarget->height() / $appContentScale, 
                     $appContentScale
                 );
-
-                // store the VG context in the pipeline container
-                // this will allow subsystem to access the VG context as well
-                $data->set($this->vg);
                 
                 $this->draw($context, $renderTarget);
 
