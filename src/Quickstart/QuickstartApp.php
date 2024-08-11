@@ -25,6 +25,7 @@ use VISU\OS\InputContextMap;
 use VISU\Quickstart\Render\QuickstartDebugMetricsOverlay;
 
 use GL\VectorGraphics\{VGContext, VGColor};
+use VISU\FlyUI\FlyUI;
 use VISU\Graphics\Rendering\Resource\RenderTargetResource;
 use VISU\Graphics\Viewport;
 
@@ -153,6 +154,9 @@ class QuickstartApp implements GameLoopDelegate
         // rest GL state after creating the VG context as it might change some state
         $this->gl->reset();
 
+        // initalize FlyUI
+        FlyUI::initailize($this->vg, $this->input);
+
         // create the fullscreen texture renderer
         $this->fullscreenTextureRenderer = new FullscreenTextureRenderer($this->gl);
         $this->dbgOverlayRenderer = new QuickstartDebugMetricsOverlay($this->container);
@@ -233,6 +237,15 @@ class QuickstartApp implements GameLoopDelegate
         $sceneColorOptions->internalFormat = GL_RGBA;
         $sceneColorAtt = $context->pipeline->createColorAttachment($appRenderTarget, 'quickstartColor', $sceneColorOptions);
 
+        // begin a FlyUI frame
+        FlyUI::beginFrame(
+            new Vec2(
+                $windowRenderTarget->width() / $appContentScale,
+                $windowRenderTarget->height() / $appContentScale
+            ),
+            $appContentScale
+        );
+
         // run the render callback if available
         $this->options->render?->__invoke($this, $context, $appRenderTarget);
         $this->setupDrawBefore($context, $appRenderTarget);
@@ -258,6 +271,9 @@ class QuickstartApp implements GameLoopDelegate
                 $data->set($this->vg);
                 
                 $this->draw($context, $renderTarget);
+
+                // end the FlyUI frame
+                FlyUI::endFrame();
 
                 $this->vg->endFrame();
                 // because VG touches the GL state we need to reset it
