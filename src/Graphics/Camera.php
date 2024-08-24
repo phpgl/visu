@@ -181,8 +181,8 @@ class Camera
      */
     public function getViewport(RenderTarget $renderTarget) : Viewport
     {
-        $screenSpaceWidth = $renderTarget->width() / $renderTarget->contentScaleX;
-        $screenSpaceHeight = $renderTarget->height() / $renderTarget->contentScaleY;
+        $screenSpaceWidth = $renderTarget->effectiveWidth();
+        $screenSpaceHeight = $renderTarget->effectiveHeight();
 
         if ($this->projectionMode === CameraProjectionMode::orthographicScreen) {
             return new Viewport(

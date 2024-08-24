@@ -2,54 +2,30 @@
 
 namespace VISU\FlyUI;
 
-use GL\Math\Vec2;
 use GL\VectorGraphics\VGColor;
 
-enum FUICardSizig {
-    case Fill;
-    case Fit;
-}
-
-class FUICard extends FUIView
+class FUICard extends FUILayout
 {
-    /**
-     * Vertical sizing mode
-     * 
-     * Should the card be sized to fit its content or fill the available space
-     */
-    public FUICardSizig $sizingVertical = FUICardSizig::Fill;
-
-    /**
-     * Horizontal sizing mode
-     * 
-     * Should the card be sized to fit its content or fill the available space
-     */
-    public FUICardSizig $sizingHorizontal = FUICardSizig::Fill;
-
     /**
      * Constructs a new view
      */
     public function __construct(
         public VGColor $backgroundColor,
-        public float $borderRadius,
+        public ?float $borderRadius = null,
         public ?VGColor $borderColor = null,
-        public float $borderWidth = 1.0
+        public ?float $borderWidth = null
     )
     {
-        parent::__construct(new Vec2(0, 0));
+        parent::__construct();
     }
 
     /**
      * Renders the current view using the provided context
      */
-    public function render(FUIRenderContext $ctx) : void
+    public function renderContent(FUIRenderContext $ctx) : void
     {
         $finalPos = $ctx->origin;
         $finalSize = $ctx->containerSize;
-
-        if ($this->sizingVertical === FUICardSizig::Fit) {
-            $finalSize->y = min($this->getEstimatedHeight(), $finalSize->y);
-        }
 
         // borders are always drawn inset in FlyUI, as VG draws them in the middle
         // we have to adjust the position and size of the rectangle
@@ -77,6 +53,7 @@ class FUICard extends FUIView
             $ctx->vg->stroke();
         }
 
-        parent::render($ctx);
+        // pass to children
+        parent::renderContent($ctx);
     }
 }

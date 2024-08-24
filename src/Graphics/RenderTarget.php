@@ -3,6 +3,7 @@
 namespace VISU\Graphics;
 
 use Exception;
+use GL\Math\Vec2;
 
 class RenderTarget
 {   
@@ -34,7 +35,7 @@ class RenderTarget
     }
 
     /**
-     * Returns the render targets width
+     * Returns the render targets width in device pixels
      * 
      * @return int
      */
@@ -44,13 +45,37 @@ class RenderTarget
     }
 
     /**
-     * Returns the render targets height
+     * Returns the render targets height in device pixels
      * 
      * @return int
      */
     public function height(): int
     {
         return $this->height;
+    }
+
+    /**
+     * Returns the render targets logical width (in points)
+     */
+    public function effectiveWidth(): int
+    {
+        return (int) ($this->width / $this->contentScaleX);
+    }
+
+    /**
+     * Returns the render targets logical height (in points)
+     */
+    public function effectiveHeight(): int
+    {
+        return (int) ($this->height / $this->contentScaleY);
+    }
+
+    /**
+     * Returns a Vec2 with effectiveWidth and effectiveHeight
+     */
+    public function effectiveSizeVec(): Vec2
+    {
+        return new Vec2($this->effectiveWidth(), $this->effectiveHeight());
     }
 
     /**

@@ -19,6 +19,11 @@ class FUIRenderContext
     public Vec2 $containerSize;
 
     /**
+     * By default views are stacked vertically so we need to keep track of the vertical offset
+     */
+    public float $verticalOffset = 0;
+
+    /**
      * Initializes the render context
      */
     public function __construct(

@@ -118,6 +118,26 @@ class RenderPipeline
     }
 
     /**
+     * Creates a new render target resource with the same dimensions and content scale as the given render target
+     * 
+     * @param string $resourceName
+     * @param RenderTarget $target
+     * 
+     * @return RenderTargetResource
+     */
+    public function createRenderTargetLike(string $resourceName, RenderTarget $target): RenderTargetResource
+    {
+        /** @var RenderTargetResource */
+        $resource = $this->createResource(RenderTargetResource::class, $resourceName);
+        $resource->width = $target->width();
+        $resource->height = $target->height();
+        $resource->contentScaleX = $target->contentScaleX;
+        $resource->contentScaleY = $target->contentScaleY;
+
+        return $resource;
+    }
+
+    /**
      * Imports a render target resource
      * 
      * @param string $resourceName 

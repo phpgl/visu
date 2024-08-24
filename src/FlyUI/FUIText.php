@@ -17,14 +17,14 @@ class FUIText extends FUIView
         public float $fontSize = 16,
     )
     {
-        parent::__construct(new Vec2(0, 0));
+        parent::__construct();
     }
 
     /**
      * Returns the height of the current view and its children
      * This is used for layouting purposes
      */
-    public function getEstimatedHeight() : float
+    public function getEstimatedHeight(Vec2 $containerSize) : float
     {
         return $this->fontSize + $this->padding->y * 2;
     }
@@ -32,10 +32,9 @@ class FUIText extends FUIView
     /**
      * Renders the current view using the provided context
      */
-    public function render(FUIRenderContext $ctx) : void
+    public function render(FUIRenderContext $ctx) : float
     {
-        $finalPos = $ctx->origin;
-        $finalSize = $ctx->containerSize;
+        $height = $this->getEstimatedHeight($ctx->containerSize);
 
         if (!$this->color) {
             $ctx->vg->fillColor(VGColor::black());
@@ -43,10 +42,18 @@ class FUIText extends FUIView
             $ctx->vg->fillColor($this->color);
         }
 
+        // // render green background
+        // $ctx->vg->beginPath();
+        // $ctx->vg->fillColor(VGColor::green());
+        // $ctx->vg->rect($ctx->origin->x, $ctx->origin->y, $ctx->containerSize->x, $height - 1);
+        // $ctx->vg->fill();
+
         $ctx->vg->textAlign(VGAlign::LEFT | VGAlign::TOP);
         $ctx->vg->fontSize($this->fontSize);
-        $ctx->vg->text($finalPos->x, $finalPos->y, $this->text);
+        $ctx->vg->fillColor(VGColor::black());
+        $ctx->vg->text($ctx->origin->x + $this->padding->x, $ctx->origin->y + $this->padding->y, $this->text);
 
-        parent::render($ctx);
+        // no pass to parent, as this is a leaf element
+        return $height;
     }
 }

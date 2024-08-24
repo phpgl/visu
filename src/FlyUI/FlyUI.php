@@ -6,6 +6,7 @@ use GL\Math\Vec2;
 use GL\VectorGraphics\VGColor;
 use GL\VectorGraphics\VGContext;
 use VISU\OS\Input;
+use VISU\Signal\Dispatcher;
 
 /**
  * FlyUI is intended as a simple to use immediate mode GUI library primarly for
@@ -25,8 +26,8 @@ class FlyUI
     /**
      * Initializes the global FlyUI instance
      */
-    public static function initailize(VGContext $vgContext, Input $input) : void {
-        self::$instance = new FlyUI($vgContext, $input);
+    public static function initailize(VGContext $vgContext, Dispatcher $dispatcher, Input $input) : void {
+        self::$instance = new FlyUI($vgContext, $dispatcher, $input);
     }
 
     /**
@@ -53,19 +54,9 @@ class FlyUI
         self::$instance->internalEndFrame();
     }
 
-    /**
-     * Begins a new view
-     */
-    public static function beginView(Vec2 $margin) : FUIView
+    public static function beginLayout(?Vec2 $padding = null) : FUILayout
     {
-        $view = new FUIView($margin);
-        self::$instance->pushView($view);
-        return $view;
-    }
-
-    public static function beginLayout() : FUILayout
-    {
-        $layout = new FUILayout();
+        $layout = new FUILayout($padding);
         self::$instance->pushView($layout);
         return $layout;
     }
@@ -124,6 +115,7 @@ class FlyUI
 
     public function __construct(
         private VGContext $vgContext,
+        private Dispatcher $dispatcher,
         private Input $input,
         ?FUITheme $theme = null
     )
@@ -160,7 +152,8 @@ class FlyUI
      */
     public function popView() : void
     {
-        $this->currentView = array_pop($this->viewTree);
+        array_pop($this->viewTree);
+        $this->currentView = end($this->viewTree) ?: null;
         if ($this->currentView === null) {
             throw new FUIException('Cannot pop the root view');
         }
@@ -187,7 +180,22 @@ class FlyUI
         $this->viewTree = [];
 
         // push the root view
-        $this->pushView(new FUIView(new Vec2(0, 0)));
+        $root = new FUIView();
+        $this->pushView($root);
+    }
+
+    /**
+     * Applies to hover state to the view tree
+     */
+    private function applyHoverState(Vec2 $mousePos) : void
+    {
+        // $view = $this->viewTree[0];
+
+        // while($view->children) {
+        //     foreach($view->children as $child) {
+        //         if ($child->)
+        //     }
+        // }
     }
 
     /**
@@ -199,6 +207,10 @@ class FlyUI
         $ctx->containerSize = $this->currentResolution;
 
         $this->vgContext->reset();
+
+        // apply hover state to view tree
+        $mousePos = $this->input->getCursorPosition();
+        $this->applyHoverState($mousePos);
 
         // let all views render itself
         $this->viewTree[0]->render($ctx);
