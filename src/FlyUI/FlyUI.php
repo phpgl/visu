@@ -115,6 +115,16 @@ class FlyUI
     }
 
     /**
+     * Creates a checkbox element
+     */
+    public static function checkbox(string $text, bool &$checked) : FUICheckbox
+    {
+        $view = new FUICheckbox($text, $checked);
+        self::$instance->addChildView($view);
+        return $view;
+    }
+
+    /**
      * The Theme currently used
      */
     public FUITheme $theme;

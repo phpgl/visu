@@ -36,6 +36,30 @@ class FUIRenderContext
         return $this->mousePos->x >= $this->origin->x && $this->mousePos->x <= $this->origin->x + $this->containerSize->x
             && $this->mousePos->y >= $this->origin->y && $this->mousePos->y <= $this->origin->y + $this->containerSize->y;
     }
+    
+    /**
+     * Returns boolean if an action + el id has been triggered once.
+     * Basically will return true only once and false if the condition is met again until reset.
+     * Reset is done by calling the function with the condition set to false.
+     */
+    public function triggeredOnce(string $id, bool $condition) : bool
+    {
+        static $fuiTriggeredStates = [];
+        if (!isset($fuiTriggeredStates[$id])) {
+            $fuiTriggeredStates[$id] = false;
+        }
+
+        if ($condition) {
+            if (!$fuiTriggeredStates[$id]) {
+                $fuiTriggeredStates[$id] = true;
+                return true;
+            }
+        } else {
+            $fuiTriggeredStates[$id] = false;
+        }
+
+        return false;
+    }
 
     /**
      * Ensures the given font face is set
