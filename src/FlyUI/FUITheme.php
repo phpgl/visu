@@ -24,17 +24,17 @@ class FUITheme
     /**
      * General font size used for text
      */
-    public float $fontSize = 16.0;
+    public float $fontSize = 13.0;
 
     /**
      * (small) font size used for text
      */
-    public float $smallFontSize = 12.0;
+    public float $smallFontSize = 10.0;
 
     /**
      * (large) font size used for text
      */
-    public float $largeFontSize = 24.0;
+    public float $largeFontSize = 16.0;
 
     /**
      * Spacing between elements

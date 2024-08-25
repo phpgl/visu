@@ -2,9 +2,11 @@
 
 namespace VISU\FlyUI;
 
+use Closure;
 use GL\Math\Vec2;
 use GL\VectorGraphics\VGColor;
 use GL\VectorGraphics\VGContext;
+use VISU\FlyUI\Exception\FlyUiInitException;
 use VISU\OS\Input;
 use VISU\Signal\Dispatcher;
 
@@ -28,6 +30,14 @@ class FlyUI
      */
     public static function initailize(VGContext $vgContext, Dispatcher $dispatcher, Input $input) : void {
         self::$instance = new FlyUI($vgContext, $dispatcher, $input);
+
+        if ($vgContext->createFont('inter-regular', VISU_PATH_FRAMEWORK_RESOURCES_FONT . '/inter/Inter-Regular.ttf') === -1) {
+            throw new FlyUiInitException('Could not load the "Inter-Regular.ttf" font file.');
+        }
+
+        if ($vgContext->createFont('inter-semibold', VISU_PATH_FRAMEWORK_RESOURCES_FONT . '/inter/Inter-SemiBold.ttf') === -1) {
+            throw new FlyUiInitException('Could not load the "Inter-Bold.ttf" font file.');
+        }
     }
 
     /**
@@ -97,9 +107,9 @@ class FlyUI
     /**
      * Creates a button element
      */
-    public static function button(string $text) : FUIButton
+    public static function button(string $text, Closure $onClick) : FUIButton
     {
-        $view = new FUIButton($text);
+        $view = new FUIButton($text, $onClick);
         self::$instance->addChildView($view);
         return $view;
     }
@@ -195,20 +205,6 @@ class FlyUI
     }
 
     /**
-     * Applies to hover state to the view tree
-     */
-    private function applyHoverState(Vec2 $mousePos) : void
-    {
-        // $view = $this->viewTree[0];
-
-        // while($view->children) {
-        //     foreach($view->children as $child) {
-        //         if ($child->)
-        //     }
-        // }
-    }
-
-    /**
      * End a UI frame (Dispatches the rendering of the views)
      */
     private function internalEndFrame() : void
@@ -218,9 +214,8 @@ class FlyUI
 
         $this->vgContext->reset();
 
-        // apply hover state to view tree
-        $mousePos = $this->input->getCursorPosition();
-        $this->applyHoverState($mousePos);
+        // set the inter font
+        $this->vgContext->fontFace('inter-regular');
 
         // let all views render itself
         $this->viewTree[0]->render($ctx);

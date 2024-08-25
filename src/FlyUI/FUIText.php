@@ -8,16 +8,19 @@ use GL\VectorGraphics\VGColor;
 
 class FUIText extends FUIView
 {
+    public float $fontSize;
+
     /**
      * Constructs a new view
      */
     public function __construct(
         public string $text,
         public ?VGColor $color = null,
-        public float $fontSize = 16,
     )
     {
         parent::__construct();
+
+        $this->fontSize = FlyUI::$instance->theme->fontSize;
     }
 
     /**
@@ -48,6 +51,7 @@ class FUIText extends FUIView
         // $ctx->vg->rect($ctx->origin->x, $ctx->origin->y, $ctx->containerSize->x, $height - 1);
         // $ctx->vg->fill();
 
+        $ctx->ensureFontFace('inter-regular');
         $ctx->vg->textAlign(VGAlign::LEFT | VGAlign::TOP);
         $ctx->vg->fontSize($this->fontSize);
         $ctx->vg->fillColor(VGColor::black());

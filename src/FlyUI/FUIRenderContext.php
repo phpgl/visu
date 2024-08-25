@@ -24,12 +24,28 @@ class FUIRenderContext
     public Vec2 $mousePos;
 
     /**
+     * Current font face
+     */
+    public string $fontFace = '';
+
+    /**
      * Returns true if the mouse is currently hovering over the current bounds
      */
     public function isHovered() : bool
     {
         return $this->mousePos->x >= $this->origin->x && $this->mousePos->x <= $this->origin->x + $this->containerSize->x
             && $this->mousePos->y >= $this->origin->y && $this->mousePos->y <= $this->origin->y + $this->containerSize->y;
+    }
+
+    /**
+     * Ensures the given font face is set
+     */
+    public function ensureFontFace(string $fontFace) : void
+    {
+        if ($this->fontFace !== $fontFace) {
+            $this->vg->fontFace($fontFace);
+            $this->fontFace = $fontFace;
+        }
     }
     
     /**
