@@ -133,6 +133,18 @@ class FUITheme
      */
     public float $buttonFontSize;
 
+    /**
+     * ------------------------------ Checkboxes ------------------------------
+     */
+
+    public VGColor $checkboxBackgroundColor;
+
+    public VGColor $checkboxHoverBackgroundColor;
+
+    public VGColor $checkboxActiveBackgroundColor;
+
+
+
 
     /**
      * Constructs a new theme
@@ -157,5 +169,12 @@ class FUITheme
         $this->buttonPadding = new Vec2(round($this->padding * 1.2), round($this->padding * 0.6));
         $this->buttonBorderRadius = $this->borderRadius;
         $this->buttonFontSize = $this->fontSize;
+
+        // checkboxes
+        $this->checkboxBackgroundColor = new VGColor(0.902, 0.902, 0.901, 1.0);
+        $this->checkboxHoverBackgroundColor = $this->checkboxBackgroundColor->lighten(0.05);
+        $this->checkboxActiveBackgroundColor =$this->buttonPrimaryBackgroundColor;
+
+        
     }
 }

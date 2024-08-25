@@ -9,7 +9,7 @@ use VISU\OS\MouseButton;
 
 class FUICheckbox extends FUIView
 {
-    private const FUI_HEIGHT = 20.0;
+    private const FUI_HEIGHT = 24.0;
 
     /**
      * Constructs a new view
@@ -42,14 +42,50 @@ class FUICheckbox extends FUIView
 
         $isInside = $ctx->isHovered();
 
-        if ($ctx->triggeredOnce($this->text, $isInside && $ctx->input->isMouseButtonPressed(MouseButton::LEFT))) {
+        if ($ctx->triggeredOnce('swt_' . $this->text, $isInside && $ctx->input->isMouseButtonPressed(MouseButton::LEFT))) {
             $this->checked = !$this->checked;
         }
 
+        $switchWidth = self::FUI_HEIGHT * 2;
+
+        // first a background
+        $bgColor = $this->checked ? FlyUI::$instance->theme->checkboxActiveBackgroundColor : FlyUI::$instance->theme->checkboxBackgroundColor;
+        if ($isInside) {
+            $bgColor = $this->checked ? $bgColor->lighten(0.05) : $bgColor->darken(0.05);
+        }
         $ctx->vg->beginPath();
-        $ctx->vg->fillColor($this->checked ? VGColor::red() : VGColor::green());
-        $ctx->vg->rect($ctx->origin->x, $ctx->origin->y, self::FUI_HEIGHT, self::FUI_HEIGHT);
+        $ctx->vg->fillColor($bgColor);
+        $ctx->vg->roundedRect(
+            $ctx->origin->x,
+            $ctx->origin->y,
+            $switchWidth,
+            self::FUI_HEIGHT,
+            self::FUI_HEIGHT * 0.5
+        );
         $ctx->vg->fill();
+
+        $knobX = $ctx->origin->x + ($this->checked ? $switchWidth - self::FUI_HEIGHT : 0);
+
+        // render a little circle in the middle
+        $ctx->vg->beginPath();
+        $ctx->vg->fillColor(VGColor::white());
+        $ctx->vg->circle(
+            $knobX + self::FUI_HEIGHT * 0.5,
+            $ctx->origin->y + self::FUI_HEIGHT * 0.5,
+            self::FUI_HEIGHT * 0.35
+        );
+        $ctx->vg->fill();
+
+        // render the text next to the switch
+        $ctx->ensureFontFace('inter-regular');
+        $ctx->vg->textAlign(VGAlign::LEFT | VGAlign::MIDDLE);
+        $ctx->vg->fontSize(FlyUI::$instance->theme->fontSize);
+        $ctx->vg->fillColor(VGColor::black());
+        $ctx->vg->text(
+            $ctx->origin->x + $switchWidth + FlyUI::$instance->theme->padding,
+            $ctx->origin->y + self::FUI_HEIGHT * 0.5,
+            $this->text
+        );
 
         // no pass to parent, as this is a leaf element
         return $height;
