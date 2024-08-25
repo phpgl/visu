@@ -54,6 +54,11 @@ class FlyUI
         self::$instance->internalEndFrame();
     }
 
+    /**
+     * Starts a layout element. 
+     * A layout is a container view that can have a margin and be layouted using different 
+     * sizing strategies like fit, fill, fixed, etc.
+     */
     public static function beginLayout(?Vec2 $padding = null) : FUILayout
     {
         $layout = new FUILayout($padding);
@@ -66,12 +71,7 @@ class FlyUI
      */
     public static function beginCardView() : FUICard
     {
-        $view = new FUICard(
-            backgroundColor: VGColor::white(),
-            borderRadius: 5.0,
-            borderColor: VGColor::black(),
-            borderWidth: 1.0
-        );
+        $view = new FUICard();
         self::$instance->pushView($view);
         return $view;
     }
@@ -90,6 +90,16 @@ class FlyUI
     public static function text(string $text, VGColor $color = null) : FUIText
     {
         $view = new FUIText($text, $color);
+        self::$instance->addChildView($view);
+        return $view;
+    }
+
+    /**
+     * Creates a button element
+     */
+    public static function button(string $text) : FUIButton
+    {
+        $view = new FUIButton($text);
         self::$instance->addChildView($view);
         return $view;
     }

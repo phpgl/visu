@@ -6,17 +6,26 @@ use GL\VectorGraphics\VGColor;
 
 class FUICard extends FUILayout
 {
+    public VGColor $backgroundColor;
+
+    public float $borderRadius;
+
+    public ?VGColor $borderColor;
+
+    public float $borderWidth;
+
     /**
      * Constructs a new view
      */
-    public function __construct(
-        public VGColor $backgroundColor,
-        public ?float $borderRadius = null,
-        public ?VGColor $borderColor = null,
-        public ?float $borderWidth = null
-    )
+    public function __construct()
     {
-        parent::__construct();
+        parent::__construct(FlyUI::$instance->theme->cardPadding);
+
+        $this->backgroundColor = FlyUI::$instance->theme->cardBackgroundColor;
+        $this->borderRadius = FlyUI::$instance->theme->cardBorderRadius;
+        $this->borderColor = FlyUI::$instance->theme->cardBorderColor;
+        $this->borderWidth = FlyUI::$instance->theme->cardBorderWidth;
+        $this->spacingY = FlyUI::$instance->theme->cardSpacing;
     }
 
     /**

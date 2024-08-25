@@ -19,9 +19,36 @@ class FUIRenderContext
     public Vec2 $containerSize;
 
     /**
-     * By default views are stacked vertically so we need to keep track of the vertical offset
+     * Current cursor position 
      */
-    public float $verticalOffset = 0;
+    public Vec2 $mousePos;
+
+    /**
+     * Returns true if the mouse is currently hovering over the current bounds
+     */
+    public function isHovered() : bool
+    {
+        return $this->mousePos->x >= $this->origin->x && $this->mousePos->x <= $this->origin->x + $this->containerSize->x
+            && $this->mousePos->y >= $this->origin->y && $this->mousePos->y <= $this->origin->y + $this->containerSize->y;
+    }
+    
+    /**
+     * Sets a static value (persistant data, over multiple frames)
+     */
+    public function setStaticValue(string $key, mixed $value) : void
+    {
+        static $persistantData = [];
+        $persistantData[$key] = $value;
+    }
+
+    /**
+     * Gets a static value (persistant data, over multiple frames)
+     */
+    public function getStaticValue(string $key, mixed $default = null) : mixed
+    {
+        static $persistantData = [];
+        return $persistantData[$key] ?? $default;
+    }
 
     /**
      * Initializes the render context
@@ -33,5 +60,6 @@ class FUIRenderContext
     {
         $this->origin = new Vec2(0, 0);
         $this->containerSize = new Vec2(0, 0);
+        $this->mousePos = $this->input->getCursorPosition();
     }
 }

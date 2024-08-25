@@ -24,7 +24,7 @@ class FUIText extends FUIView
      * Returns the height of the current view and its children
      * This is used for layouting purposes
      */
-    public function getEstimatedHeight(Vec2 $containerSize) : float
+    public function getEstimatedHeight(FUIRenderContext $ctx) : float
     {
         return $this->fontSize + $this->padding->y * 2;
     }
@@ -34,7 +34,7 @@ class FUIText extends FUIView
      */
     public function render(FUIRenderContext $ctx) : float
     {
-        $height = $this->getEstimatedHeight($ctx->containerSize);
+        $height = $this->getEstimatedHeight($ctx);
 
         if (!$this->color) {
             $ctx->vg->fillColor(VGColor::black());

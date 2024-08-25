@@ -86,6 +86,11 @@ class FUILayout extends FUIView
     public ?float $bottom = null;
 
     /**
+     * A vertical gab between the children 
+     */
+    public float $spacingY = 0.0;
+
+    /**
      * Sets the horizontal and vertical margins
      */
     public function marginXY(float $horizontal, float $vertical) : self
@@ -227,15 +232,19 @@ class FUILayout extends FUIView
     /**
      * Returns the height of the content aka the sum of all children
      */
-    private function getContentHeight(Vec2 $containerSize) : float
+    private function getContentHeight(FUIRenderContext $ctx) : float
     {
         $height = 0.0;
 
         // height of all children
-        foreach($this->children as $child) {
-            $height += $child->getEstimatedHeight($containerSize);
+        if (count($this->children) !== 0) {
+            foreach($this->children as $child) {
+                $height += $child->getEstimatedHeight($ctx) + $this->spacingY;
+            }
+    
+            $height -= $this->spacingY; // remove the last spacing
         }
-
+        
         // add the padding to the height
         $height += $this->padding->y * 2;
         
@@ -247,21 +256,21 @@ class FUILayout extends FUIView
      * 
      * Note: This is used for layouting in some sizing modes
      */
-    public function getEstimatedHeight(Vec2 $containerSize) : float
+    public function getEstimatedHeight(FUIRenderContext $ctx) : float
     {
         if ($this->sizingVertical === FUILayoutSizing::fixed) {
             return $this->height + $this->top + $this->bottom;
         }
 
         elseif ($this->sizingVertical === FUILayoutSizing::factor) {
-            return $containerSize->y * $this->height;
+            return $ctx->containerSize->y * $this->height;
         }
         
         elseif ($this->sizingVertical === FUILayoutSizing::fill) {
-            return $containerSize->y;
+            return $ctx->containerSize->y;
         }
 
-        $height = $this->getContentHeight($containerSize);
+        $height = $this->getContentHeight($ctx);
 
         // add the margin to the height
         $height += $this->top + $this->bottom;
@@ -271,28 +280,30 @@ class FUILayout extends FUIView
 
     protected function renderContent(FUIRenderContext $ctx) : void
     {
-        // START debug
-        $cursorPos = $ctx->input->getCursorPosition();
-        if ($cursorPos->x >= $ctx->origin->x && $cursorPos->x <= $ctx->origin->x + $ctx->containerSize->x &&
-            $cursorPos->y >= $ctx->origin->y && $cursorPos->y <= $ctx->origin->y + $ctx->containerSize->y
-        ) {
-            $ctx->vg->beginPath();
-            $ctx->vg->rect($ctx->origin->x, $ctx->origin->y, $ctx->containerSize->x, $ctx->containerSize->y);
-            $ctx->vg->strokeColor(VGColor::red());
-            $ctx->vg->stroke();
-            $ctx->vg->fillColor(VGColor::red());
-            $ctx->vg->fontSize(12);
-            $ctx->vg->text($ctx->origin->x + 15, $ctx->origin->y + 15, 'origin(' . $ctx->origin->x . ', ' . $ctx->origin->y . '), size(' . $ctx->containerSize->x . ', ' . $ctx->containerSize->y . '), offset(' . $ctx->verticalOffset . ')');
-        }
-        // END debug
+        // // START debug
+        // $cursorPos = $ctx->input->getCursorPosition();
+        // if ($cursorPos->x >= $ctx->origin->x && $cursorPos->x <= $ctx->origin->x + $ctx->containerSize->x &&
+        //     $cursorPos->y >= $ctx->origin->y && $cursorPos->y <= $ctx->origin->y + $ctx->containerSize->y
+        // ) {
+        //     $ctx->vg->beginPath();
+        //     $ctx->vg->rect($ctx->origin->x, $ctx->origin->y, $ctx->containerSize->x, $ctx->containerSize->y);
+        //     $ctx->vg->strokeColor(VGColor::red());
+        //     $ctx->vg->stroke();
+        //     $ctx->vg->fillColor(VGColor::red());
+        //     $ctx->vg->fontSize(12);
+        //     $ctx->vg->text($ctx->origin->x + 15, $ctx->origin->y + 15, 'origin(' . $ctx->origin->x . ', ' . $ctx->origin->y . '), size(' . $ctx->containerSize->x . ', ' . $ctx->containerSize->y . ')');
+        // }
+        // // END debug
 
         // apply padding to the context
         $ctx->origin = $ctx->origin + $this->padding;
         $ctx->containerSize = $ctx->containerSize - ($this->padding * 2);
-
+        $linestart = $ctx->origin->x;
+        
         // render the children
         foreach($this->children as $child) {
-            $ctx->origin->y = $ctx->origin->y + $child->render($ctx);
+            $ctx->origin->y = $ctx->origin->y + $child->render($ctx) + $this->spacingY;
+            $ctx->origin->x = $linestart;
         }
     }
 
@@ -315,7 +326,7 @@ class FUILayout extends FUIView
             $ctx->origin = $ctx->origin + new Vec2($this->left ?? 0, $this->top ?? 0);
 
             if ($this->sizingVertical === FUILayoutSizing::fit) {
-                $ctx->containerSize->y = $this->getContentHeight($ctx->containerSize);
+                $ctx->containerSize->y = $this->getContentHeight($ctx);
             } elseif ($this->sizingVertical === FUILayoutSizing::fill) {
                 // reduce the container size by the margin
                 $ctx->containerSize->y = $ctx->containerSize->y - ($this->top ?? 0) - ($this->bottom ?? 0);
@@ -352,7 +363,7 @@ class FUILayout extends FUIView
 
                 // no height value, we will use the content height
                 if ($this->sizingVertical === FUILayoutSizing::fit) {
-                    $ctx->containerSize->y = $this->getContentHeight($ctx->containerSize);
+                    $ctx->containerSize->y = $this->getContentHeight($ctx);
                 } elseif ($this->sizingVertical === FUILayoutSizing::fill) {
                     $ctx->containerSize->y = $ctx->containerSize->y - ($this->top ?? 0) - ($this->bottom ?? 0);
                 } else {
@@ -401,6 +412,6 @@ class FUILayout extends FUIView
         $ctx->origin = $initalOrigin;
         $ctx->containerSize = $initalSize;
 
-        return $this->getEstimatedHeight($ctx->containerSize);
+        return $this->getEstimatedHeight($ctx);
     }
 }
