@@ -242,6 +242,10 @@ class QuickstartApp implements GameLoopDelegate
         // this will allow subsystem to access the VG context as well
         $data->set($this->vg);
 
+        // store the VG context in the pipeline container
+        // this will allow subsystem to access the VG context as well
+        $data->set($this->vg);
+
         // run the render callback if available
         $this->options->render?->__invoke($this, $context, $quickstartPassData->renderTarget);
         $this->setupDrawBefore($context, $quickstartPassData->renderTarget);

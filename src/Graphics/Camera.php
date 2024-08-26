@@ -64,6 +64,13 @@ class Camera
     public float $staticWorldHeight = 100.0;
 
     /**
+     * Camera Zoom
+     * 
+     * Only applies to orthographic projection modes and vg contexts.
+     */
+    public float $zoom = 1.0;
+
+    /**
      * Flip the viewport on the y axis
      * The camera by default uses y+ as up, this will flip the viewport to use y- as up.
      * 
@@ -317,17 +324,17 @@ class Camera
      */
     public function transformVGSpace(Viewport $viewport, VGContext $vg) : void
     {
-        $scaleFactorY = $viewport->screenSpaceHeight / $viewport->height;
-        $scaleFactorX = $viewport->screenSpaceWidth / $viewport->width;
-
-        $vg->scale($scaleFactorX, $scaleFactorY);
-
         $offsetX = -$viewport->left;
         $offsetY = -$viewport->top;
-        $offsetX -= $this->transform->position->x;
-        $offsetY -= $this->transform->position->y;
+        $offsetX -= $this->transform->position->x * $this->zoom;
+        $offsetY -= $this->transform->position->y * $this->zoom;
 
         $vg->translate($offsetX, $offsetY);
+
+        $scaleFactorX = $viewport->screenSpaceWidth / $viewport->width * $this->zoom;
+        $scaleFactorY = $viewport->screenSpaceHeight / $viewport->height * $this->zoom;    
+
+        $vg->scale($scaleFactorX, $scaleFactorY);
     }
 
     /**
