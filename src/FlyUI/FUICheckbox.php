@@ -53,15 +53,21 @@ class FUICheckbox extends FUIView
         if ($isInside) {
             $bgColor = $this->checked ? $bgColor->lighten(0.05) : $bgColor->darken(0.05);
         }
+
+        // border 
+        $ctx->vg->strokeColor($bgColor->darken(0.1));
+        $ctx->vg->strokeWidth(1.0);
+
         $ctx->vg->beginPath();
         $ctx->vg->fillColor($bgColor);
         $ctx->vg->roundedRect(
             $ctx->origin->x,
-            $ctx->origin->y,
+            $ctx->origin->y + 1,
             $switchWidth,
-            self::FUI_HEIGHT,
-            self::FUI_HEIGHT * 0.5
+            self::FUI_HEIGHT - 2,
+            (self::FUI_HEIGHT - 2) * 0.5
         );
+        $ctx->vg->stroke();
         $ctx->vg->fill();
 
         $knobX = $ctx->origin->x + ($this->checked ? $switchWidth - self::FUI_HEIGHT : 0);
@@ -75,6 +81,7 @@ class FUICheckbox extends FUIView
             self::FUI_HEIGHT * 0.35
         );
         $ctx->vg->fill();
+        $ctx->vg->stroke();
 
         // render the text next to the switch
         $ctx->ensureFontFace('inter-regular');

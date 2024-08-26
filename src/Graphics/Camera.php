@@ -324,18 +324,20 @@ class Camera
      */
     public function transformVGSpace(Viewport $viewport, VGContext $vg) : void
     {
-        $offsetX = -$viewport->left;
-        $offsetY = -$viewport->top;
-        $offsetX -= $this->transform->position->x * $this->zoom;
-        $offsetY -= $this->transform->position->y * $this->zoom;
-
-        $vg->translate($offsetX, $offsetY);
-
-        $scaleFactorX = $viewport->screenSpaceWidth / $viewport->width * $this->zoom;
-        $scaleFactorY = $viewport->screenSpaceHeight / $viewport->height * $this->zoom;    
+        $scaleFactorX = $viewport->screenSpaceWidth / $viewport->width;
+        $scaleFactorY = $viewport->screenSpaceHeight / $viewport->height;    
 
         $vg->scale($scaleFactorX, $scaleFactorY);
+    
+        $offsetX = -$viewport->left;
+        $offsetY = -$viewport->top;
+        $offsetX -= $this->transform->position->x;
+        $offsetY -= $this->transform->position->y;
+
+        $vg->translate($offsetX, $offsetY);
+        $vg->scale($this->zoom, $this->zoom);
     }
+
 
     /**
      * Calling this method will store the current camera position and orientation

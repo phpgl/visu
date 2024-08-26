@@ -340,15 +340,12 @@ class FUILayout extends FUIView
             } else {
                 throw new FUIException(sprintf('The horizontal sizing mode %s is not supported for layouts without a width or height value.', $this->sizingHorizontal));
             }
-
         }
         else
         {
             // we have a height value
             if ($this->height !== null)
             {
-                $ctx->origin->y = $ctx->origin->y + ($this->top ?? 0);
-
                 if ($this->sizingVertical === FUILayoutSizing::fixed) {
                     $ctx->containerSize->y = $this->height;
                 } elseif ($this->sizingVertical === FUILayoutSizing::factor) {
@@ -359,8 +356,6 @@ class FUILayout extends FUIView
             } 
             else
             {
-                $ctx->origin->y = $ctx->origin->y + ($this->top ?? 0);
-
                 // no height value, we will use the content height
                 if ($this->sizingVertical === FUILayoutSizing::fit) {
                     $ctx->containerSize->y = $this->getContentHeight($ctx);
@@ -370,6 +365,15 @@ class FUILayout extends FUIView
                     throw new FUIException(sprintf('The sizing mode %s is not supported for layouts without a width or height value.', $this->sizingVertical));
                 }
             } 
+
+            // because we have a fixed height, bottom and top cannot be set at the same time
+            // we will prioritize the top margin
+            if ($this->top !== null) {
+                $ctx->origin->y = $ctx->origin->y + $this->top;
+            }
+            else if ($this->bottom !== null) {
+                $ctx->origin->y = $initalSize->y - $ctx->containerSize->y - $this->bottom;
+            }
 
             // we have a width value
             if ($this->width !== null)
@@ -389,6 +393,10 @@ class FUILayout extends FUIView
                 }
                 else if ($this->right !== null) {
                     $ctx->origin->x = $ctx->origin->x + $fullWidth - $ctx->containerSize->x - $this->right;
+                }
+                // if right and left are not set, we will center the layout
+                else {
+                    $ctx->origin->x = $ctx->origin->x + ($fullWidth - $ctx->containerSize->x) * 0.5;
                 }
 
                 $ctx->containerSize->x = $ctx->containerSize->x - ($this->left ?? 0) - ($this->right ?? 0);
