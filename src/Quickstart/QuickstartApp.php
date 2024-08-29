@@ -25,8 +25,10 @@ use VISU\OS\InputContextMap;
 use VISU\Quickstart\Render\QuickstartDebugMetricsOverlay;
 
 use GL\VectorGraphics\{VGContext, VGColor};
+use VISU\FlyUI\FlyUI;
 use VISU\Graphics\Rendering\Resource\RenderTargetResource;
 use VISU\Graphics\Viewport;
+use VISU\Quickstart\Render\QuickstartPassData;
 
 class QuickstartApp implements GameLoopDelegate
 {
@@ -153,6 +155,9 @@ class QuickstartApp implements GameLoopDelegate
         // rest GL state after creating the VG context as it might change some state
         $this->gl->reset();
 
+        // initalize FlyUI
+        FlyUI::initailize($this->vg, $this->dispatcher, $this->input);
+
         // create the fullscreen texture renderer
         $this->fullscreenTextureRenderer = new FullscreenTextureRenderer($this->gl);
         $this->dbgOverlayRenderer = new QuickstartDebugMetricsOverlay($this->container);
@@ -215,57 +220,61 @@ class QuickstartApp implements GameLoopDelegate
         $pipeline = new RenderPipeline($this->renderResources, $data, $windowRenderTarget);
         $context = new RenderContext($pipeline, $data, $this->renderResources, $deltaTime);
 
+        // create a data holder for the quickstart pass
+        $quickstartPassData = $data->create(QuickstartPassData::class);
+
         // create an intermediate render target with a texture attachment
         $appContentScale = $windowRenderTarget->contentScaleX;
-        $appRenderTarget = $context->pipeline->createRenderTarget(
-            'quickstartTarget', 
-            $windowRenderTarget->width(), 
-            $windowRenderTarget->height()
-        );
+        $quickstartPassData->renderTarget = $context->pipeline->createRenderTargetLike('quickstartTarget', $windowRenderTarget);
 
-        // copy the content scale
-        $appRenderTarget->contentScaleX = $appContentScale;
-        $appRenderTarget->contentScaleY = $appContentScale;
-        $appRenderTarget->createRenderbufferDepthStencil = true;
+        // we want a depth and stencil buffer
+        $quickstartPassData->renderTarget->createRenderbufferDepthStencil = true;
 
         // create a color attachment
         $sceneColorOptions = new TextureOptions;
         $sceneColorOptions->internalFormat = GL_RGBA;
-        $sceneColorAtt = $context->pipeline->createColorAttachment($appRenderTarget, 'quickstartColor', $sceneColorOptions);
+        $sceneColorAtt = $context->pipeline->createColorAttachment($quickstartPassData->renderTarget, 'quickstartColor', $sceneColorOptions);
 
+        // begin a FlyUI frame
+        FlyUI::beginFrame($quickstartPassData->renderTarget->effectiveSizeVec(), $appContentScale);
+        
         // store the VG context in the pipeline container
         // this will allow subsystem to access the VG context as well
         $data->set($this->vg);
 
         // run the render callback if available
-        $this->options->render?->__invoke($this, $context, $appRenderTarget);
-        $this->setupDrawBefore($context, $appRenderTarget);
+        $this->options->render?->__invoke($this, $context, $quickstartPassData->renderTarget);
+        $this->setupDrawBefore($context, $quickstartPassData->renderTarget);
 
         $pipeline->addPass(new CallbackPass(
             'QuickstartApp::draw',
-            function(RenderPass $pass, RenderPipeline $pipeline, PipelineContainer $data) use($appRenderTarget) {
-                $pipeline->writes($pass, $appRenderTarget);
+            function(RenderPass $pass, RenderPipeline $pipeline, PipelineContainer $data) {
+                $pipeline->writes($pass, $data->get(QuickstartPassData::class)->renderTarget);
             },
-            function(PipelineContainer $data, PipelineResources $resources) use($appRenderTarget, $appContentScale, $context) 
+            function(PipelineContainer $data, PipelineResources $resources) use($context) 
             {
-                $renderTarget = $resources->getRenderTarget($appRenderTarget);
+                $quickstartPassData = $data->get(QuickstartPassData::class);
+
+                $renderTarget = $resources->getRenderTarget($quickstartPassData->renderTarget);
                 $renderTarget->preparePass();
                 
-                $this->vg->beginFrame(
-                    $renderTarget->width() / $appContentScale, 
-                    $renderTarget->height() / $appContentScale, 
-                    $appContentScale
-                );
-                
+                // begin the VectorGraphics frame
+                $this->vg->beginFrame($renderTarget->effectiveWidth(), $renderTarget->effectiveHeight(), $renderTarget->contentScaleX);
+
+                // main draw call
                 $this->draw($context, $renderTarget);
 
+                // end the FlyUI frame
+                FlyUI::endFrame();
+                
+                // end the VectorGraphics frame
                 $this->vg->endFrame();
                 // because VG touches the GL state we need to reset it
                 $this->gl->reset();
             }
         ));
 
-        $this->setupDrawAfter($context, $appRenderTarget);
+        $this->setupDrawAfter($context, $quickstartPassData->renderTarget);
 
         // create a fullscreen quad render pass
         $backbuffer = $data->get(BackbufferData::class)->target;
