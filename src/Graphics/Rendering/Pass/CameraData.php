@@ -6,9 +6,18 @@ use GL\Math\Mat4;
 use GL\Math\Vec2;
 use VISU\Geo\Frustum;
 use VISU\Graphics\Camera;
-use VISU\Graphics\Rendering\RenderResource;
 use VISU\Graphics\Viewport;
 
+/**
+ * The camera data object is meant to hold all meta data about the current frame
+ * This includes:
+ *  - projection & view matrix and their combination as well as the inverse
+ *  - frame delta time
+ *  - screen resolution, effective resolution and content scale
+ *  - frustum of the current frame
+ *  - viewport information
+ *  - The current camera object used
+ */
 class CameraData
 {
     /**

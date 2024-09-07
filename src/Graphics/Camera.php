@@ -9,9 +9,11 @@ use GL\Math\Vec2;
 use GL\Math\Vec3;
 use GL\Math\Vec4;
 use GL\VectorGraphics\VGContext;
+use VISU\Exception\VISUException;
 use VISU\Geo\Frustum;
 use VISU\Geo\Ray;
 use VISU\Geo\Transform;
+use VISU\Graphics\Rendering\Pass\CameraData;
 
 class Camera
 {
@@ -173,7 +175,7 @@ class Camera
             );
         }
         else {
-            throw new \Exception('Unknown projection mode');
+            throw new VISUException('Unknown or unsupported projection mode given');
         }
 
         return $this->projectionMatrixAlloc->copy();
@@ -229,7 +231,7 @@ class Camera
             );
         }
         else {
-            throw new \Exception('Unknown or unsupported projection mode');
+            throw new VISUException('Unknown or unsupported projection mode given');
         }
     }
 
@@ -349,5 +351,35 @@ class Camera
     {
         $this->lfCameraPos = $this->transform->position->copy();
         $this->lfCameraRot = $this->transform->orientation->copy();
+    }
+
+    /**
+     * Creates and returns a camera data instance for the given render target and delta time.
+     */
+    public function createCameraData(RenderTarget $renderTarget, float $compensation = 0.0) : CameraData
+    {
+        // extract the camera view and projection matrices
+        $viewMatrix = $this->getViewMatrix($compensation); // <- this is interpolated
+        $projectionMatrix = $this->getProjectionMatrix($renderTarget);
+
+        /** @var Mat4 */
+        $projectionViewMatrix = $projectionMatrix * $viewMatrix;
+        $inverseProjectionViewMatrix = Mat4::inverted($projectionViewMatrix);
+
+        return new CameraData(
+            frameCamera: $this,
+            renderCamera: $this,
+            projection: $projectionMatrix,
+            view: $viewMatrix,
+            projectionView: $projectionViewMatrix,
+            inverseProjectionView: $inverseProjectionViewMatrix,
+            frustum: Frustum::fromMat4($projectionViewMatrix),
+            compensation: $compensation,
+            resolutionX: $renderTarget->width(),
+            resolutionY: $renderTarget->height(),
+            contentScaleX: $renderTarget->contentScaleX,
+            contentScaleY: $renderTarget->contentScaleY,
+            viewport: $this->projectionMode !== CameraProjectionMode::perspective ? $this->getViewport($renderTarget) : null,
+        );
     }
 }

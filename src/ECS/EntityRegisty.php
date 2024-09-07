@@ -276,12 +276,15 @@ class EntityRegisty implements EntitiesInterface
     /**
      * Stores a singleton component in the entity registy
      * 
-     * @template T of object
+     * @template T
      * @param T             $component
+     * @return T
      */
-    public function setSingleton($component) : void
+    public function setSingleton($component)
     {
         $this->singletonComponents[get_class($component)] = $component; 
+        
+        return $component;
     }
 
     /**

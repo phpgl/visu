@@ -136,8 +136,9 @@ interface EntitiesInterface
      * 
      * @template T
      * @param T             $component
+     * @return T
      */
-    public function setSingleton($component) : void;
+    public function setSingleton($component);
 
     /**
      * Returns a singleton component from the entity registry

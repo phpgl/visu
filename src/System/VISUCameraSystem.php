@@ -305,8 +305,6 @@ class VISUCameraSystem implements SystemInterface
         $camera->transform->markDirty();
     }
 
-    private ?Mat4 $frozenView = null;
-
     /**
      * Create a camera data structure for the given render target.
      * 
@@ -319,52 +317,7 @@ class VISUCameraSystem implements SystemInterface
     public function getCameraData(EntitiesInterface $entities, RenderTarget $renderTarget, float $compensation) : CameraData
     {
         $camera = $this->getActiveCamera($entities);
-
-        // extract the camera view and projection matrices
-        $viewMatrix = $camera->getViewMatrix($compensation);
-        $projectionMatrix = $camera->getProjectionMatrix($renderTarget);
-
-        /** @var Mat4 */
-        $projectionViewMatrix = $projectionMatrix * $viewMatrix;
-        $inverseProjectionViewMatrix = Mat4::inverted($projectionViewMatrix);
-
-        if ($this->input->isMouseButtonPressed(MouseButton::RIGHT)) {
-            $this->frozenView = $viewMatrix->copy();
-        } elseif ($this->input->isMouseButtonPressed(MouseButton::MIDDLE)) {
-            $this->frozenView = null;
-        }
-
-        global $showFrustum;
-        if ($this->frozenView) {
-            // // debug
-            // $testView = new Mat4;
-            // $testView->rotate(GLM::radians(45.0), new Vec3(1.0, 0.0, 0.0));
-            // $testView->rotate(GLM::radians(sin(glfwGetTime()) * 90), new Vec3(0.0, 1.0, 0.0));
-
-            $fakeView = $this->frozenView->copy();
-            $projectionViewMatrix = $projectionMatrix * $fakeView;
-            $inverseProjectionViewMatrix = Mat4::inverted($projectionViewMatrix);
-
-            $showFrustum = true;
-        } else {
-            $showFrustum = false;
-        }
-
-        return new CameraData(
-            frameCamera: $camera,
-            renderCamera: $camera,
-            projection: $projectionMatrix,
-            view: $viewMatrix,
-            projectionView: $projectionViewMatrix,
-            inverseProjectionView: $inverseProjectionViewMatrix,
-            frustum: Frustum::fromMat4($projectionViewMatrix),
-            compensation: $compensation,
-            resolutionX: $renderTarget->width(),
-            resolutionY: $renderTarget->height(),
-            contentScaleX: $renderTarget->contentScaleX,
-            contentScaleY: $renderTarget->contentScaleY,
-            viewport: $camera->projectionMode !== CameraProjectionMode::perspective ? $camera->getViewport($renderTarget) : null,
-        );
+        return $camera->createCameraData($renderTarget, $compensation);
     }
 
     /**
