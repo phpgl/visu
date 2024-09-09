@@ -143,6 +143,14 @@ class FlyUI
 
     private float $currentContentScale = 1.0;
 
+    /**
+     * If true, FLyUI will create and end VGContext frames itself
+     */
+    private bool $selfManageVGContext = false;
+
+    /**
+     * Constructor
+     */
     public function __construct(
         private VGContext $vgContext,
         private Dispatcher $dispatcher,
@@ -152,6 +160,16 @@ class FlyUI
     {
         // assing the theme, create a default one if none is provided
         $this->theme = $theme ?? new FUITheme();
+    }
+
+    /**
+     * Sets if FlyUI should manage the VGContext frames itself
+     * 
+     * When enabled FlyUI will call beginFrame and endFrame itself.
+     */
+    public function setSelfManageVGContext(bool $value) : void
+    {
+        $this->selfManageVGContext = $value;
     }
 
     /**
@@ -212,6 +230,11 @@ class FlyUI
         // push the root view
         $root = new FUIView();
         $this->pushView($root);
+
+        // begin the VGContext frame
+        if ($this->selfManageVGContext) {
+            $this->vgContext->beginFrame($resolution->x, $resolution->y, $contentScale);
+        }
     }
 
     /**
@@ -229,5 +252,10 @@ class FlyUI
 
         // let all views render itself
         $this->viewTree[0]->render($ctx);
+
+        // end the VGContext frame
+        if ($this->selfManageVGContext) {
+            $this->vgContext->endFrame();
+        }
     }
 }
