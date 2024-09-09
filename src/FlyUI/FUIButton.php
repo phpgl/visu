@@ -22,6 +22,12 @@ class FUIButton extends FUIView
     public string $buttonId;
 
     /**
+     * If set to true, the button will take the full width of the parent container
+     * instead of basing its size on the text width
+     */
+    public bool $fullWidth = false;
+
+    /**
      * Constructs a new view
      */
     public function __construct(
@@ -30,7 +36,7 @@ class FUIButton extends FUIView
         ?string $buttonId = null
     )
     {
-        parent::__construct(FlyUI::$instance->theme->buttonPadding);
+        parent::__construct(FlyUI::$instance->theme->buttonPadding->copy());
 
         $this->backgroundColor = FlyUI::$instance->theme->buttonPrimaryBackgroundColor;
         $this->hoverBackgroundColor = FlyUI::$instance->theme->buttonPrimaryHoverBackgroundColor;
@@ -53,6 +59,15 @@ class FUIButton extends FUIView
     }
 
     /**
+     * Sets the button to full width mode
+     */
+    public function setFullWidth(bool $fullWidth = true) : self
+    {
+        $this->fullWidth = $fullWidth;
+        return $this;
+    }
+
+    /**
      * Returns the height of the current view and its children
      * This is used for layouting purposes
      */
@@ -68,10 +83,18 @@ class FUIButton extends FUIView
      */
     public function getEstimatedWidth(FUIRenderContext $ctx) : float
     {
-        $ctx->ensureFontFace('inter-semibold');
+        if ($this->fullWidth) {
+            return $ctx->containerSize->x;
+        }
+
+        $ctx->ensureSemiBoldFontFace();
         $ctx->vg->fontSize($this->fontSize);
         return $ctx->vg->textBounds(0, 0, $this->text) + $this->padding->x * 2;
     }
+
+    private const BUTTON_PRESS_NONE = 0;
+    private const BUTTON_PRESS_STARTED = 1;
+    private const BUTTON_PRESS_ENDED = 2;
 
     /**
      * Renders the current view using the provided context
@@ -85,12 +108,12 @@ class FUIButton extends FUIView
         $ctx->containerSize->y = $height;
         $ctx->containerSize->x = $width;
 
-        // Check if the mouse is inside the button
+        // check if the mouse is inside the button
         $isInside = $ctx->isHovered();
     
         static $fuiButtonPressStates = [];
         if (!isset($fuiButtonPressStates[$this->buttonId])) {
-            $fuiButtonPressStates[$this->buttonId] = false;
+            $fuiButtonPressStates[$this->buttonId] = self::BUTTON_PRESS_NONE;
         }
     
         if ($isInside && $ctx->input->isMouseButtonPressed(MouseButton::LEFT)) {
@@ -109,15 +132,16 @@ class FUIButton extends FUIView
             );
             $ctx->vg->stroke();
 
-
-            if (!$fuiButtonPressStates[$this->buttonId]) {
-                $fuiButtonPressStates[$this->buttonId] = true;
-                if ($this->onClick !== null) {
-                    ($this->onClick)();
-                }
+            if ($fuiButtonPressStates[$this->buttonId] === self::BUTTON_PRESS_NONE) {
+                $fuiButtonPressStates[$this->buttonId] = self::BUTTON_PRESS_STARTED;
+            }
+        } else if ($isInside && $fuiButtonPressStates[$this->buttonId] === self::BUTTON_PRESS_STARTED) {
+            $fuiButtonPressStates[$this->buttonId] = self::BUTTON_PRESS_ENDED;
+            if ($this->onClick) {
+                ($this->onClick)();
             }
         } else {
-            $fuiButtonPressStates[$this->buttonId] = false;
+            $fuiButtonPressStates[$this->buttonId] = self::BUTTON_PRESS_NONE;
         }
 
         // render the button background
@@ -146,6 +170,8 @@ class FUIButton extends FUIView
         // wile ignoring letters like 'g' or 'y' that go below the baseline
         $ctx->origin->y = floor($ctx->origin->y + $this->fontSize * 0.15);
         
+        $ctx->ensureSemiBoldFontFace();
+        $ctx->vg->fontSize($this->fontSize);
         $ctx->vg->textAlign(VGAlign::CENTER | VGAlign::MIDDLE);
         $ctx->vg->fillColor($this->textColor);
         $ctx->vg->text($ctx->origin->x, $ctx->origin->y, $this->text);

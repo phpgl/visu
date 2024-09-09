@@ -19,7 +19,7 @@ class FUICard extends FUILayout
      */
     public function __construct()
     {
-        parent::__construct(FlyUI::$instance->theme->cardPadding);
+        parent::__construct(FlyUI::$instance->theme->cardPadding->copy());
 
         $this->backgroundColor = FlyUI::$instance->theme->cardBackgroundColor;
         $this->borderRadius = FlyUI::$instance->theme->cardBorderRadius;

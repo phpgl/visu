@@ -230,6 +230,15 @@ class FUILayout extends FUIView
     }
 
     /**
+     * Sets the vertical spacing between the children
+     */
+    public function spacingY(float $spacing) : self
+    {
+        $this->spacingY = $spacing;
+        return $this;
+    }
+
+    /**
      * Returns the height of the content aka the sum of all children
      */
     private function getContentHeight(FUIRenderContext $ctx) : float

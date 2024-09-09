@@ -12,6 +12,20 @@ class FUITheme
      */
 
     /**
+     * Default font used for text, buttons, etc.
+     * FlyUI loads the `inter` font automatically, if you want to use a different font you
+     * are responsible for loading it yourself.
+     */
+    public string $regularFont = 'inter-regular';
+
+    /**
+     * Default "semi bold" font.
+     * FlyUI loads the `inter` font automatically, if you want to use a different font you
+     * are responsible for loading it yourself.
+     */
+    public string $semiBoldFont = 'inter-semibold';
+
+    /**
      * The general padding used to space elements
      */
     public float $padding = 10.0;

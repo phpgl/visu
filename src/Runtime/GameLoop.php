@@ -73,6 +73,11 @@ class GameLoop
     public int $tickTimeSampleCount = 60;
 
     /**
+     * If set to true, the game loop will force stop, even if the delegate doesn't want to.
+     */
+    private bool $forceStop = false;
+
+    /**
      * Constructor
      * 
      * @param GameLoopDelegate $delegate The game loop delegate to handle update, draw etc.
@@ -209,6 +214,14 @@ class GameLoop
     }
 
     /**
+     * Force stops the game loop.
+     */
+    public function forceStop() : void
+    {
+        $this->forceStop = true;
+    }
+
+    /**
      * Starts and runs the game loop
      * 
      * @return void 
@@ -225,7 +238,7 @@ class GameLoop
         $frameTickCount = 0;
 
         // loop forever until the delegate tells us to stop
-        while (!$this->delegate->shouldStop()) 
+        while (!$this->delegate->shouldStop() && !$this->forceStop) 
         {
             // determine delta time since last frame
             $deltaTime = Clock::now64() - $lastFrameStart;

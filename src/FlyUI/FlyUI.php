@@ -242,13 +242,13 @@ class FlyUI
      */
     private function internalEndFrame() : void
     {
-        $ctx = new FUIRenderContext($this->vgContext, $this->input);
+        $ctx = new FUIRenderContext($this->vgContext, $this->input, $this->theme);
         $ctx->containerSize = $this->currentResolution;
 
         $this->vgContext->reset();
 
-        // set the inter font
-        $this->vgContext->fontFace('inter-regular');
+        // set the default font face
+        $ctx->ensureRegularFontFace();
 
         // let all views render itself
         $this->viewTree[0]->render($ctx);

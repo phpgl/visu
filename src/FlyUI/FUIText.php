@@ -8,7 +8,15 @@ use GL\VectorGraphics\VGColor;
 
 class FUIText extends FUIView
 {
+    /**
+     * The font size of the text
+     */
     public float $fontSize;
+
+    /**
+     * Should the text be bold
+     */
+    public bool $isBold = false;
 
     /**
      * Constructs a new view
@@ -21,6 +29,24 @@ class FUIText extends FUIView
         parent::__construct();
 
         $this->fontSize = FlyUI::$instance->theme->fontSize;
+    }
+
+    /**
+     * Sets the font size of the text
+     */
+    public function fontSize(float $size) : self
+    {
+        $this->fontSize = $size;
+        return $this;
+    }
+
+    /**
+     * Sets the text to be bold
+     */
+    public function bold() : self
+    {
+        $this->isBold = true;
+        return $this;
     }
 
     /**
@@ -51,7 +77,12 @@ class FUIText extends FUIView
         // $ctx->vg->rect($ctx->origin->x, $ctx->origin->y, $ctx->containerSize->x, $height - 1);
         // $ctx->vg->fill();
 
-        $ctx->ensureFontFace('inter-regular');
+        if ($this->isBold) {
+            $ctx->ensureSemiBoldFontFace();
+        } else {
+            $ctx->ensureRegularFontFace();
+        }
+        
         $ctx->vg->textAlign(VGAlign::LEFT | VGAlign::TOP);
         $ctx->vg->fontSize($this->fontSize);
         $ctx->vg->fillColor(VGColor::black());

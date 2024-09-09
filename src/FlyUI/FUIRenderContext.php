@@ -26,7 +26,7 @@ class FUIRenderContext
     /**
      * Current font face
      */
-    public string $fontFace = '';
+    private string $fontFace = '';
 
     /**
      * Returns true if the mouse is currently hovering over the current bounds
@@ -71,6 +71,22 @@ class FUIRenderContext
             $this->fontFace = $fontFace;
         }
     }
+
+    /**
+     * Ensures the default "regular" font face is set
+     */
+    public function ensureRegularFontFace() : void
+    {
+        $this->ensureFontFace($this->theme->regularFont);
+    }
+
+    /**
+     * Ensures the default "semi bold" font face is set
+     */
+    public function ensureSemiBoldFontFace() : void
+    {
+        $this->ensureFontFace($this->theme->semiBoldFont);
+    }
     
     /**
      * Sets a static value (persistant data, over multiple frames)
@@ -95,7 +111,8 @@ class FUIRenderContext
      */
     public function __construct(
         public VGContext $vg,
-        public Input $input
+        public Input $input,
+        public FUITheme $theme
     )
     {
         $this->origin = new Vec2(0, 0);
