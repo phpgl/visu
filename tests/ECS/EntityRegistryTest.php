@@ -144,4 +144,47 @@ class EntityRegistryTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals('e2', $entites->get($e2, \Error::class)->getMessage());
         $this->assertEquals(3, $entites->create());
     }
+
+    public function testTryGet() : void
+    {
+        $entites = new EntityRegisty();
+        $entites->registerComponent(\Exception::class);
+
+        $e1 = $entites->create();
+        $entites->attach($e1, new \Exception('e1'));
+
+        $e2 = $entites->create();
+        $entites->attach($e2, new \Exception('e2'));
+
+        $this->assertEquals('e1', $entites->tryGet($e1, \Exception::class)->getMessage());
+        $this->assertNull($entites->tryGet($e2, \Error::class));
+    }
+
+    public function testViewWith() : void
+    {
+        $entites = new EntityRegisty();
+        $entites->registerComponent(\Exception::class);
+        $entites->registerComponent(\Error::class);
+
+        $e1 = $entites->create();
+        $entites->attach($e1, new \Exception('e1'));
+
+        $e2 = $entites->create();
+        $entites->attach($e2, new \Exception('e2'));
+        $entites->attach($e2, new \Error('e2'));
+
+        $e3 = $entites->create();
+        $entites->attach($e3, new \Error('e3'));
+        $entites->attach($e3, new \Exception('e3'));
+
+        $e4 = $entites->create();
+        $entites->attach($e4, new \Error('e4'));
+
+        $actualBuffer = [];
+        foreach($entites->viewWith(\Exception::class, \Error::class) as $entity => $components) {
+            $actualBuffer[] = $entity;
+        }
+
+        $this->assertEquals([$e2, $e3], $actualBuffer);
+    }
 }

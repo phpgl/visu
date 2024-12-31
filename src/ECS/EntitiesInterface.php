@@ -80,6 +80,8 @@ interface EntitiesInterface
 
     /**
      * Returns a component for the given entity 
+     * ! Warning: This method does no error checking and assumes you made sure the component needs to actually exist!
+     * 
      * 
      * @template T
      * @param int                       $entity The entitiy ID of the component to be retrieved
@@ -88,6 +90,17 @@ interface EntitiesInterface
      * @return T
      */
     public function get(int $entity, string $componentClassName);
+
+    /**
+     * Returns a component for the given entity or null if it does not exist
+     * 
+     * @template T
+     * @param int                       $entity The entitiy ID of the component to be retrieved
+     * @param class-string<T>           $componentClassName
+     * 
+     * @return T|null
+     */
+    public function tryGet(int $entity, string $componentClassName);
 
     /**
      * Returns boolean if an entity has a component
@@ -113,6 +126,16 @@ interface EntitiesInterface
      * @return \Generator<int, T>
      */
     public function view(string $componentClassName) : Generator;
+
+    /**
+     * Iterates over all entities having the given components and will pass the components as arguments to the callback
+     * Please note that the order is important, choose the "rarest" component first as this will be used 
+     * to iterate and filter the entities.
+     * 
+     * @param class-string             ...$componentClassNames
+     * @return \Generator<int, array<object>>
+     */
+    public function viewWith(string ...$componentClassNames) : Generator;
     
     /**
      * Returns the first component of the given class name

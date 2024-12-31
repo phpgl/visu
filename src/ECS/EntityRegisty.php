@@ -206,6 +206,21 @@ class EntityRegisty implements EntitiesInterface
     }
 
     /**
+     * Returns a component for the given entity or null if it does not exist
+     * 
+     * @template T
+     * @param int                       $entity The entitiy ID of the component to be retrieved
+     * @param class-string<T>           $componentClassName
+     * 
+     * @return T|null
+     */
+    public function tryGet(int $entity, string $componentClassName)
+    {
+        // @phpstan-ignore-next-line
+        return $this->entityComponents[$entity][$componentClassName] ?? null;
+    }
+
+    /**
      * Returns boolean if an entity has a component
      * 
      * @param int                    $entity The entitiy ID of the component
@@ -239,6 +254,34 @@ class EntityRegisty implements EntitiesInterface
         foreach(($this->components[$componentClassName] ?? []) as $entity => $component) {
             // @phpstan-ignore-next-line
             yield $entity => $component;
+        }
+    }
+
+    /**
+     * Iterates over all entities having the given components and will pass the components as arguments to the callback
+     * 
+     * @param class-string             ...$componentClassNames
+     * @return \Generator<int, array<object>>
+     */
+    public function viewWith(string ...$componentClassNames) : Generator
+    {
+        if (empty($componentClassNames)) {
+            return;
+        }
+
+        $mainComponent = array_shift($componentClassNames);
+
+        foreach ($this->view($mainComponent) as $entity => $mainComponentInstance) {
+            $components = [$mainComponentInstance];
+            
+            foreach ($componentClassNames as $componentClassName) {
+                if (!isset($this->entityComponents[$entity][$componentClassName])) {
+                    continue 2; // Skip this entity if it does not have the required component
+                }
+                $components[] = $this->entityComponents[$entity][$componentClassName];
+            }
+
+            yield $entity => $components;
         }
     }
 
