@@ -47,13 +47,23 @@ class FUICard extends FUILayout
 
         $ctx->vg->beginPath();
         $ctx->vg->fillColor($this->backgroundColor);
-        $ctx->vg->roundedRect(
-            $finalPos->x,
-            $finalPos->y,
-            $finalSize->x,
-            $finalSize->y,
-            $this->borderRadius
-        );
+
+        if ($this->borderRadius > 0) {
+            $ctx->vg->roundedRect(
+                $finalPos->x,
+                $finalPos->y,
+                $finalSize->x,
+                $finalSize->y,
+                $this->borderRadius
+            );
+        } else {
+            $ctx->vg->rect(
+                $finalPos->x,
+                $finalPos->y,
+                $finalSize->x,
+                $finalSize->y,
+            );
+        }
         $ctx->vg->fill();
 
         if ($this->borderColor) {

@@ -2,6 +2,7 @@
 
 namespace VISU\FlyUI;
 
+use Closure;
 use GL\Math\Vec2;
 use GL\VectorGraphics\VGAlign;
 use GL\VectorGraphics\VGColor;
@@ -15,8 +16,22 @@ class FUICheckbox extends FUIView
      * Constructs a new view
      */
     public function __construct(
+        
+        /**
+         * The text to display next to the checkbox
+         */
         public string $text,
+
+        /**
+         * Reference to the checked state
+         */
         public bool &$checked,
+        /**
+         * Callback that is called when the checkbox is toggled
+         * 
+         * @param Closure(bool):void
+         */
+        public ?Closure $callback = null
     )
     {
         parent::__construct();
@@ -44,6 +59,7 @@ class FUICheckbox extends FUIView
 
         if ($ctx->triggeredOnce('swt_' . $this->text, $isInside && $ctx->input->isMouseButtonPressed(MouseButton::LEFT))) {
             $this->checked = !$this->checked;
+            if ($this->callback) ($this->callback)($this->checked);
         }
 
         $switchWidth = self::FUI_HEIGHT * 2;
@@ -84,7 +100,7 @@ class FUICheckbox extends FUIView
         $ctx->vg->stroke();
 
         // render the text next to the switch
-        $ctx->ensureFontFace('inter-regular');
+        $ctx->ensureRegularFontFace();
         $ctx->vg->textAlign(VGAlign::LEFT | VGAlign::MIDDLE);
         $ctx->vg->fontSize(FlyUI::$instance->theme->fontSize);
         $ctx->vg->fillColor(VGColor::black());

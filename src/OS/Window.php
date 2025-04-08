@@ -632,4 +632,21 @@ class Window
     {
         glfwSwapInterval($interval);
     }
+
+    /**
+     * Sets the window monitor 
+     */
+    public function setFullscreen(int $width, int $height, int $refreshRate, ?GLFWmonitor $monitor = null) : void
+    { 
+        $monitor = $monitor ?? glfwGetPrimaryMonitor();
+        glfwSetWindowMonitor($this->requiresInitialization(), $monitor, 0, 0, $width, $height, $refreshRate);
+    }
+
+    /**
+     * Sets the window into windowed mode
+     */
+    public function setWindowed(int $width, int $height, int $x = 0, int $y = 0) : void
+    {
+        glfwSetWindowMonitor($this->requiresInitialization(), null, $x, $y, $width, $height, GLFW_DONT_CARE);
+    }
 } 

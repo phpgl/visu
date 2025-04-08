@@ -87,9 +87,27 @@ class FlyUI
     }
 
     /**
+     * Begins a new box view
+     */
+    public static function beginBoxView(VGColor $color) : FUIBox
+    {
+        $view = new FUIBox($color);
+        self::$instance->pushView($view);
+        return $view;
+    }
+
+    /**
      * Ends the current view
      */
     public static function endView() : void
+    {
+        self::$instance->popView();
+    }
+
+    /**
+     * Ends the current layout (same as endView)
+     */
+    public static function endLayout() : void
     {
         self::$instance->popView();
     }
@@ -116,10 +134,14 @@ class FlyUI
 
     /**
      * Creates a checkbox element
+     * 
+     * @param string $text The text to display next to the checkbox
+     * @param bool $checked Reference to the checked state
+     * @param Closure(bool):void $callback Callback that is called when the checkbox is toggled
      */
-    public static function checkbox(string $text, bool &$checked) : FUICheckbox
+    public static function checkbox(string $text, bool &$checked, ?Closure $callback = null) : FUICheckbox
     {
-        $view = new FUICheckbox($text, $checked);
+        $view = new FUICheckbox($text, $checked, $callback);
         self::$instance->addChildView($view);
         return $view;
     }

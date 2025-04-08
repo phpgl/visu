@@ -158,12 +158,19 @@ class FUITheme
     public VGColor $checkboxActiveBackgroundColor;
 
 
-
-
     /**
      * Constructs a new theme
      */
     public function __construct() 
+    {
+        $this->applyGenerals();
+    }
+
+    /**
+     * Applies the general theme settings to all elements
+     * This will override any custom settings you have set except the general settings
+     */
+    public function applyGenerals() : void
     {
         // card
         $this->cardPadding = new Vec2($this->padding, $this->padding);
@@ -188,7 +195,5 @@ class FUITheme
         $this->checkboxBackgroundColor = new VGColor(0.902, 0.902, 0.901, 1.0);
         $this->checkboxHoverBackgroundColor = $this->checkboxBackgroundColor->lighten(0.05);
         $this->checkboxActiveBackgroundColor =$this->buttonPrimaryBackgroundColor;
-
-        
     }
 }
