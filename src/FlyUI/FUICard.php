@@ -6,10 +6,6 @@ use GL\VectorGraphics\VGColor;
 
 class FUICard extends FUILayout
 {
-    public VGColor $backgroundColor;
-
-    public float $borderRadius;
-
     public ?VGColor $borderColor;
 
     public float $borderWidth;
@@ -22,10 +18,10 @@ class FUICard extends FUILayout
         parent::__construct(FlyUI::$instance->theme->cardPadding->copy());
 
         $this->backgroundColor = FlyUI::$instance->theme->cardBackgroundColor;
-        $this->borderRadius = FlyUI::$instance->theme->cardBorderRadius;
+        $this->cornerRadius = FlyUI::$instance->theme->cardBorderRadius;
         $this->borderColor = FlyUI::$instance->theme->cardBorderColor;
         $this->borderWidth = FlyUI::$instance->theme->cardBorderWidth;
-        $this->spacingY = FlyUI::$instance->theme->cardSpacing;
+        $this->spacing = FlyUI::$instance->theme->cardSpacing;
     }
 
     /**
@@ -45,34 +41,13 @@ class FUICard extends FUILayout
             $finalSize->y = $finalSize->y - $this->borderWidth;
         }
 
-        $ctx->vg->beginPath();
-        $ctx->vg->fillColor($this->backgroundColor);
-
-        if ($this->borderRadius > 0) {
-            $ctx->vg->roundedRect(
-                $finalPos->x,
-                $finalPos->y,
-                $finalSize->x,
-                $finalSize->y,
-                $this->borderRadius
-            );
-        } else {
-            $ctx->vg->rect(
-                $finalPos->x,
-                $finalPos->y,
-                $finalSize->x,
-                $finalSize->y,
-            );
-        }
-        $ctx->vg->fill();
+        // pass to children
+        parent::renderContent($ctx);
 
         if ($this->borderColor) {
             $ctx->vg->strokeColor($this->borderColor);
             $ctx->vg->strokeWidth($this->borderWidth);
             $ctx->vg->stroke();
         }
-
-        // pass to children
-        parent::renderContent($ctx);
     }
 }

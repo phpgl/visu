@@ -66,14 +66,53 @@ class FlyUI
 
     /**
      * Starts a layout element. 
-     * A layout is a container view that can have a margin and be layouted using different 
-     * sizing strategies like fit, fill, fixed, etc.
+     * 
+     * A layout is a container view that arranges its children either vertically or horizontally.
+     * 
+     * There is support for different sizing modes:
+     *  - Fixed: a fixed size in points
+     *  - Fill: takes up all available space
+     *  - Fit: sizes to the content
+     * 
+     * The layout can then also align its children to topLeft, topCenter etc...
      */
     public static function beginLayout(?Vec2 $padding = null) : FUILayout
     {
         $layout = new FUILayout($padding);
         self::$instance->pushView($layout);
         return $layout;
+    }
+
+    /**
+     * Starts a horiazontal layout where elements are stacked after each other from left to right
+     */
+    public static function beginHorizontalStack(?float $spacing = null, ?Vec2 $padding = null) : FUILayout
+    {
+        $layout = new FUILayout($padding);
+        $layout
+            ->horizontalFit()
+            ->spacing($spacing ?? self::$instance->theme->spacing)
+            ->flow(FUILayoutFlow::horizontal);
+        self::$instance->pushView($layout);
+        return $layout;
+    }
+
+    /**
+     * Starts a section 
+     * A section is a container with a title and some content underneath
+     */
+    public static function beginSection(string $title) : FUILayout
+    {
+        $l = self::beginLayout()
+            ->horizontalFill()
+            ->verticalFit()
+            ->spacing(self::$instance->theme->sectionSpacing);
+
+        self::$instance->text(mb_strtoupper($title), self::$instance->theme->sectionHeaderTextColor)
+            ->fontSize(self::$instance->theme->sectionHeaderFontSize)
+            ->bold();
+
+        return $l;
     }
 
     /**
@@ -87,35 +126,37 @@ class FlyUI
     }
 
     /**
-     * Begins a new box view
+     * Ends the current view
      */
-    public static function beginBoxView(VGColor $color) : FUIBox
+    public static function end() : void
     {
-        $view = new FUIBox($color);
-        self::$instance->pushView($view);
+        self::$instance->popView();
+    }
+
+    /**
+     * Creates a X space element
+     */
+    public static function spaceX(float $width) : FUISpace
+    {
+        $view = new FUISpace(new Vec2($width, 0));
+        self::$instance->addChildView($view);
         return $view;
     }
 
     /**
-     * Ends the current view
+     * Creates a Y space element
      */
-    public static function endView() : void
+    public static function spaceY(float $height) : FUISpace
     {
-        self::$instance->popView();
-    }
-
-    /**
-     * Ends the current layout (same as endView)
-     */
-    public static function endLayout() : void
-    {
-        self::$instance->popView();
+        $view = new FUISpace(new Vec2(0, $height));
+        self::$instance->addChildView($view);
+        return $view;
     }
 
     /**
      * Creates a text element
      */
-    public static function text(string $text, VGColor $color = null) : FUIText
+    public static function text(string $text, ?VGColor $color = null) : FUIText
     {
         $view = new FUIText($text, $color);
         self::$instance->addChildView($view);
@@ -128,6 +169,17 @@ class FlyUI
     public static function button(string $text, Closure $onClick) : FUIButton
     {
         $view = new FUIButton($text, $onClick);
+        self::$instance->addChildView($view);
+
+        return $view;
+    }
+
+    /**
+     * Creates a button group element
+     */
+    public static function buttonGroup(array $options, ?string $selectedOption = null, ?Closure $onSelect = null) : FUIButtonGroup
+    {
+        $view = new FUIButtonGroup($options, $selectedOption, $onSelect);
         self::$instance->addChildView($view);
         return $view;
     }
@@ -222,11 +274,12 @@ class FlyUI
      */
     public function popView() : void
     {
-        array_pop($this->viewTree);
-        $this->currentView = end($this->viewTree) ?: null;
-        if ($this->currentView === null) {
+        if (count($this->viewTree) <= 1) {
             throw new FUIException('Cannot pop the root view');
         }
+
+        array_pop($this->viewTree);
+        $this->currentView = end($this->viewTree); // @phpstan-ignore-line (we know there is at least one element)
     }
 
     /**
@@ -250,7 +303,9 @@ class FlyUI
         $this->viewTree = [];
 
         // push the root view
-        $root = new FUIView();
+        $root = new FUILayout();
+        $root->verticalFill();
+        $root->horizontalFill();
         $this->pushView($root);
 
         // begin the VGContext frame

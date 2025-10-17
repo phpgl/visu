@@ -4,6 +4,7 @@ namespace VISU\FlyUI;
 
 use GL\Math\Vec2;
 use GL\VectorGraphics\VGColor;
+use VISU\FlyUI\Theme\FUIButtonStyle;
 
 class FUITheme
 {   
@@ -56,6 +57,39 @@ class FUITheme
     public float $spacing = 5.0;
 
     /*
+     * ------------------------------ Colors ---------------------------------
+     */
+
+    /**
+     * Base text color
+     */
+    public VGColor $textColor;
+
+    /**
+     * Muted text color
+     */
+    public VGColor $mutedTextColor;
+
+    /*
+     * ------------------------------ Sections ---------------------------------
+     */
+
+    /**
+     * Section spacing between title and content
+     */
+    public float $sectionSpacing;
+
+    /**
+     * Section header text color
+     */
+    public VGColor $sectionHeaderTextColor;
+
+    /**
+     * Section header font size
+     */
+    public float $sectionHeaderFontSize;
+
+    /*
      * ------------------------------ Cards -----------------------------------
      */
 
@@ -99,53 +133,13 @@ class FUITheme
     public Vec2 $windowPadding;
 
     /*
-     * ------------------------------- Buttons --------------------------------
+     * ------------------------------- Components -------------------------------
      */
 
-    /**
-     * The background color for primary buttons
-     */
-    public VGColor $buttonPrimaryBackgroundColor;
+    // button styles
+    public FUIButtonStyle $primaryButton;
+    public FUIButtonStyle $secondaryButton;
 
-    /**
-     * The background color for primary buttons when hovered
-     */
-    public VGColor $buttonPrimaryHoverBackgroundColor;
-
-    /**
-     * The text color for primary buttons
-     */
-    public VGColor $buttonPrimaryTextColor;
-
-    /**
-     * The background color for secondary buttons
-     */
-    public VGColor $buttonSecondaryBackgroundColor;
-
-    /**
-     * The background color for secondary buttons when hovered
-     */
-    public VGColor $buttonSecondaryHoverBackgroundColor;
-
-    /**
-     * The text color for secondary buttons
-     */
-    public VGColor $buttonSecondaryTextColor;
-    
-    /**
-     * Padding for buttons
-     */
-    public Vec2 $buttonPadding;
-
-    /**
-     * The border radius for buttons
-     */
-    public float $buttonBorderRadius;
-
-    /**
-     * The font size for buttons
-     */
-    public float $buttonFontSize;
 
     /**
      * ------------------------------ Checkboxes ------------------------------
@@ -172,6 +166,16 @@ class FUITheme
      */
     public function applyGenerals() : void
     {
+        // general
+        // --------------------------------------------------------------------
+        $this->textColor = VGColor::black();
+        $this->mutedTextColor =  $this->textColor->lighten(0.4);
+
+        // section
+        $this->sectionSpacing = $this->spacing * 2;
+        $this->sectionHeaderTextColor = $this->mutedTextColor->copy();
+        $this->sectionHeaderFontSize = $this->smallFontSize;
+
         // card
         $this->cardPadding = new Vec2($this->padding, $this->padding);
         $this->cardBorderRadius = $this->borderRadius;
@@ -181,19 +185,34 @@ class FUITheme
         $this->windowPadding = new Vec2($this->padding, $this->padding);
 
         // buttons
-        $this->buttonPrimaryBackgroundColor = new VGColor(0.256, 0.271, 0.906, 1.0);
-        $this->buttonPrimaryHoverBackgroundColor = $this->buttonPrimaryBackgroundColor->lighten(0.05);
-        $this->buttonPrimaryTextColor = VGColor::white();
-        $this->buttonSecondaryBackgroundColor = VGColor::black();
-        $this->buttonSecondaryHoverBackgroundColor = VGColor::black()->lighten(0.1);
-        $this->buttonSecondaryTextColor = VGColor::white();
-        $this->buttonPadding = new Vec2(round($this->padding * 1.2), round($this->padding * 0.6));
-        $this->buttonBorderRadius = $this->borderRadius;
-        $this->buttonFontSize = $this->fontSize;
+        // --------------------------------------------------------------------
+
+        // primary button
+        $this->primaryButton = new FUIButtonStyle();
+        $this->primaryButton->padding = new Vec2(round($this->padding * 1.2), round($this->padding * 0.6));
+        $this->primaryButton->cornerRadius = $this->borderRadius;
+        $this->primaryButton->fontSize = $this->fontSize;
+        $this->primaryButton->backgroundColor = new VGColor(0.256, 0.271, 0.906, 1.0);
+        $this->primaryButton->hoverBackgroundColor = $this->primaryButton->backgroundColor->lighten(0.05);
+        $this->primaryButton->textColor = VGColor::white();
+        $this->primaryButton->hoverTextColor = VGColor::white();
+        $this->primaryButton->disabledBackgroundColor = new VGColor(
+            $this->primaryButton->backgroundColor->r,
+            $this->primaryButton->backgroundColor->g,
+            $this->primaryButton->backgroundColor->b,
+            0.5
+        );
+
+        // secondary button
+        $this->secondaryButton = clone $this->primaryButton;
+        $this->secondaryButton->backgroundColor = VGColor::black();
+        $this->secondaryButton->hoverBackgroundColor = $this->secondaryButton->backgroundColor->lighten(0.1);
+        $this->secondaryButton->textColor = VGColor::white();
+        $this->secondaryButton->hoverTextColor = VGColor::white();
+        $this->secondaryButton->disabledBackgroundColor = VGColor::darkGray();
 
         // checkboxes
         $this->checkboxBackgroundColor = new VGColor(0.902, 0.902, 0.901, 1.0);
         $this->checkboxHoverBackgroundColor = $this->checkboxBackgroundColor->lighten(0.05);
-        $this->checkboxActiveBackgroundColor =$this->buttonPrimaryBackgroundColor;
     }
 }

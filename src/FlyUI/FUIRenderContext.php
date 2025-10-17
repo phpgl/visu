@@ -29,12 +29,37 @@ class FUIRenderContext
     private string $fontFace = '';
 
     /**
+     * Static data storage for persistent values across frames
+     * 
+     * @var array<string, mixed>
+     */
+    private static array $persistentData = [];
+
+    /**
      * Returns true if the mouse is currently hovering over the current bounds
      */
     public function isHovered() : bool
     {
         return $this->mousePos->x >= $this->origin->x && $this->mousePos->x <= $this->origin->x + $this->containerSize->x
             && $this->mousePos->y >= $this->origin->y && $this->mousePos->y <= $this->origin->y + $this->containerSize->y;
+    }
+
+    /**
+     * Returns true if the given Position and Size are currently hovered by the mouse
+     */
+    public function isHoveredAt(Vec2 $pos, Vec2 $size) : bool
+    {
+        return $this->mousePos->x >= $pos->x && $this->mousePos->x <= $pos->x + $size->x
+            && $this->mousePos->y >= $pos->y && $this->mousePos->y <= $pos->y + $size->y;
+    }
+
+    /**
+     * Returns true if the given AABB is currently hovered by the mouse
+     */
+    public function isHoveredAABB(float $x, float $y, float $width, float $height) : bool
+    {
+        return $this->mousePos->x >= $x && $this->mousePos->x <= $x + $width
+            && $this->mousePos->y >= $y && $this->mousePos->y <= $y + $height;
     }
     
     /**
@@ -93,8 +118,7 @@ class FUIRenderContext
      */
     public function setStaticValue(string $key, mixed $value) : void
     {
-        static $persistantData = [];
-        $persistantData[$key] = $value;
+        self::$persistentData[$key] = $value;
     }
 
     /**
@@ -102,8 +126,23 @@ class FUIRenderContext
      */
     public function getStaticValue(string $key, mixed $default = null) : mixed
     {
-        static $persistantData = [];
-        return $persistantData[$key] ?? $default;
+        return self::$persistentData[$key] ?? $default;
+    }
+
+    /**
+     * Clears a specific static value
+     */
+    public function clearStaticValue(string $key) : void
+    {
+        unset(self::$persistentData[$key]);
+    }
+
+    /**
+     * Clears all static values
+     */
+    public function clearAllStaticValues() : void
+    {
+        self::$persistentData = [];
     }
 
     /**

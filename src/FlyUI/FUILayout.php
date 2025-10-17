@@ -5,29 +5,18 @@ namespace VISU\FlyUI;
 use GL\Math\Vec2;
 use GL\VectorGraphics\VGColor;
 
-enum FUILayoutSizing 
+enum FUILayoutAlignment
 {
-    /**
-     * Fill the available space
-     */
-    case fill;
-
-    /**
-     * Size to fit the content
-     */
-    case fit;
-
-    /**
-     * Fixed size in effective pixels
-     */
-    case fixed;
-
-    /**
-     * Size relative to the parent
-     */
-    case factor;
+    case topLeft;
+    case topCenter;
+    case topRight;
+    case centerLeft;
+    case center;
+    case centerRight;
+    case bottomLeft;
+    case bottomCenter;
+    case bottomRight;
 }
-
 
 class FUILayout extends FUIView
 {
@@ -36,20 +25,29 @@ class FUILayout extends FUIView
      * 
      * Should the view be sized to fit its content or fill the available space
      */
-    private FUILayoutSizing $sizingVertical = FUILayoutSizing::fit;
+    public FUILayoutSizing $sizingVertical = FUILayoutSizing::fit;
 
     /**
      * Horizontal sizing mode
      * 
      * Should the view be sized to fit its content or fill the available space
      */
-    private FUILayoutSizing $sizingHorizontal = FUILayoutSizing::fill;
+    public FUILayoutSizing $sizingHorizontal = FUILayoutSizing::fill;
+
+    /**
+     * The layouts flow direction for its children
+     */
+    public FUILayoutFlow $flow = FUILayoutFlow::vertical;
+
+    /**
+     * The layouts alignment of its children
+     */
+    public FUILayoutAlignment $alignment = FUILayoutAlignment::topLeft;
 
     /**
      * The layouts width
      * This can represent a:
      *  - `fixed` value in effective pixels
-     *  - `factor` of the parent or the available space
      */
     public ?float $width = null;
 
@@ -57,104 +55,30 @@ class FUILayout extends FUIView
      * The layouts height
      * This can represent a:
      *  - `fixed` value in effective pixels
-     *  - `factor` of the parent or the available space
      */
     public ?float $height = null;
 
     /**
-     * Left margin in effective pixels
-     * When set to `null` the margin is to be considered in "auto" mode.
+     * A vertical gap between the children
      */
-    public ?float $left = null;
+    public float $spacing = 0.0;
 
     /**
-     * Top margin in effective pixels
-     * When set to `null` the margin is to be considered in "auto" mode.
+     * Background color of the view
      */
-    public ?float $top = null;
+    public ?VGColor $backgroundColor = null;
 
     /**
-     * Right margin in effective pixels
-     * When set to `null` the margin is to be considered in "auto" mode.
+     * Border radius of the view
      */
-    public ?float $right = null;
+    public float $cornerRadius = 0.0;
 
     /**
-     * Bottom margin in effective pixels
-     * When set to `null` the margin is to be considered in "auto" mode.
+     * Sets the layout flow direction
      */
-    public ?float $bottom = null;
-
-    /**
-     * A vertical gab between the children 
-     */
-    public float $spacingY = 0.0;
-
-    /**
-     * Sets the horizontal and vertical margins
-     */
-    public function marginXY(float $horizontal, float $vertical) : self
+    public function flow(FUILayoutFlow $flow) : self
     {
-        $this->left = $horizontal;
-        $this->right = $horizontal;
-        $this->top = $vertical;
-        $this->bottom = $vertical;
-        return $this;
-    }
-
-    /**
-     * Sets the horizontal margin
-     */
-    public function marginX(float $horizontal) : self
-    {
-        $this->left = $horizontal;
-        $this->right = $horizontal;
-        return $this;
-    }
-
-    /**
-     * Sets the vertical margin
-     */
-    public function marginY(float $vertical) : self
-    {
-        $this->top = $vertical;
-        $this->bottom = $vertical;
-        return $this;
-    }
-
-    /**
-     * Sets the left margin
-     */
-    public function marginLeft(float $left) : self
-    {
-        $this->left = $left;
-        return $this;
-    }
-
-    /**
-     * Sets the right margin
-     */
-    public function marginRight(float $right) : self
-    {
-        $this->right = $right;
-        return $this;
-    }
-
-    /**
-     * Sets the top margin
-     */
-    public function marginTop(float $top) : self
-    {
-        $this->top = $top;
-        return $this;
-    }
-
-    /**
-     * Sets the bottom margin
-     */
-    public function marginBottom(float $bottom) : self
-    {
-        $this->bottom = $bottom;
+        $this->flow = $flow;
         return $this;
     }
 
@@ -177,28 +101,6 @@ class FUILayout extends FUIView
     {
         $this->width = $width;
         $this->sizingHorizontal = FUILayoutSizing::fixed;
-        return $this;
-    }
-
-    /**
-     * Sets the a factor height for the layout
-     * Note: This will override the vertical sizing mode
-     */
-    public function factorHeight(float $factor) : self
-    {
-        $this->height = $factor;
-        $this->sizingVertical = FUILayoutSizing::factor;
-        return $this;
-    }
-
-    /**
-     * Sets the a factor width for the layout
-     * Note: This will override the horizontal sizing mode
-     */
-    public function factorWidth(float $factor) : self
-    {
-        $this->width = $factor;
-        $this->sizingHorizontal = FUILayoutSizing::factor;
         return $this;
     }
 
@@ -230,34 +132,164 @@ class FUILayout extends FUIView
     }
 
     /**
-     * Sets the vertical spacing between the children
+     * Sets the horizontal sizing mode
      */
-    public function spacingY(float $spacing) : self
+    public function horizontalSizing(FUILayoutSizing $sizing) : self
     {
-        $this->spacingY = $spacing;
+        $this->sizingHorizontal = $sizing;
         return $this;
     }
 
     /**
-     * Returns the height of the content aka the sum of all children
+     * Sets the horizontal sizing mode to `fill`
      */
-    private function getContentHeight(FUIRenderContext $ctx) : float
+    public function horizontalFill() : self
     {
-        $height = 0.0;
+        $this->sizingHorizontal = FUILayoutSizing::fill;
+        return $this;
+    }
 
-        // height of all children
-        if (count($this->children) !== 0) {
-            foreach($this->children as $child) {
-                $height += $child->getEstimatedHeight($ctx) + $this->spacingY;
-            }
-    
-            $height -= $this->spacingY; // remove the last spacing
+    /**
+     * Sets the horizontal sizing mode to `fit`
+     */
+    public function horizontalFit() : self
+    {
+        $this->sizingHorizontal = FUILayoutSizing::fit;
+        return $this;
+    }
+
+    /**
+     * Sets the vertical spacing between the children
+     */
+    public function spacing(float $spacing) : self
+    {
+        $this->spacing = $spacing;
+        return $this;
+    }
+
+    /**
+     * Sets the background color of the view
+     */
+    public function backgroundColor(VGColor $color, ?float $cornerRadius = null) : self
+    {
+        $this->backgroundColor = $color;
+        if ($cornerRadius !== null) {
+            $this->cornerRadius = $cornerRadius;
+        }
+        return $this;
+    }
+
+    /**
+     * Calculate the sizes of all children based on their sizing modes
+     * This implements Figma-style fill behavior where fill children share available space equally
+     * 
+     * @return array<Vec2>
+     */
+    private function calculateChildrenSizes(FUIRenderContext $ctx) : array
+    {
+        if (empty($this->children)) {
+            return [];
+        }
+
+        $availableSize = $ctx->containerSize->copy();
+        $childrenSizes = [];
+        $fillChildren = [];
+        $nonFillSize = new Vec2(0.0, 0.0);
+        
+        // pre-calculate all children sizes once to avoid redundant calls
+        $estimatedSizes = [];
+        foreach ($this->children as $index => $child) {
+            $estimatedSizes[$index] = $child->getEstimatedSize($ctx);
         }
         
-        // add the padding to the height
-        $height += $this->padding->y * 2;
+        // first pass: categorize children and calculate non-fill sizes
+        foreach ($this->children as $index => $child) {
+            $childSize = $estimatedSizes[$index]; // use pre-calculated size
+            
+            if (!($child instanceof FUILayout)) {
+                // for non-layout children, use their estimated size directly
+                $childrenSizes[$index] = $childSize;
+                
+                if ($this->flow === FUILayoutFlow::horizontal) {
+                    $nonFillSize->x = $nonFillSize->x + $childSize->x;
+                    $nonFillSize->y = max($nonFillSize->y, $childSize->y);
+                } else {
+                    $nonFillSize->y = $nonFillSize->y + $childSize->y;
+                    $nonFillSize->x = max($nonFillSize->x, $childSize->x);
+                }
+                continue;
+            }
+
+            // for layout children, check their sizing modes
+            $childLayout = $child;
+            $isHorizontalFill = $childLayout->sizingHorizontal === FUILayoutSizing::fill;
+            $isVerticalFill = $childLayout->sizingVertical === FUILayoutSizing::fill;
+
+            // check if this child should fill in the flow direction
+            $shouldFillInFlowDirection = ($this->flow === FUILayoutFlow::horizontal && $isHorizontalFill) ||
+                                       ($this->flow === FUILayoutFlow::vertical && $isVerticalFill);
+            
+            if ($shouldFillInFlowDirection) {
+                // this child wants to fill in the flow direction
+                $fillChildren[] = $index;
+                
+                // store initial size (will be updated in second pass for flow dimension)
+                $childrenSizes[$index] = $childSize;
+                
+                // add to non-fill size calculation (perpendicular to flow)
+                if ($this->flow === FUILayoutFlow::horizontal) {
+                    // for horizontal flow, we don't add to x (that's handled in second pass)
+                    // but we do need to track the maximum height
+                    $nonFillSize->y = max($nonFillSize->y, $childSize->y);
+                } else {
+                    // for vertical flow, we don't add to y (that's handled in second pass)
+                    // but we do need to track the maximum width
+                    $nonFillSize->x = max($nonFillSize->x, $childSize->x);
+                }
+            } else {
+                // use pre-calculated size for non-fill child
+                $childrenSizes[$index] = $childSize;
+                
+                if ($this->flow === FUILayoutFlow::horizontal) {
+                    $nonFillSize->x = $nonFillSize->x + $childSize->x;
+                    $nonFillSize->y = max($nonFillSize->y, $childSize->y);
+                } else {
+                    $nonFillSize->y = $nonFillSize->y + $childSize->y;
+                    $nonFillSize->x = max($nonFillSize->x, $childSize->x);
+                }
+            }
+        }
+
+        // calculate spacing
+        $totalSpacing = $this->spacing * max(0.0, count($this->children) - 1);
         
-        return $height;
+        // second pass: calculate sizes for fill children
+        if (!empty($fillChildren)) {
+            $fillChildrenCount = count($fillChildren);
+            
+            if ($this->flow === FUILayoutFlow::horizontal) {
+                $remainingWidth = max(0.0, $availableSize->x - $nonFillSize->x - $totalSpacing);
+                $fillWidth = $remainingWidth / $fillChildrenCount;
+                
+                foreach ($fillChildren as $index) {
+                    $currentSize = $childrenSizes[$index];
+                    // reuse existing Vec2 object by modifying in place
+                    $currentSize->x = $fillWidth;
+                }
+            } else {
+                $remainingHeight = max(0.0, $availableSize->y - $nonFillSize->y - $totalSpacing);
+                $fillHeight = $remainingHeight / $fillChildrenCount;
+                
+                foreach ($fillChildren as $index) {
+                    $currentSize = $childrenSizes[$index];
+                    // reuse existing Vec2 object by modifying in place
+                    $currentSize->y = $fillHeight;
+                }
+            }
+        }
+
+        // return all calculated sizes
+        return array_values($childrenSizes);
     }
 
     /**
@@ -265,170 +297,145 @@ class FUILayout extends FUIView
      * 
      * Note: This is used for layouting in some sizing modes
      */
-    public function getEstimatedHeight(FUIRenderContext $ctx) : float
+    public function getEstimatedSize(FUIRenderContext $ctx) : Vec2
     {
-        if ($this->sizingVertical === FUILayoutSizing::fixed) {
-            return $this->height + $this->top + $this->bottom;
+        // start calculating size
+        $size = new Vec2(0.0, 0.0);
+
+        // handle horizontal sizing
+        if ($this->sizingHorizontal === FUILayoutSizing::fixed && $this->width !== null) {
+            $size->x = $this->width;
+        } elseif ($this->sizingHorizontal === FUILayoutSizing::fill) {
+            $size->x = $ctx->containerSize->x;
         }
 
-        elseif ($this->sizingVertical === FUILayoutSizing::factor) {
-            return $ctx->containerSize->y * $this->height;
-        }
-        
-        elseif ($this->sizingVertical === FUILayoutSizing::fill) {
-            return $ctx->containerSize->y;
+        // handle vertical sizing
+        if ($this->sizingVertical === FUILayoutSizing::fixed && $this->height !== null) {
+            $size->y = $this->height;
+        } elseif ($this->sizingVertical === FUILayoutSizing::fill) {
+            $size->y = $ctx->containerSize->y;
         }
 
-        $height = $this->getContentHeight($ctx);
+        // for fit mode, calculate the size based on children directly
+        if ($this->sizingHorizontal === FUILayoutSizing::fit || $this->sizingVertical === FUILayoutSizing::fit) {
+            // pre-calculate all children sizes once to avoid redundant calls
+            $childrenEstimatedSizes = [];
+            foreach ($this->children as $child) {
+                $childrenEstimatedSizes[] = $child->getEstimatedSize($ctx);
+            }
+            
+            if ($this->sizingHorizontal === FUILayoutSizing::fit) {
+                if ($this->flow === FUILayoutFlow::horizontal) {
+                    $totalWidth = 0.0;
+                    foreach ($childrenEstimatedSizes as $childSize) {
+                        $totalWidth = $totalWidth + $childSize->x;
+                    }
+                    $size->x = $totalWidth + ($this->spacing * max(0, count($this->children) - 1)) + ($this->padding->x * 2);
+                } else {
+                    $maxWidth = 0.0;
+                    foreach ($childrenEstimatedSizes as $childSize) {
+                        if ($childSize->x > $maxWidth) {
+                            $maxWidth = $childSize->x;
+                        }
+                    }
+                    $size->x = $maxWidth + ($this->padding->x * 2);
+                }
+            }
+            
+            if ($this->sizingVertical === FUILayoutSizing::fit) {
+                if ($this->flow === FUILayoutFlow::vertical) {
+                    $totalHeight = 0.0;
+                    foreach ($childrenEstimatedSizes as $childSize) {
+                        $totalHeight = $totalHeight + $childSize->y;
+                    }
+                    $size->y = $totalHeight + ($this->spacing * max(0, count($this->children) - 1)) + ($this->padding->y * 2);
+                } else {
+                    $maxHeight = 0.0;
+                    foreach ($childrenEstimatedSizes as $childSize) {
+                        if ($childSize->y > $maxHeight) {
+                            $maxHeight = $childSize->y;
+                        }
+                    }
+                    $size->y = $maxHeight + ($this->padding->y * 2);
+                }
+            }
+        }
 
-        // add the margin to the height
-        $height += $this->top + $this->bottom;
-        
-        return $height;
+        return $size;
     }
 
     protected function renderContent(FUIRenderContext $ctx) : void
     {
-        // // START debug
-        // $cursorPos = $ctx->input->getCursorPosition();
-        // if ($cursorPos->x >= $ctx->origin->x && $cursorPos->x <= $ctx->origin->x + $ctx->containerSize->x &&
-        //     $cursorPos->y >= $ctx->origin->y && $cursorPos->y <= $ctx->origin->y + $ctx->containerSize->y
-        // ) {
-        //     $ctx->vg->beginPath();
-        //     $ctx->vg->rect($ctx->origin->x, $ctx->origin->y, $ctx->containerSize->x, $ctx->containerSize->y);
-        //     $ctx->vg->strokeColor(VGColor::red());
-        //     $ctx->vg->stroke();
-        //     $ctx->vg->fillColor(VGColor::red());
-        //     $ctx->vg->fontSize(12);
-        //     $ctx->vg->text($ctx->origin->x + 15, $ctx->origin->y + 15, 'origin(' . $ctx->origin->x . ', ' . $ctx->origin->y . '), size(' . $ctx->containerSize->x . ', ' . $ctx->containerSize->y . ')');
-        // }
-        // // END debug
+        $containerOrigin = $ctx->origin->copy();
 
-        // apply padding to the context
-        $ctx->origin = $ctx->origin + $this->padding;
-        $ctx->containerSize = $ctx->containerSize - ($this->padding * 2);
-        $linestart = $ctx->origin->x;
-        
-        // render the children
-        foreach($this->children as $child) {
-            $ctx->origin->y = $ctx->origin->y + $child->render($ctx) + $this->spacingY;
-            $ctx->origin->x = $linestart;
+        // calculate all children sizes once using optimized method
+        $childrenSizes = $this->calculateChildrenSizes($ctx);
+
+        foreach($this->children as $index => $child) 
+        {
+            // use the pre-calculated size for this child (no fallback needed since calculateChildrenSizes handles all children)
+            $childSize = $childrenSizes[$index];
+
+            // update the context for the child with the calculated size
+            $originalOrigin = $ctx->origin;
+            $originalSize = $ctx->containerSize;
+
+            $ctx->origin = $containerOrigin->copy();
+            $ctx->containerSize = $childSize; // reuse existing Vec2 object
+
+            $child->render($ctx);
+
+            // restore the original context
+            $ctx->origin = $originalOrigin;
+            $ctx->containerSize = $originalSize;
+
+            // move to the next position based on flow direction (reuse containerOrigin)
+            if ($this->flow === FUILayoutFlow::horizontal) 
+            {
+                $containerOrigin->x = $containerOrigin->x + $childSize->x + $this->spacing;
+            } 
+            else 
+            {
+                $containerOrigin->y = $containerOrigin->y + $childSize->y + $this->spacing;
+            }
         }
     }
 
     /**
      * Renders the current view using the provided context
      */
-    public function render(FUIRenderContext $ctx) : float
+    public function render(FUIRenderContext $ctx) : void
     {
-        $initalOrigin = $ctx->origin->copy();
-        $initalSize = $ctx->containerSize->copy();
+        $initalOrigin = $ctx->origin;
+        $initalSize = $ctx->containerSize;
 
-        // my head hurts from trying to cleanly implement this, 
-        // honestly after rewriting this over and over again for like 2 hours
-        // im sick of it and im going to make it simple and stupid
-        // somebody smarter then me is very welcome to refactor this
-        if ($this->width === null && $this->height === null) 
-        {
-            // no width and no height means we only consider the margins
-            // this is only possible in fit and fill mode
-            $ctx->origin = $ctx->origin + new Vec2($this->left ?? 0, $this->top ?? 0);
-
-            if ($this->sizingVertical === FUILayoutSizing::fit) {
-                $ctx->containerSize->y = $this->getContentHeight($ctx);
-            } elseif ($this->sizingVertical === FUILayoutSizing::fill) {
-                // reduce the container size by the margin
-                $ctx->containerSize->y = $ctx->containerSize->y - ($this->top ?? 0) - ($this->bottom ?? 0);
+        // draw the background if we have one
+        if ($this->backgroundColor) {
+            $ctx->vg->beginPath();
+            $ctx->vg->fillColor($this->backgroundColor);
+            if ($this->cornerRadius > 0.0) {
+                $ctx->vg->roundedRect($ctx->origin->x, $ctx->origin->y, $ctx->containerSize->x, $ctx->containerSize->y, $this->cornerRadius);
             } else {
-                throw new FUIException(sprintf('The vertical sizing mode %s is not supported for layouts without a width or height value.', $this->sizingVertical));
+                $ctx->vg->rect($ctx->origin->x, $ctx->origin->y, $ctx->containerSize->x, $ctx->containerSize->y);
             }
-
-            if ($this->sizingHorizontal === FUILayoutSizing::fill) {
-                // reduce the container size by the margin
-                $ctx->containerSize->x = $ctx->containerSize->x - ($this->left ?? 0) - ($this->right ?? 0);
-            } else {
-                throw new FUIException(sprintf('The horizontal sizing mode %s is not supported for layouts without a width or height value.', $this->sizingHorizontal));
-            }
-        }
-        else
-        {
-            // we have a height value
-            if ($this->height !== null)
-            {
-                if ($this->sizingVertical === FUILayoutSizing::fixed) {
-                    $ctx->containerSize->y = $this->height;
-                } elseif ($this->sizingVertical === FUILayoutSizing::factor) {
-                    $ctx->containerSize->y = $ctx->containerSize->y * $this->height;
-                }
-
-                $ctx->containerSize->y = $ctx->containerSize->y - ($this->top ?? 0) - ($this->bottom ?? 0);
-            } 
-            else
-            {
-                // no height value, we will use the content height
-                if ($this->sizingVertical === FUILayoutSizing::fit) {
-                    $ctx->containerSize->y = $this->getContentHeight($ctx);
-                } elseif ($this->sizingVertical === FUILayoutSizing::fill) {
-                    $ctx->containerSize->y = $ctx->containerSize->y - ($this->top ?? 0) - ($this->bottom ?? 0);
-                } else {
-                    throw new FUIException(sprintf('The sizing mode %s is not supported for layouts without a width or height value.', $this->sizingVertical));
-                }
-            } 
-
-            // because we have a fixed height, bottom and top cannot be set at the same time
-            // we will prioritize the top margin
-            if ($this->top !== null) {
-                $ctx->origin->y = $ctx->origin->y + $this->top;
-            }
-            else if ($this->bottom !== null) {
-                $ctx->origin->y = $initalSize->y - $ctx->containerSize->y - $this->bottom;
-            }
-
-            // we have a width value
-            if ($this->width !== null)
-            {
-                $fullWidth = $ctx->containerSize->x;
-
-                if ($this->sizingHorizontal === FUILayoutSizing::fixed) {
-                    $ctx->containerSize->x = $this->width;
-                } elseif ($this->sizingHorizontal === FUILayoutSizing::factor) {
-                    $ctx->containerSize->x = $ctx->containerSize->x * $this->width;
-                }
-
-                // because we have a fixed width, right and left cannot be set at the same time
-                // we will prioritize the left margin 
-                if ($this->left !== null) {
-                    $ctx->origin->x = $ctx->origin->x + $this->left;
-                }
-                else if ($this->right !== null) {
-                    $ctx->origin->x = $ctx->origin->x + $fullWidth - $ctx->containerSize->x - $this->right;
-                }
-                // if right and left are not set, we will center the layout
-                else {
-                    $ctx->origin->x = $ctx->origin->x + ($fullWidth - $ctx->containerSize->x) * 0.5;
-                }
-
-                $ctx->containerSize->x = $ctx->containerSize->x - ($this->left ?? 0) - ($this->right ?? 0);
-            }
-            else 
-            {
-                $ctx->origin->x = $ctx->origin->x + ($this->left ?? 0);
-
-                if ($this->sizingHorizontal === FUILayoutSizing::fill) {
-                    $ctx->containerSize->x = $ctx->containerSize->x - ($this->left ?? 0) - ($this->right ?? 0);
-                } else {
-                    throw new FUIException(sprintf('The sizing mode %s is not supported for layouts without a width or height value.', $this->sizingHorizontal));
-                }
-            }
+            $ctx->vg->fill();
         }
 
-        // render the content
+        // apply padding to the context (reuse temporary Vec2 object)
+        $paddedOrigin = $ctx->origin + $this->padding;
+        $paddedSize = new Vec2(
+            $ctx->containerSize->x - ($this->padding->x * 2),
+            $ctx->containerSize->y - ($this->padding->y * 2)
+        );
+        
+        $ctx->origin = $paddedOrigin;
+        $ctx->containerSize = $paddedSize;
+        
+        // render the children
         $this->renderContent($ctx);
 
-        // update origin and container for the next view in the layout
+        // restore context, as children might have modified it
         $ctx->origin = $initalOrigin;
         $ctx->containerSize = $initalSize;
-
-        return $this->getEstimatedHeight($ctx);
     }
 }

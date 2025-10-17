@@ -51,20 +51,19 @@ class FUIText extends FUIView
 
     /**
      * Returns the height of the current view and its children
-     * This is used for layouting purposes
+     * 
+     * Note: This is used for layouting in some sizing modes
      */
-    public function getEstimatedHeight(FUIRenderContext $ctx) : float
+    public function getEstimatedSize(FUIRenderContext $ctx) : Vec2
     {
-        return $this->fontSize + $this->padding->y * 2;
+        return new Vec2(0, $this->fontSize + $this->padding->y * 2);
     }
 
     /**
      * Renders the current view using the provided context
      */
-    public function render(FUIRenderContext $ctx) : float
+    public function render(FUIRenderContext $ctx) : void
     {
-        $height = $this->getEstimatedHeight($ctx);
-
         if (!$this->color) {
             $ctx->vg->fillColor(VGColor::black());
         } else {
@@ -85,10 +84,6 @@ class FUIText extends FUIView
         
         $ctx->vg->textAlign(VGAlign::LEFT | VGAlign::TOP);
         $ctx->vg->fontSize($this->fontSize);
-        $ctx->vg->fillColor(VGColor::black());
         $ctx->vg->text($ctx->origin->x + $this->padding->x, $ctx->origin->y + $this->padding->y, $this->text);
-
-        // no pass to parent, as this is a leaf element
-        return $height;
     }
 }

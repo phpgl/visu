@@ -3,22 +3,22 @@
 namespace VISU\FlyUI;
 
 use GL\Math\Vec2;
+use GL\Math\Vec4;
 use GL\VectorGraphics\VGAlign;
 use GL\VectorGraphics\VGColor;
+use VISU\FlyUI\Theme\FUIButtonStyle;
 use VISU\OS\MouseButton;
 
 class FUIButton extends FUIView
 {
-    public VGColor $backgroundColor;
+    /**
+     * The style of the button
+     */
+    public FUIButtonStyle $style;
 
-    public VGColor $hoverBackgroundColor;
-
-    public VGColor $textColor;
-
-    public float $borderRadius;
-
-    public float $fontSize;
-
+    /**
+     * Button ID
+     */
     public string $buttonId;
 
     /**
@@ -33,20 +33,26 @@ class FUIButton extends FUIView
     public function __construct(
         public string $text,
         public ?\Closure $onClick = null,
-        ?string $buttonId = null
+        ?string $buttonId = null,
+        ?FUIButtonStyle $buttonStyle = null
     )
     {
-        parent::__construct(FlyUI::$instance->theme->buttonPadding->copy());
-
-        $this->backgroundColor = FlyUI::$instance->theme->buttonPrimaryBackgroundColor;
-        $this->hoverBackgroundColor = FlyUI::$instance->theme->buttonPrimaryHoverBackgroundColor;
-        $this->textColor = FlyUI::$instance->theme->buttonPrimaryTextColor;
-        $this->borderRadius = FlyUI::$instance->theme->buttonBorderRadius;
-        $this->fontSize = FlyUI::$instance->theme->buttonFontSize;
+        $this->style = $buttonStyle ?? FlyUI::$instance->theme->primaryButton;
+        parent::__construct($this->style->padding->copy());
 
         // button ID by default just the text, this means that if 
         // you have multiple buttons with the same text, you have to assign a custom ID
         $this->buttonId = $buttonId ?? 'btn_' . $this->text;
+    }
+
+    /**
+     * Applies the given button style
+     */
+    public function applyStyle(FUIButtonStyle $style) : self
+    {
+        $this->style = $style;
+        $this->padding = $style->padding->copy();
+        return $this;
     }
 
     /**
@@ -68,28 +74,22 @@ class FUIButton extends FUIView
     }
 
     /**
-     * Returns the height of the current view and its children
-     * This is used for layouting purposes
+     * Returns the estimated size of the button
      */
-    public function getEstimatedHeight(FUIRenderContext $ctx) : float
+    public function getEstimatedSize(FUIRenderContext $ctx) : Vec2
     {
-        return $this->fontSize + $this->padding->y * 2;
-    }
-
-    /**
-     * Returns the width of the current view and its children
-     * 
-     * Note: This is used for layouting in some sizing modes
-     */
-    public function getEstimatedWidth(FUIRenderContext $ctx) : float
-    {
-        if ($this->fullWidth) {
-            return $ctx->containerSize->x;
-        }
-
+        // we need to set font and size to get the correct bounds
         $ctx->ensureSemiBoldFontFace();
-        $ctx->vg->fontSize($this->fontSize);
-        return $ctx->vg->textBounds(0, 0, $this->text) + $this->padding->x * 2;
+        $ctx->vg->fontSize($this->style->fontSize);
+        $bounds = new Vec4();
+        $ctx->vg->textBounds(0, 0, $this->text, $bounds);
+
+        $width = ($bounds->z - $bounds->x) + $this->padding->x * 2;
+        $height = ($bounds->w - $bounds->y) + $this->padding->y * 2;
+        if ($this->fullWidth) {
+            $width = $ctx->containerSize->x;
+        }
+        return new Vec2($width, $height);
     }
 
     private const BUTTON_PRESS_NONE = 0;
@@ -99,38 +99,31 @@ class FUIButton extends FUIView
     /**
      * Renders the current view using the provided context
      */
-    public function render(FUIRenderContext $ctx) : float
+    public function render(FUIRenderContext $ctx) : void
     {
-        $height = $this->getEstimatedHeight($ctx);
-        $width = $this->getEstimatedWidth($ctx);
+        $estimatedSize = $this->getEstimatedSize($ctx);
+        $height = $estimatedSize->y;
+        $width = $estimatedSize->x;
 
-        // update the container size based on the determined height
+        // update the container size based on the determined size
         $ctx->containerSize->y = $height;
         $ctx->containerSize->x = $width;
 
         // check if the mouse is inside the button
         $isInside = $ctx->isHovered();
+
+        // last press key
+        $lpKey = $this->buttonId . '_lp';
     
         static $fuiButtonPressStates = [];
         if (!isset($fuiButtonPressStates[$this->buttonId])) {
             $fuiButtonPressStates[$this->buttonId] = self::BUTTON_PRESS_NONE;
         }
     
-        if ($isInside && $ctx->input->isMouseButtonPressed(MouseButton::LEFT)) {
-
-            // render a ring around the button when pressed
-            $ctx->vg->beginPath();
-            $ctx->vg->strokeColor($this->backgroundColor);
-            $ctx->vg->strokeWidth(2);
-            $ringDistance = 2;
-            $ctx->vg->roundedRect(
-                $ctx->origin->x - $ringDistance,
-                $ctx->origin->y - $ringDistance,
-                $ctx->containerSize->x + $ringDistance * 2,
-                $height + $ringDistance * 2,
-                $this->borderRadius
-            );
-            $ctx->vg->stroke();
+        if ($isInside && $ctx->input->isMouseButtonPressed(MouseButton::LEFT)) 
+        {
+            // store last press time
+            $ctx->setStaticValue($lpKey, glfwGetTime());
 
             if ($fuiButtonPressStates[$this->buttonId] === self::BUTTON_PRESS_NONE) {
                 $fuiButtonPressStates[$this->buttonId] = self::BUTTON_PRESS_STARTED;
@@ -144,12 +137,36 @@ class FUIButton extends FUIView
             $fuiButtonPressStates[$this->buttonId] = self::BUTTON_PRESS_NONE;
         }
 
+        // we have a little fade animation of the ring of the button
+        // so basically check if it has been less then 0.2 seconds since the last press
+        if ($ctx->getStaticValue($lpKey, -99.0) + 0.2 > glfwGetTime()) 
+        {
+            $alpha = (float)(($ctx->getStaticValue($lpKey, 0.0) + 0.2 - glfwGetTime()) * 5.0);
+
+            $ctx->vg->beginPath();
+            $ctx->vg->strokeColor($this->style->backgroundColor->withAlpha($alpha));
+            $ctx->vg->strokeWidth(2);
+            $ringDistance = 2 + (1.0 - $alpha) * 3.0;
+            $ctx->vg->roundedRect(
+                $ctx->origin->x - $ringDistance,
+                $ctx->origin->y - $ringDistance,
+                $ctx->containerSize->x + $ringDistance * 2,
+                $height + $ringDistance * 2,
+                $this->style->cornerRadius
+            );
+            $ctx->vg->stroke();
+        }
+        else {
+            // clean up the last press time
+            $ctx->clearStaticValue($lpKey);
+        }
+
         // render the button background
         $ctx->vg->beginPath();
-        $ctx->vg->fillColor($this->backgroundColor);
+        $ctx->vg->fillColor($this->style->backgroundColor);
 
         if ($isInside) {
-            $ctx->vg->fillColor($this->hoverBackgroundColor);
+            $ctx->vg->fillColor($this->style->hoverBackgroundColor);
         }
 
         $ctx->vg->roundedRect(
@@ -157,7 +174,7 @@ class FUIButton extends FUIView
             $ctx->origin->y,
             $ctx->containerSize->x,
             $height,
-            $this->borderRadius
+            $this->style->cornerRadius
         );
         $ctx->vg->fill();
 
@@ -168,15 +185,14 @@ class FUIButton extends FUIView
         // we cheat a little bit here, basically the technical correct center just
         // doesnt look right because at least in my opinion the text should be in the center
         // wile ignoring letters like 'g' or 'y' that go below the baseline
-        $ctx->origin->y = floor($ctx->origin->y + $this->fontSize * 0.15);
+        $ctx->origin->y = floor($ctx->origin->y + $this->style->fontSize * 0.15);
         
         $ctx->ensureSemiBoldFontFace();
-        $ctx->vg->fontSize($this->fontSize);
+        $ctx->vg->fontSize($this->style->fontSize);
         $ctx->vg->textAlign(VGAlign::CENTER | VGAlign::MIDDLE);
-        $ctx->vg->fillColor($this->textColor);
+        $ctx->vg->fillColor($this->style->textColor);
         $ctx->vg->text($ctx->origin->x, $ctx->origin->y, $this->text);
 
         // no pass to parent, as this is a leaf element
-        return $height;
     }
 }
