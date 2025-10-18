@@ -5,23 +5,19 @@ namespace VISU\FlyUI;
 use GL\Math\Vec2;
 use GL\VectorGraphics\VGAlign;
 use GL\VectorGraphics\VGColor;
+use VISU\FlyUI\Theme\FUIButtonGroupStyle;
 use VISU\OS\MouseButton;
 
 class FUIButtonGroup extends FUIView
 {
-    public VGColor $backgroundColor;
-    public VGColor $borderColor;
-    public VGColor $activeBackgroundColor;
-    public VGColor $hoverBackgroundColor;
-    public VGColor $activeTextColor;
-    public VGColor $inactiveTextColor;
+    /**
+     * The style of the button group
+     */
+    public FUIButtonGroupStyle $style;
 
-    public float $borderRadius;
-    public float $buttonBorderRadius;
-    public float $fontSize;
-    public float $buttonSpacing;
-    public float $innerOffset;
-
+    /**
+     * Button group ID
+     */
     public string $buttonGroupId;
 
     /**
@@ -41,36 +37,34 @@ class FUIButtonGroup extends FUIView
      * @param string|null $selectedOption Initially selected option key
      * @param \Closure|null $onSelect Callback function called when selection changes
      * @param string|null $buttonGroupId Unique identifier for this button group
+     * @param FUIButtonGroupStyle|null $buttonGroupStyle Custom style for the button group
      */
     public function __construct(
         array $options,
         ?string $selectedOption = null,
         public ?\Closure $onSelect = null,
-        ?string $buttonGroupId = null
+        ?string $buttonGroupId = null,
+        ?FUIButtonGroupStyle $buttonGroupStyle = null
     )
     {
-        parent::__construct(FlyUI::$instance->theme->buttonPadding->copy());
+        $this->style = $buttonGroupStyle ?? FlyUI::$instance->theme->buttonGroup;
+        parent::__construct(clone $this->style->padding);
 
         $this->options = $options;
         $this->selectedOption = $selectedOption;
 
-        // Theme colors
-        $this->backgroundColor = VGColor::white();
-        $this->borderColor = new VGColor(0.996, 0.996, 0.996, 1.0); // #FEFEFE equivalent
-        $this->activeBackgroundColor = FlyUI::$instance->theme->buttonPrimaryBackgroundColor;
-        $this->hoverBackgroundColor = FlyUI::$instance->theme->buttonPrimaryHoverBackgroundColor;
-        $this->activeTextColor = VGColor::white();
-        $this->inactiveTextColor = VGColor::black();
-
-        // Styling properties
-        $this->borderRadius = 10.0;
-        $this->buttonBorderRadius = 7.0;
-        $this->fontSize = FlyUI::$instance->theme->buttonFontSize;
-        $this->buttonSpacing = 30.0;
-        $this->innerOffset = 4.0;
-
         // Generate unique ID if not provided
         $this->buttonGroupId = $buttonGroupId ?? 'btngroup_' . uniqid();
+    }
+
+    /**
+     * Applies the given button group style
+     */
+    public function applyStyle(FUIButtonGroupStyle $style): self
+    {
+        $this->style = $style;
+        $this->padding = clone $style->padding;
+        return $this;
     }
 
     /**
@@ -105,18 +99,18 @@ class FUIButtonGroup extends FUIView
     public function getEstimatedSize(FUIRenderContext $ctx): Vec2
     {
         $ctx->ensureSemiBoldFontFace();
-        $ctx->vg->fontSize($this->fontSize);
+        $ctx->vg->fontSize($this->style->fontSize);
 
-        $totalWidth = $this->buttonSpacing;
-        $lineHeight = $this->fontSize * 1.8;
+        $totalWidth = $this->style->buttonSpacing;
+        $lineHeight = $this->style->fontSize * 1.8;
 
         foreach ($this->options as $option) {
             $buttonWidth = $ctx->vg->textBounds(0, 0, $option);
-            $totalWidth += $buttonWidth + $this->buttonSpacing * 2;
+            $totalWidth += $buttonWidth + $this->style->buttonSpacing * 2;
         }
 
-        $totalWidth -= $this->buttonSpacing; // Remove last spacing
-        $totalHeight = $lineHeight + $this->innerOffset * 2;
+        $totalWidth -= $this->style->buttonSpacing; // Remove last spacing
+        $totalHeight = $lineHeight + $this->style->innerOffset * 2;
 
         return new Vec2($totalWidth, $totalHeight);
     }
@@ -135,18 +129,18 @@ class FUIButtonGroup extends FUIView
         $ctx->containerSize->y = $totalHeight;
 
         $ctx->ensureSemiBoldFontFace();
-        $ctx->vg->fontSize($this->fontSize);
+        $ctx->vg->fontSize($this->style->fontSize);
         $ctx->vg->textAlign(VGAlign::LEFT | VGAlign::MIDDLE);
 
         // Calculate button widths and positions
         $buttonWidths = [];
         $buttonOffsets = [];
-        $offsetc = $this->buttonSpacing;
+        $offsetc = $this->style->buttonSpacing;
 
         foreach ($this->options as $key => $option) {
             $buttonWidths[$key] = $ctx->vg->textBounds(0, 0, $option);
             $buttonOffsets[$key] = $offsetc;
-            $offsetc += $buttonWidths[$key] + $this->buttonSpacing * 2;
+            $offsetc += $buttonWidths[$key] + $this->style->buttonSpacing * 2;
         }
 
         // Draw the background container
@@ -156,10 +150,10 @@ class FUIButtonGroup extends FUIView
             $ctx->origin->y, 
             $totalWidth, 
             $totalHeight, 
-            $this->borderRadius
+            $this->style->cornerRadius
         );
-        $ctx->vg->fillColor($this->backgroundColor);
-        $ctx->vg->strokeColor($this->borderColor);
+        $ctx->vg->fillColor($this->style->backgroundColor);
+        $ctx->vg->strokeColor($this->style->borderColor);
         $ctx->vg->fill();
 
         // Draw individual buttons
@@ -167,10 +161,10 @@ class FUIButtonGroup extends FUIView
             $currentWidth = $buttonWidths[$key];
             $currentOffset = $buttonOffsets[$key];
 
-            $bx = $ctx->origin->x + $currentOffset - $this->buttonSpacing + $this->innerOffset;
-            $bw = $currentWidth + $this->buttonSpacing * 2 - $this->innerOffset * 2;
-            $by = $ctx->origin->y + $this->innerOffset;
-            $bh = $totalHeight - $this->innerOffset * 2;
+            $bx = $ctx->origin->x + $currentOffset - $this->style->buttonSpacing + $this->style->innerOffset;
+            $bw = $currentWidth + $this->style->buttonSpacing * 2 - $this->style->innerOffset * 2;
+            $by = $ctx->origin->y + $this->style->innerOffset;
+            $bh = $totalHeight - $this->style->innerOffset * 2;
 
             $buttonId = $this->buttonGroupId . '_' . $key;
 
@@ -197,20 +191,24 @@ class FUIButtonGroup extends FUIView
             // Draw button background if active or hovered
             if ($isActive || $isInside) {
                 $ctx->vg->beginPath();
-                $ctx->vg->roundedRect($bx, $by, $bw, $bh, $this->buttonBorderRadius);
+                $ctx->vg->roundedRect($bx, $by, $bw, $bh, $this->style->buttonCornerRadius);
 
                 if ($isInside && !$isActive) {
-                    $ctx->vg->fillColor($this->hoverBackgroundColor);
+                    $ctx->vg->fillColor($this->style->hoverBackgroundColor);
                 } else {
-                    $ctx->vg->fillColor($this->activeBackgroundColor);
+                    $ctx->vg->fillColor($this->style->activeBackgroundColor);
                 }
                 $ctx->vg->fill();
 
                 // Set text color for active/hovered buttons
-                $ctx->vg->fillColor($this->activeTextColor);
+                if ($isInside && !$isActive) {
+                    $ctx->vg->fillColor($this->style->hoverTextColor);
+                } else {
+                    $ctx->vg->fillColor($this->style->activeTextColor);
+                }
             } else {
                 // Set text color for inactive buttons
-                $ctx->vg->fillColor($this->inactiveTextColor);
+                $ctx->vg->fillColor($this->style->inactiveTextColor);
             }
 
             // Draw the button label

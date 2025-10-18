@@ -4,6 +4,7 @@ namespace VISU\FlyUI;
 
 use Closure;
 use GL\Math\Vec2;
+use GL\Math\Vec4;
 use GL\VectorGraphics\VGColor;
 use GL\VectorGraphics\VGContext;
 use VISU\FlyUI\Exception\FlyUiInitException;
@@ -76,7 +77,7 @@ class FlyUI
      * 
      * The layout can then also align its children to topLeft, topCenter etc...
      */
-    public static function beginLayout(?Vec2 $padding = null) : FUILayout
+    public static function beginLayout(?Vec4 $padding = null) : FUILayout
     {
         $layout = new FUILayout($padding);
         self::$instance->pushView($layout);
@@ -86,7 +87,7 @@ class FlyUI
     /**
      * Starts a horiazontal layout where elements are stacked after each other from left to right
      */
-    public static function beginHorizontalStack(?float $spacing = null, ?Vec2 $padding = null) : FUILayout
+    public static function beginHorizontalStack(?float $spacing = null, ?Vec4 $padding = null) : FUILayout
     {
         $layout = new FUILayout($padding);
         $layout
@@ -106,7 +107,8 @@ class FlyUI
         $l = self::beginLayout()
             ->horizontalFill()
             ->verticalFit()
-            ->spacing(self::$instance->theme->sectionSpacing);
+            ->spacing(self::$instance->theme->sectionSpacing)
+            ->paddingBottom(self::$instance->theme->sectionBottomSpace);
 
         self::$instance->text(mb_strtoupper($title), self::$instance->theme->sectionHeaderTextColor)
             ->fontSize(self::$instance->theme->sectionHeaderFontSize)
@@ -138,7 +140,7 @@ class FlyUI
      */
     public static function spaceX(float $width) : FUISpace
     {
-        $view = new FUISpace(new Vec2($width, 0));
+        $view = new FUISpace(new Vec4($width, 0, 0, 0));
         self::$instance->addChildView($view);
         return $view;
     }
@@ -148,7 +150,7 @@ class FlyUI
      */
     public static function spaceY(float $height) : FUISpace
     {
-        $view = new FUISpace(new Vec2(0, $height));
+        $view = new FUISpace(new Vec4(0, 0, $height, 0));
         self::$instance->addChildView($view);
         return $view;
     }

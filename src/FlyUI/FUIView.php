@@ -3,6 +3,7 @@
 namespace VISU\FlyUI;
 
 use GL\Math\Vec2;
+use GL\Math\Vec4;
 
 abstract class FUIView
 {
@@ -14,25 +15,29 @@ abstract class FUIView
     public array $children = [];
 
     /**
-     * Padding is represented as a Vec2
-     *  x = horizontal padding
-     *  y = vertical padding
+     * Padding is represented as a Vec4
+     *  x = left padding
+     *  y = right padding
+     *  z = top padding
+     *  w = bottom padding
      */
-    public Vec2 $padding;
+    public Vec4 $padding;
 
     /**
      * Constructs a new view
      */
     public function __construct(
         /**
-         * Padding is represented as a Vec2
-         *  x = horizontal padding
-         *  y = vertical padding
+         * Padding is represented as a Vec4
+         *  x = left padding
+         *  y = right padding
+         *  z = top padding
+         *  w = bottom padding
          */
-        ?Vec2 $padding = null,
+        ?Vec4 $padding = null,
     )
     {
-        $this->padding = $padding ?? new Vec2(0);
+        $this->padding = $padding ?? new Vec4(0, 0, 0, 0);
     }
 
     /**
@@ -41,27 +46,89 @@ abstract class FUIView
      */
     public function padding(float $horizontal, float $vertical) : self
     {
-        $this->padding = new Vec2($horizontal, $vertical);
+        $this->padding = new Vec4($horizontal, $horizontal, $vertical, $vertical);
         return $this;
     }
 
     /**
-     * Sets the views X padding
+     * Sets the views padding with individual values
+     * Padding is the space inside the view to its content
+     */
+    public function paddingFull(float $left, float $right, float $top, float $bottom) : self
+    {
+        $this->padding = new Vec4($left, $right, $top, $bottom);
+        return $this;
+    }
+
+    /**
+     * Sets all padding values to the same value
+     * Padding is the space inside the view to its content
+     */
+    public function paddingAll(float $padding) : self
+    {
+        $this->padding = new Vec4($padding, $padding, $padding, $padding);
+        return $this;
+    }
+
+    /**
+     * Sets the views left padding
+     * Padding is the space inside the view to its content
+     */
+    public function paddingLeft(float $paddingLeft) : self
+    {
+        $this->padding->x = $paddingLeft;
+        return $this;
+    }
+
+    /**
+     * Sets the views right padding
+     * Padding is the space inside the view to its content
+     */
+    public function paddingRight(float $paddingRight) : self
+    {
+        $this->padding->y = $paddingRight;
+        return $this;
+    }
+
+    /**
+     * Sets the views top padding
+     * Padding is the space inside the view to its content
+     */
+    public function paddingTop(float $paddingTop) : self
+    {
+        $this->padding->z = $paddingTop;
+        return $this;
+    }
+
+    /**
+     * Sets the views bottom padding
+     * Padding is the space inside the view to its content
+     */
+    public function paddingBottom(float $paddingBottom) : self
+    {
+        $this->padding->w = $paddingBottom;
+        return $this;
+    }
+
+    /**
+     * Sets the views horizontal padding (left and right)
      * Padding is the space inside the view to its content
      */
     public function paddingX(float $paddingX) : self
     {
         $this->padding->x = $paddingX;
+        $this->padding->y = $paddingX;
         return $this;
     }
 
     /**
-     * Sets the views Y padding
+     * Sets the views vertical padding (top and bottom)
      * Padding is the space inside the view to its content
      */
     public function paddingY(float $paddingY) : self
     {
-        $this->padding->y = $paddingY;
+        $this->padding->z = $paddingY;
+        $this->padding->w = $paddingY;
         return $this;
     }
 

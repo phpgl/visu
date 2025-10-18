@@ -3,8 +3,10 @@
 namespace VISU\FlyUI;
 
 use GL\Math\Vec2;
+use GL\Math\Vec4;
 use GL\VectorGraphics\VGColor;
 use VISU\FlyUI\Theme\FUIButtonStyle;
+use VISU\FlyUI\Theme\FUIButtonGroupStyle;
 
 class FUITheme
 {   
@@ -80,6 +82,11 @@ class FUITheme
     public float $sectionSpacing;
 
     /**
+     * Space after a section
+     */
+    public float $sectionBottomSpace;
+
+    /**
      * Section header text color
      */
     public VGColor $sectionHeaderTextColor;
@@ -101,7 +108,7 @@ class FUITheme
     /**
      * The padding (inset space) used for cards
      */
-    public Vec2 $cardPadding;
+    public Vec4 $cardPadding;
 
     /**
      * The background color used for cards
@@ -130,7 +137,7 @@ class FUITheme
     /**
      * The padding (inset space) used for windows
      */
-    public Vec2 $windowPadding;
+    public Vec4 $windowPadding;
 
     /*
      * ------------------------------- Components -------------------------------
@@ -139,6 +146,9 @@ class FUITheme
     // button styles
     public FUIButtonStyle $primaryButton;
     public FUIButtonStyle $secondaryButton;
+
+    // button group style
+    public FUIButtonGroupStyle $buttonGroup;
 
 
     /**
@@ -173,23 +183,24 @@ class FUITheme
 
         // section
         $this->sectionSpacing = $this->spacing * 2;
+        $this->sectionBottomSpace = $this->spacing * 4;
         $this->sectionHeaderTextColor = $this->mutedTextColor->copy();
         $this->sectionHeaderFontSize = $this->smallFontSize;
 
         // card
-        $this->cardPadding = new Vec2($this->padding, $this->padding);
+        $this->cardPadding = new Vec4($this->padding, $this->padding, $this->padding, $this->padding);
         $this->cardBorderRadius = $this->borderRadius;
         $this->cardBackgroundColor = VGColor::white();
 
         // window
-        $this->windowPadding = new Vec2($this->padding, $this->padding);
+        $this->windowPadding = new Vec4($this->padding, $this->padding, $this->padding, $this->padding);
 
         // buttons
         // --------------------------------------------------------------------
 
         // primary button
         $this->primaryButton = new FUIButtonStyle();
-        $this->primaryButton->padding = new Vec2(round($this->padding * 1.2), round($this->padding * 0.6));
+        $this->primaryButton->padding = new Vec4(round($this->padding * 1.2), round($this->padding * 1.2), round($this->padding * 0.6), round($this->padding * 0.6));
         $this->primaryButton->cornerRadius = $this->borderRadius;
         $this->primaryButton->fontSize = $this->fontSize;
         $this->primaryButton->backgroundColor = new VGColor(0.256, 0.271, 0.906, 1.0);
@@ -206,7 +217,7 @@ class FUITheme
         // secondary button
         $this->secondaryButton = clone $this->primaryButton;
         $this->secondaryButton->backgroundColor = VGColor::black();
-        $this->secondaryButton->hoverBackgroundColor = $this->secondaryButton->backgroundColor->lighten(0.1);
+        $this->secondaryButton->hoverBackgroundColor = $this->secondaryButton->backgroundColor->lighten(0.2);
         $this->secondaryButton->textColor = VGColor::white();
         $this->secondaryButton->hoverTextColor = VGColor::white();
         $this->secondaryButton->disabledBackgroundColor = VGColor::darkGray();
@@ -214,5 +225,24 @@ class FUITheme
         // checkboxes
         $this->checkboxBackgroundColor = new VGColor(0.902, 0.902, 0.901, 1.0);
         $this->checkboxHoverBackgroundColor = $this->checkboxBackgroundColor->lighten(0.05);
+
+        // button group
+        // --------------------------------------------------------------------
+        $this->buttonGroup = new FUIButtonGroupStyle();
+        $this->buttonGroup->padding = new Vec4(round($this->padding * 0.4), round($this->padding * 0.4), round($this->padding * 0.4), round($this->padding * 0.4));
+        $this->buttonGroup->cornerRadius = $this->borderRadius * 2.0;
+        $this->buttonGroup->buttonCornerRadius = $this->borderRadius * 1.4;
+        $this->buttonGroup->fontSize = $this->fontSize;
+        $this->buttonGroup->buttonSpacing = 30.0;
+        $this->buttonGroup->innerOffset = 4.0;
+        $this->buttonGroup->backgroundColor = VGColor::white();
+        $this->buttonGroup->borderColor = new VGColor(0.996, 0.996, 0.996, 1.0); // #FEFEFE equivalent
+        $this->buttonGroup->activeBackgroundColor = $this->primaryButton->backgroundColor;
+        $this->buttonGroup->hoverBackgroundColor = $this->primaryButton->hoverBackgroundColor;
+        $this->buttonGroup->activeTextColor = VGColor::white();
+        $this->buttonGroup->inactiveTextColor = VGColor::black();
+        $this->buttonGroup->hoverTextColor = VGColor::white();
+        $this->buttonGroup->disabledBackgroundColor = new VGColor(0.9, 0.9, 0.9, 1.0);
+        $this->buttonGroup->disabledTextColor = new VGColor(0.6, 0.6, 0.6, 1.0);
     }
 }

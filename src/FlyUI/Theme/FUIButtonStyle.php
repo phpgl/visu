@@ -3,6 +3,7 @@
 namespace VISU\FlyUI\Theme;
 
 use GL\Math\Vec2;
+use GL\Math\Vec4;
 use GL\VectorGraphics\VGColor;
 use VISU\FlyUI\FlyUI;
 
@@ -26,7 +27,7 @@ class FUIButtonStyle
     /**
      * Padding for buttons
      */
-    public Vec2 $padding;
+    public Vec4 $padding;
 
     /**
      * The corner radius for buttons

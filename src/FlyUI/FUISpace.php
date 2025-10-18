@@ -7,11 +7,13 @@ use GL\Math\Vec2;
 class FUISpace extends FUIView
 {
     /**
-     * The space simply misuses the padding of the base view as its size
+     * The space simply uses the padding values to determine size
+     * For horizontal space, it uses left + right padding
+     * For vertical space, it uses top + bottom padding
      */
     public function getEstimatedSize(FUIRenderContext $ctx) : Vec2
     {
-        return $this->padding;
+        return new Vec2($this->padding->x + $this->padding->y, $this->padding->z + $this->padding->w);
     }
 
     /**

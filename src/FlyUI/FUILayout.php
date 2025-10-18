@@ -330,7 +330,7 @@ class FUILayout extends FUIView
                     foreach ($childrenEstimatedSizes as $childSize) {
                         $totalWidth = $totalWidth + $childSize->x;
                     }
-                    $size->x = $totalWidth + ($this->spacing * max(0, count($this->children) - 1)) + ($this->padding->x * 2);
+                    $size->x = $totalWidth + ($this->spacing * max(0, count($this->children) - 1)) + ($this->padding->x + $this->padding->y);
                 } else {
                     $maxWidth = 0.0;
                     foreach ($childrenEstimatedSizes as $childSize) {
@@ -338,7 +338,7 @@ class FUILayout extends FUIView
                             $maxWidth = $childSize->x;
                         }
                     }
-                    $size->x = $maxWidth + ($this->padding->x * 2);
+                    $size->x = $maxWidth + ($this->padding->x + $this->padding->y);
                 }
             }
             
@@ -348,7 +348,7 @@ class FUILayout extends FUIView
                     foreach ($childrenEstimatedSizes as $childSize) {
                         $totalHeight = $totalHeight + $childSize->y;
                     }
-                    $size->y = $totalHeight + ($this->spacing * max(0, count($this->children) - 1)) + ($this->padding->y * 2);
+                    $size->y = $totalHeight + ($this->spacing * max(0, count($this->children) - 1)) + ($this->padding->z + $this->padding->w);
                 } else {
                     $maxHeight = 0.0;
                     foreach ($childrenEstimatedSizes as $childSize) {
@@ -356,7 +356,7 @@ class FUILayout extends FUIView
                             $maxHeight = $childSize->y;
                         }
                     }
-                    $size->y = $maxHeight + ($this->padding->y * 2);
+                    $size->y = $maxHeight + ($this->padding->z + $this->padding->w);
                 }
             }
         }
@@ -421,11 +421,11 @@ class FUILayout extends FUIView
             $ctx->vg->fill();
         }
 
-        // apply padding to the context (reuse temporary Vec2 object)
-        $paddedOrigin = $ctx->origin + $this->padding;
+        // apply padding to the context
+        $paddedOrigin = new Vec2($ctx->origin->x + $this->padding->x, $ctx->origin->y + $this->padding->z);
         $paddedSize = new Vec2(
-            $ctx->containerSize->x - ($this->padding->x * 2),
-            $ctx->containerSize->y - ($this->padding->y * 2)
+            $ctx->containerSize->x - ($this->padding->x + $this->padding->y),
+            $ctx->containerSize->y - ($this->padding->z + $this->padding->w)
         );
         
         $ctx->origin = $paddedOrigin;

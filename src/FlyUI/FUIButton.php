@@ -84,8 +84,8 @@ class FUIButton extends FUIView
         $bounds = new Vec4();
         $ctx->vg->textBounds(0, 0, $this->text, $bounds);
 
-        $width = ($bounds->z - $bounds->x) + $this->padding->x * 2;
-        $height = ($bounds->w - $bounds->y) + $this->padding->y * 2;
+        $width = ($bounds->z - $bounds->x) + $this->padding->x + $this->padding->y;
+        $height = ($bounds->w - $bounds->y) + $this->padding->z + $this->padding->w;
         if ($this->fullWidth) {
             $width = $ctx->containerSize->x;
         }
