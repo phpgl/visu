@@ -142,4 +142,37 @@ class Key
     public const RIGHT_SUPER = GLFW_KEY_RIGHT_SUPER;
     public const MENU = GLFW_KEY_MENU;
     public const LAST = GLFW_KEY_LAST;
+
+    /**
+     * Static lookup array for key names
+     * 
+     * @var array<int, string>|null
+     */
+    private static ?array $keyLookup = null;
+
+    /**
+     * Function to get the name of a key from its constant
+     */
+    public static function getName(int $keyConstant): string
+    {
+        if (self::$keyLookup === null) {
+            self::initKeyLookup();
+        }
+        
+        return self::$keyLookup[$keyConstant] ?? 'UNKNOWN';
+    }
+
+    /**
+     * Initialize the key lookup array once
+     */
+    private static function initKeyLookup(): void
+    {
+        $reflection = new \ReflectionClass(self::class);
+        $constants = $reflection->getConstants();
+        
+        self::$keyLookup = [];
+        foreach ($constants as $name => $value) {
+            self::$keyLookup[$value] = $name;
+        }
+    }
 }

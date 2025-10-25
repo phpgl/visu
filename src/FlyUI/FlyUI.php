@@ -8,7 +8,9 @@ use GL\Math\Vec4;
 use GL\VectorGraphics\VGColor;
 use GL\VectorGraphics\VGContext;
 use VISU\FlyUI\Exception\FlyUiInitException;
+use VISU\Instrument\Clock;
 use VISU\OS\Input;
+use VISU\OS\Key;
 use VISU\Signal\Dispatcher;
 
 /**
@@ -39,6 +41,11 @@ class FlyUI
         if ($vgContext->createFont('inter-semibold', VISU_PATH_FRAMEWORK_RESOURCES_FONT . '/inter/Inter-SemiBold.ttf') === -1) {
             throw new FlyUiInitException('Could not load the "Inter-Bold.ttf" font file.');
         }
+
+        // monospace font (Inconsolata)
+        if ($vgContext->createFont('inconsolata-regular', VISU_PATH_FRAMEWORK_RESOURCES_FONT . '/inconsolata/Inconsolata-Regular.ttf') === -1) {
+            throw new FlyUiInitException('Could not load the "Inconsolata-Regular.ttf" font file.');
+        }
     }
 
     /**
@@ -63,6 +70,17 @@ class FlyUI
         }
 
         self::$instance->internalEndFrame();
+    }
+
+    /**
+     * Enables performance tracing for the current FlyUI instance
+     */
+    public static function enablePerformanceTracing(bool $enable = true) : void {
+        if (!isset(self::$instance)) {
+            throw new \Exception('FlyUI has not been initialized, call FlyUI::initialize() first');
+        }
+
+        self::$instance->performanceTracingEnabled = $enable;
     }
 
     /**
@@ -179,9 +197,14 @@ class FlyUI
     /**
      * Creates a button group element
      */
-    public static function buttonGroup(array $options, ?string $selectedOption = null, ?Closure $onSelect = null) : FUIButtonGroup
+    public static function buttonGroup(
+        string $name,
+        array $options, 
+        ?string &$selectedOption = null, 
+        ?Closure $onSelect = null
+    ) : FUIButtonGroup
     {
-        $view = new FUIButtonGroup($options, $selectedOption, $onSelect);
+        $view = new FUIButtonGroup($name, $options, $selectedOption, $onSelect);
         self::$instance->addChildView($view);
         return $view;
     }
@@ -201,10 +224,16 @@ class FlyUI
     }
 
     /**
+     * Instance Functions/Properties
+     * 
+     * ------------------------------------------------------------------------
+     */
+
+    /**
      * The Theme currently used
      */
     public FUITheme $theme;
-    
+
     /**
      * The current tree of views 
      * This functions as a stack where the last element is the current view
@@ -225,6 +254,29 @@ class FlyUI
     private bool $selfManageVGContext = false;
 
     /**
+     * Boolean if performance tracing is enabled
+     * 
+     * Performance tracing will replace all views just before rendering with proxies
+     * allowing to measure the time they took to execute. Keep in mind this will really only mesure 
+     * CPU time and not GPU time.
+     * 
+     * @var bool
+     */
+    public bool $performanceTracingEnabled = false;
+
+    /**
+     * Performance tracer instance
+     * 
+     * This thing that does the tracing...
+     */
+    private FUIPerformanceTracer $performanceTracer;
+
+    /**
+     * Performance tracer overlay for visualizing performance data
+     */
+    private ?FUIPerformanceTracerOverlay $performanceOverlay = null;
+
+    /**
      * Constructor
      */
     public function __construct(
@@ -236,6 +288,10 @@ class FlyUI
     {
         // assing the theme, create a default one if none is provided
         $this->theme = $theme ?? new FUITheme();
+
+        // create performance tracer
+        $this->performanceTracer = new FUIPerformanceTracer();
+        $this->performanceOverlay = new FUIPerformanceTracerOverlay();
     }
 
     /**
@@ -324,13 +380,38 @@ class FlyUI
         $ctx = new FUIRenderContext($this->vgContext, $this->input, $this->theme);
         $ctx->containerSize = $this->currentResolution;
 
+        // toggle performance tracing overlay on f6
+        if ($this->input->hasKeyBeenPressedThisFrame(Key::F6)) {
+            $this->performanceTracingEnabled = !$this->performanceTracingEnabled;
+        }
+
         $this->vgContext->reset();
 
         // set the default font face
         $ctx->ensureRegularFontFace();
 
+        // if performance tracing is enabled, we wrap all views in proxies
+        if ($this->performanceTracingEnabled) {
+            $this->viewTree[0] = $this->performanceTracer->replaceViewWithTracingProxy($this->viewTree[0]);
+        }
+
         // let all views render itself
         $this->viewTree[0]->render($ctx);
+        
+        // collect performance data if tracing is enabled
+        if ($this->performanceTracingEnabled) {
+            $trace = $this->performanceTracer->getTrace($this->viewTree[0]);
+            
+            // add trace to overlay if it exists
+            if ($this->performanceOverlay !== null) {
+                $this->performanceOverlay->addTrace($trace);
+            }
+        }
+
+        // render the performance overlay if it exists
+        if ($this->performanceTracingEnabled && $this->performanceOverlay) {
+            $this->performanceOverlay->render($ctx);
+        }
 
         // end the VGContext frame
         if ($this->selfManageVGContext) {

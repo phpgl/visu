@@ -42,6 +42,11 @@ class FUIButtonGroupStyle
      */
     public float $innerOffset;
 
+    /**
+     * Animation speed for highlight box transitions (higher = faster)
+     */
+    public float $animationSpeed;
+
     /*
      * ------------------------------- Colors --------------------------------
      */
@@ -80,6 +85,11 @@ class FUIButtonGroupStyle
      * The text color for buttons when hovered
      */
     public VGColor $hoverTextColor;
+
+    /**
+     * The gray overlay color for hover effects
+     */
+    public VGColor $hoverOverlayColor;
 
     /**
      * The disabled button group background color

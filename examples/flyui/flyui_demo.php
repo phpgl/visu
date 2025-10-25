@@ -1,12 +1,15 @@
 <?php
 
 use GL\Math\Vec2;
+use GL\Math\Vec4;
 use GL\VectorGraphics\VGColor;
 use VISU\ECS\EntityRegisty;
 use VISU\FlyUI\FlyUI;
+use VISU\FlyUI\FUIButtonGroup;
 use VISU\FlyUI\FUILayoutFlow;
 use VISU\FlyUI\FUILayoutSizing;
 use VISU\FlyUI\Theme\FUIButtonStyle;
+use VISU\FlyUI\Theme\FUIButtonGroupStyle;
 use VISU\Graphics\Rendering\RenderContext;
 use VISU\Graphics\RenderTarget;
 use VISU\Quickstart;
@@ -68,15 +71,15 @@ UIDemo("Layout - Stacks", function(RenderContext $context, RenderTarget $target,
         ->spacing(5);
 
     for ($i = 0; $i < 10; $i++) {
-        $color = VGColor::red()->darken(($i / 10) * 0.5);
+        $color = VGColor::white()->darken(($i / 10));
 
-        FlyUI::beginLayout(new Vec2(10, 10))
+        FlyUI::beginLayout(new Vec4(10))
             ->verticalSizing($state->stackSizing)
             ->backgroundColor($color, 3.0);
         
 
         // find a text color that contrasts well with the background
-        FlyUI::text("This is box #" . ($i + 1), $color->invert())
+        FlyUI::text("This is box #" . ($i + 1), $color->contrast())
             ->fontSize(12);
 
         FlyUI::end();
@@ -119,7 +122,7 @@ UIDemo("Layout - Stacks", function(RenderContext $context, RenderTarget $target,
 });
 
 /**
- * Demo: Layout - Vertical stacking
+ * Demo: Components - Buttons
  * 
  * ----------------------------------------------------------------------------
  */
@@ -139,8 +142,6 @@ UIDemo("Components - Buttons", function(RenderContext $context, RenderTarget $ta
     FlyUI::end(); // end horizontal stack
     FlyUI::end(); // end section
 
-    FlyUI::spaceY(30);
-
     FlyUI::beginSection('Button Styles');
     FlyUI::beginHorizontalStack();
 
@@ -153,6 +154,69 @@ UIDemo("Components - Buttons", function(RenderContext $context, RenderTarget $ta
     })->applyStyle(FUIButtonStyle::secondary());
 
     FlyUI::end(); // end horizontal stack
+    FlyUI::end(); // end section
+});
+
+/**
+ * Demo: Components - Button Groups
+ * 
+ * ----------------------------------------------------------------------------
+ */
+UIDemo("Components - Button Groups", function(RenderContext $context, RenderTarget $target, FlyUiDemoState $state) : void 
+{
+    static $selectedSize = 'medium';
+    static $selectedStyle = 'primary';
+    static $selectedLayout = 'horizontal';
+
+    FlyUI::beginSection('Button Group with Reference');
+    FlyUI::beginHorizontalStack();
+
+    FlyUI::buttonGroup(
+        'size-selector',
+        ['small' => 'Small', 'medium' => 'Medium', 'large' => 'Large'],
+        $selectedSize,
+        function(string $option) {
+            echo "Selected size: " . $option . "\n";
+        }
+    );
+
+    FlyUI::end(); // end horizontal stack
+    FlyUI::end(); // end section
+
+    FlyUI::beginSection('Another Button Group (Custom Hover)');
+    FlyUI::beginHorizontalStack();
+
+    FlyUI::buttonGroup(
+        'style-selector',
+        ['primary' => 'Primary', 'secondary' => 'Secondary', 'accent' => 'Accent'],
+        $selectedStyle,
+        function(string $option) {
+            echo "Selected style: " . $option . "\n";
+        }
+    )->setHoverOverlayColor(new VGColor(0.2, 0.4, 0.8, 0.15)); // Light blue hover
+
+    FlyUI::end(); // end horizontal stack
+    FlyUI::end(); // end section
+
+    FlyUI::beginSection('Layout Selection (Slow Animation)');
+    FlyUI::beginHorizontalStack();
+
+    FlyUI::buttonGroup(
+        'layout-selector',
+        ['horizontal' => 'Horizontal', 'vertical' => 'Vertical', 'grid' => 'Grid'],
+        $selectedLayout,
+        function(string $option) {
+            echo "Selected layout: " . $option . "\n";
+        }
+    )->setAnimationSpeed(3.0); // Slower animation
+
+    FlyUI::end(); // end horizontal stack
+    FlyUI::end(); // end section
+
+    FlyUI::beginSection('Current Selections');
+    FlyUI::text("Size: " . $selectedSize);
+    FlyUI::text("Style: " . $selectedStyle);
+    FlyUI::text("Layout: " . $selectedLayout);
     FlyUI::end(); // end section
 });
 
@@ -171,7 +235,7 @@ $quickstart = new Quickstart(function(QuickstartOptions $app) use(&$state)
         $target->framebuffer()->clear();
 
         // main sidebar/content layout
-        FlyUI::beginLayout(new Vec2(25, 25))
+        FlyUI::beginLayout(new Vec4(25))
             ->flow(FUILayoutFlow::horizontal)
             ->backgroundColor(VGColor::white())
             ->verticalFill()
@@ -179,7 +243,7 @@ $quickstart = new Quickstart(function(QuickstartOptions $app) use(&$state)
             ->spacing(20);
 
             // sidebar
-            FlyUI::beginLayout(new Vec2(10, 10))
+            FlyUI::beginLayout(new Vec4(10))
                 ->flow(FUILayoutFlow::vertical)
                 ->backgroundColor(VGColor::rgb(0.9, 0.9, 0.9), 5.0)
                 ->verticalFill()
@@ -196,7 +260,7 @@ $quickstart = new Quickstart(function(QuickstartOptions $app) use(&$state)
             FlyUI::end();
 
             // content area
-            FlyUI::beginLayout(new Vec2(10, 10))
+            FlyUI::beginLayout(new Vec4(10))
                 ->flow(FUILayoutFlow::vertical)
                 ->backgroundColor(VGColor::rgb(0.95, 0.95, 0.95), 5.0)
                 ->horizontalFill()

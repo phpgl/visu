@@ -112,6 +112,14 @@ class FUIRenderContext
     {
         $this->ensureFontFace($this->theme->semiBoldFont);
     }
+
+    /**
+     * Ensures the default "monospace" font face is set
+     */
+    public function ensureMonospaceFontFace() : void
+    {
+        $this->ensureFontFace($this->theme->monospaceFont);
+    }
     
     /**
      * Sets a static value (persistant data, over multiple frames)

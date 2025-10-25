@@ -105,6 +105,34 @@ class Input implements WindowEventHandlerInterface
      */
     private array $mouseButtonsDidReleaseFrame = [];
 
+    /**
+     * An array of all keys that have been pressed since the last poll
+     * 
+     * @var array<int, bool>
+     */
+    private array $keysDidPress = [];
+
+    /**
+     * An array of all keys that have been released since the last poll
+     * 
+     * @var array<int, bool>
+     */
+    private array $keysDidRelease = [];
+
+    /**
+     * Same as "keysDidPress" but for per frame state instead of per poll state
+     * 
+     * @var array<int, bool>
+     */
+    private array $keysDidPressFrame = [];
+
+    /**
+     * Same as "keysDidRelease" but for per frame state instead of per poll state
+     * 
+     * @var array<int, bool>
+     */
+    private array $keysDidReleaseFrame = [];
+
 
     /**
      * The event names the input class will dispatch on
@@ -311,6 +339,112 @@ class Input implements WindowEventHandlerInterface
     }
 
     /**
+     * Returns boolean if the given key was pressed since the last poll
+     * 
+     * Example:
+     * ```php
+     * $input->hasKeyBeenPressed(Key::SPACE);
+     * ```
+     * 
+     * @param int $key The key to check
+     * @return bool True if the key was pressed, false otherwise
+     */
+    public function hasKeyBeenPressed(int $key) : bool
+    {
+        return $this->keysDidPress[$key] ?? false;
+    }
+
+    /**
+     * Returns boolean if the given key was released since the last poll
+     * 
+     * Example:
+     * ```php
+     * $input->hasKeyBeenReleased(Key::SPACE);
+     * ```
+     * 
+     * @param int $key The key to check
+     * @return bool True if the key was released, false otherwise
+     */
+    public function hasKeyBeenReleased(int $key) : bool
+    {
+        return $this->keysDidRelease[$key] ?? false;
+    }
+
+    /**
+     * Returns boolean if the given key was pressed since the last frame
+     * 
+     * Example:
+     * ```php
+     * $input->hasKeyBeenPressedThisFrame(Key::SPACE);
+     * ```
+     * 
+     * @param int $key The key to check
+     * @return bool True if the key was pressed, false otherwise
+     */
+    public function hasKeyBeenPressedThisFrame(int $key) : bool
+    {
+        return $this->keysDidPressFrame[$key] ?? false;
+    }
+
+    /**
+     * Returns boolean if the given key was released since the last frame
+     * 
+     * Example:
+     * ```php
+     * $input->hasKeyBeenReleasedThisFrame(Key::SPACE);
+     * ```
+     * 
+     * @param int $key The key to check
+     * @return bool True if the key was released, false otherwise
+     */
+    public function hasKeyBeenReleasedThisFrame(int $key) : bool
+    {
+        return $this->keysDidReleaseFrame[$key] ?? false;
+    }
+
+    /**
+     * Returns an array of all currently pressed keys
+     * 
+     * This method returns the key codes of all keys that were pressed
+     * since the last poll event.
+     * 
+     * Example:
+     * ```php
+     * $pressedKeys = $input->getKeyPresses();
+     * foreach ($pressedKeys as $key) {
+     *     echo "Key $key was pressed\n";
+     * }
+     * ```
+     * 
+     * @return array<int> Array of key codes that were pressed since last poll
+     */
+    public function getKeyPresses() : array
+    {
+        return array_keys($this->keysDidPress);
+    }
+
+    /**
+     * Returns an array of all keys pressed this frame
+     * 
+     * This method returns the key codes of all keys that were pressed
+     * since the last frame.
+     * 
+     * Example:
+     * ```php
+     * $pressedKeys = $input->getKeyPressesThisFrame();
+     * foreach ($pressedKeys as $key) {
+     *     echo "Key $key was pressed this frame\n";
+     * }
+     * ```
+     * 
+     * @return array<int> Array of key codes that were pressed this frame
+     */
+    public function getKeyPressesThisFrame() : array
+    {
+        return array_keys($this->keysDidPressFrame);
+    }
+
+    /**
      * Get the current cursor position
      * 
      * @return Vec2 The current cursor position
@@ -422,6 +556,15 @@ class Input implements WindowEventHandlerInterface
      */
     public function handleWindowKey(Window $window, int $key, int $scancode, int $action, int $mods): void
     {
+        // record for did press and did release
+        if ($action === GLFW_PRESS) {
+            $this->keysDidPress[$key] = true;
+            $this->keysDidPressFrame[$key] = true;
+        } else if ($action === GLFW_RELEASE) {
+            $this->keysDidRelease[$key] = true;
+            $this->keysDidReleaseFrame[$key] = true;
+        }
+
         $this->dispatcher->dispatch(self::EVENT_KEY, new KeySignal($window, $key, $scancode, $action, $mods));
     }
 
@@ -578,6 +721,8 @@ class Input implements WindowEventHandlerInterface
     {
         $this->mouseButtonsDidPress = [];
         $this->mouseButtonsDidRelease = [];
+        $this->keysDidPress = [];
+        $this->keysDidRelease = [];
     }
 
     /**
@@ -601,6 +746,8 @@ class Input implements WindowEventHandlerInterface
     {
         $this->mouseButtonsDidPressFrame = [];
         $this->mouseButtonsDidReleaseFrame = [];
+        $this->keysDidPressFrame = [];
+        $this->keysDidReleaseFrame = [];
     }
 
     /**

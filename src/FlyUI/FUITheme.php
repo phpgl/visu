@@ -29,6 +29,11 @@ class FUITheme
     public string $semiBoldFont = 'inter-semibold';
 
     /**
+     * Monospace font.
+     */
+    public string $monospaceFont = 'inconsolata-regular';
+
+    /**
      * The general padding used to space elements
      */
     public float $padding = 10.0;
@@ -235,13 +240,15 @@ class FUITheme
         $this->buttonGroup->fontSize = $this->fontSize;
         $this->buttonGroup->buttonSpacing = 30.0;
         $this->buttonGroup->innerOffset = 4.0;
+        $this->buttonGroup->animationSpeed = 8.0;
         $this->buttonGroup->backgroundColor = VGColor::white();
-        $this->buttonGroup->borderColor = new VGColor(0.996, 0.996, 0.996, 1.0); // #FEFEFE equivalent
+        $this->buttonGroup->borderColor = VGColor::black()->withAlpha(0.05);
         $this->buttonGroup->activeBackgroundColor = $this->primaryButton->backgroundColor;
         $this->buttonGroup->hoverBackgroundColor = $this->primaryButton->hoverBackgroundColor;
         $this->buttonGroup->activeTextColor = VGColor::white();
         $this->buttonGroup->inactiveTextColor = VGColor::black();
-        $this->buttonGroup->hoverTextColor = VGColor::white();
+        $this->buttonGroup->hoverTextColor = new VGColor(0.3, 0.3, 0.3, 1.0); // Dark gray
+        $this->buttonGroup->hoverOverlayColor = new VGColor(0.0, 0.0, 0.0, 0.1); // Light gray overlay
         $this->buttonGroup->disabledBackgroundColor = new VGColor(0.9, 0.9, 0.9, 1.0);
         $this->buttonGroup->disabledTextColor = new VGColor(0.6, 0.6, 0.6, 1.0);
     }
