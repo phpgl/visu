@@ -1,4 +1,4 @@
-site_name: VISU / Make PHP Games
+site_name: VISU / Make Games with PHP
 repo_url: https://github.com/phpgl/visu
 site_url: https://visu.phpgl.net
 use_directory_urls: false
@@ -7,8 +7,10 @@ nav:
   - Getting Started:
     - Installation & Requirements: getting-started/installation.md
     - Project Setup: getting-started/project-setup.md
-  - User Guide: 'user-guide/'
+  - User Guide:
+    - Graphics: 'user-guide/graphics/'
   - Games: 'games/'
+  - API Reference: api-reference.md
   - PHP-GLFW →: https://phpgl.net
 plugins:
   - search
@@ -29,7 +31,7 @@ theme:
     - navigation.footer
 extra_css:
   - stylesheets/extra.css
-copyright: Copyright &copy; 2023 Mario Döring / @see <a target="_blank" href="https://github.com/phpgl/visu/blob/master/LICENSE">LICENSE</a>
+copyright: Copyright &copy; 2025 Mario Döring / @see <a target="_blank" href="https://github.com/phpgl/visu/blob/master/LICENSE">LICENSE</a>
 extra:
   generator: false
   social:
