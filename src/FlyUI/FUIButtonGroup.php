@@ -4,6 +4,7 @@ namespace VISU\FlyUI;
 
 use GL\Math\Vec2;
 use GL\VectorGraphics\VGAlign;
+use GL\VectorGraphics\VGColor;
 use VISU\FlyUI\Theme\FUIButtonGroupStyle;
 use VISU\OS\MouseButton;
 
@@ -25,6 +26,11 @@ class FUIButtonGroup extends FUIView
     public array $options;
 
     /**
+     * A Label string that will be rendered before the button group
+     */
+    public ?string $label = null;
+
+    /**
      * The currently selected option key
      */
     public ?string $selectedOption = null;
@@ -34,17 +40,11 @@ class FUIButtonGroup extends FUIView
      */
     private ?string $selectedOptionRef = null;
 
-
-
     /**
      * Constructs a new button group
      * 
-     * @param string $name The name/identifier for this button group
+     * @param string $name The name of the button group, will also be used for the ID, so must be unique
      * @param array<string, string> $options Array of key => label pairs
-     * @param string|null $selectedOption Initially selected option key (passed by reference)
-     * @param \Closure|null $onSelect Callback function called when selection changes
-     * @param string|null $buttonGroupId Unique identifier for this button group
-     * @param FUIButtonGroupStyle|null $buttonGroupStyle Custom style for the button group
      */
     public function __construct(
         string $name,
@@ -52,7 +52,7 @@ class FUIButtonGroup extends FUIView
         ?string &$selectedOption = null,
         public ?\Closure $onSelect = null,
         ?string $buttonGroupId = null,
-        ?FUIButtonGroupStyle $buttonGroupStyle = null
+        ?FUIButtonGroupStyle $buttonGroupStyle = null,
     )
     {
         $this->style = $buttonGroupStyle ?? FlyUI::$instance->theme->buttonGroup;
@@ -63,6 +63,7 @@ class FUIButtonGroup extends FUIView
         $this->selectedOptionRef = &$selectedOption;
 
         // button group ID, based on name if not provided
+        $this->label = $name;
         $this->buttonGroupId = $buttonGroupId ?? 'btngrp_' . $name;
     }
 
@@ -107,29 +108,11 @@ class FUIButtonGroup extends FUIView
     }
 
     /**
-     * Sets the animation speed for the highlight box transitions
+     * Hides the label for the button group
      */
-    public function setAnimationSpeed(float $speed): self
+    public function hideLabel(): self
     {
-        $this->style->animationSpeed = $speed;
-        return $this;
-    }
-
-    /**
-     * Sets the hover overlay color (the gray fade effect)
-     */
-    public function setHoverOverlayColor(\GL\VectorGraphics\VGColor $color): self
-    {
-        $this->style->hoverOverlayColor = $color;
-        return $this;
-    }
-
-    /**
-     * Sets the hover text color
-     */
-    public function setHoverTextColor(\GL\VectorGraphics\VGColor $color): self
-    {
-        $this->style->hoverTextColor = $color;
+        $this->label = null;
         return $this;
     }
 
@@ -153,6 +136,12 @@ class FUIButtonGroup extends FUIView
         $totalWidth -= $buttonSpacing; // remove last spacing
         $totalHeight = $this->style->fontSize * 1.8 + $this->style->innerOffset * 2;
 
+        // if we have a label, add its height
+        if ($this->label !== null) {
+            $label = new FUILabel($this->label);
+            $totalHeight += $label->getLabelHeight();
+        }
+
         return new Vec2($totalWidth, $totalHeight);
     }
 
@@ -161,13 +150,19 @@ class FUIButtonGroup extends FUIView
      */
     public function render(FUIRenderContext $ctx): void
     {
-        // cache frequently accessed style properties to avoid repeated property access
         $style = $this->style;
         $buttonSpacing = $style->buttonSpacing;
         $buttonSpacingDouble = $buttonSpacing * 2;
         $innerOffset = $style->innerOffset;
         $innerOffsetDouble = $innerOffset * 2;
-        
+        $labelHeight = 0;
+
+        if ($this->label !== null) {
+            $label = new FUILabel($this->label);
+            $labelHeight = $label->getLabelHeight();
+            $label->render($ctx);
+        }
+
         $ctx->ensureSemiBoldFontFace();
         $ctx->vg->fontSize($style->fontSize);
         $ctx->vg->textAlign(VGAlign::LEFT | VGAlign::MIDDLE);
@@ -191,11 +186,11 @@ class FUIButtonGroup extends FUIView
 
         // update container size
         $ctx->containerSize->x = $totalWidth;
-        $ctx->containerSize->y = $totalHeight;
+        $ctx->containerSize->y = $totalHeight + $labelHeight;
 
         // draw the background container
         $originX = $ctx->origin->x;
-        $originY = $ctx->origin->y;
+        $originY = $ctx->origin->y + $labelHeight;
         
         $ctx->vg->beginPath();
         $ctx->vg->roundedRect($originX, $originY, $totalWidth, $totalHeight, $style->cornerRadius);

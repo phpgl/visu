@@ -3,6 +3,7 @@
 namespace VISU\FlyUI;
 
 use GL\Math\Vec2;
+use GL\Math\Vec4;
 use GL\VectorGraphics\VGAlign;
 use GL\VectorGraphics\VGColor;
 
@@ -56,7 +57,24 @@ class FUIText extends FUIView
      */
     public function getEstimatedSize(FUIRenderContext $ctx) : Vec2
     {
-        return new Vec2(0, $this->fontSize + $this->padding->y * 2);
+        // set up the correct font face and size for measurement
+        if ($this->isBold) {
+            $ctx->ensureSemiBoldFontFace();
+        } else {
+            $ctx->ensureRegularFontFace();
+        }
+        
+        $ctx->vg->fontSize($this->fontSize);
+
+        // get the text bounds
+        $bounds = new Vec4();
+        $ctx->vg->textBounds(0, 0, $this->text, $bounds);
+        
+        // return the actual bounds as size (width = x2 - x1, height = y2 - y1)
+        return new Vec2(
+            $bounds->z - $bounds->x + $this->padding->x * 2,
+            $bounds->w - $bounds->y + $this->padding->y * 2
+        );
     }
 
     /**

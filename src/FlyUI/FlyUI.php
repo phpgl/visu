@@ -123,7 +123,7 @@ class FlyUI
     public static function beginSection(string $title) : FUILayout
     {
         $l = self::beginLayout()
-            ->horizontalFill()
+            ->horizontalFit()
             ->verticalFit()
             ->spacing(self::$instance->theme->sectionSpacing)
             ->paddingBottom(self::$instance->theme->sectionBottomSpace);
@@ -196,6 +196,8 @@ class FlyUI
 
     /**
      * Creates a button group element
+     * 
+     * @param array<string, string> $options Array of key => label pairs
      */
     public static function buttonGroup(
         string $name,

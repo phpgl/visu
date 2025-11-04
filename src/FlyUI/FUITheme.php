@@ -102,6 +102,25 @@ class FUITheme
     public float $sectionHeaderFontSize;
 
     /*
+     * ------------------------------ Labels -----------------------------------
+     */
+
+    /**
+     * Label text color
+     */
+    public VGColor $labelTextColor;
+
+    /**
+     * Label font size
+     */
+    public float $labelFontSize;
+
+    /**
+     * Label height 
+     */
+    public float $labelHeight = 24.0;
+
+    /*
      * ------------------------------ Cards -----------------------------------
      */
 
@@ -192,6 +211,10 @@ class FUITheme
         $this->sectionHeaderTextColor = $this->mutedTextColor->copy();
         $this->sectionHeaderFontSize = $this->smallFontSize;
 
+        // labels
+        $this->labelTextColor = VGColor::black();
+        $this->labelFontSize = $this->fontSize;
+
         // card
         $this->cardPadding = new Vec4($this->padding, $this->padding, $this->padding, $this->padding);
         $this->cardBorderRadius = $this->borderRadius;
@@ -212,12 +235,7 @@ class FUITheme
         $this->primaryButton->hoverBackgroundColor = $this->primaryButton->backgroundColor->lighten(0.05);
         $this->primaryButton->textColor = VGColor::white();
         $this->primaryButton->hoverTextColor = VGColor::white();
-        $this->primaryButton->disabledBackgroundColor = new VGColor(
-            $this->primaryButton->backgroundColor->r,
-            $this->primaryButton->backgroundColor->g,
-            $this->primaryButton->backgroundColor->b,
-            0.5
-        );
+        $this->primaryButton->disabledBackgroundColor = $this->primaryButton->backgroundColor->withAlpha(0.5);
 
         // secondary button
         $this->secondaryButton = clone $this->primaryButton;

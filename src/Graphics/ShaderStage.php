@@ -16,6 +16,31 @@ class ShaderStage
     const TESS_EVALUATION = GL_TESS_EVALUATION_SHADER;
     // const COMPUTE = GL_COMPUTE_SHADER;
 
+    public static function vertex(?string $sourceCode = null) : ShaderStage
+    {
+        return new ShaderStage(self::VERTEX, $sourceCode);
+    }
+
+    public static function fragment(?string $sourceCode = null) : ShaderStage
+    {
+        return new ShaderStage(self::FRAGMENT, $sourceCode);
+    }
+
+    public static function geometry(?string $sourceCode = null) : ShaderStage
+    {
+        return new ShaderStage(self::GEOMETRY, $sourceCode);
+    }
+
+    public static function tessControl(?string $sourceCode = null) : ShaderStage
+    {
+        return new ShaderStage(self::TESS_CONTROL, $sourceCode);
+    }
+
+    public static function tessEvaluation(?string $sourceCode = null) : ShaderStage
+    {
+        return new ShaderStage(self::TESS_EVALUATION, $sourceCode);
+    }
+
     /**
      * OpenGL shader ID
      */
