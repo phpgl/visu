@@ -229,6 +229,9 @@ class GizmoEditorSystem implements SystemInterface
             }
 
             $camera = $entities->first(Camera::class);
+            if (!$camera) {
+                return;
+            }
 
             // create a ray from the camera to the cursor position
             $cursorPos = $this->input->getNormalizedCursorPosition();
@@ -264,7 +267,7 @@ class GizmoEditorSystem implements SystemInterface
             // additionally store the distance between the camera 
             // and the interaction point, we need this information to properly apply
             // an offset from the cameras position
-            if ($this->activeGizmoEntity) {
+            if ($this->activeGizmoEntity && $this->gizmoIntersectionPos !== null) {
                 $this->gizmoIntersectionDistance = $this->gizmoIntersectionPos->distanceTo($camera->transform->position);
                 $this->gizmoTranslationInitial = $entities->get($this->activeGizmoEntity, Transform::class)->position->copy();
             } else {
@@ -281,7 +284,9 @@ class GizmoEditorSystem implements SystemInterface
      */
     public function unregister(EntitiesInterface $entities) : void
     {
-        $this->dispatcher->unregister(Input::EVENT_MOUSE_BUTTON, $this->mouseClickListenerId);
+        if ($this->mouseClickListenerId !== null) {
+            $this->dispatcher->unregister(Input::EVENT_MOUSE_BUTTON, $this->mouseClickListenerId);
+        }
     }
 
     /**
@@ -305,13 +310,23 @@ class GizmoEditorSystem implements SystemInterface
             $this->cursorPositionQueue->flush();
             return;
         }
-
+        
         // get the camera to create a ray from the current cursor position
         $camera = $entities->first(Camera::class);
+        if (!$camera) {
+            $this->cursorPositionQueue->flush();
+            return;
+        }
 
         // create a ray from the camera to the cursor position
         $cursorPos = $this->input->getNormalizedCursorPosition();
         $ray = $camera->getSSRay($this->lastFrameRenderTarget, $cursorPos);
+
+        // ensure we have the required intersection data
+        if ($this->gizmoTranslationInitial === null || $this->gizmoIntersectionPos === null) {
+            $this->cursorPositionQueue->flush();
+            return;
+        }
 
         // determine the world space position of our mouse ray using 
         // the distance from the camera to the gizmo when the interaction started

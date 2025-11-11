@@ -177,8 +177,10 @@ class BasicInstancedVertexArray
     /**
      * Draws a range of vertices
      * 
-     * @param int $offset The offset
-     * @param int $count The count
+     * @param int $vertexOffset The vertex offset
+     * @param int $vertexCount The vertex count
+     * @param int $instanceCount The instance count
+     * @param int $drawMode The draw mode (default: GL_TRIANGLES)
      */
     public function draw(int $vertexOffset, int $vertexCount, int $instanceCount, int $drawMode = GL_TRIANGLES) : void
     {

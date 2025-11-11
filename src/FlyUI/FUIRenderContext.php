@@ -9,6 +9,11 @@ use VISU\OS\Input;
 class FUIRenderContext
 {
     /**
+     * Current content scale factor
+     */
+    public float $contentScale = 1.0;
+
+    /**
      * Absolute origin of the current view
      */
     public Vec2 $origin;

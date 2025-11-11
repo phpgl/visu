@@ -60,11 +60,9 @@ class TextLabelRenderer
      * Constructor 
      * 
      * @param GLState $gl The current GL state.
-     * @param ShaderCollection $shaders The shader collection to use.
      */
     public function __construct(
-        private GLState $gl,
-        ShaderCollection $shaders
+        private GLState $gl
     )
     {
         // create the shader program
@@ -137,6 +135,11 @@ class TextLabelRenderer
         $fontTextureOpt = new TextureOptions;
         $fontTextureOpt->minFilter = GL_NEAREST;
         $fontTextureOpt->magFilter = GL_NEAREST;
+        
+        if ($fontAtlas->texturePath === null) {
+            throw new \Exception("Font atlas texture path is null");
+        }
+        
         $this->loadedFontTextures[$handle]->loadFromFile($fontAtlas->texturePath, $fontTextureOpt);
     }
 
@@ -176,7 +179,7 @@ class TextLabelRenderer
     public function createLabel(
         string $text, 
         ?string $fontHandle = null, 
-        $renderGroup = 'default', 
+        string $renderGroup = 'default', 
         ?Transform $transform = null, 
         bool $isStatic = false
     ) : TextLabel
@@ -248,7 +251,9 @@ class TextLabelRenderer
 
             // update the internal label state
             $internalLabel->updateText($dynamicLabel->text);
-            $internalLabel->updateColor($dynamicLabel->color);
+            if ($dynamicLabel->color !== null) {
+                $internalLabel->updateColor($dynamicLabel->color);
+            }
         }
 
         // cleanup by finding all labels that are not attached to a dynamic label component anymore
@@ -427,7 +432,7 @@ class TextLabelRenderer
 
                     $this->loadedFontTextures[$renderGroup->fontHandle]->bind(GL_TEXTURE0);
 
-                    $this->shaderProgram->setUniform1i('is_static', $renderGroup->isStatic);
+                    $this->shaderProgram->setUniform1i('is_static', (int) $renderGroup->isStatic);
 
                     $renderGroup->vertexArray->bind();
                     $renderGroup->vertexArray->drawAll();

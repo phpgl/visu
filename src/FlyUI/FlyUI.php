@@ -122,6 +122,7 @@ class FlyUI
      */
     public static function beginSection(string $title) : FUILayout
     {
+        /** @var FUILayout $l */
         $l = self::beginLayout()
             ->horizontalFit()
             ->verticalFit()
@@ -243,11 +244,21 @@ class FlyUI
      * @var array<FUIView>
      */
     private array $viewTree = [];
-
+    
+    /**
+     * The currently active view in the view stack
+     */
     private FUIView $currentView;
 
+    /**
+     * Internal holder for the current resolution
+     */
     private Vec2 $currentResolution;
 
+    /**
+     * Internal holder for the current content scale
+     * Will be passed to the render context
+     */
     private float $currentContentScale = 1.0;
 
     /**
@@ -283,6 +294,7 @@ class FlyUI
      */
     public function __construct(
         private VGContext $vgContext,
+        /** @phpstan-ignore-next-line */ 
         private Dispatcher $dispatcher,
         private Input $input,
         ?FUITheme $theme = null
@@ -381,6 +393,7 @@ class FlyUI
     {
         $ctx = new FUIRenderContext($this->vgContext, $this->input, $this->theme);
         $ctx->containerSize = $this->currentResolution;
+        $ctx->contentScale = $this->currentContentScale;
 
         // toggle performance tracing overlay on f6
         if ($this->input->hasKeyBeenPressedThisFrame(Key::F6)) {

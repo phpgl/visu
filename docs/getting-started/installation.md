@@ -19,9 +19,11 @@ VISU requires **PHP 8.1** or a higher version. If you haven't installed PHP yet:
 
 Do keep in mind the version requirement. VISU won't function with older PHP editions. To check your PHP version, execute `php -v` in your terminal.
 
-### Can I use Docker? No
+### Docker
 
-Considering the dynamic world of software development, many prefer containerization using platforms like Docker. However, there's a hiccup: **PHP-GLFW can't** operate in a Docker container. The culprit? PHP-GLFW's need for an active display server. So, for now, native installations are the way to go.
+!!! warning "Docker is not supported"
+
+    PHP-GLFW requires access to an active display server and cannot run inside Docker containers. please install and run PHP-GLFW natively on Linux, macOS, or Windows.
 
 ## Composer
 

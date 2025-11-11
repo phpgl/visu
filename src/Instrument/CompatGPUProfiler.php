@@ -24,7 +24,7 @@ class CompatGPUProfiler implements ProfilerInterface
     /**
      * An array of query handles per scope
      * 
-     * @var array<string, array<array<int, int>>
+     * @var array<string, array<array<int, int>>>
      */
     private array $queries = [];
 
@@ -36,11 +36,6 @@ class CompatGPUProfiler implements ProfilerInterface
     private ?string $currentScope = null;
 
     /**
-     * Boolean if the current scopes shall mesure GPU time
-     */
-    private bool $currentScopeMeasuresGpuTime = false;
-
-    /**
      * An array of scopes that have been started in the current frame
      * 
      * @var array<string>
@@ -50,6 +45,8 @@ class CompatGPUProfiler implements ProfilerInterface
     /**
      * An array of scopes that have been sampled within the current frame
      * This array is generated based on the "startedScopes" array when finalize() is called
+     * 
+     * @var array<string>
      */
     private array $sampledScopes = [];
 
@@ -105,6 +102,8 @@ class CompatGPUProfiler implements ProfilerInterface
 
     /**
      * Returns an array of sampled scopes for the current frame
+     * 
+     * @return array<string>
      */
     public function getSampledScopes() : array
     {
@@ -149,6 +148,8 @@ class CompatGPUProfiler implements ProfilerInterface
 
     /**
      * Returns the averages for each scope and metric
+     * 
+     * @return array<string, array<string, float|int>>
      */
     public function getAveragesPerScope() : array
     {
@@ -173,8 +174,6 @@ class CompatGPUProfiler implements ProfilerInterface
      */
     public function start(string $scope) : void
     {
-        $gpu = true; // im lazy and this profiler is now only used for the GPU so render pass profiling
-
         // if the profiler is disabled do nothing
         if (!$this->enabled) {
             return;
@@ -189,10 +188,6 @@ class CompatGPUProfiler implements ProfilerInterface
         // start the query
         $this->currentScope = $scope;
         $this->scopeCpuStart = Clock::now64();
-
-        // if we don't want to measure the GPU time, we are done
-        $this->currentScopeMeasuresGpuTime = $gpu;
-        if (!$gpu) return;
 
         // if the query is unkwnon create it
         if (!isset($this->queries[$scope])) {   
@@ -238,9 +233,6 @@ class CompatGPUProfiler implements ProfilerInterface
         // reset the current scope
         $this->currentScope = null;
         $this->scopeCpuStart = null;
-        
-        // if we don't want to measure the GPU time, we are done
-        if (!$this->currentScopeMeasuresGpuTime) return;
 
         // end the queries
         glEndQuery(GL_TIME_ELAPSED);

@@ -35,7 +35,8 @@ class FlyUiDemoState {
      * ------------------------------------------------------------------------
      */
     public FUILayoutFlow $stackFlow = FUILayoutFlow::vertical;
-    public FUILayoutSizing $stackSizing = FUILayoutSizing::fill;
+    public FUILayoutSizing $verticalStackSizing = FUILayoutSizing::fill;
+    public FUILayoutSizing $horizontalStackSizing = FUILayoutSizing::fill;
 }
 
 $state = new FlyUiDemoState;
@@ -73,13 +74,13 @@ UIDemo("Layout - Stacks", function(RenderContext $context, RenderTarget $target,
     for ($i = 0; $i < 10; $i++) {
         $color = VGColor::white()->darken(($i / 10));
 
-        FlyUI::beginLayout(new Vec4(10))
-            ->verticalSizing($state->stackSizing)
+        $layout = FlyUI::beginLayout(new Vec4(10))
+            ->verticalSizing($state->verticalStackSizing)
+            ->horizontalSizing($state->horizontalStackSizing)
             ->backgroundColor($color, 3.0);
-        
 
         // find a text color that contrasts well with the background
-        FlyUI::text("This is box #" . ($i + 1), $color->contrast())
+        FlyUI::text("#" . ($i + 1), $color->contrast())
             ->fontSize(12);
 
         FlyUI::end();
@@ -89,21 +90,48 @@ UIDemo("Layout - Stacks", function(RenderContext $context, RenderTarget $target,
 
     // right settings area
     FlyUI::beginLayout()
-        ->verticalFill()
-        ->fixedWidth(200)
+        ->horizontalFit()
+        ->verticalFit()
         ->spacing(5);
 
-    FlyUI::text("Settings")
-        ->bold()
-        ->fontSize(16);
-
-    FlyUI::text("Stack Flow:")->fontSize(14);
-    FlyUI::button("Vertical", function() use($state) {
-        $state->stackFlow = FUILayoutFlow::vertical;
+    $flowString = $state->stackFlow->name;
+    FlyUI::buttonGroup('Stack Flow', [
+        'vertical' => 'Vertical',
+        'horizontal' => 'Horizontal',
+    ], $flowString, function(string $option) use(&$state) {
+        if ($option === 'vertical') {
+            $state->stackFlow = FUILayoutFlow::vertical;
+        } else {
+            $state->stackFlow = FUILayoutFlow::horizontal;
+        }
     });
 
-    FlyUI::button("Horizontal", function() use($state) {
-        $state->stackFlow = FUILayoutFlow::horizontal;
+    FlyUI::spaceY(10);
+
+    // sizing
+    FlyUI::beginSection('Stack Sizing');
+    $sizingString = $state->verticalStackSizing->name;
+    FlyUI::buttonGroup('Vertical', [
+        'fill' => 'Fill',
+        'fit' => 'Fit',
+    ], $sizingString, function(string $option) use(&$state) {
+        if ($option === 'fill') {
+            $state->verticalStackSizing = FUILayoutSizing::fill;
+        } else {
+            $state->verticalStackSizing = FUILayoutSizing::fit;
+        }
+    });
+
+    $sizingString = $state->horizontalStackSizing->name;
+    FlyUI::buttonGroup('Horizontal', [
+        'fill' => 'Fill',
+        'fit' => 'Fit',
+    ], $sizingString, function(string $option) use(&$state) {
+        if ($option === 'fill') {
+            $state->horizontalStackSizing = FUILayoutSizing::fill;
+        } else {
+            $state->horizontalStackSizing = FUILayoutSizing::fit;
+        }
     });
 
     // FlyUI::buttonGroup(['fill' => 'Fill', 'fit' => 'Fit'], $state->stackSizing->name, function(string $option) use(&$state) {
@@ -147,7 +175,7 @@ UIDemo("Components - Buttons", function(RenderContext $context, RenderTarget $ta
 
     FlyUI::button('Primary Button', function() {
         echo "Primary Button Pressed\n";
-    });
+    })->setId('primary-btn2');
 
     FlyUI::button('Secondary Button', function() {
         echo "Secondary Button Pressed\n";
@@ -165,14 +193,10 @@ UIDemo("Components - Buttons", function(RenderContext $context, RenderTarget $ta
 UIDemo("Components - Button Groups", function(RenderContext $context, RenderTarget $target, FlyUiDemoState $state) : void 
 {
     static $selectedSize = 'medium';
-    static $selectedStyle = 'primary';
-    static $selectedLayout = 'horizontal';
 
-    FlyUI::beginSection('Button Group with Reference');
-    FlyUI::beginHorizontalStack();
 
     FlyUI::buttonGroup(
-        'size-selector',
+        'Size',
         ['small' => 'Small', 'medium' => 'Medium', 'large' => 'Large'],
         $selectedSize,
         function(string $option) {
@@ -180,43 +204,11 @@ UIDemo("Components - Button Groups", function(RenderContext $context, RenderTarg
         }
     );
 
-    FlyUI::end(); // end horizontal stack
-    FlyUI::end(); // end section
+    FlyUI::spaceY(20);
 
-    FlyUI::beginSection('Another Button Group (Custom Hover)');
-    FlyUI::beginHorizontalStack();
-
-    FlyUI::buttonGroup(
-        'style-selector',
-        ['primary' => 'Primary', 'secondary' => 'Secondary', 'accent' => 'Accent'],
-        $selectedStyle,
-        function(string $option) {
-            echo "Selected style: " . $option . "\n";
-        }
-    )->setHoverOverlayColor(new VGColor(0.2, 0.4, 0.8, 0.15)); // Light blue hover
-
-    FlyUI::end(); // end horizontal stack
-    FlyUI::end(); // end section
-
-    FlyUI::beginSection('Layout Selection (Slow Animation)');
-    FlyUI::beginHorizontalStack();
-
-    FlyUI::buttonGroup(
-        'layout-selector',
-        ['horizontal' => 'Horizontal', 'vertical' => 'Vertical', 'grid' => 'Grid'],
-        $selectedLayout,
-        function(string $option) {
-            echo "Selected layout: " . $option . "\n";
-        }
-    )->setAnimationSpeed(3.0); // Slower animation
-
-    FlyUI::end(); // end horizontal stack
-    FlyUI::end(); // end section
 
     FlyUI::beginSection('Current Selections');
     FlyUI::text("Size: " . $selectedSize);
-    FlyUI::text("Style: " . $selectedStyle);
-    FlyUI::text("Layout: " . $selectedLayout);
     FlyUI::end(); // end section
 });
 
@@ -229,6 +221,10 @@ $quickstart = new Quickstart(function(QuickstartOptions $app) use(&$state)
 {
     // preselect the first demo
     $state->currentDemo = array_key_first($state->uiDemoFunctions);
+
+    $app->ready = function(QuickstartApp $app) {
+        // FlyUI::enablePerformanceTracing(true);
+    };
 
     $app->draw = function(QuickstartApp $app, RenderContext $context, RenderTarget $target) use(&$state) 
     {

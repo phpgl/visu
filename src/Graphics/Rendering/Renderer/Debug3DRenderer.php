@@ -429,10 +429,10 @@ class Debug3DRenderer
     /**
      * Draws a Frustum
      * 
-     * @param Mat4 $mat The view projection matrix to build the frustum from
+     * @param Mat4 $ivp The inverse view projection matrix to build the frustum from
      * @param Vec3 $color The color of the frustum
      */
-    public function addFrustum(Mat4 $ivp, Vec3 $color)
+    public function addFrustum(Mat4 $ivp, Vec3 $color) : void
     {
         static $planes = [
             // near

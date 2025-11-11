@@ -38,20 +38,20 @@ class FUICheckbox extends FUIView
     }
 
     /**
-     * Returns the height of the current view and its children
+     * Returns the estimated size of the current view and its children
      * This is used for layouting purposes
      */
-    public function getEstimatedHeight(FUIRenderContext $ctx) : float
+    public function getEstimatedSize(FUIRenderContext $ctx) : Vec2
     {
-        return self::FUI_HEIGHT;
+        return new Vec2(self::FUI_HEIGHT * 2 + 100, self::FUI_HEIGHT); // width estimate + height
     }
 
     /**
      * Renders the current view using the provided context
      */
-    public function render(FUIRenderContext $ctx) : float
+    public function render(FUIRenderContext $ctx) : void
     {
-        $height = $this->getEstimatedHeight($ctx);
+        $height = $this->getEstimatedSize($ctx)->y;
 
         $ctx->containerSize->y = $height;
 
@@ -111,6 +111,5 @@ class FUICheckbox extends FUIView
         );
 
         // no pass to parent, as this is a leaf element
-        return $height;
     }
 }

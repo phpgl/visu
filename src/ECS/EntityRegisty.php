@@ -319,7 +319,7 @@ class EntityRegisty implements EntitiesInterface
     /**
      * Stores a singleton component in the entity registy
      * 
-     * @template T
+     * @template T of object
      * @param T             $component
      * @return T
      */

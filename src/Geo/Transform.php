@@ -502,25 +502,4 @@ class Transform
         $this->scale = unserialize(serialize($this->scale));
         $this->matrix = unserialize(serialize($this->matrix));
     }
-
-    public static function serialize(Transform $transform) : array
-    {
-        return [
-            'position' => Serializer::serializeVec3($transform->position),
-            'orientation' => Serializer::serializeQuat($transform->orientation),
-            'scale' => Serializer::serializeVec3($transform->scale),
-            'parent' => $transform->parent,
-        ];
-    }
-
-    public static function unserialize(array $data) : Transform
-    {
-        $transform = new Transform();
-        $transform->position = Serializer::deserializeVec3($data['position']);
-        $transform->orientation = Serializer::deserializeQuat($data['orientation']);
-        $transform->scale = Serializer::deserializeVec3($data['scale']);
-        $transform->parent = $data['parent'];
-        $transform->isDirty = true;
-        return $transform;
-    }
 }

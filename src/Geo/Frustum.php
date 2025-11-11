@@ -64,6 +64,8 @@ class Frustum
 
     /**
      * Holds an additional reference to the planes that can be accessed by index
+     * 
+     * @var array<Plane>
      */
     private array $planes = [];
 

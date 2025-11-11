@@ -208,11 +208,11 @@ class GeneratorBase
 
         // define imports
         $namespaceImports = $options['use'] ?? [];
-        if (isset($options['extends']) && is_string($options['extends'])) {
+        if (isset($options['extends'])) {
             $namespaceImports[] = $options['extends'];
         }
 
-        if (isset($options['implements']) && is_array($options['implements'])) {
+        if (isset($options['implements'])) {
             foreach ($options['implements'] as $implementedInterface) {
                 $namespaceImports[] = $implementedInterface;
             }
@@ -234,13 +234,13 @@ class GeneratorBase
         $buffer .= $options['structType'] . " " . $className;
 
         // class extends
-        if (isset($options['extends']) && is_string($options['extends'])) {
+        if (isset($options['extends'])) {
             list($extendsPath, $extendsName) = $this->splitNamespaceAndClass($options['extends']);
             $buffer .= ' extends ' . $extendsName;
         }
 
         // class implements
-        if (isset($options['implements']) && is_array($options['implements']) && $options['implements']) {
+        if (isset($options['implements']) && $options['implements']) {
             $buffer .= ' implements ';
             $implementedInterfaceNames = [];
             foreach ($options['implements'] as $implementedInterface) {

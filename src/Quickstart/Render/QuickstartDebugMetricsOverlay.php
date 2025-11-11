@@ -9,6 +9,8 @@ use VISU\Graphics\Rendering\{PipelineResources, RenderPipeline};
 use VISU\Graphics\Rendering\Renderer\DebugOverlayText;
 use VISU\Graphics\Rendering\Resource\RenderTargetResource;
 use VISU\Graphics\Rendering\Renderer\DebugOverlayTextRenderer;
+use VISU\Instrument\CompatGPUProfiler;
+use VISU\Instrument\ProfilerInterface;
 use VISU\OS\{Input, Key};
 use VISU\Runtime\GameLoop;
 use VISU\Signal\Dispatcher;
@@ -19,9 +21,9 @@ class QuickstartDebugMetricsOverlay
     /**
      * Rows to be rendered on the next frame
      * 
-     * @var array<string
+     * @var array<string>
      */
-    static private $globalRows = [];
+    static private array $globalRows = [];
 
     /**
      * Adds a string to the global quickstart debug overlay, This allows you 
@@ -34,6 +36,8 @@ class QuickstartDebugMetricsOverlay
 
     /**
      * An array of string to be renderd on the next frame
+     * 
+     * @var array<string>
      */
     private array $rows = [];
 
@@ -106,9 +110,52 @@ class QuickstartDebugMetricsOverlay
     }
 
     /**
+     * Generates the game profiler metrics strings
+     * 
+     * Example:
+     *   [RenderPass]          CPU(10): 1.23 ms       | GPU(10): 2.34 ms       | Tri: 12345
+     *   [ShadowPass]          CPU(10): 0.56 ms       | GPU(10): 1.78 ms    §   | Tri: 6789
+     *
+     * @return array<string>
+     */
+    private function gameProfilerMetrics(ProfilerInterface $profiler) : array
+    {
+        if (!$profiler instanceof CompatGPUProfiler) {
+            // currently only CompatGPUProfiler is supported
+            return [];
+        }
+
+        $profiler->finalize();
+
+        $scopeAverages = $profiler->getAveragesPerScope();
+        $rows = [];
+
+        // sort the averages by GPU consumption
+        uasort($scopeAverages, function($a, $b) {
+            return $b['gpu'] <=> $a['gpu'];
+        });
+
+        foreach($scopeAverages as $scope => $averages) {
+            $row = str_pad("[" . $scope . ']', 25);
+            $row .= str_pad(" CPU(" . $averages['cpu_samples'] . "): " . $this->formatNStoHuman((int) $averages['cpu']), 20);
+            $row .= str_pad(" | GPU(" . $averages['gpu_samples'] . "): " . $this->formatNStoHuman((int) $averages['gpu']), 20);
+            $row .= str_pad(" | Tri: " . round($averages['gpu_triangles']), 10);
+            $rows[] = $row;
+        } 
+
+        return $rows;
+    }
+
+    /**
      * Attaches a render pass to the given pipeline that renders the debug overlay
      */
-    public function attachPass(RenderPipeline $pipeline, PipelineResources $resources, RenderTargetResource $rt, float $compensation)
+    public function attachPass(
+        RenderPipeline $pipeline, 
+        PipelineResources $resources, 
+        ?ProfilerInterface $profiler,
+        RenderTargetResource $rt, 
+        float $compensation
+    ) : void
     {
         // we sync the profile enabled state with the debug overlay
         // $this->container->resolveProfiler()->enabled = $this->enabled;
@@ -136,13 +183,15 @@ class QuickstartDebugMetricsOverlay
             new DebugOverlayText(implode("\n", $this->rows), 10, 10)
         ]);
 
-        // $profilerLines =  $this->gameProfilerMetrics();
-        // $y = $rt->height - (count($profilerLines) * $this->debugTextRenderer->lineHeight * $target->contentScaleX);
-        // $y -= 25;
-        // $this->debugTextRenderer->attachPass($pipeline, $rt, [
-        //     new DebugOverlayText(implode("\n", $profilerLines), 10, $y, new Vec3(0.726, 0.865, 1.0)),
-        // ]);
-
+        // if we have a profiler, render its metrics as well
+        if ($profiler) {
+            $profilerLines =  $this->gameProfilerMetrics($profiler);
+            $y = $target->height() - (count($profilerLines) * $this->overlayTextRenderer->lineHeight * $target->contentScaleX);
+            $y -= 25;
+            $this->overlayTextRenderer->attachPass($pipeline, $rt, [
+                new DebugOverlayText(implode("\n", $profilerLines), 10, (int) $y, new \GL\Math\Vec3(0.726, 0.865, 1.0)),
+            ]);
+        }
 
         // clear the rows for the next frame
         $this->rows = [];

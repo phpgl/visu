@@ -28,6 +28,7 @@ use GL\VectorGraphics\{VGContext, VGColor};
 use VISU\FlyUI\FlyUI;
 use VISU\Graphics\Rendering\Resource\RenderTargetResource;
 use VISU\Graphics\Viewport;
+use VISU\Instrument\ProfilerInterface;
 use VISU\Quickstart\Render\QuickstartPassData;
 
 class QuickstartApp implements GameLoopDelegate
@@ -91,6 +92,11 @@ class QuickstartApp implements GameLoopDelegate
      * Quickstart Debug Metrics Overlay
      */
     private QuickstartDebugMetricsOverlay $dbgOverlayRenderer;
+
+    /**
+     * Optional Profiler
+     */
+    private ?ProfilerInterface $profiler = null;
 
     /**
      * QuickstartApp constructor.
@@ -286,10 +292,16 @@ class QuickstartApp implements GameLoopDelegate
         $this->fullscreenTextureRenderer->attachPass($context->pipeline, $backbuffer, $sceneColorAtt);
         
         // render debug text overlay on top
-        $this->dbgOverlayRenderer->attachPass($pipeline, $this->renderResources, $backbuffer, $deltaTime);
+        $this->dbgOverlayRenderer->attachPass(
+            $pipeline, 
+            $this->renderResources,
+            $this->profiler,
+            $backbuffer, 
+            $deltaTime
+        );
 
         // execute the pipeline
-        $pipeline->execute($this->frameIndex++, null);
+        $pipeline->execute($this->frameIndex++, $this->profiler);
 
         // swap the winows back and front buffer
         $this->window->swapBuffers();
@@ -348,5 +360,23 @@ class QuickstartApp implements GameLoopDelegate
     public function shouldStop() : bool
     {
         return $this->window->shouldClose();   
+    }
+
+    /**
+     * Attaches the given profiler to the app
+     */
+    public function attachProfiler(?ProfilerInterface $profiler) : void
+    {
+        $this->profiler = $profiler;
+    }
+
+    /**
+     * Loads a GPU Compat Profiler and attaches it to the app
+     */
+    public function loadCompatGPUProfiler() : void
+    {
+        $profiler = new \VISU\Instrument\CompatGPUProfiler();
+        $profiler->enabled = true;
+        $this->attachProfiler($profiler);
     }
 }

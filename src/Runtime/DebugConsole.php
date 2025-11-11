@@ -44,15 +44,17 @@ class DebugConsole
     /**
      * Is the console currently enabled?
      */
-    private $enabled = false;
+    private bool $enabled = false;
 
     /**
      * The string that is currently beeing written to
      */
-    private $inputLine = "";
+    private string $inputLine = "";
 
     /**
      * The input line history
+     * 
+     * @var array<string>
      */
     private array $inputLineHistory = [];
 
@@ -90,7 +92,7 @@ class DebugConsole
      * Constructor
      */
     public function __construct(
-        private GLState $gl,
+        GLState $gl,
         private Input $input,
         private Dispatcher $dispatcher,
     )
@@ -139,16 +141,25 @@ class DebugConsole
      * 
      * @param string $line
      */
-    public function writeLine(string $line)
+    public function writeLine(string $line) : void
     {
         $this->inputLineHistory[] = $line;
         $this->inputLineHistoryIndex = count($this->inputLineHistory);
     }
 
     /**
+     * Clears the console history
+     */
+    public function clearHistory() : void
+    {
+        $this->inputLineHistory = [];
+        $this->inputLineHistoryIndex = 0;
+    }
+
+    /**
      * Keyboard event handler
      */
-    public function handleKeyboardInputSignal(KeySignal $signal)
+    public function handleKeyboardInputSignal(KeySignal $signal) : void
     {
         // if the console is enabled we need to handle some special commands
         // like backspace and enter
@@ -203,7 +214,9 @@ class DebugConsole
                 
             } else {
                 $this->input->releaseContext(self::INPUT_CONTEXT);
-                $this->dispatcher->unregister(Input::EVENT_CHAR, $this->charInputListenerId);
+                if ($this->charInputListenerId !== null) {
+                    $this->dispatcher->unregister(Input::EVENT_CHAR, $this->charInputListenerId);
+                }
             }
 
             Logger::info("Console enabled: " . var_export($this->enabled, true));
@@ -213,7 +226,7 @@ class DebugConsole
     /**
      * Char input handler
      */
-    public function handleKeyboardCharSignal(CharSignal $signal)
+    public function handleKeyboardCharSignal(CharSignal $signal) : void
     {
         $this->inputLine .= $signal->getString();
     }
@@ -221,8 +234,6 @@ class DebugConsole
     /**
      * Handles rendering of the scene, here you can attach additional render passes,
      * modify the render pipeline or customize rendering related data.
-     * 
-     * @param RenderContext $context
      */
     public function attachPass(RenderPipeline $pipeline, PipelineResources $resources, RenderTargetResource $rt) : void
     {
@@ -279,8 +290,8 @@ class DebugConsole
         $height = $this->debugTextRenderer->lineHeight * $target->contentScaleX * count($historySlice);
 
         $this->debugTextRenderer->attachPass($pipeline, $rt, [
-            new DebugOverlayText($history, 10, $y - $height, new Vec3(1.0, 1.0, 1.0)),
-            new DebugOverlayText($text, 10, $y, new Vec3(1.0, 0.494, 0.459))
+            new DebugOverlayText($history, 10, (int)($y - $height), new Vec3(1.0, 1.0, 1.0)),
+            new DebugOverlayText($text, 10, (int)$y, new Vec3(1.0, 0.494, 0.459))
         ]);
     }
 }
