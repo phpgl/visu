@@ -170,11 +170,11 @@ void main()
     fragment = tone_mapping_ACESFilm(fragment);
     fragment = gamma_correct(fragment);
 
-    // tmp blueish sky if albedo is 0 
-    // this is a hack till we build a proper skybox renderer
-    if (buffer_albedo == vec3(0.0)) {
-        fragment = vec3(0.654, 0.68, 0.8);
-    }
+    // // tmp blueish sky if albedo is 0 
+    // // this is a hack till we build a proper skybox renderer
+    // if (buffer_albedo == vec3(0.0)) {
+    //     fragment = vec3(0.654, 0.68, 0.8);
+    // }
 
     fragment_color = vec4(fragment, 1.0);
 }

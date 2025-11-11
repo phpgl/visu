@@ -78,6 +78,37 @@ class VISUCameraSystem implements SystemInterface
     }
 
     /**
+     * Returns the active camera entity
+     */
+    public function getActiveCameraEntity() : int
+    {
+        return $this->activeCameraEntity;
+    }
+    
+    /**
+     * Spwans a default flying camera entity
+     */
+    public function spawnDefaultFlyingCamera(EntitiesInterface $entities, ?Vec3 $position = null) : int
+    {
+        $entities->registerComponent(Camera::class);
+
+        $cameraEntity = $entities->create();
+        $camera = $entities->attach($cameraEntity, new Camera(CameraProjectionMode::perspective));
+
+        if ($position !== null) {
+            $camera->transform->setPosition($position);
+        }
+
+        // set the active camera entity
+        $this->setActiveCameraEntity($cameraEntity);
+
+        // set the camera mode to flying
+        $this->visuCameraMode = self::CAMERA_MODE_FLYING;
+
+        return $cameraEntity;
+    }
+
+    /**
      * Registers the system, this is where you should register all required components.
      * 
      * @return void 

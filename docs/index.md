@@ -3,9 +3,22 @@ hide:
   - navigation
 ---
 
-# **VISU** - A Modern **OpenGL** Framework for **PHP**
+# **VISU** - A Modern **Game** Framework for **PHP**
 
-VISU is a collection of components and systems to make interaction with OpenGL in PHP simpler. This framework is built around the extension **[PHP-GLFW](https://github.com/mario-deluna/php-glfw)** which is requried for VISU to work.
+VISU is a component based php game engine. _Think Laravel or Symfony, but for game development._
+
+This framework is built around the extension **[PHP-GLFW](https://github.com/mario-deluna/php-glfw)** which is requried for VISU to work.
+
+## Core Philosophy
+
+### Replace what you want, keep what you need
+
+VISU is built around the idea of modularity. You can replace any system you want with your own implementation, while keeping the rest of the framework intact.
+
+- Most parts of VISU are decoupled by design and don't require the entire framework stack to work. If you want to use our rendering helpers go ahead.
+- There is no fixed rendering pipeline, you can freely extend or replace the existing rendering systems with your own.
+
+
 
 
 <div class="grid cards" markdown>

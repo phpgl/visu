@@ -3,19 +3,19 @@
 namespace App\Tests\ECS;
 
 use Exception;
-use VISU\ECS\EntityRegisty;
+use VISU\ECS\EntityRegistry;
 use VISU\ECS\Exception\EntityRegistryException;
 
 class EntityRegistryTest extends \PHPUnit\Framework\TestCase
 {
     public function testConstruct() : void
     {
-        $this->assertInstanceOf(EntityRegisty::class, new EntityRegisty);
+        $this->assertInstanceOf(EntityRegistry::class, new EntityRegistry);
     }
 
     public function testCreateAndValid() : void
     {
-        $entites = new EntityRegisty();
+        $entites = new EntityRegistry();
 
         $id1 = $entites->create();
         $id2 = $entites->create();
@@ -32,14 +32,14 @@ class EntityRegistryTest extends \PHPUnit\Framework\TestCase
     {
         $this->expectException(EntityRegistryException::class);
 
-        $entites = new EntityRegisty();
+        $entites = new EntityRegistry();
         $entity = $entites->create();
         $entites->attach($entity, new \Error('test'));
     }
 
     public function testAttachAndDetach() : void
     {
-        $entites = new EntityRegisty();
+        $entites = new EntityRegistry();
         $entites->registerComponent(\Error::class);
 
         $entity = $entites->create();
@@ -58,7 +58,7 @@ class EntityRegistryTest extends \PHPUnit\Framework\TestCase
 
     public function testView() : void
     {
-        $entites = new EntityRegisty();
+        $entites = new EntityRegistry();
         $entites->registerComponent(\Exception::class);
         $entites->registerComponent(\Error::class);
 
@@ -95,7 +95,7 @@ class EntityRegistryTest extends \PHPUnit\Framework\TestCase
 
     public function testListWith() : void
     {
-        $entites = new EntityRegisty();
+        $entites = new EntityRegistry();
         $entites->registerComponent(\Exception::class);
         $entites->registerComponent(\Error::class);
 
@@ -119,7 +119,7 @@ class EntityRegistryTest extends \PHPUnit\Framework\TestCase
 
     public function testSerialization() : void
     {
-        $entites = new EntityRegisty();
+        $entites = new EntityRegistry();
         $entites->registerComponent(\Exception::class);
         $entites->registerComponent(\Error::class);
 
@@ -134,7 +134,7 @@ class EntityRegistryTest extends \PHPUnit\Framework\TestCase
 
         $this->assertIsString($buffer);
 
-        $entites = new EntityRegisty();
+        $entites = new EntityRegistry();
         $entites->deserialize($buffer);
 
         $this->assertTrue($entites->valid($e1));
@@ -147,7 +147,7 @@ class EntityRegistryTest extends \PHPUnit\Framework\TestCase
 
     public function testTryGet() : void
     {
-        $entites = new EntityRegisty();
+        $entites = new EntityRegistry();
         $entites->registerComponent(\Exception::class);
 
         $e1 = $entites->create();
@@ -162,7 +162,7 @@ class EntityRegistryTest extends \PHPUnit\Framework\TestCase
 
     public function testViewWith() : void
     {
-        $entites = new EntityRegisty();
+        $entites = new EntityRegistry();
         $entites->registerComponent(\Exception::class);
         $entites->registerComponent(\Error::class);
 

@@ -70,9 +70,8 @@ class DeferredLightPass extends RenderPass
         $this->sun->intensity = 1.0;
         $this->sun->direction->normalize();
 
-        D3D::ray(new Vec3(0.0), $this->sun->direction, D3D::$colorYellow, 200.0);
-        D3D::cross(new Vec3(0.0), D3D::$colorYellow, 50.0);
-
+        // D3D::ray(new Vec3(0.0), $this->sun->direction, D3D::$colorYellow, 200.0);
+        // D3D::cross(new Vec3(0.0), D3D::$colorYellow, 50.0);
 
         $this->lightingShader->setUniformVec3('sun_direction', $this->sun->direction);
         $this->lightingShader->setUniformVec3('sun_color', $this->sun->color);

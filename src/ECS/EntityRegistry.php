@@ -5,7 +5,7 @@ namespace VISU\ECS;
 use Generator;
 use VISU\ECS\Exception\EntityRegistryException;
 
-class EntityRegisty implements EntitiesInterface
+class EntityRegistry implements EntitiesInterface
 {
     /**
      * An array of entity ids that have been destroyed and can be used again.

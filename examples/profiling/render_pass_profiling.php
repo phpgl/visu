@@ -1,15 +1,5 @@
 <?php
 
-use GL\Math\Vec2;
-use GL\Math\Vec4;
-use GL\VectorGraphics\VGColor;
-use VISU\ECS\EntityRegisty;
-use VISU\FlyUI\FlyUI;
-use VISU\FlyUI\FUIButtonGroup;
-use VISU\FlyUI\FUILayoutFlow;
-use VISU\FlyUI\FUILayoutSizing;
-use VISU\FlyUI\Theme\FUIButtonStyle;
-use VISU\FlyUI\Theme\FUIButtonGroupStyle;
 use VISU\Graphics\Rendering\RenderContext;
 use VISU\Graphics\RenderTarget;
 use VISU\Quickstart;

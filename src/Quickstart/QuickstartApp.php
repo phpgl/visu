@@ -4,7 +4,7 @@ namespace VISU\Quickstart;
 
 use ClanCats\Container\Container;
 use GL\Math\Vec2;
-use VISU\ECS\EntityRegisty;
+use VISU\ECS\EntityRegistry as EntityRegistry;
 use VISU\Graphics\GLState;
 use VISU\Graphics\RenderTarget;
 use VISU\Graphics\TextureOptions;
@@ -25,14 +25,21 @@ use VISU\OS\InputContextMap;
 use VISU\Quickstart\Render\QuickstartDebugMetricsOverlay;
 
 use GL\VectorGraphics\{VGContext, VGColor};
+use VISU\ECS\SystemInterface;
+use VISU\ECS\SystemRegistryTrait;
 use VISU\FlyUI\FlyUI;
 use VISU\Graphics\Rendering\Resource\RenderTargetResource;
-use VISU\Graphics\Viewport;
+use VISU\Graphics\ShaderCollection;
 use VISU\Instrument\ProfilerInterface;
 use VISU\Quickstart\Render\QuickstartPassData;
 
 class QuickstartApp implements GameLoopDelegate
 {
+    /**
+     * Our quickstart app is able to register systems directly
+     */
+    use SystemRegistryTrait;
+
     /**
      * GL State holder
      */
@@ -47,6 +54,11 @@ class QuickstartApp implements GameLoopDelegate
      * A event dispacher instance 
      */
     public Dispatcher $dispatcher;
+
+    /**
+     * A shader collection instance
+     */
+    public ShaderCollection $shaders;
 
     /**
      * The input instance of the app
@@ -66,7 +78,7 @@ class QuickstartApp implements GameLoopDelegate
     /**
      * An entity registry instance
      */
-    public EntityRegisty $entities;
+    public EntityRegistry $entities;
 
     /**
      * VectorGraphics Context
@@ -109,13 +121,35 @@ class QuickstartApp implements GameLoopDelegate
         public QuickstartOptions $options,
     )
     {
-        // create GL state helper 
-        $this->gl = new GLState();
-        $this->container->set('gl', $this->gl);
+        $getOrCreateService = function(string $name, callable $creator) : mixed {
+            if (!$this->container->has($name)) {
+                $this->container->set($name, $creator());
+            }
+            return $this->container->get($name);
+        };
 
-        // create the event dispatcher
-        $this->dispatcher = new Dispatcher();
-        $this->container->set('dispatcher', $this->dispatcher);
+        // fetch the GL state from the container or create a new one
+        $this->gl = $getOrCreateService('gl', function() {
+            return new GLState();
+        });
+
+        // fetch the main dispatcher from the container or create a new one
+        $this->dispatcher = $getOrCreateService('visu.dispatcher', function() {
+            return new Dispatcher();
+        });
+        // dispatcher alias
+        $this->container->alias('dispatcher', 'visu.dispatcher');
+
+        // fetch or create the shader collection
+        $this->shaders = $getOrCreateService('shaders', function() {
+            $shaders = new ShaderCollection($this->gl, $this->container->getParameter('visu.path.resources.shader'));
+            
+            $shaders->enableVISUIncludes();
+            $shaders->addVISUShaders();
+            $shaders->scanShaderDirectory();
+
+            return $shaders;
+        });
 
         // create & initialize the window
         $windowHints = new WindowHints();
@@ -142,7 +176,7 @@ class QuickstartApp implements GameLoopDelegate
         }
 
         // create the input instance
-        $this->input = new Input($this->window, $this->dispatcher);
+        $this->input = $getOrCreateService('input', fn() => new Input($this->window, $this->dispatcher));
 
         // create the input action mapper
         $this->inputContext = new InputContextMap($this->dispatcher);
@@ -154,7 +188,7 @@ class QuickstartApp implements GameLoopDelegate
         $this->renderResources = new PipelineResources($this->gl);
 
         // create the entity registry
-        $this->entities = new EntityRegisty();
+        $this->entities = new EntityRegistry();
 
         // create the vector graphics context
         $this->vg = new VGContext(VGContext::ANTIALIAS);
@@ -178,6 +212,12 @@ class QuickstartApp implements GameLoopDelegate
     public function ready() : void
     {
         $this->options->ready?->__invoke($this);
+
+        // auto register all system from the registry
+        $this->registerSystems($this->entities);
+
+        // run the scene initialization callback if available
+        $this->options->initializeScene?->__invoke($this);
     }
 
     /**
@@ -241,6 +281,9 @@ class QuickstartApp implements GameLoopDelegate
         $sceneColorOptions->internalFormat = GL_RGBA;
         $sceneColorAtt = $context->pipeline->createColorAttachment($quickstartPassData->renderTarget, 'quickstartColor', $sceneColorOptions);
 
+        // we plan to render the scene color buffer to the backbuffer
+        $quickstartPassData->outputTexture = $sceneColorAtt;
+
         // begin a FlyUI frame
         FlyUI::beginFrame($quickstartPassData->renderTarget->effectiveSizeVec(), $appContentScale);
         
@@ -289,7 +332,7 @@ class QuickstartApp implements GameLoopDelegate
         $pipeline->addPass(new ClearPass($backbuffer));
 
         // render the offscreen render target to the backbuffer
-        $this->fullscreenTextureRenderer->attachPass($context->pipeline, $backbuffer, $sceneColorAtt);
+        $this->fullscreenTextureRenderer->attachPass($context->pipeline, $backbuffer, $quickstartPassData->outputTexture);
         
         // render debug text overlay on top
         $this->dbgOverlayRenderer->attachPass(
@@ -350,7 +393,8 @@ class QuickstartApp implements GameLoopDelegate
     }
 
     /**
-     * Loop should stop
+     * Returns boolean indicating whether the game loop should stop.
+     * 
      * This method is called once per frame and should return true if the game loop
      * should stop. This is useful if you want to quit the game after a certain amount
      * of time or if the player has lost all his lives etc..
@@ -363,7 +407,7 @@ class QuickstartApp implements GameLoopDelegate
     }
 
     /**
-     * Attaches the given profiler to the app
+     * Attaches the given profiler to the app, the profiler will be passed to the rendering pipeline.
      */
     public function attachProfiler(?ProfilerInterface $profiler) : void
     {
@@ -372,11 +416,32 @@ class QuickstartApp implements GameLoopDelegate
 
     /**
      * Loads a GPU Compat Profiler and attaches it to the app
+     * 
+     * The GPU Compat Profiler uses blocking glBeginQuery / glEndQuery calls
+     * which are not optimal for performance but allows basic GPU profiling on all systems.
+     * 
+     * Just do not enable it in production builds ;)
      */
     public function loadCompatGPUProfiler() : void
     {
         $profiler = new \VISU\Instrument\CompatGPUProfiler();
         $profiler->enabled = true;
         $this->attachProfiler($profiler);
+    }
+
+    /**
+     * Updates the given system
+     */
+    public function updateSystem(SystemInterface $system) : void
+    {
+        $system->update($this->entities);
+    }
+
+    /**
+     * Renders the given system with the given render context
+     */
+    public function renderSystem(SystemInterface $system, RenderContext $context) : void
+    {
+        $system->render($this->entities, $context);
     }
 }

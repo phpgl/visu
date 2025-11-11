@@ -5,6 +5,7 @@ namespace VISU\Quickstart;
 use ClanCats\Container\Container;
 use Closure;
 use VISU\Graphics\Rendering\RenderContext;
+use VISU\Graphics\Rendering\Resource\RenderTargetResource;
 use VISU\Graphics\RenderTarget;
 
 class QuickstartOptions
@@ -72,6 +73,18 @@ class QuickstartOptions
     public ?Closure $ready = null;
 
     /**
+     * A callable in which the scene entities and components should initalized
+     * 
+     * This is called once after the `ready` stage as registered all binded systems.
+     * So the general flow is as:
+     *   - ready = bind systems
+     *   - initializeScene = setup entities & components
+     * 
+     * @var null|Closure(QuickstartApp): void
+     */
+    public ?Closure $initializeScene = null;
+
+    /**
      * A callable that is invoked to update the game state.
      * 
      * Note! It is not guranteed that this method is called every frame.
@@ -84,7 +97,7 @@ class QuickstartOptions
      * A callable that is called once per frame to configure the rendering pipeline
      * This is where you can attach render passes, use if you need higher / complex control over the rendering pipeline.
      * 
-     * @var null|Closure(QuickstartApp, RenderContext, RenderTarget): void
+     * @var null|Closure(QuickstartApp, RenderContext, RenderTargetResource): void
      */
     public ?Closure $render = null;
 

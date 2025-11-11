@@ -1,11 +1,8 @@
 <?php
 
-use GL\Math\Vec2;
 use GL\Math\Vec3;
 use GL\Math\Vec4;
-use GL\VectorGraphics\VGAlign;
 use GL\VectorGraphics\VGColor;
-use VISU\ECS\EntityRegisty;
 use VISU\Graphics\Rendering\RenderContext;
 use VISU\Graphics\Rendering\Resource\RenderTargetResource;
 use VISU\Graphics\RenderTarget;
@@ -14,7 +11,6 @@ use VISU\Quickstart\QuickstartApp;
 use VISU\Quickstart\QuickstartOptions;
 use VISU\FlyUI\FlyUI;
 use VISU\Runtime\DebugConsole;
-use VISU\Signal\Dispatcher;
 use VISU\Signals\Runtime\ConsoleCommandSignal;
 
 $container = require __DIR__ . '/../bootstrap.php';

@@ -5,7 +5,7 @@ namespace VISU\ECS\Picker;
 use GL\Buffer\UByteBuffer;
 use GL\Math\Vec4;
 use VISU\ECS\EntitiesInterface;
-use VISU\ECS\EntityRegisty;
+use VISU\ECS\EntityRegistry;
 use VISU\ECS\Exception\EntityPickerException;
 use VISU\Graphics\Rendering\Pass\CameraData;
 use VISU\Graphics\RenderTarget;
@@ -48,7 +48,7 @@ class DevEntityPicker
      */
     public function __construct(
         private DevEntityPickerDelegate $delegate,
-        private EntityRegisty $entities,
+        private EntityRegistry $entities,
         private Dispatcher $dispatcher,
         private RenderTarget $renderTarget,
         array $systems, // Array of systems that can produce pickable geometry

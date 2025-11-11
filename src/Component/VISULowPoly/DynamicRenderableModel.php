@@ -2,14 +2,19 @@
 
 namespace VISU\Component\VISULowPoly;
 
-use VISU\System\VISULowPoly\LPModel;
-
 class DynamicRenderableModel
 {
     /**
-     * The name of the model to render
+     * Construct a new DynamicRenderableModel
      */
-    public string $modelIdentifier;
+    public function __construct(
+        /**
+         * The name / id of the model as it is registered in the LPModelCollection
+         */
+        public string $modelIdentifier
+    )
+    {
+    }
 
     /**
      * Should this object cast shadows?

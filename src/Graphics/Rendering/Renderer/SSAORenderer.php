@@ -15,8 +15,6 @@ use VISU\Graphics\Rendering\PipelineContainer;
 use VISU\Graphics\Rendering\PipelineResources;
 use VISU\Graphics\Rendering\RenderPass;
 use VISU\Graphics\Rendering\RenderPipeline;
-use VISU\Graphics\Rendering\Resource\RenderTargetResource;
-use VISU\Graphics\Rendering\Resource\TextureResource;
 use VISU\Graphics\ShaderCollection;
 use VISU\Graphics\ShaderProgram;
 use VISU\Graphics\Texture;
@@ -50,32 +48,19 @@ class SSAORenderer
     private FloatBuffer $kernel;
 
     /**
-     * SSAO radius
-     * this is the radius of the sphere that is used to sample
+     * Current SSAO quality configuration
      */
-    private float $radius = 0.5;
+    private SSAOQuality $currentQuality;
 
     /**
-     * SSAO bias
-     * this is the bias that is used to prevent self occlusion
+     * The maximum number of samples supported by the SSAO shader
      */
-    private float $bias = 0.025;
+    private const MAX_SAMPLES = 64;
 
     /**
-     * SSAO intensity
-     * this is the intensity of the SSAO effect
+     * The noise texture size
      */
-    private float $intensity = 5.0;
-
-    /**
-     * SSAO scale, this is the resolution scale of the SSAO pass
-     */
-    private float $scale = 1.0;
-
-    /**
-     * SSAO blur scale, this is the resolution scale of the SSAO blur pass
-     */
-    private float $blurScale = 1.0;
+    private const NOISE_TEXTURE_SIZE = 4;
 
     /**
      * Constructor 
@@ -88,10 +73,14 @@ class SSAORenderer
         ShaderCollection $shaders
     )
     {
+        $shaders->setGlobalDefine('SSAO_MAX_SAMPLES', self::MAX_SAMPLES);
+        $shaders->setGlobalDefine('SSAO_NOISE_TEXTURE_SIZE', self::NOISE_TEXTURE_SIZE);
         $this->ssaoShaderProgram = $shaders->get('visu/ssao');
         $this->ssaoBlurShaderProgram = $shaders->get('visu/ssao_blur');
 
         $this->quad = new QuadVertexArray($gl);
+
+        $this->setQuality(SSAOQuality::ultra());
 
         $this->generateNoiseTexture();
         $this->generateKernel();
@@ -100,18 +89,19 @@ class SSAORenderer
     private function generateNoiseTexture() : void
     {
         $noiseBuffer = new FloatBuffer();
-        for ($i = 0; $i < 16; $i++) {
+        for ($i = 0; $i < self::NOISE_TEXTURE_SIZE * self::NOISE_TEXTURE_SIZE; $i++) {
+            // generate normalized random vectors for rotation
             $noiseBuffer->pushVec3(new Vec3(
                 (rand() / getrandmax()) * 2.0 - 1.0,
                 (rand() / getrandmax()) * 2.0 - 1.0,
-                0.0
+                (rand() / getrandmax()) * 2.0 - 1.0
             ));
         }
 
         $this->noiseTexture = new Texture($this->gl, 'ssao_noise');
         $to = new TextureOptions;
-        $to->width = 4;
-        $to->height = 4;
+        $to->width = self::NOISE_TEXTURE_SIZE;
+        $to->height = self::NOISE_TEXTURE_SIZE;
         $to->internalFormat = GL_RGB32F;
         $to->dataFormat = GL_RGB;
         $to->dataType = GL_FLOAT;
@@ -131,7 +121,8 @@ class SSAORenderer
     private function generateKernel() : void
     {
         $this->kernel = new FloatBuffer;
-        for ($i = 0; $i < 64; $i++) {
+
+        for ($i = 0; $i < self::MAX_SAMPLES; $i++) {
             $sample = new Vec3(
                 (rand() / getrandmax()) * 2.0 - 1.0,
                 (rand() / getrandmax()) * 2.0 - 1.0,
@@ -139,13 +130,37 @@ class SSAORenderer
             );
             $sample->normalize();
 
-            $scale = $i / 64.0;
+            $scale = $i / self::MAX_SAMPLES;
             $scale = $this->lerp(0.1, 1.0, $scale * $scale);
 
             $sample = $sample * $scale;
 
             $this->kernel->pushVec3($sample);
         }
+    }
+
+    /**
+     * Set SSAO quality configuration
+     */
+    public function setQuality(SSAOQuality $quality): void
+    {
+        $this->currentQuality = $quality;
+    }
+
+    /**
+     * Get current quality configuration
+     */
+    public function getCurrentQuality(): SSAOQuality
+    {
+        return $this->currentQuality;
+    }
+
+    /**
+     * Get current quality name
+     */
+    public function getCurrentQualityName(): string
+    {
+        return $this->currentQuality->name;
     }
 
     /**
@@ -165,13 +180,13 @@ class SSAORenderer
                 $ssaoData = $data->create(SSAOData::class);
                 $gbufferData = $data->get(GBufferPassData::class);
 
-                $downSscale = $this->scale;
-                $downSscaleBlur = $this->blurScale;
+                $downScale = max(0.01, $this->currentQuality->scale);
+                $downScaleBlur = max(0.01, $this->currentQuality->blurScale);
 
                 $ssaoData->ssaoTarget = $pipeline->createRenderTarget(
                     'ssao_pass', 
-                    (int) ($gbufferData->renderTarget->width / $downSscale), 
-                    (int) ($gbufferData->renderTarget->height / $downSscale)
+                    (int) ($gbufferData->renderTarget->width * $downScale),
+                    (int) ($gbufferData->renderTarget->height * $downScale)
                 );
                 
                 $ssaoTextureOptions = new TextureOptions;
@@ -180,13 +195,15 @@ class SSAORenderer
                 $ssaoTextureOptions->internalFormat = GL_R16F;
                 $ssaoTextureOptions->minFilter = GL_LINEAR;
                 $ssaoTextureOptions->magFilter = GL_LINEAR;
+                $ssaoTextureOptions->wrapS = GL_CLAMP_TO_EDGE;
+                $ssaoTextureOptions->wrapT = GL_CLAMP_TO_EDGE;
                 $ssaoData->ssaoTexture = $pipeline->createColorAttachment($ssaoData->ssaoTarget, 'ssao_output', $ssaoTextureOptions);
 
                 // blur render target 
                 $ssaoData->blurTarget = $pipeline->createRenderTarget(
                     'ssao_blur_pass', 
-                    (int) ($gbufferData->renderTarget->width / $downSscaleBlur), 
-                    (int) ($gbufferData->renderTarget->height / $downSscaleBlur)
+                    (int) ($gbufferData->renderTarget->width * $downScaleBlur),
+                    (int) ($gbufferData->renderTarget->height * $downScaleBlur)
                 );
 
                 $ssaoBlurTextureOptions = new TextureOptions;
@@ -195,6 +212,8 @@ class SSAORenderer
                 $ssaoBlurTextureOptions->internalFormat = GL_R16F;
                 $ssaoBlurTextureOptions->minFilter = GL_LINEAR;
                 $ssaoBlurTextureOptions->magFilter = GL_LINEAR;
+                $ssaoBlurTextureOptions->wrapS = GL_CLAMP_TO_EDGE;
+                $ssaoBlurTextureOptions->wrapT = GL_CLAMP_TO_EDGE;
                 $ssaoData->blurTexture = $pipeline->createColorAttachment($ssaoData->blurTarget, 'ssao_blur_output', $ssaoBlurTextureOptions);
             },
             // execute
@@ -209,9 +228,16 @@ class SSAORenderer
                 $this->ssaoShaderProgram->use();
                 $this->ssaoShaderProgram->setUniformIvec2('screen_size', $ssaoData->ssaoTarget->width, $ssaoData->ssaoTarget->height);
                 $this->ssaoShaderProgram->setUniformMat4('projection', false, $cameradData->projection);
-                $this->ssaoShaderProgram->setUniform1f('radius', $this->radius);
-                $this->ssaoShaderProgram->setUniform1f('bias', $this->bias);
-                $this->ssaoShaderProgram->setUniform1f('strength', $this->intensity);
+                
+                // calculate and set inverse projection matrix
+                $inverseProjection = $cameradData->projection->copy();
+                $inverseProjection->inverse();
+                $this->ssaoShaderProgram->setUniformMat4('inverse_projection', false, $inverseProjection);
+                
+                $this->ssaoShaderProgram->setUniform1f('radius', $this->currentQuality->radius);
+                $this->ssaoShaderProgram->setUniform1f('bias', $this->currentQuality->bias);
+                $this->ssaoShaderProgram->setUniform1f('strength', $this->currentQuality->strength);
+                $this->ssaoShaderProgram->setUniform1i('sample_count', $this->currentQuality->sampleCount);
 
                 $normalMatrix = $cameradData->view->copy();
                 $normalMatrix->transpose();
@@ -220,7 +246,7 @@ class SSAORenderer
                 $this->ssaoShaderProgram->setUniformVec3Array('samples', $this->kernel);
                 
                 foreach([
-                    [$gbufferData->viewSpacePositionTexture, 'position'], // @todo, use world space position and reconstruct view space position in shader
+                    [$gbufferData->depthTexture, 'depth'],
                     [$gbufferData->normalTexture, 'normal'],
                 ] as $i => $tuple) {
                     list($texture, $name) = $tuple;
