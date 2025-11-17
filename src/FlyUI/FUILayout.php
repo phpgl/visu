@@ -79,6 +79,87 @@ class FUILayout extends FUIView
     }
 
     /**
+     * Sets the alignment to top left
+     */
+    public function alignTopLeft() : self
+    {
+        $this->alignment = FUILayoutAlignment::topLeft;
+        return $this;
+    }
+
+    /**
+     * Sets the alignment to top center
+     */
+    public function alignTopCenter() : self
+    {
+        $this->alignment = FUILayoutAlignment::topCenter;
+        return $this;
+    }
+
+    /**
+     * Sets the alignment to top right
+     */
+    public function alignTopRight() : self
+    {
+        $this->alignment = FUILayoutAlignment::topRight;
+        return $this;
+    }
+
+    /**
+     * Sets the alignment to center left
+     */
+    public function alignCenterLeft() : self
+    {
+        $this->alignment = FUILayoutAlignment::centerLeft;
+        return $this;
+    }
+
+    /**
+     * Sets the alignment to center
+     */
+    public function alignCenter() : self
+    {
+        $this->alignment = FUILayoutAlignment::center;
+        return $this;
+    }
+
+    /**
+     * Sets the alignment to center right
+     */
+    public function alignCenterRight() : self
+    {
+        $this->alignment = FUILayoutAlignment::centerRight;
+        return $this;
+    }
+
+    /**
+     * Sets the alignment to bottom left
+     */
+    public function alignBottomLeft() : self
+    {
+        $this->alignment = FUILayoutAlignment::bottomLeft;
+        return $this;
+    }
+
+    /**
+     * Sets the alignment to bottom center
+     */
+    public function alignBottomCenter() : self
+    {
+        $this->alignment = FUILayoutAlignment::bottomCenter;
+        return $this;
+    }
+
+    /**
+     * Sets the alignment to bottom right
+     */
+    public function alignBottomRight() : self
+    {
+        $this->alignment = FUILayoutAlignment::bottomRight;
+        return $this;
+    }
+
+    /**
      * Sets the a fixed height for the layout
      * Note: This will override the vertical sizing mode
      */
