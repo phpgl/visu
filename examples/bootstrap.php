@@ -24,7 +24,6 @@ define('VISU_PATH_STORE',        VISU_PATH_ROOT . DS . '..' . DS . 'var' . DS . 
 define('VISU_PATH_VENDOR',       VISU_PATH_ROOT . DS . '..' . DS . 'vendor');
 define('VISU_PATH_RESOURCES',    VISU_PATH_ROOT . DS . 'resources');
 define('VISU_PATH_APPCONFIG',    VISU_PATH_ROOT . DS . 'ctn');
-
 define('VISU_APPCONFIG_ROOT',    '/examples.ctn');
 
 /**

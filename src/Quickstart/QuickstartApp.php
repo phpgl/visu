@@ -142,7 +142,7 @@ class QuickstartApp implements GameLoopDelegate
 
         // fetch or create the shader collection
         $this->shaders = $getOrCreateService('shaders', function() {
-            $shaders = new ShaderCollection($this->gl, $this->container->getParameter('visu.path.resources.shader'));
+            $shaders = new ShaderCollection($this->gl, VISU_PATH_RESOURCES_SHADER); // @phpstan-ignore-line
             
             $shaders->enableVISUIncludes();
             $shaders->addVISUShaders();

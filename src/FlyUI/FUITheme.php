@@ -248,6 +248,7 @@ class FUITheme
         // checkboxes
         $this->checkboxBackgroundColor = new VGColor(0.902, 0.902, 0.901, 1.0);
         $this->checkboxHoverBackgroundColor = $this->checkboxBackgroundColor->lighten(0.05);
+        $this->checkboxActiveBackgroundColor = $this->primaryButton->backgroundColor;
 
         // button group
         // --------------------------------------------------------------------

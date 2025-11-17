@@ -13,8 +13,11 @@ $container = require __DIR__ . '/../bootstrap.php';
  * 
  * ----------------------------------------------------------------------------
  */
-$quickstart = new Quickstart(function(QuickstartOptions $app) use(&$state)
+$quickstart = new Quickstart(function(QuickstartOptions $app) use(&$state, $container)
 {
+    // Initalize the application
+    // --------------------------------------------------------------------
+    $app->container = $container;
     $app->ready = function(QuickstartApp $app) {
         $app->loadCompatGPUProfiler();
     };

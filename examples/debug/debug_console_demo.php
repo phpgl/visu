@@ -50,8 +50,11 @@ class DebugConsoleQuickstartApp extends QuickstartApp
  * 
  * ----------------------------------------------------------------------------
  */
-$quickstart = new Quickstart(function(QuickstartOptions $app) use(&$demoState)
+$quickstart = new Quickstart(function(QuickstartOptions $app) use(&$demoState, $container)
 {
+    // Initalize the application
+    // --------------------------------------------------------------------
+    $app->container = $container;
     $app->windowTitle = 'VISU Debug Console Demo';
     $app->appClass = DebugConsoleQuickstartApp::class;
 

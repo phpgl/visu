@@ -213,6 +213,82 @@ UIDemo("Components - Button Groups", function(RenderContext $context, RenderTarg
 });
 
 /**
+ * Demo: Components - Checkboxes
+ * 
+ * ----------------------------------------------------------------------------
+ */
+UIDemo("Components - Checkboxes", function(RenderContext $context, RenderTarget $target, FlyUiDemoState $state) : void 
+{
+    static $enableNotifications = true;
+    static $darkMode = false;
+    static $autoSave = true;
+    static $showGrid = false;
+    static $enableSounds = true;
+
+    FlyUI::beginSection('Basic Checkboxes');
+    FlyUI::beginLayout()
+        ->flow(FUILayoutFlow::vertical)
+        ->spacing(5);
+
+    FlyUI::checkbox('Enable Notifications', $enableNotifications, function(bool $checked) {
+        echo "Notifications " . ($checked ? "enabled" : "disabled") . "\n";
+    });
+
+    FlyUI::checkbox('Dark Mode', $darkMode, function(bool $checked) {
+        echo "Dark mode " . ($checked ? "enabled" : "disabled") . "\n";
+    });
+
+    FlyUI::checkbox('Auto Save', $autoSave, function(bool $checked) {
+        echo "Auto save " . ($checked ? "enabled" : "disabled") . "\n";
+    });
+
+    FlyUI::end(); // end layout
+    FlyUI::end(); // end section
+
+    FlyUI::spaceY(20);
+
+    FlyUI::beginSection('Settings Panel');
+    FlyUI::beginLayout()
+        ->flow(FUILayoutFlow::vertical)
+        ->spacing(5);
+
+    FlyUI::text('Display Options:', VGColor::rgb(0.3, 0.3, 0.3))->fontSize(14);
+    FlyUI::spaceY(5);
+    
+    FlyUI::checkbox('Show Grid', $showGrid, function(bool $checked) {
+        echo "Grid display " . ($checked ? "enabled" : "disabled") . "\n";
+    });
+
+    FlyUI::spaceY(10);
+
+    FlyUI::text('Audio Options:', VGColor::rgb(0.3, 0.3, 0.3))->fontSize(14);
+    FlyUI::spaceY(5);
+
+    FlyUI::checkbox('Enable Sounds', $enableSounds, function(bool $checked) {
+        echo "Sounds " . ($checked ? "enabled" : "disabled") . "\n";
+    });
+
+    FlyUI::end(); // end layout
+    FlyUI::end(); // end section
+
+    FlyUI::spaceY(20);
+
+    FlyUI::beginSection('Current State');
+    FlyUI::beginLayout()
+        ->flow(FUILayoutFlow::vertical)
+        ->spacing(3);
+    
+    FlyUI::text("Notifications: " . ($enableNotifications ? "ON" : "OFF"));
+    FlyUI::text("Dark Mode: " . ($darkMode ? "ON" : "OFF"));
+    FlyUI::text("Auto Save: " . ($autoSave ? "ON" : "OFF"));
+    FlyUI::text("Show Grid: " . ($showGrid ? "ON" : "OFF")); 
+    FlyUI::text("Enable Sounds: " . ($enableSounds ? "ON" : "OFF"));
+    
+    FlyUI::end(); // end layout
+    FlyUI::end(); // end section
+});
+
+/**
  * Main Entry Point
  * 
  * ----------------------------------------------------------------------------
