@@ -4,6 +4,13 @@
 #define CAP_MIN_DISTANCE 0.0001
 #define CAP_MAX_DISTANCE 0.005
 
+#ifndef SSAO_MAX_SAMPLES
+    #define SSAO_MAX_SAMPLES 64
+#endif
+#ifndef SSAO_NOISE_TEXTURE_SIZE
+    #define SSAO_NOISE_TEXTURE_SIZE 4
+#endif
+
 out float frag_ao;
 
 in vec2 v_uv;
