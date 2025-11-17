@@ -5,19 +5,6 @@ namespace VISU\FlyUI;
 use GL\Math\Vec2;
 use GL\VectorGraphics\VGColor;
 
-enum FUILayoutAlignment
-{
-    case topLeft;
-    case topCenter;
-    case topRight;
-    case centerLeft;
-    case center;
-    case centerRight;
-    case bottomLeft;
-    case bottomCenter;
-    case bottomRight;
-}
-
 class FUILayout extends FUIView
 {
     /**
@@ -79,6 +66,15 @@ class FUILayout extends FUIView
     public function flow(FUILayoutFlow $flow) : self
     {
         $this->flow = $flow;
+        return $this;
+    }
+
+    /**
+     * Sets the alignment of the view
+     */
+    public function align(FUILayoutAlignment $alignment) : self
+    {
+        $this->alignment = $alignment;
         return $this;
     }
 
@@ -177,6 +173,58 @@ class FUILayout extends FUIView
             $this->cornerRadius = $cornerRadius;
         }
         return $this;
+    }
+
+    /**
+     * Calculate the offset for alignment within available space
+     */
+    private function calculateAlignmentOffset(Vec2 $totalChildrenSize, Vec2 $availableSize) : Vec2
+    {
+        $offset = new Vec2(0.0, 0.0);
+        
+        // calculate horizontal offset
+        switch ($this->alignment) {
+            case FUILayoutAlignment::topCenter:
+            case FUILayoutAlignment::center:
+            case FUILayoutAlignment::bottomCenter:
+                $offset->x = ($availableSize->x - $totalChildrenSize->x) / 2.0;
+                break;
+                
+            case FUILayoutAlignment::topRight:
+            case FUILayoutAlignment::centerRight:
+            case FUILayoutAlignment::bottomRight:
+                $offset->x = $availableSize->x - $totalChildrenSize->x;
+                break;
+                
+            default:
+                $offset->x = 0.0; // left alignment (default)
+                break;
+        }
+        
+        // calculate vertical offset
+        switch ($this->alignment) {
+            case FUILayoutAlignment::centerLeft:
+            case FUILayoutAlignment::center:
+            case FUILayoutAlignment::centerRight:
+                $offset->y = ($availableSize->y - $totalChildrenSize->y) / 2.0;
+                break;
+                
+            case FUILayoutAlignment::bottomLeft:
+            case FUILayoutAlignment::bottomCenter:
+            case FUILayoutAlignment::bottomRight:
+                $offset->y = $availableSize->y - $totalChildrenSize->y;
+                break;
+                
+            default:
+                $offset->y = 0.0; // top alignment (default)
+                break;
+        }
+        
+        // ensure offsets are never negative
+        $offset->x = max(0.0, $offset->x);
+        $offset->y = max(0.0, $offset->y);
+        
+        return $offset;
     }
 
     /**
@@ -366,10 +414,40 @@ class FUILayout extends FUIView
 
     protected function renderContent(FUIRenderContext $ctx) : void
     {
-        $containerOrigin = $ctx->origin->copy();
-
         // calculate all children sizes once using optimized method
         $childrenSizes = $this->calculateChildrenSizes($ctx);
+        
+        if (empty($childrenSizes)) {
+            return;
+        }
+
+        // calculate total size of all children including spacing
+        $totalChildrenSize = new Vec2(0.0, 0.0);
+        $totalSpacing = $this->spacing * max(0, count($childrenSizes) - 1);
+        
+        if ($this->flow === FUILayoutFlow::horizontal) {
+            foreach ($childrenSizes as $childSize) {
+                $totalChildrenSize = new Vec2(
+                    $totalChildrenSize->x + $childSize->x,
+                    max($totalChildrenSize->y, $childSize->y)
+                );
+            }
+            $totalChildrenSize = new Vec2($totalChildrenSize->x + $totalSpacing, $totalChildrenSize->y);
+        } else {
+            foreach ($childrenSizes as $childSize) {
+                $totalChildrenSize = new Vec2(
+                    max($totalChildrenSize->x, $childSize->x),
+                    $totalChildrenSize->y + $childSize->y
+                );
+            }
+            $totalChildrenSize = new Vec2($totalChildrenSize->x, $totalChildrenSize->y + $totalSpacing);
+        }
+
+        // calculate alignment offset
+        $alignmentOffset = $this->calculateAlignmentOffset($totalChildrenSize, $ctx->containerSize);
+        
+        // start rendering from the aligned position
+        $containerOrigin = $ctx->origin + $alignmentOffset;
 
         foreach($this->children as $index => $child) 
         {
@@ -389,14 +467,20 @@ class FUILayout extends FUIView
             $ctx->origin = $originalOrigin;
             $ctx->containerSize = $originalSize;
 
-            // move to the next position based on flow direction (reuse containerOrigin)
+            // move to the next position based on flow direction
             if ($this->flow === FUILayoutFlow::horizontal) 
             {
-                $containerOrigin->x = $containerOrigin->x + $childSize->x + $this->spacing;
+                $containerOrigin = new Vec2(
+                    $containerOrigin->x + $childSize->x + $this->spacing,
+                    $containerOrigin->y
+                );
             } 
             else 
             {
-                $containerOrigin->y = $containerOrigin->y + $childSize->y + $this->spacing;
+                $containerOrigin = new Vec2(
+                    $containerOrigin->x,
+                    $containerOrigin->y + $childSize->y + $this->spacing
+                );
             }
         }
     }

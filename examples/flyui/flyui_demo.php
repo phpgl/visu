@@ -8,6 +8,7 @@ use VISU\FlyUI\FlyUI;
 use VISU\FlyUI\FUIButtonGroup;
 use VISU\FlyUI\FUILayoutFlow;
 use VISU\FlyUI\FUILayoutSizing;
+use VISU\FlyUI\FUILayoutAlignment;
 use VISU\FlyUI\Theme\FUIButtonStyle;
 use VISU\FlyUI\Theme\FUIButtonGroupStyle;
 use VISU\Graphics\Rendering\RenderContext;
@@ -37,6 +38,7 @@ class FlyUiDemoState {
     public FUILayoutFlow $stackFlow = FUILayoutFlow::vertical;
     public FUILayoutSizing $verticalStackSizing = FUILayoutSizing::fill;
     public FUILayoutSizing $horizontalStackSizing = FUILayoutSizing::fill;
+    public FUILayoutAlignment $stackAlignment = FUILayoutAlignment::topLeft;
 }
 
 $state = new FlyUiDemoState;
@@ -69,6 +71,7 @@ UIDemo("Layout - Stacks", function(RenderContext $context, RenderTarget $target,
     FlyUI::beginLayout()
         ->verticalFill()
         ->flow($state->stackFlow)
+        ->align($state->stackAlignment)
         ->spacing(5);
 
     for ($i = 0; $i < 10; $i++) {
@@ -134,16 +137,64 @@ UIDemo("Layout - Stacks", function(RenderContext $context, RenderTarget $target,
         }
     });
 
-    // FlyUI::buttonGroup(['fill' => 'Fill', 'fit' => 'Fit'], $state->stackSizing->name, function(string $option) use(&$state) {
-    //     var_dump($option);
-    //     if ($option === 'fill') {
-    //         $state->stackSizing = FUILayoutSizing::fill;
-    //     } else {
-    //         $state->stackSizing = FUILayoutSizing::fit;
-    //     }
-    // });
+    FlyUI::spaceY(10);
 
-    FlyUI::end(); // end right settings area
+    // alignment
+    FlyUI::beginSection('Stack Alignment');
+    
+    // horizontal alignment
+    $horizontalAlignment = match($state->stackAlignment) {
+        FUILayoutAlignment::topLeft, FUILayoutAlignment::centerLeft, FUILayoutAlignment::bottomLeft => 'left',
+        FUILayoutAlignment::topCenter, FUILayoutAlignment::center, FUILayoutAlignment::bottomCenter => 'center',
+        FUILayoutAlignment::topRight, FUILayoutAlignment::centerRight, FUILayoutAlignment::bottomRight => 'right',
+    };
+    
+    FlyUI::buttonGroup('Horizontal', [
+        'left' => 'Left',
+        'center' => 'Center',
+        'right' => 'Right',
+    ], $horizontalAlignment, function(string $option) use(&$state) {
+        $state->stackAlignment = match([$state->stackAlignment, $option]) {
+            [FUILayoutAlignment::topLeft, 'left'], [FUILayoutAlignment::topCenter, 'left'], [FUILayoutAlignment::topRight, 'left'] => FUILayoutAlignment::topLeft,
+            [FUILayoutAlignment::topLeft, 'center'], [FUILayoutAlignment::topCenter, 'center'], [FUILayoutAlignment::topRight, 'center'] => FUILayoutAlignment::topCenter,
+            [FUILayoutAlignment::topLeft, 'right'], [FUILayoutAlignment::topCenter, 'right'], [FUILayoutAlignment::topRight, 'right'] => FUILayoutAlignment::topRight,
+            [FUILayoutAlignment::centerLeft, 'left'], [FUILayoutAlignment::center, 'left'], [FUILayoutAlignment::centerRight, 'left'] => FUILayoutAlignment::centerLeft,
+            [FUILayoutAlignment::centerLeft, 'center'], [FUILayoutAlignment::center, 'center'], [FUILayoutAlignment::centerRight, 'center'] => FUILayoutAlignment::center,
+            [FUILayoutAlignment::centerLeft, 'right'], [FUILayoutAlignment::center, 'right'], [FUILayoutAlignment::centerRight, 'right'] => FUILayoutAlignment::centerRight,
+            [FUILayoutAlignment::bottomLeft, 'left'], [FUILayoutAlignment::bottomCenter, 'left'], [FUILayoutAlignment::bottomRight, 'left'] => FUILayoutAlignment::bottomLeft,
+            [FUILayoutAlignment::bottomLeft, 'center'], [FUILayoutAlignment::bottomCenter, 'center'], [FUILayoutAlignment::bottomRight, 'center'] => FUILayoutAlignment::bottomCenter,
+            [FUILayoutAlignment::bottomLeft, 'right'], [FUILayoutAlignment::bottomCenter, 'right'], [FUILayoutAlignment::bottomRight, 'right'] => FUILayoutAlignment::bottomRight,
+        };
+    })->setId('h-align-btn-group');
+    
+    // vertical alignment
+    $verticalAlignment = match($state->stackAlignment) {
+        FUILayoutAlignment::topLeft, FUILayoutAlignment::topCenter, FUILayoutAlignment::topRight => 'top',
+        FUILayoutAlignment::centerLeft, FUILayoutAlignment::center, FUILayoutAlignment::centerRight => 'center',
+        FUILayoutAlignment::bottomLeft, FUILayoutAlignment::bottomCenter, FUILayoutAlignment::bottomRight => 'bottom',
+    };
+    
+    FlyUI::buttonGroup('Vertical', [
+        'top' => 'Top',
+        'center' => 'Center',
+        'bottom' => 'Bottom',
+    ], $verticalAlignment, function(string $option) use(&$state) {
+        $state->stackAlignment = match([$state->stackAlignment, $option]) {
+            [FUILayoutAlignment::topLeft, 'top'], [FUILayoutAlignment::centerLeft, 'top'], [FUILayoutAlignment::bottomLeft, 'top'] => FUILayoutAlignment::topLeft,
+            [FUILayoutAlignment::topCenter, 'top'], [FUILayoutAlignment::center, 'top'], [FUILayoutAlignment::bottomCenter, 'top'] => FUILayoutAlignment::topCenter,
+            [FUILayoutAlignment::topRight, 'top'], [FUILayoutAlignment::centerRight, 'top'], [FUILayoutAlignment::bottomRight, 'top'] => FUILayoutAlignment::topRight,
+            [FUILayoutAlignment::topLeft, 'center'], [FUILayoutAlignment::centerLeft, 'center'], [FUILayoutAlignment::bottomLeft, 'center'] => FUILayoutAlignment::centerLeft,
+            [FUILayoutAlignment::topCenter, 'center'], [FUILayoutAlignment::center, 'center'], [FUILayoutAlignment::bottomCenter, 'center'] => FUILayoutAlignment::center,
+            [FUILayoutAlignment::topRight, 'center'], [FUILayoutAlignment::centerRight, 'center'], [FUILayoutAlignment::bottomRight, 'center'] => FUILayoutAlignment::centerRight,
+            [FUILayoutAlignment::topLeft, 'bottom'], [FUILayoutAlignment::centerLeft, 'bottom'], [FUILayoutAlignment::bottomLeft, 'bottom'] => FUILayoutAlignment::bottomLeft,
+            [FUILayoutAlignment::topCenter, 'bottom'], [FUILayoutAlignment::center, 'bottom'], [FUILayoutAlignment::bottomCenter, 'bottom'] => FUILayoutAlignment::bottomCenter,
+            [FUILayoutAlignment::topRight, 'bottom'], [FUILayoutAlignment::centerRight, 'bottom'], [FUILayoutAlignment::bottomRight, 'bottom'] => FUILayoutAlignment::bottomRight,
+        };
+    })->setId('v-align-btn-group');
+    
+    FlyUI::end(); // end alignment section
+
+    FlyUI::end(); // end right settings area 
 
     FlyUI::end(); // end main container
 
