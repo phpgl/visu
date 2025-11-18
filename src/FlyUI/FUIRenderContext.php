@@ -41,6 +41,14 @@ class FUIRenderContext
     private static array $persistentData = [];
 
     /**
+     * Queue of deferred render functions to be executed at the end of the frame
+     * This allows elements like dropdowns to render on top of other elements
+     * 
+     * @var array<\Closure(FUIRenderContext): void>
+     */
+    private array $deferredRenderQueue = [];
+
+    /**
      * Returns true if the mouse is currently hovering over the current bounds
      */
     public function isHovered() : bool
@@ -148,6 +156,27 @@ class FUIRenderContext
     public function clearStaticValue(string $key) : void
     {
         unset(self::$persistentData[$key]);
+    }
+
+    /**
+     * Adds a render function to be executed at the end of the frame
+     * This allows elements to render on top of others (z-index control)
+     */
+    public function deferRender(\Closure $renderFunc): void
+    {
+        $this->deferredRenderQueue[] = $renderFunc;
+    }
+
+    /**
+     * Executes all deferred render functions and clears the queue
+     * This should be called at the end of the frame
+     */
+    public function executeDeferredRenders(): void
+    {
+        foreach ($this->deferredRenderQueue as $renderFunc) {
+            $renderFunc($this);
+        }
+        $this->deferredRenderQueue = [];
     }
 
     /**

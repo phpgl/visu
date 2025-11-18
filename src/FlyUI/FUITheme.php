@@ -7,6 +7,7 @@ use GL\Math\Vec4;
 use GL\VectorGraphics\VGColor;
 use VISU\FlyUI\Theme\FUIButtonStyle;
 use VISU\FlyUI\Theme\FUIButtonGroupStyle;
+use VISU\FlyUI\Theme\FUISelectStyle;
 
 class FUITheme
 {   
@@ -174,6 +175,9 @@ class FUITheme
     // button group style
     public FUIButtonGroupStyle $buttonGroup;
 
+    // select style
+    public FUISelectStyle $select;
+
 
     /**
      * ------------------------------ Checkboxes ------------------------------
@@ -235,7 +239,6 @@ class FUITheme
         $this->primaryButton->hoverBackgroundColor = $this->primaryButton->backgroundColor->lighten(0.05);
         $this->primaryButton->textColor = VGColor::white();
         $this->primaryButton->hoverTextColor = VGColor::white();
-        $this->primaryButton->disabledBackgroundColor = $this->primaryButton->backgroundColor->withAlpha(0.5);
 
         // secondary button
         $this->secondaryButton = clone $this->primaryButton;
@@ -243,10 +246,9 @@ class FUITheme
         $this->secondaryButton->hoverBackgroundColor = $this->secondaryButton->backgroundColor->lighten(0.2);
         $this->secondaryButton->textColor = VGColor::white();
         $this->secondaryButton->hoverTextColor = VGColor::white();
-        $this->secondaryButton->disabledBackgroundColor = VGColor::darkGray();
 
         // checkboxes
-        $this->checkboxBackgroundColor = new VGColor(0.902, 0.902, 0.901, 1.0);
+        $this->checkboxBackgroundColor = new VGColor(0.9, 0.9, 0.9, 1.0);
         $this->checkboxHoverBackgroundColor = $this->checkboxBackgroundColor->lighten(0.05);
         $this->checkboxActiveBackgroundColor = $this->primaryButton->backgroundColor;
 
@@ -268,7 +270,28 @@ class FUITheme
         $this->buttonGroup->inactiveTextColor = VGColor::black();
         $this->buttonGroup->hoverTextColor = new VGColor(0.3, 0.3, 0.3, 1.0); // Dark gray
         $this->buttonGroup->hoverOverlayColor = new VGColor(0.0, 0.0, 0.0, 0.1); // Light gray overlay
-        $this->buttonGroup->disabledBackgroundColor = new VGColor(0.9, 0.9, 0.9, 1.0);
-        $this->buttonGroup->disabledTextColor = new VGColor(0.6, 0.6, 0.6, 1.0);
+
+        // select
+        // --------------------------------------------------------------------
+        $this->select = new FUISelectStyle();
+        $this->select->padding = new Vec4(round($this->padding * 1.2), round($this->padding * 1.2), round($this->padding * 0.6), round($this->padding * 0.6));
+        $this->select->cornerRadius = $this->borderRadius;
+        $this->select->dropdownCornerRadius = $this->borderRadius;
+        $this->select->fontSize = $this->fontSize;
+        $this->select->optionHeight = 28.0;
+        $this->select->maxDropdownHeight = 200.0;
+        $this->select->backgroundColor = VGColor::white();
+        $this->select->hoverBackgroundColor = VGColor::white()->withAlpha(0.7);
+        $this->select->borderColor = VGColor::black()->withAlpha(0.05);
+        $this->select->dropdownBackgroundColor = VGColor::white();
+        $this->select->dropdownBorderColor = $this->select->borderColor->copy();
+        $this->select->optionHoverBackgroundColor = VGColor::black()->withAlpha(0.05);
+        $this->select->optionSelectedBackgroundColor = $this->primaryButton->backgroundColor->copy();
+        $this->select->textColor = VGColor::black();
+        $this->select->textPlaceholderColor = VGColor::black()->withAlpha(0.3);
+        $this->select->optionTextColor = VGColor::black();
+        $this->select->optionHoverTextColor = VGColor::black();
+        $this->select->optionSelectedTextColor = VGColor::white();
+        $this->select->arrowColor = new VGColor(0.5, 0.5, 0.5, 1.0);
     }
 }

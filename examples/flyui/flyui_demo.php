@@ -340,6 +340,36 @@ UIDemo("Components - Checkboxes", function(RenderContext $context, RenderTarget 
 });
 
 /**
+ * Demo: Components - Select Dropdowns
+ * 
+ * ----------------------------------------------------------------------------
+ */
+UIDemo("Components - Select Dropdowns", function(RenderContext $context, RenderTarget $target, FlyUiDemoState $state) : void 
+{
+    static $selectedSize = '';
+
+    FlyUI::beginSection('Basic Select Dropdowns');
+    FlyUI::beginLayout()
+        ->flow(FUILayoutFlow::vertical)
+        ->spacing(10);
+
+    // size selector without initial selection
+    FlyUI::select(
+        'Size',
+        ['small' => 'Small', 'medium' => 'Medium', 'large' => 'Large', 'xl' => 'Extra Large'],
+        $selectedSize,
+        function(string $option) {
+            echo "Selected size: " . $option . "\n";
+        }
+    );
+
+    FlyUI::text("Size: " . ($selectedSize ?: 'Not selected'));
+    
+    FlyUI::end(); // end layout
+    FlyUI::end(); // end section
+});
+
+/**
  * Main Entry Point
  * 
  * ----------------------------------------------------------------------------

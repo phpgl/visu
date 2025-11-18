@@ -178,20 +178,27 @@ class FUIButton extends FUIView
         );
         $ctx->vg->fill();
 
-        // move origin to the center of the button
-        $ctx->origin->x = $ctx->origin->x + $ctx->containerSize->x * 0.5;
-        $ctx->origin->y = $ctx->origin->y + $height * 0.5;
-
-        // we cheat a little bit here, basically the technical correct center just
-        // doesnt look right because at least in my opinion the text should be in the center
-        // wile ignoring letters like 'g' or 'y' that go below the baseline
-        $ctx->origin->y = floor($ctx->origin->y + $this->style->fontSize * 0.15);
-        
+        // prepare font for text metrics
         $ctx->ensureSemiBoldFontFace();
         $ctx->vg->fontSize($this->style->fontSize);
         $ctx->vg->textAlign(VGAlign::CENTER | VGAlign::MIDDLE);
         $ctx->vg->fillColor($this->style->textColor);
-        $ctx->vg->text($ctx->origin->x, $ctx->origin->y, $this->text);
+
+        // get text metrics for visual centering with TOP alignment
+        $ascender = 0.0;
+        $descender = 0.0;
+        $lineHeight = 0.0;
+        $ctx->vg->textMetrics($ascender, $descender, $lineHeight);
+
+        $visualCenterY = $ctx->origin->y + $height * 0.5;
+        $visualCenterY += (-$descender) * 0.25;
+
+        $ctx->vg->fillColor($this->style->textColor);
+        $ctx->vg->text(
+            $ctx->origin->x + $ctx->containerSize->x * 0.5,
+            floor($visualCenterY),
+            $this->text
+        );
 
         // no pass to parent, as this is a leaf element
     }

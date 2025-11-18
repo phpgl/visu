@@ -62,14 +62,4 @@ class FUIButtonStyle
      * the text color for the button in hover state
      */
     public VGColor $hoverTextColor;
-
-    /**
-     * The disabled button background color
-     */
-    public VGColor $disabledBackgroundColor;
-
-    /**
-     * The disabled button text color
-     */
-    public VGColor $disabledTextColor;
 }

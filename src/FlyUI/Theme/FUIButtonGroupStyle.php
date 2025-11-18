@@ -90,14 +90,4 @@ class FUIButtonGroupStyle
      * The gray overlay color for hover effects
      */
     public VGColor $hoverOverlayColor;
-
-    /**
-     * The disabled button group background color
-     */
-    public VGColor $disabledBackgroundColor;
-
-    /**
-     * The disabled button group text color
-     */
-    public VGColor $disabledTextColor;
 }

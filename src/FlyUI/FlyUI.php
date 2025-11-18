@@ -227,6 +227,26 @@ class FlyUI
     }
 
     /**
+     * Creates a select (dropdown) element
+     * 
+     * @param string $name The name of the select
+     * @param array<string, string> $options Array of key => label pairs
+     * @param string|null $selectedOption Reference to the selected option
+     * @param Closure(string):void|null $onSelect Callback that is called when an option is selected
+     */
+    public static function select(
+        string $name,
+        array $options, 
+        ?string &$selectedOption = null, 
+        ?Closure $onSelect = null
+    ) : FUISelect
+    {
+        $view = new FUISelect($name, $options, $selectedOption, $onSelect);
+        self::$instance->addChildView($view);
+        return $view;
+    }
+
+    /**
      * Instance Functions/Properties
      * 
      * ------------------------------------------------------------------------
@@ -422,6 +442,9 @@ class FlyUI
                 $this->performanceOverlay->addTrace($trace);
             }
         }
+
+        // execute all deferred renders (for z-index control like dropdowns)
+        $ctx->executeDeferredRenders();
 
         // render the performance overlay if it exists
         if ($this->performanceTracingEnabled && $this->performanceOverlay) {
