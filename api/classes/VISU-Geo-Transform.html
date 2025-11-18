@@ -1,0 +1,2836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+            <title>VISU - PHP Game Framework</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="../">
+    <link rel="icon" href="images/favicon.ico"/>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/base.css">
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/template.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism-okaidia.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
+        <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="js/template.js"></script>
+        <script src="js/search.js"></script>
+        <script defer src="js/searchIndex.js"></script>
+    </head>
+<body id="top">
+    <header class="phpdocumentor-header phpdocumentor-section">
+    <h1 class="phpdocumentor-title"><a href="" class="phpdocumentor-title__link">VISU - PHP Game Framework</a></h1>
+    <input class="phpdocumentor-header__menu-button" type="checkbox" id="menu-button" name="menu-button" />
+    <label class="phpdocumentor-header__menu-icon" for="menu-button">
+        <i class="fas fa-bars"></i>
+    </label>
+    <section data-search-form class="phpdocumentor-search">
+    <label>
+        <span class="visually-hidden">Search for</span>
+        <svg class="phpdocumentor-search__icon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="7.5" cy="7.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <line x1="12.4892" y1="12.2727" x2="19.1559" y2="18.9393" stroke="currentColor" stroke-width="3"/>
+        </svg>
+        <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+    </label>
+</section>
+
+    <nav class="phpdocumentor-topnav">
+    <ul class="phpdocumentor-topnav__menu">
+        </ul>
+</nav>
+</header>
+
+    <main class="phpdocumentor">
+        <div class="phpdocumentor-section">
+            <input class="phpdocumentor-sidebar__menu-button" type="checkbox" id="sidebar-button" name="sidebar-button" />
+<label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
+    Menu
+</label>
+<aside class="phpdocumentor-column -three phpdocumentor-sidebar">
+                    <section class="phpdocumentor-sidebar__category -namespaces">
+            <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/visu.html" class="">VISU</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/visu-animation.html" class="">Animation</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-command.html" class="">Command</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-component.html" class="">Component</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-ecs.html" class="">ECS</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-exception.html" class="">Exception</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-flyui.html" class="">FlyUI</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-geo.html" class="">Geo</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-graphics.html" class="">Graphics</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-instrument.html" class="">Instrument</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-maker.html" class="">Maker</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-os.html" class="">OS</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-quickstart.html" class="">Quickstart</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-runtime.html" class="">Runtime</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-signal.html" class="">Signal</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-signals.html" class="">Signals</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-system.html" class="">System</a>
+                
+            </li>
+            </ul>
+
+                        </section>
+                <section class="phpdocumentor-sidebar__category -packages">
+            <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Application.html" class="">Application</a>
+</h4>
+
+                        </section>
+            
+    <section class="phpdocumentor-sidebar__category -reports">
+        <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="graphs/classes.html">Class Diagram</a></h3>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
+    </section>
+
+    <section class="phpdocumentor-sidebar__category -indices">
+        <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
+    </section>
+</aside>
+
+            <div class="phpdocumentor-column -nine phpdocumentor-content">
+                                <section>
+                                        <ul class="phpdocumentor-breadcrumbs">
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/visu.html">VISU</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/visu-geo.html">Geo</a></li>
+    </ul>
+
+    <article class="phpdocumentor-element -class">
+        <h2 class="phpdocumentor-content__title">
+    Transform
+
+    
+            <div class="phpdocumentor-element__package">
+            in package
+            <ul class="phpdocumentor-breadcrumbs">
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Application.html">Application</a></li>
+                            </ul>
+        </div>
+    
+    
+    </h2>
+
+<div class="phpdocumentor-label-line">
+
+
+</div>
+
+        <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">10</span>
+
+    </aside>
+
+        
+
+
+
+
+
+
+
+
+<h3 id="toc">
+    Table of Contents
+    <a href="classes/VISU-Geo-Transform.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h3>
+
+
+
+
+
+
+
+
+
+<h4 id="toc-properties">
+    Properties
+    <a href="classes/VISU-Geo-Transform.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#property_isDirty">$isDirty</a>
+    <span>
+                        &nbsp;: bool            </span>
+</dt>
+<dd>Flag indicating whether the matrix is dirty and needs to be recalculated.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#property_orientation">$orientation</a>
+    <span>
+                        &nbsp;: <abbr title="\GL\Math\Quat">Quat</abbr>            </span>
+</dt>
+<dd>Current orientation in local space.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#property_parent">$parent</a>
+    <span>
+                        &nbsp;: int|null            </span>
+</dt>
+<dd>Parent entity id.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#property_position">$position</a>
+    <span>
+                        &nbsp;: <abbr title="\GL\Math\Vec3">Vec3</abbr>            </span>
+</dt>
+<dd>Current position in local space.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#property_scale">$scale</a>
+    <span>
+                        &nbsp;: <abbr title="\GL\Math\Vec3">Vec3</abbr>            </span>
+</dt>
+<dd>Current scale in local space.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-Geo-Transform.html#property_matrix">$matrix</a>
+    <span>
+                        &nbsp;: <abbr title="\GL\Math\Mat4">Mat4</abbr>            </span>
+</dt>
+<dd>Internal matrix representation.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-Geo-Transform.html#property_previous">$previous</a>
+    <span>
+                        &nbsp;: <a href="classes/VISU-Geo-Transform.html"><abbr title="\VISU\Geo\Transform">Transform</abbr></a>|null            </span>
+</dt>
+<dd>Prvious transform
+Can story a copy of the current transform before it was modified.</dd>
+
+    </dl>
+
+<h4 id="toc-methods">
+    Methods
+    <a href="classes/VISU-Geo-Transform.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method___clone">__clone()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method___construct">__construct()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+<dd>Constructor</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_dirBackward">dirBackward()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Vec3">Vec3</abbr>    </span>
+</dt>
+<dd>Returns the backward direction of the transform</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_dirDown">dirDown()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Vec3">Vec3</abbr>    </span>
+</dt>
+<dd>Returns the down direction of the transform</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_dirForward">dirForward()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Vec3">Vec3</abbr>    </span>
+</dt>
+<dd>Returns the forward direction of the transform</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_dirLeft">dirLeft()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Vec3">Vec3</abbr>    </span>
+</dt>
+<dd>Returns the left direction of the transform</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_dirRight">dirRight()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Vec3">Vec3</abbr>    </span>
+</dt>
+<dd>Returns the right direction of the transform</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_dirUp">dirUp()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Vec3">Vec3</abbr>    </span>
+</dt>
+<dd>Returns the up direction of the transform</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_getInterpolatedLocalMatrix">getInterpolatedLocalMatrix()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Mat4">Mat4</abbr>    </span>
+</dt>
+<dd>Returns a interpolated matrix between the previous and current transform.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_getInterpolatedOrientation">getInterpolatedOrientation()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Quat">Quat</abbr>    </span>
+</dt>
+<dd>Returns the interpolated orientation between the previous and current transform.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_getInterpolatedPosition">getInterpolatedPosition()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Vec3">Vec3</abbr>    </span>
+</dt>
+<dd>Returns the interpolated position between the previous and current transform.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_getInterpolatedScale">getInterpolatedScale()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Vec3">Vec3</abbr>    </span>
+</dt>
+<dd>Returns the interpolated scale between the previous and current transform.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_getLocalEulerAngles">getLocalEulerAngles()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Vec3">Vec3</abbr>    </span>
+</dt>
+<dd>Retruns the orientation as euler angles.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_getLocalMatrix">getLocalMatrix()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Mat4">Mat4</abbr>    </span>
+</dt>
+<dd>Returns the local matrix.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_getParent">getParent()</a>
+    <span>
+                                &nbsp;: <a href="classes/VISU-Geo-Transform.html"><abbr title="\VISU\Geo\Transform">Transform</abbr></a>|null    </span>
+</dt>
+<dd>Returns the parent Transform component.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_getWorldEulerAngles">getWorldEulerAngles()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Vec3">Vec3</abbr>    </span>
+</dt>
+<dd>Returns the orientation as euler angles in world space.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_getWorldMatrix">getWorldMatrix()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Mat4">Mat4</abbr>    </span>
+</dt>
+<dd>Returns the world matrix.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_getWorldOrientation">getWorldOrientation()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Quat">Quat</abbr>    </span>
+</dt>
+<dd>Returns the orientation in world space.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_getWorldPosition">getWorldPosition()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Vec3">Vec3</abbr>    </span>
+</dt>
+<dd>Returns the position in world space.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_getWorldScale">getWorldScale()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Vec3">Vec3</abbr>    </span>
+</dt>
+<dd>Returns the scale in world space.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_lookAt">lookAt()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Look at a point in world space.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_lookIn">lookIn()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Look in a direction in world space.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_markDirty">markDirty()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Flags the internal matrix as dirty.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_moveBackward">moveBackward()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Translates backward in local space.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_moveDown">moveDown()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Translates down in local space.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_moveForward">moveForward()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Translates forward in local space.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_moveLeft">moveLeft()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Translates left in local space.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_moveRight">moveRight()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Translates right in local space.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_moveUp">moveUp()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Translates up in local space.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_resetPrevious">resetPrevious()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Resets the previous transform.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_setOrientation">setOrientation()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the orientation of the transform.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_setParent">setParent()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the parent entity id.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_setPosition">setPosition()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the position of the transform.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_setScale">setScale()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the scale of the transform.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_storePrevious">storePrevious()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Calling this function will store a copy of the current transform as the previous transform.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_worldBackward">worldBackward()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Vec3">Vec3</abbr>    </span>
+</dt>
+<dd>Returns a new Vec3 with a vector pointing backward in the world.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_worldDown">worldDown()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Vec3">Vec3</abbr>    </span>
+</dt>
+<dd>Returns a new Vec3 with a vector pointing down in the world.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_worldForward">worldForward()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Vec3">Vec3</abbr>    </span>
+</dt>
+<dd>Returns a new Vec3 with a vector pointing forward in the world.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_worldLeft">worldLeft()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Vec3">Vec3</abbr>    </span>
+</dt>
+<dd>Returns a new Vec3 with a vector pointing left in the world.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_worldRight">worldRight()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Vec3">Vec3</abbr>    </span>
+</dt>
+<dd>Returns a new Vec3 with a vector pointing right in the world.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Geo-Transform.html#method_worldUp">worldUp()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Vec3">Vec3</abbr>    </span>
+</dt>
+<dd>Returns a new Vec3 with a vector pointing up in the world.</dd>
+
+    </dl>
+
+
+
+        
+
+        
+    <section class="phpdocumentor-properties">
+        <h3 class="phpdocumentor-elements__header" id="properties">
+            Properties
+            <a href="classes/VISU-Geo-Transform.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_isDirty">
+        $isDirty
+        <a href="classes/VISU-Geo-Transform.html#property_isDirty" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">68</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Flag indicating whether the matrix is dirty and needs to be recalculated.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool</span>
+    <span class="phpdocumentor-signature__name">$isDirty</span>
+     = <span class="phpdocumentor-signature__default-value">true</span></code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_orientation">
+        $orientation
+        <a href="classes/VISU-Geo-Transform.html#property_orientation" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">78</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Current orientation in local space.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type"><abbr title="\GL\Math\Quat">Quat</abbr></span>
+    <span class="phpdocumentor-signature__name">$orientation</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_parent">
+        $parent
+        <a href="classes/VISU-Geo-Transform.html#property_parent" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">88</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Parent entity id.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">int|null</span>
+    <span class="phpdocumentor-signature__name">$parent</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_position">
+        $position
+        <a href="classes/VISU-Geo-Transform.html#property_position" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">73</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Current position in local space.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span>
+    <span class="phpdocumentor-signature__name">$position</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_scale">
+        $scale
+        <a href="classes/VISU-Geo-Transform.html#property_scale" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">83</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Current scale in local space.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span>
+    <span class="phpdocumentor-signature__name">$scale</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_matrix">
+        $matrix
+        <a href="classes/VISU-Geo-Transform.html#property_matrix" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">63</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Internal matrix representation.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><abbr title="\GL\Math\Mat4">Mat4</abbr></span>
+    <span class="phpdocumentor-signature__name">$matrix</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_previous">
+        $previous
+        <a href="classes/VISU-Geo-Transform.html#property_previous" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">95</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Prvious transform
+Can story a copy of the current transform before it was modified.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/VISU-Geo-Transform.html"><abbr title="\VISU\Geo\Transform">Transform</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$previous</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>This can be used for interpolation of the transformation between frames.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+            </section>
+
+            <section class="phpdocumentor-methods">
+        <h3 class="phpdocumentor-elements__header" id="methods">
+            Methods
+            <a href="classes/VISU-Geo-Transform.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method___clone">
+        __clone()
+        <a href="classes/VISU-Geo-Transform.html#method___clone" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">497</span>
+
+    </aside>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">__clone</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/VISU-Geo-Transform.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">100</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Constructor</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_dirBackward">
+        dirBackward()
+        <a href="classes/VISU-Geo-Transform.html#method_dirBackward" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">293</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the backward direction of the transform</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">dirBackward</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_dirDown">
+        dirDown()
+        <a href="classes/VISU-Geo-Transform.html#method_dirDown" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">325</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the down direction of the transform</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">dirDown</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_dirForward">
+        dirForward()
+        <a href="classes/VISU-Geo-Transform.html#method_dirForward" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">285</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the forward direction of the transform</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">dirForward</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_dirLeft">
+        dirLeft()
+        <a href="classes/VISU-Geo-Transform.html#method_dirLeft" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">309</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the left direction of the transform</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">dirLeft</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_dirRight">
+        dirRight()
+        <a href="classes/VISU-Geo-Transform.html#method_dirRight" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">301</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the right direction of the transform</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">dirRight</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_dirUp">
+        dirUp()
+        <a href="classes/VISU-Geo-Transform.html#method_dirUp" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">317</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the up direction of the transform</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">dirUp</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getInterpolatedLocalMatrix">
+        getInterpolatedLocalMatrix()
+        <a href="classes/VISU-Geo-Transform.html#method_getInterpolatedLocalMatrix" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">483</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns a interpolated matrix between the previous and current transform.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getInterpolatedLocalMatrix</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$alpha</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Mat4">Mat4</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$alpha</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Mat4">Mat4</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getInterpolatedOrientation">
+        getInterpolatedOrientation()
+        <a href="classes/VISU-Geo-Transform.html#method_getInterpolatedOrientation" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">459</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the interpolated orientation between the previous and current transform.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getInterpolatedOrientation</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$alpha</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Quat">Quat</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$alpha</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Quat">Quat</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getInterpolatedPosition">
+        getInterpolatedPosition()
+        <a href="classes/VISU-Geo-Transform.html#method_getInterpolatedPosition" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">447</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the interpolated position between the previous and current transform.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getInterpolatedPosition</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$alpha</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$alpha</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getInterpolatedScale">
+        getInterpolatedScale()
+        <a href="classes/VISU-Geo-Transform.html#method_getInterpolatedScale" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">471</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the interpolated scale between the previous and current transform.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getInterpolatedScale</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$alpha</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$alpha</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getLocalEulerAngles">
+        getLocalEulerAngles()
+        <a href="classes/VISU-Geo-Transform.html#method_getLocalEulerAngles" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">226</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Retruns the orientation as euler angles.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getLocalEulerAngles</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getLocalMatrix">
+        getLocalMatrix()
+        <a href="classes/VISU-Geo-Transform.html#method_getLocalMatrix" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">143</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the local matrix.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getLocalMatrix</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Mat4">Mat4</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Mat4">Mat4</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getParent">
+        getParent()
+        <a href="classes/VISU-Geo-Transform.html#method_getParent" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">129</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the parent Transform component.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getParent</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entities</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/VISU-Geo-Transform.html"><abbr title="\VISU\Geo\Transform">Transform</abbr></a>|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$entities</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The entity registry the parent entity is stored in.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/VISU-Geo-Transform.html"><abbr title="\VISU\Geo\Transform">Transform</abbr></a>|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getWorldEulerAngles">
+        getWorldEulerAngles()
+        <a href="classes/VISU-Geo-Transform.html#method_getWorldEulerAngles" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">237</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the orientation as euler angles in world space.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getWorldEulerAngles</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entities</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$entities</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The entity registry the parent entity is stored in.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getWorldMatrix">
+        getWorldMatrix()
+        <a href="classes/VISU-Geo-Transform.html#method_getWorldMatrix" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">163</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the world matrix.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getWorldMatrix</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entities</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Mat4">Mat4</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$entities</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The entity registry the parent entity is stored in.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Mat4">Mat4</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getWorldOrientation">
+        getWorldOrientation()
+        <a href="classes/VISU-Geo-Transform.html#method_getWorldOrientation" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">197</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the orientation in world space.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getWorldOrientation</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entities</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Quat">Quat</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$entities</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The entity registry the parent entity is stored in.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Quat">Quat</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getWorldPosition">
+        getWorldPosition()
+        <a href="classes/VISU-Geo-Transform.html#method_getWorldPosition" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">182</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the position in world space.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getWorldPosition</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entities</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$entities</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The entity registry the parent entity is stored in.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getWorldScale">
+        getWorldScale()
+        <a href="classes/VISU-Geo-Transform.html#method_getWorldScale" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">212</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the scale in world space.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getWorldScale</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entities</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$entities</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The entity registry the parent entity is stored in.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_lookAt">
+        lookAt()
+        <a href="classes/VISU-Geo-Transform.html#method_lookAt" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">399</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Look at a point in world space.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">lookAt</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Vec3">Vec3</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$point</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$point</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_lookIn">
+        lookIn()
+        <a href="classes/VISU-Geo-Transform.html#method_lookIn" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">420</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Look in a direction in world space.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">lookIn</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Vec3">Vec3</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$direction</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$direction</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_markDirty">
+        markDirty()
+        <a href="classes/VISU-Geo-Transform.html#method_markDirty" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">247</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Flags the internal matrix as dirty.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">markDirty</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>When you modify the position, orientation or scale of the transform manually
+You have to call this method to make sure the internal matrix is recalculated.</p>
+</section>
+
+    
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_moveBackward">
+        moveBackward()
+        <a href="classes/VISU-Geo-Transform.html#method_moveBackward" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">344</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Translates backward in local space.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">moveBackward</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$distance</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$distance</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_moveDown">
+        moveDown()
+        <a href="classes/VISU-Geo-Transform.html#method_moveDown" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">388</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Translates down in local space.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">moveDown</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$distance</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$distance</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_moveForward">
+        moveForward()
+        <a href="classes/VISU-Geo-Transform.html#method_moveForward" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">333</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Translates forward in local space.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">moveForward</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$distance</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$distance</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_moveLeft">
+        moveLeft()
+        <a href="classes/VISU-Geo-Transform.html#method_moveLeft" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">366</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Translates left in local space.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">moveLeft</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$distance</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$distance</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_moveRight">
+        moveRight()
+        <a href="classes/VISU-Geo-Transform.html#method_moveRight" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">355</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Translates right in local space.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">moveRight</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$distance</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$distance</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_moveUp">
+        moveUp()
+        <a href="classes/VISU-Geo-Transform.html#method_moveUp" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">377</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Translates up in local space.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">moveUp</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$distance</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$distance</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_resetPrevious">
+        resetPrevious()
+        <a href="classes/VISU-Geo-Transform.html#method_resetPrevious" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">439</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Resets the previous transform.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">resetPrevious</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setOrientation">
+        setOrientation()
+        <a href="classes/VISU-Geo-Transform.html#method_setOrientation" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">266</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the orientation of the transform.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setOrientation</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Quat">Quat</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$orientation</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Note: This will mark the internal matrix as dirty.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$orientation</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Quat">Quat</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setParent">
+        setParent()
+        <a href="classes/VISU-Geo-Transform.html#method_setParent" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">114</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the parent entity id.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setParent</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entities</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$parent</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$entities</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The entity registry the parent entity is stored in.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$parent</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setPosition">
+        setPosition()
+        <a href="classes/VISU-Geo-Transform.html#method_setPosition" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">256</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the position of the transform.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setPosition</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Vec3">Vec3</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$position</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Note: This will mark the internal matrix as dirty.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$position</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setScale">
+        setScale()
+        <a href="classes/VISU-Geo-Transform.html#method_setScale" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">276</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the scale of the transform.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setScale</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Vec3">Vec3</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$scale</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Note: This will mark the internal matrix as dirty.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$scale</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_storePrevious">
+        storePrevious()
+        <a href="classes/VISU-Geo-Transform.html#method_storePrevious" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">428</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Calling this function will store a copy of the current transform as the previous transform.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">storePrevious</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_worldBackward">
+        worldBackward()
+        <a href="classes/VISU-Geo-Transform.html#method_worldBackward" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">55</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns a new Vec3 with a vector pointing backward in the world.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">worldBackward</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_worldDown">
+        worldDown()
+        <a href="classes/VISU-Geo-Transform.html#method_worldDown" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">23</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns a new Vec3 with a vector pointing down in the world.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">worldDown</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_worldForward">
+        worldForward()
+        <a href="classes/VISU-Geo-Transform.html#method_worldForward" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">47</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns a new Vec3 with a vector pointing forward in the world.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">worldForward</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_worldLeft">
+        worldLeft()
+        <a href="classes/VISU-Geo-Transform.html#method_worldLeft" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">39</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns a new Vec3 with a vector pointing left in the world.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">worldLeft</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_worldRight">
+        worldRight()
+        <a href="classes/VISU-Geo-Transform.html#method_worldRight" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">31</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns a new Vec3 with a vector pointing right in the world.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">worldRight</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_worldUp">
+        worldUp()
+        <a href="classes/VISU-Geo-Transform.html#method_worldUp" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Geo/Transform.php"><a href="files/src-geo-transform.html"><abbr title="src/Geo/Transform.php">Transform.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">15</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns a new Vec3 with a vector pointing up in the world.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">worldUp</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span>
+            </section>
+
+</article>
+            </section>
+
+        <div class="phpdocumentor-modal" id="source-view">
+    <div class="phpdocumentor-modal-bg" data-exit-button></div>
+    <div class="phpdocumentor-modal-container">
+        <div class="phpdocumentor-modal-content">
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/Geo/Transform.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+        </div>
+        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
+    </div>
+</div>
+
+    <script type="text/javascript">
+        (function () {
+            function loadExternalCodeSnippet(el, url, line) {
+                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
+                    const language = 'php';
+
+                    const code = document.createElement('code');
+                    code.className = 'language-' + language;
+                    pre.textContent = '';
+                    pre.setAttribute('data-line', line)
+                    code.textContent = 'Loading…';
+                    pre.appendChild(code);
+
+                    var xhr = new XMLHttpRequest();
+
+                    xhr.open('GET', src, true);
+
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState !== 4) {
+                            return;
+                        }
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+                            Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
+                            return;
+                        }
+
+                        if (xhr.status === 404) {
+                            code.textContent = '✖ Error: File could not be found';
+                            return;
+                        }
+
+                        if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                            return;
+                        }
+
+                        code.textContent = '✖ Error: An unknown error occurred';
+                    };
+
+                    xhr.send(null);
+                });
+            }
+
+            const modalButtons = document.querySelectorAll("[data-modal]");
+            const openedAsLocalFile = window.location.protocol === 'file:';
+            if (modalButtons.length > 0 && openedAsLocalFile) {
+                console.warn(
+                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
+                    'browsers block XHR requests when a page is opened this way'
+                );
+            }
+
+            modalButtons.forEach(function (trigger) {
+                if (openedAsLocalFile) {
+                    trigger.setAttribute("hidden", "hidden");
+                }
+
+                trigger.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const modal = document.getElementById(trigger.dataset.modal);
+                    if (!modal) {
+                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
+                        return;
+                    }
+                    modal.classList.add("phpdocumentor-modal__open");
+
+                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
+                    const exits = modal.querySelectorAll("[data-exit-button]");
+                    exits.forEach(function (exit) {
+                        exit.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            modal.classList.remove("phpdocumentor-modal__open");
+                        });
+                    });
+                });
+            });
+        })();
+    </script>
+
+    </article>
+                                </section>
+                <section class="phpdocumentor-on-this-page__sidebar">
+                                
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                                            <li><a href="classes/VISU-Geo-Transform.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/VISU-Geo-Transform.html#toc-methods">Methods</a></li>
+                                    </ul>
+            </li>
+            
+                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/VISU-Geo-Transform.html#property_isDirty">$isDirty</a></li>
+                                                    <li class=""><a href="classes/VISU-Geo-Transform.html#property_orientation">$orientation</a></li>
+                                                    <li class=""><a href="classes/VISU-Geo-Transform.html#property_parent">$parent</a></li>
+                                                    <li class=""><a href="classes/VISU-Geo-Transform.html#property_position">$position</a></li>
+                                                    <li class=""><a href="classes/VISU-Geo-Transform.html#property_scale">$scale</a></li>
+                                                    <li class=""><a href="classes/VISU-Geo-Transform.html#property_matrix">$matrix</a></li>
+                                                    <li class=""><a href="classes/VISU-Geo-Transform.html#property_previous">$previous</a></li>
+                                            </ul>
+                </li>
+            
+                        <li class="phpdocumentor-on-this-page-section__title">Methods</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method___clone">__clone()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method___construct">__construct()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_dirBackward">dirBackward()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_dirDown">dirDown()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_dirForward">dirForward()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_dirLeft">dirLeft()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_dirRight">dirRight()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_dirUp">dirUp()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_getInterpolatedLocalMatrix">getInterpolatedLocalMatrix()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_getInterpolatedOrientation">getInterpolatedOrientation()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_getInterpolatedPosition">getInterpolatedPosition()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_getInterpolatedScale">getInterpolatedScale()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_getLocalEulerAngles">getLocalEulerAngles()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_getLocalMatrix">getLocalMatrix()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_getParent">getParent()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_getWorldEulerAngles">getWorldEulerAngles()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_getWorldMatrix">getWorldMatrix()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_getWorldOrientation">getWorldOrientation()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_getWorldPosition">getWorldPosition()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_getWorldScale">getWorldScale()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_lookAt">lookAt()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_lookIn">lookIn()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_markDirty">markDirty()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_moveBackward">moveBackward()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_moveDown">moveDown()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_moveForward">moveForward()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_moveLeft">moveLeft()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_moveRight">moveRight()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_moveUp">moveUp()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_resetPrevious">resetPrevious()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_setOrientation">setOrientation()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_setParent">setParent()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_setPosition">setPosition()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_setScale">setScale()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_storePrevious">storePrevious()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_worldBackward">worldBackward()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_worldDown">worldDown()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_worldForward">worldForward()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_worldLeft">worldLeft()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_worldRight">worldRight()</a></li>
+                                            <li class=""><a href="classes/VISU-Geo-Transform.html#method_worldUp">worldUp()</a></li>
+                                    </ul>
+            </li>
+                    </ul>
+    </section>
+
+                </section>
+                            </div>
+            <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+    <section class="phpdocumentor-search-results__dialog">
+        <header class="phpdocumentor-search-results__header">
+            <h2 class="phpdocumentor-search-results__title">Search results</h2>
+            <button class="phpdocumentor-search-results__close"><i class="fas fa-times"></i></button>
+        </header>
+        <section class="phpdocumentor-search-results__body">
+            <ul class="phpdocumentor-search-results__entries"></ul>
+        </section>
+    </section>
+</section>
+        </div>
+        <a href="classes/VISU-Geo-Transform.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+
+    </main>
+
+    <script>
+        cssVars({});
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+</body>
+</html>

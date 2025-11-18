@@ -1,0 +1,1610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+            <title>VISU - PHP Game Framework</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="../">
+    <link rel="icon" href="images/favicon.ico"/>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/base.css">
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/template.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism-okaidia.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
+        <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="js/template.js"></script>
+        <script src="js/search.js"></script>
+        <script defer src="js/searchIndex.js"></script>
+    </head>
+<body id="top">
+    <header class="phpdocumentor-header phpdocumentor-section">
+    <h1 class="phpdocumentor-title"><a href="" class="phpdocumentor-title__link">VISU - PHP Game Framework</a></h1>
+    <input class="phpdocumentor-header__menu-button" type="checkbox" id="menu-button" name="menu-button" />
+    <label class="phpdocumentor-header__menu-icon" for="menu-button">
+        <i class="fas fa-bars"></i>
+    </label>
+    <section data-search-form class="phpdocumentor-search">
+    <label>
+        <span class="visually-hidden">Search for</span>
+        <svg class="phpdocumentor-search__icon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="7.5" cy="7.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <line x1="12.4892" y1="12.2727" x2="19.1559" y2="18.9393" stroke="currentColor" stroke-width="3"/>
+        </svg>
+        <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+    </label>
+</section>
+
+    <nav class="phpdocumentor-topnav">
+    <ul class="phpdocumentor-topnav__menu">
+        </ul>
+</nav>
+</header>
+
+    <main class="phpdocumentor">
+        <div class="phpdocumentor-section">
+            <input class="phpdocumentor-sidebar__menu-button" type="checkbox" id="sidebar-button" name="sidebar-button" />
+<label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
+    Menu
+</label>
+<aside class="phpdocumentor-column -three phpdocumentor-sidebar">
+                    <section class="phpdocumentor-sidebar__category -namespaces">
+            <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/visu.html" class="">VISU</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/visu-animation.html" class="">Animation</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-command.html" class="">Command</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-component.html" class="">Component</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-ecs.html" class="">ECS</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-exception.html" class="">Exception</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-flyui.html" class="">FlyUI</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-geo.html" class="">Geo</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-graphics.html" class="">Graphics</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-instrument.html" class="">Instrument</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-maker.html" class="">Maker</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-os.html" class="">OS</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-quickstart.html" class="">Quickstart</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-runtime.html" class="">Runtime</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-signal.html" class="">Signal</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-signals.html" class="">Signals</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-system.html" class="">System</a>
+                
+            </li>
+            </ul>
+
+                        </section>
+                <section class="phpdocumentor-sidebar__category -packages">
+            <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Application.html" class="">Application</a>
+</h4>
+
+                        </section>
+            
+    <section class="phpdocumentor-sidebar__category -reports">
+        <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="graphs/classes.html">Class Diagram</a></h3>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
+    </section>
+
+    <section class="phpdocumentor-sidebar__category -indices">
+        <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
+    </section>
+</aside>
+
+            <div class="phpdocumentor-column -nine phpdocumentor-content">
+                                <section>
+                                        <ul class="phpdocumentor-breadcrumbs">
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/visu.html">VISU</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/visu-graphics.html">Graphics</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/visu-graphics-rendering.html">Rendering</a></li>
+    </ul>
+
+    <article class="phpdocumentor-element -class">
+        <h2 class="phpdocumentor-content__title">
+    PipelineResources
+
+    
+            <div class="phpdocumentor-element__package">
+            in package
+            <ul class="phpdocumentor-breadcrumbs">
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Application.html">Application</a></li>
+                            </ul>
+        </div>
+    
+    
+    </h2>
+
+<div class="phpdocumentor-label-line">
+
+
+</div>
+
+        <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Rendering/PipelineResources.php"><a href="files/src-graphics-rendering-pipelineresources.html"><abbr title="src/Graphics/Rendering/PipelineResources.php">PipelineResources.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">13</span>
+
+    </aside>
+
+        
+
+
+
+
+
+
+
+
+<h3 id="toc">
+    Table of Contents
+    <a href="classes/VISU-Graphics-Rendering-PipelineResources.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h3>
+
+
+
+
+
+
+
+
+
+<h4 id="toc-properties">
+    Properties
+    <a href="classes/VISU-Graphics-Rendering-PipelineResources.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-Graphics-Rendering-PipelineResources.html#property_gl">$gl</a>
+    <span>
+                        &nbsp;: <a href="classes/VISU-Graphics-GLState.html"><abbr title="\VISU\Graphics\GLState">GLState</abbr></a>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-Graphics-Rendering-PipelineResources.html#property_activeRenderTarget">$activeRenderTarget</a>
+    <span>
+                        &nbsp;: <a href="classes/VISU-Graphics-RenderTarget.html"><abbr title="\VISU\Graphics\RenderTarget">RenderTarget</abbr></a>|null            </span>
+</dt>
+<dd>Currently bound render target</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-Graphics-Rendering-PipelineResources.html#property_renderTargets">$renderTargets</a>
+    <span>
+                        &nbsp;: array&lt;string, <a href="classes/VISU-Graphics-RenderTarget.html"><abbr title="\VISU\Graphics\RenderTarget">RenderTarget</abbr></a>&gt;            </span>
+</dt>
+<dd>Internal array of render targets</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-Graphics-Rendering-PipelineResources.html#property_resourceUseTick">$resourceUseTick</a>
+    <span>
+                        &nbsp;: array&lt;string, int&gt;            </span>
+</dt>
+<dd>A map storing the tick each resource was last accessed</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-Graphics-Rendering-PipelineResources.html#property_staticStorage">$staticStorage</a>
+    <span>
+                        &nbsp;: array&lt;string, mixed&gt;            </span>
+</dt>
+<dd>Holder of mixed generic static resources</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-Graphics-Rendering-PipelineResources.html#property_textures">$textures</a>
+    <span>
+                        &nbsp;: array&lt;string, <a href="classes/VISU-Graphics-Texture.html"><abbr title="\VISU\Graphics\Texture">Texture</abbr></a>&gt;            </span>
+</dt>
+<dd>Internal array of textures</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-Graphics-Rendering-PipelineResources.html#property_tickIndex">$tickIndex</a>
+    <span>
+                        &nbsp;: int            </span>
+</dt>
+<dd>The current ticke index the resources are accessed with</dd>
+
+    </dl>
+
+<h4 id="toc-methods">
+    Methods
+    <a href="classes/VISU-Graphics-Rendering-PipelineResources.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Graphics-Rendering-PipelineResources.html#method___construct">__construct()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Constructor</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_activateRenderTarget">activateRenderTarget()</a>
+    <span>
+                                &nbsp;: <a href="classes/VISU-Graphics-RenderTarget.html"><abbr title="\VISU\Graphics\RenderTarget">RenderTarget</abbr></a>    </span>
+</dt>
+<dd>Activates the given render target</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_cacheStaticResource">cacheStaticResource()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+<dd>Cacehs a generic resource / value or object by name
+This is the same as getStaticResource but you provide a callback which is called if the resource is not found.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_collectGarbage">collectGarbage()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Collects all garbage and removes all unused resources</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_destroyRenderTarget">destroyRenderTarget()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Destroys a render target</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_findTextureByName">findTextureByName()</a>
+    <span>
+                                &nbsp;: <a href="classes/VISU-Graphics-Texture.html"><abbr title="\VISU\Graphics\Texture">Texture</abbr></a>|null    </span>
+</dt>
+<dd>Returns a texture by its name, will return null if not found
+This will also update the resource use tick</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_getActiveRenderTarget">getActiveRenderTarget()</a>
+    <span>
+                                &nbsp;: <a href="classes/VISU-Graphics-RenderTarget.html"><abbr title="\VISU\Graphics\RenderTarget">RenderTarget</abbr></a>    </span>
+</dt>
+<dd>Returns the currently active render target, throws an exception if none is active</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_getRenderTarget">getRenderTarget()</a>
+    <span>
+                                &nbsp;: <a href="classes/VISU-Graphics-RenderTarget.html"><abbr title="\VISU\Graphics\RenderTarget">RenderTarget</abbr></a>    </span>
+</dt>
+<dd>Returns the render target for the given resource</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_getStaticResource">getStaticResource()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+<dd>Returns a generic resource / value or object by name</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_getTexture">getTexture()</a>
+    <span>
+                                &nbsp;: <a href="classes/VISU-Graphics-Texture.html"><abbr title="\VISU\Graphics\Texture">Texture</abbr></a>    </span>
+</dt>
+<dd>Returns a texture for the given resource</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_getTextureID">getTextureID()</a>
+    <span>
+                                &nbsp;: int    </span>
+</dt>
+<dd>Returns a texture ID for the given resource
+The texture ID is the raw GL handle</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_setCurrentTick">setCurrentTick()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the current tick index</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_setRenderTarget">setRenderTarget()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets a render target to the given handle</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_setStaticResource">setStaticResource()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Stores a generic resource / value or object by name</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_setTexture">setTexture()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets a texture to the given handle</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_createRenderTarget">createRenderTarget()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Creates a missing render target for the given resource</dd>
+
+    </dl>
+
+
+
+        
+
+        
+    <section class="phpdocumentor-properties">
+        <h3 class="phpdocumentor-elements__header" id="properties">
+            Properties
+            <a href="classes/VISU-Graphics-Rendering-PipelineResources.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_gl">
+        $gl
+        <a href="classes/VISU-Graphics-Rendering-PipelineResources.html#property_gl" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Rendering/PipelineResources.php"><a href="files/src-graphics-rendering-pipelineresources.html"><abbr title="src/Graphics/Rendering/PipelineResources.php">PipelineResources.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">64</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/VISU-Graphics-GLState.html"><abbr title="\VISU\Graphics\GLState">GLState</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$gl</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_activeRenderTarget">
+        $activeRenderTarget
+        <a href="classes/VISU-Graphics-Rendering-PipelineResources.html#property_activeRenderTarget" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Rendering/PipelineResources.php"><a href="files/src-graphics-rendering-pipelineresources.html"><abbr title="src/Graphics/Rendering/PipelineResources.php">PipelineResources.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">27</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Currently bound render target</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/VISU-Graphics-RenderTarget.html"><abbr title="\VISU\Graphics\RenderTarget">RenderTarget</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$activeRenderTarget</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_renderTargets">
+        $renderTargets
+        <a href="classes/VISU-Graphics-Rendering-PipelineResources.html#property_renderTargets" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Rendering/PipelineResources.php"><a href="files/src-graphics-rendering-pipelineresources.html"><abbr title="src/Graphics/Rendering/PipelineResources.php">PipelineResources.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">20</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Internal array of render targets</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">array&lt;string, <a href="classes/VISU-Graphics-RenderTarget.html"><abbr title="\VISU\Graphics\RenderTarget">RenderTarget</abbr></a>&gt;</span>
+    <span class="phpdocumentor-signature__name">$renderTargets</span>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_resourceUseTick">
+        $resourceUseTick
+        <a href="classes/VISU-Graphics-Rendering-PipelineResources.html#property_resourceUseTick" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Rendering/PipelineResources.php"><a href="files/src-graphics-rendering-pipelineresources.html"><abbr title="src/Graphics/Rendering/PipelineResources.php">PipelineResources.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">55</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A map storing the tick each resource was last accessed</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">array&lt;string, int&gt;</span>
+    <span class="phpdocumentor-signature__name">$resourceUseTick</span>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_staticStorage">
+        $staticStorage
+        <a href="classes/VISU-Graphics-Rendering-PipelineResources.html#property_staticStorage" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Rendering/PipelineResources.php"><a href="files/src-graphics-rendering-pipelineresources.html"><abbr title="src/Graphics/Rendering/PipelineResources.php">PipelineResources.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">41</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Holder of mixed generic static resources</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">array&lt;string, mixed&gt;</span>
+    <span class="phpdocumentor-signature__name">$staticStorage</span>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_textures">
+        $textures
+        <a href="classes/VISU-Graphics-Rendering-PipelineResources.html#property_textures" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Rendering/PipelineResources.php"><a href="files/src-graphics-rendering-pipelineresources.html"><abbr title="src/Graphics/Rendering/PipelineResources.php">PipelineResources.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">34</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Internal array of textures</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">array&lt;string, <a href="classes/VISU-Graphics-Texture.html"><abbr title="\VISU\Graphics\Texture">Texture</abbr></a>&gt;</span>
+    <span class="phpdocumentor-signature__name">$textures</span>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_tickIndex">
+        $tickIndex
+        <a href="classes/VISU-Graphics-Rendering-PipelineResources.html#property_tickIndex" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Rendering/PipelineResources.php"><a href="files/src-graphics-rendering-pipelineresources.html"><abbr title="src/Graphics/Rendering/PipelineResources.php">PipelineResources.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">48</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The current ticke index the resources are accessed with</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">int</span>
+    <span class="phpdocumentor-signature__name">$tickIndex</span>
+     = <span class="phpdocumentor-signature__default-value">0</span></code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+            </section>
+
+            <section class="phpdocumentor-methods">
+        <h3 class="phpdocumentor-elements__header" id="methods">
+            Methods
+            <a href="classes/VISU-Graphics-Rendering-PipelineResources.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Rendering/PipelineResources.php"><a href="files/src-graphics-rendering-pipelineresources.html"><abbr title="src/Graphics/Rendering/PipelineResources.php">PipelineResources.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">63</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Constructor</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-GLState.html"><abbr title="\VISU\Graphics\GLState">GLState</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$gl</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$gl</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-GLState.html"><abbr title="\VISU\Graphics\GLState">GLState</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_activateRenderTarget">
+        activateRenderTarget()
+        <a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_activateRenderTarget" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Rendering/PipelineResources.php"><a href="files/src-graphics-rendering-pipelineresources.html"><abbr title="src/Graphics/Rendering/PipelineResources.php">PipelineResources.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">251</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Activates the given render target</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">activateRenderTarget</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Rendering-Resource-RenderTargetResource.html"><abbr title="\VISU\Graphics\Rendering\Resource\RenderTargetResource">RenderTargetResource</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$resource</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/VISU-Graphics-RenderTarget.html"><abbr title="\VISU\Graphics\RenderTarget">RenderTarget</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$resource</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Rendering-Resource-RenderTargetResource.html"><abbr title="\VISU\Graphics\Rendering\Resource\RenderTargetResource">RenderTargetResource</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/VISU-Graphics-RenderTarget.html"><abbr title="\VISU\Graphics\RenderTarget">RenderTarget</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_cacheStaticResource">
+        cacheStaticResource()
+        <a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_cacheStaticResource" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Rendering/PipelineResources.php"><a href="files/src-graphics-rendering-pipelineresources.html"><abbr title="src/Graphics/Rendering/PipelineResources.php">PipelineResources.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">363</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Cacehs a generic resource / value or object by name
+This is the same as getStaticResource but you provide a callback which is called if the resource is not found.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">cacheStaticResource</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$callback</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$name</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$callback</span>
+                : <span class="phpdocumentor-signature__argument__return-type">callable</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_collectGarbage">
+        collectGarbage()
+        <a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_collectGarbage" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Rendering/PipelineResources.php"><a href="files/src-graphics-rendering-pipelineresources.html"><abbr title="src/Graphics/Rendering/PipelineResources.php">PipelineResources.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">377</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Collects all garbage and removes all unused resources</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">collectGarbage</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_destroyRenderTarget">
+        destroyRenderTarget()
+        <a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_destroyRenderTarget" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Rendering/PipelineResources.php"><a href="files/src-graphics-rendering-pipelineresources.html"><abbr title="src/Graphics/Rendering/PipelineResources.php">PipelineResources.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">206</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Destroys a render target</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">destroyRenderTarget</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Rendering-Resource-RenderTargetResource.html"><abbr title="\VISU\Graphics\Rendering\Resource\RenderTargetResource">RenderTargetResource</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$resource</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$resource</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Rendering-Resource-RenderTargetResource.html"><abbr title="\VISU\Graphics\Rendering\Resource\RenderTargetResource">RenderTargetResource</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_findTextureByName">
+        findTextureByName()
+        <a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_findTextureByName" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Rendering/PipelineResources.php"><a href="files/src-graphics-rendering-pipelineresources.html"><abbr title="src/Graphics/Rendering/PipelineResources.php">PipelineResources.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">321</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns a texture by its name, will return null if not found
+This will also update the resource use tick</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">findTextureByName</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/VISU-Graphics-Texture.html"><abbr title="\VISU\Graphics\Texture">Texture</abbr></a>|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$name</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/VISU-Graphics-Texture.html"><abbr title="\VISU\Graphics\Texture">Texture</abbr></a>|null</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getActiveRenderTarget">
+        getActiveRenderTarget()
+        <a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_getActiveRenderTarget" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Rendering/PipelineResources.php"><a href="files/src-graphics-rendering-pipelineresources.html"><abbr title="src/Graphics/Rendering/PipelineResources.php">PipelineResources.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">264</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the currently active render target, throws an exception if none is active</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getActiveRenderTarget</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/VISU-Graphics-RenderTarget.html"><abbr title="\VISU\Graphics\RenderTarget">RenderTarget</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/VISU-Graphics-RenderTarget.html"><abbr title="\VISU\Graphics\RenderTarget">RenderTarget</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getRenderTarget">
+        getRenderTarget()
+        <a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_getRenderTarget" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Rendering/PipelineResources.php"><a href="files/src-graphics-rendering-pipelineresources.html"><abbr title="src/Graphics/Rendering/PipelineResources.php">PipelineResources.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">225</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the render target for the given resource</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getRenderTarget</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Rendering-Resource-RenderTargetResource.html"><abbr title="\VISU\Graphics\Rendering\Resource\RenderTargetResource">RenderTargetResource</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$resource</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/VISU-Graphics-RenderTarget.html"><abbr title="\VISU\Graphics\RenderTarget">RenderTarget</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$resource</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Rendering-Resource-RenderTargetResource.html"><abbr title="\VISU\Graphics\Rendering\Resource\RenderTargetResource">RenderTargetResource</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/VISU-Graphics-RenderTarget.html"><abbr title="\VISU\Graphics\RenderTarget">RenderTarget</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getStaticResource">
+        getStaticResource()
+        <a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_getStaticResource" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Rendering/PipelineResources.php"><a href="files/src-graphics-rendering-pipelineresources.html"><abbr title="src/Graphics/Rendering/PipelineResources.php">PipelineResources.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">345</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns a generic resource / value or object by name</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getStaticResource</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$name</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getTexture">
+        getTexture()
+        <a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_getTexture" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Rendering/PipelineResources.php"><a href="files/src-graphics-rendering-pipelineresources.html"><abbr title="src/Graphics/Rendering/PipelineResources.php">PipelineResources.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">292</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns a texture for the given resource</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getTexture</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Rendering-RenderResource.html"><abbr title="\VISU\Graphics\Rendering\RenderResource">RenderResource</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$resource</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/VISU-Graphics-Texture.html"><abbr title="\VISU\Graphics\Texture">Texture</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$resource</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Rendering-RenderResource.html"><abbr title="\VISU\Graphics\Rendering\RenderResource">RenderResource</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/VISU-Graphics-Texture.html"><abbr title="\VISU\Graphics\Texture">Texture</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getTextureID">
+        getTextureID()
+        <a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_getTextureID" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Rendering/PipelineResources.php"><a href="files/src-graphics-rendering-pipelineresources.html"><abbr title="src/Graphics/Rendering/PipelineResources.php">PipelineResources.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">309</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns a texture ID for the given resource
+The texture ID is the raw GL handle</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getTextureID</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Rendering-RenderResource.html"><abbr title="\VISU\Graphics\Rendering\RenderResource">RenderResource</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$resource</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$resource</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Rendering-RenderResource.html"><abbr title="\VISU\Graphics\Rendering\RenderResource">RenderResource</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setCurrentTick">
+        setCurrentTick()
+        <a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_setCurrentTick" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Rendering/PipelineResources.php"><a href="files/src-graphics-rendering-pipelineresources.html"><abbr title="src/Graphics/Rendering/PipelineResources.php">PipelineResources.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">75</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the current tick index</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setCurrentTick</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$index</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$index</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setRenderTarget">
+        setRenderTarget()
+        <a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_setRenderTarget" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Rendering/PipelineResources.php"><a href="files/src-graphics-rendering-pipelineresources.html"><abbr title="src/Graphics/Rendering/PipelineResources.php">PipelineResources.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">88</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets a render target to the given handle</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setRenderTarget</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Rendering-RenderResource.html"><abbr title="\VISU\Graphics\Rendering\RenderResource">RenderResource</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$resource</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-RenderTarget.html"><abbr title="\VISU\Graphics\RenderTarget">RenderTarget</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$target</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$resource</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Rendering-RenderResource.html"><abbr title="\VISU\Graphics\Rendering\RenderResource">RenderResource</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$target</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-RenderTarget.html"><abbr title="\VISU\Graphics\RenderTarget">RenderTarget</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setStaticResource">
+        setStaticResource()
+        <a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_setStaticResource" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Rendering/PipelineResources.php"><a href="files/src-graphics-rendering-pipelineresources.html"><abbr title="src/Graphics/Rendering/PipelineResources.php">PipelineResources.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">333</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Stores a generic resource / value or object by name</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setStaticResource</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">mixed&nbsp;</span><span class="phpdocumentor-signature__argument__name">$value</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$name</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$value</span>
+                : <span class="phpdocumentor-signature__argument__return-type">mixed</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setTexture">
+        setTexture()
+        <a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_setTexture" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Rendering/PipelineResources.php"><a href="files/src-graphics-rendering-pipelineresources.html"><abbr title="src/Graphics/Rendering/PipelineResources.php">PipelineResources.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">281</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets a texture to the given handle</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setTexture</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Rendering-RenderResource.html"><abbr title="\VISU\Graphics\Rendering\RenderResource">RenderResource</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$resource</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Texture.html"><abbr title="\VISU\Graphics\Texture">Texture</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$texture</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$resource</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Rendering-RenderResource.html"><abbr title="\VISU\Graphics\Rendering\RenderResource">RenderResource</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$texture</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Texture.html"><abbr title="\VISU\Graphics\Texture">Texture</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_createRenderTarget">
+        createRenderTarget()
+        <a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_createRenderTarget" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Rendering/PipelineResources.php"><a href="files/src-graphics-rendering-pipelineresources.html"><abbr title="src/Graphics/Rendering/PipelineResources.php">PipelineResources.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">100</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Creates a missing render target for the given resource</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">createRenderTarget</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Rendering-Resource-RenderTargetResource.html"><abbr title="\VISU\Graphics\Rendering\Resource\RenderTargetResource">RenderTargetResource</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$resource</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$resource</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Rendering-Resource-RenderTargetResource.html"><abbr title="\VISU\Graphics\Rendering\Resource\RenderTargetResource">RenderTargetResource</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+            </section>
+
+        <div class="phpdocumentor-modal" id="source-view">
+    <div class="phpdocumentor-modal-bg" data-exit-button></div>
+    <div class="phpdocumentor-modal-container">
+        <div class="phpdocumentor-modal-content">
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/Graphics/Rendering/PipelineResources.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+        </div>
+        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
+    </div>
+</div>
+
+    <script type="text/javascript">
+        (function () {
+            function loadExternalCodeSnippet(el, url, line) {
+                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
+                    const language = 'php';
+
+                    const code = document.createElement('code');
+                    code.className = 'language-' + language;
+                    pre.textContent = '';
+                    pre.setAttribute('data-line', line)
+                    code.textContent = 'Loading…';
+                    pre.appendChild(code);
+
+                    var xhr = new XMLHttpRequest();
+
+                    xhr.open('GET', src, true);
+
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState !== 4) {
+                            return;
+                        }
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+                            Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
+                            return;
+                        }
+
+                        if (xhr.status === 404) {
+                            code.textContent = '✖ Error: File could not be found';
+                            return;
+                        }
+
+                        if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                            return;
+                        }
+
+                        code.textContent = '✖ Error: An unknown error occurred';
+                    };
+
+                    xhr.send(null);
+                });
+            }
+
+            const modalButtons = document.querySelectorAll("[data-modal]");
+            const openedAsLocalFile = window.location.protocol === 'file:';
+            if (modalButtons.length > 0 && openedAsLocalFile) {
+                console.warn(
+                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
+                    'browsers block XHR requests when a page is opened this way'
+                );
+            }
+
+            modalButtons.forEach(function (trigger) {
+                if (openedAsLocalFile) {
+                    trigger.setAttribute("hidden", "hidden");
+                }
+
+                trigger.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const modal = document.getElementById(trigger.dataset.modal);
+                    if (!modal) {
+                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
+                        return;
+                    }
+                    modal.classList.add("phpdocumentor-modal__open");
+
+                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
+                    const exits = modal.querySelectorAll("[data-exit-button]");
+                    exits.forEach(function (exit) {
+                        exit.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            modal.classList.remove("phpdocumentor-modal__open");
+                        });
+                    });
+                });
+            });
+        })();
+    </script>
+
+    </article>
+                                </section>
+                <section class="phpdocumentor-on-this-page__sidebar">
+                                
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                                            <li><a href="classes/VISU-Graphics-Rendering-PipelineResources.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/VISU-Graphics-Rendering-PipelineResources.html#toc-methods">Methods</a></li>
+                                    </ul>
+            </li>
+            
+                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/VISU-Graphics-Rendering-PipelineResources.html#property_gl">$gl</a></li>
+                                                    <li class=""><a href="classes/VISU-Graphics-Rendering-PipelineResources.html#property_activeRenderTarget">$activeRenderTarget</a></li>
+                                                    <li class=""><a href="classes/VISU-Graphics-Rendering-PipelineResources.html#property_renderTargets">$renderTargets</a></li>
+                                                    <li class=""><a href="classes/VISU-Graphics-Rendering-PipelineResources.html#property_resourceUseTick">$resourceUseTick</a></li>
+                                                    <li class=""><a href="classes/VISU-Graphics-Rendering-PipelineResources.html#property_staticStorage">$staticStorage</a></li>
+                                                    <li class=""><a href="classes/VISU-Graphics-Rendering-PipelineResources.html#property_textures">$textures</a></li>
+                                                    <li class=""><a href="classes/VISU-Graphics-Rendering-PipelineResources.html#property_tickIndex">$tickIndex</a></li>
+                                            </ul>
+                </li>
+            
+                        <li class="phpdocumentor-on-this-page-section__title">Methods</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li class=""><a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method___construct">__construct()</a></li>
+                                            <li class=""><a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_activateRenderTarget">activateRenderTarget()</a></li>
+                                            <li class=""><a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_cacheStaticResource">cacheStaticResource()</a></li>
+                                            <li class=""><a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_collectGarbage">collectGarbage()</a></li>
+                                            <li class=""><a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_destroyRenderTarget">destroyRenderTarget()</a></li>
+                                            <li class=""><a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_findTextureByName">findTextureByName()</a></li>
+                                            <li class=""><a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_getActiveRenderTarget">getActiveRenderTarget()</a></li>
+                                            <li class=""><a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_getRenderTarget">getRenderTarget()</a></li>
+                                            <li class=""><a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_getStaticResource">getStaticResource()</a></li>
+                                            <li class=""><a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_getTexture">getTexture()</a></li>
+                                            <li class=""><a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_getTextureID">getTextureID()</a></li>
+                                            <li class=""><a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_setCurrentTick">setCurrentTick()</a></li>
+                                            <li class=""><a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_setRenderTarget">setRenderTarget()</a></li>
+                                            <li class=""><a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_setStaticResource">setStaticResource()</a></li>
+                                            <li class=""><a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_setTexture">setTexture()</a></li>
+                                            <li class=""><a href="classes/VISU-Graphics-Rendering-PipelineResources.html#method_createRenderTarget">createRenderTarget()</a></li>
+                                    </ul>
+            </li>
+                    </ul>
+    </section>
+
+                </section>
+                            </div>
+            <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+    <section class="phpdocumentor-search-results__dialog">
+        <header class="phpdocumentor-search-results__header">
+            <h2 class="phpdocumentor-search-results__title">Search results</h2>
+            <button class="phpdocumentor-search-results__close"><i class="fas fa-times"></i></button>
+        </header>
+        <section class="phpdocumentor-search-results__body">
+            <ul class="phpdocumentor-search-results__entries"></ul>
+        </section>
+    </section>
+</section>
+        </div>
+        <a href="classes/VISU-Graphics-Rendering-PipelineResources.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+
+    </main>
+
+    <script>
+        cssVars({});
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,2466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+            <title>VISU - PHP Game Framework</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="../">
+    <link rel="icon" href="images/favicon.ico"/>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/base.css">
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/template.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism-okaidia.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
+        <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="js/template.js"></script>
+        <script src="js/search.js"></script>
+        <script defer src="js/searchIndex.js"></script>
+    </head>
+<body id="top">
+    <header class="phpdocumentor-header phpdocumentor-section">
+    <h1 class="phpdocumentor-title"><a href="" class="phpdocumentor-title__link">VISU - PHP Game Framework</a></h1>
+    <input class="phpdocumentor-header__menu-button" type="checkbox" id="menu-button" name="menu-button" />
+    <label class="phpdocumentor-header__menu-icon" for="menu-button">
+        <i class="fas fa-bars"></i>
+    </label>
+    <section data-search-form class="phpdocumentor-search">
+    <label>
+        <span class="visually-hidden">Search for</span>
+        <svg class="phpdocumentor-search__icon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="7.5" cy="7.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <line x1="12.4892" y1="12.2727" x2="19.1559" y2="18.9393" stroke="currentColor" stroke-width="3"/>
+        </svg>
+        <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+    </label>
+</section>
+
+    <nav class="phpdocumentor-topnav">
+    <ul class="phpdocumentor-topnav__menu">
+        </ul>
+</nav>
+</header>
+
+    <main class="phpdocumentor">
+        <div class="phpdocumentor-section">
+            <input class="phpdocumentor-sidebar__menu-button" type="checkbox" id="sidebar-button" name="sidebar-button" />
+<label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
+    Menu
+</label>
+<aside class="phpdocumentor-column -three phpdocumentor-sidebar">
+                    <section class="phpdocumentor-sidebar__category -namespaces">
+            <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/visu.html" class="">VISU</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/visu-animation.html" class="">Animation</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-command.html" class="">Command</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-component.html" class="">Component</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-ecs.html" class="">ECS</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-exception.html" class="">Exception</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-flyui.html" class="">FlyUI</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-geo.html" class="">Geo</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-graphics.html" class="">Graphics</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-instrument.html" class="">Instrument</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-maker.html" class="">Maker</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-os.html" class="">OS</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-quickstart.html" class="">Quickstart</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-runtime.html" class="">Runtime</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-signal.html" class="">Signal</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-signals.html" class="">Signals</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-system.html" class="">System</a>
+                
+            </li>
+            </ul>
+
+                        </section>
+                <section class="phpdocumentor-sidebar__category -packages">
+            <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Application.html" class="">Application</a>
+</h4>
+
+                        </section>
+            
+    <section class="phpdocumentor-sidebar__category -reports">
+        <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="graphs/classes.html">Class Diagram</a></h3>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
+    </section>
+
+    <section class="phpdocumentor-sidebar__category -indices">
+        <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
+    </section>
+</aside>
+
+            <div class="phpdocumentor-column -nine phpdocumentor-content">
+                                <section>
+                                        <ul class="phpdocumentor-breadcrumbs">
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/visu.html">VISU</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/visu-os.html">OS</a></li>
+    </ul>
+
+    <article class="phpdocumentor-element -class">
+        <h2 class="phpdocumentor-content__title">
+    WindowEventCallbackHandler
+
+    
+            <div class="phpdocumentor-element__package">
+            in package
+            <ul class="phpdocumentor-breadcrumbs">
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Application.html">Application</a></li>
+                            </ul>
+        </div>
+    
+            <span class="phpdocumentor-element__implements">
+            implements
+                            <a href="classes/VISU-OS-WindowEventHandlerInterface.html"><abbr title="\VISU\OS\WindowEventHandlerInterface">WindowEventHandlerInterface</abbr></a>                    </span>
+    
+    </h2>
+
+<div class="phpdocumentor-label-line">
+
+
+</div>
+
+        <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">5</span>
+
+    </aside>
+
+        
+
+
+
+
+
+
+
+
+<h3 id="toc">
+    Table of Contents
+    <a href="classes/VISU-OS-WindowEventCallbackHandler.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h3>
+
+
+
+    <h4 id="toc-interfaces">
+        Interfaces
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#toc-interfaces" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <dl class="phpdocumentor-table-of-contents">
+                    <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/VISU-OS-WindowEventHandlerInterface.html"><abbr title="\VISU\OS\WindowEventHandlerInterface">WindowEventHandlerInterface</abbr></a></dt>    </dl>
+
+
+
+
+<h4 id="toc-constants">
+    Constants
+    <a href="classes/VISU-OS-WindowEventCallbackHandler.html#toc-constants" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#constant_EVENT_TYPE_CHAR">EVENT_TYPE_CHAR</a>
+    <span>
+        &nbsp;= 1                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#constant_EVENT_TYPE_CHAR_MODS">EVENT_TYPE_CHAR_MODS</a>
+    <span>
+        &nbsp;= 2                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#constant_EVENT_TYPE_CURSOR_ENTER">EVENT_TYPE_CURSOR_ENTER</a>
+    <span>
+        &nbsp;= 5                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#constant_EVENT_TYPE_CURSOR_POSITION">EVENT_TYPE_CURSOR_POSITION</a>
+    <span>
+        &nbsp;= 4                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#constant_EVENT_TYPE_DROP">EVENT_TYPE_DROP</a>
+    <span>
+        &nbsp;= 7                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#constant_EVENT_TYPE_KEY">EVENT_TYPE_KEY</a>
+    <span>
+        &nbsp;= 0                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#constant_EVENT_TYPE_MOUSE_BUTTON">EVENT_TYPE_MOUSE_BUTTON</a>
+    <span>
+        &nbsp;= 3                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#constant_EVENT_TYPE_SCROLL">EVENT_TYPE_SCROLL</a>
+    <span>
+        &nbsp;= 6                            </span>
+</dt>
+
+    </dl>
+
+
+<h4 id="toc-properties">
+    Properties
+    <a href="classes/VISU-OS-WindowEventCallbackHandler.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#property_eventHandlers">$eventHandlers</a>
+    <span>
+                        &nbsp;: array&lt;int, array&lt;string|int, callable&gt;&gt;            </span>
+</dt>
+<dd>Registered callbacks</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#property_eventRegistrationIndex">$eventRegistrationIndex</a>
+    <span>
+                        &nbsp;: int            </span>
+</dt>
+<dd>A counter that ensures registered callbacks dont share the same ID</dd>
+
+    </dl>
+
+<h4 id="toc-methods">
+    Methods
+    <a href="classes/VISU-OS-WindowEventCallbackHandler.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowChar">handleWindowChar()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Window char event callback
+This method is invoked when a character is inputted (e.g. when typing).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowCharMods">handleWindowCharMods()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Window char mods event callback
+This method is invoked when a character is inputted (e.g. when typing).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowCursorEnter">handleWindowCursorEnter()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Window cursor enter event callback
+This method is invoked when the cursor enters or leaves the client area of the window.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowCursorPos">handleWindowCursorPos()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Window cursor position event callback
+This method is invoked when the cursor is moved.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowDidPollEvents">handleWindowDidPollEvents()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Callback after new evenets are polled
+This method is invoked after new events are polled think of it as a post-update method.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowDrop">handleWindowDrop()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Window drop event callback
+This method is invoked when one or more dragged files are dropped on the window.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowKey">handleWindowKey()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Window key event callback
+This method is invoked when a key is pressed, repeated or released.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowMouseButton">handleWindowMouseButton()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Window mouse button event callback
+This method is invoked when a mouse button is pressed or released.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowScroll">handleWindowScroll()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Window scroll event callback
+This method is invoked when a scrolling device is used, such as a mouse wheel or scrolling area of a touchpad.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowWillPollEvents">handleWindowWillPollEvents()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Callback before new evenets are polled
+This method is invoked before new events are polled think of it as a pre-update method.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#method_onWindowChar">onWindowChar()</a>
+    <span>
+                                &nbsp;: int    </span>
+</dt>
+<dd>Register a callback for the window char event</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#method_onWindowCharMods">onWindowCharMods()</a>
+    <span>
+                                &nbsp;: int    </span>
+</dt>
+<dd>Register a callback for the window char mods event</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#method_onWindowCursorEnter">onWindowCursorEnter()</a>
+    <span>
+                                &nbsp;: int    </span>
+</dt>
+<dd>Register a callback for the window cursor enter event</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#method_onWindowCursorPos">onWindowCursorPos()</a>
+    <span>
+                                &nbsp;: int    </span>
+</dt>
+<dd>Register a callback for the window cursor position event</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#method_onWindowDrop">onWindowDrop()</a>
+    <span>
+                                &nbsp;: int    </span>
+</dt>
+<dd>Register a callback for the window drop event</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#method_onWindowKey">onWindowKey()</a>
+    <span>
+                                &nbsp;: int    </span>
+</dt>
+<dd>Register a callback for the window key event</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#method_onWindowMouseButton">onWindowMouseButton()</a>
+    <span>
+                                &nbsp;: int    </span>
+</dt>
+<dd>Register a callback for the window mouse button event</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#method_onWindowScroll">onWindowScroll()</a>
+    <span>
+                                &nbsp;: int    </span>
+</dt>
+<dd>Register a callback for the window scroll event</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#method_unbindWindowCharCallback">unbindWindowCharCallback()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Unregister a callback for the window char event</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#method_unbindWindowCharModsCallback">unbindWindowCharModsCallback()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Unregister a callback for the window char mods event</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#method_unbindWindowCursorEnterCallback">unbindWindowCursorEnterCallback()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Unregister a callback for the window cursor enter event</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#method_unbindWindowCursorPosCallback">unbindWindowCursorPosCallback()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Unregister a callback for the window cursor position event</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#method_unbindWindowDropCallback">unbindWindowDropCallback()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Unregister a callback for the window drop event</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#method_unbindWindowKeyCallback">unbindWindowKeyCallback()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Unregister a callback for the window key event</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#method_unbindWindowMouseButtonCallback">unbindWindowMouseButtonCallback()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Unregister a callback for the window mouse button event</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowEventCallbackHandler.html#method_unbindWindowScrollCallback">unbindWindowScrollCallback()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Unregister a callback for the window scroll event</dd>
+
+    </dl>
+
+
+
+        
+    <section class="phpdocumentor-constants">
+        <h3 class="phpdocumentor-elements__header" id="constants">
+            Constants
+            <a href="classes/VISU-OS-WindowEventCallbackHandler.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_EVENT_TYPE_CHAR">
+        EVENT_TYPE_CHAR
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#constant_EVENT_TYPE_CHAR" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">8</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">EVENT_TYPE_CHAR</span>
+    = <span class="phpdocumentor-signature__default-value">1</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_EVENT_TYPE_CHAR_MODS">
+        EVENT_TYPE_CHAR_MODS
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#constant_EVENT_TYPE_CHAR_MODS" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">9</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">EVENT_TYPE_CHAR_MODS</span>
+    = <span class="phpdocumentor-signature__default-value">2</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_EVENT_TYPE_CURSOR_ENTER">
+        EVENT_TYPE_CURSOR_ENTER
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#constant_EVENT_TYPE_CURSOR_ENTER" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">12</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">EVENT_TYPE_CURSOR_ENTER</span>
+    = <span class="phpdocumentor-signature__default-value">5</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_EVENT_TYPE_CURSOR_POSITION">
+        EVENT_TYPE_CURSOR_POSITION
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#constant_EVENT_TYPE_CURSOR_POSITION" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">11</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">EVENT_TYPE_CURSOR_POSITION</span>
+    = <span class="phpdocumentor-signature__default-value">4</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_EVENT_TYPE_DROP">
+        EVENT_TYPE_DROP
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#constant_EVENT_TYPE_DROP" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">14</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">EVENT_TYPE_DROP</span>
+    = <span class="phpdocumentor-signature__default-value">7</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_EVENT_TYPE_KEY">
+        EVENT_TYPE_KEY
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#constant_EVENT_TYPE_KEY" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">7</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">EVENT_TYPE_KEY</span>
+    = <span class="phpdocumentor-signature__default-value">0</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_EVENT_TYPE_MOUSE_BUTTON">
+        EVENT_TYPE_MOUSE_BUTTON
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#constant_EVENT_TYPE_MOUSE_BUTTON" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">10</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">EVENT_TYPE_MOUSE_BUTTON</span>
+    = <span class="phpdocumentor-signature__default-value">3</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_EVENT_TYPE_SCROLL">
+        EVENT_TYPE_SCROLL
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#constant_EVENT_TYPE_SCROLL" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">13</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">EVENT_TYPE_SCROLL</span>
+    = <span class="phpdocumentor-signature__default-value">6</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+            </section>
+
+        
+    <section class="phpdocumentor-properties">
+        <h3 class="phpdocumentor-elements__header" id="properties">
+            Properties
+            <a href="classes/VISU-OS-WindowEventCallbackHandler.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_eventHandlers">
+        $eventHandlers
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#property_eventHandlers" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">28</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Registered callbacks</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">array&lt;int, array&lt;string|int, callable&gt;&gt;</span>
+    <span class="phpdocumentor-signature__name">$eventHandlers</span>
+     = <span class="phpdocumentor-signature__default-value">[self::EVENT_TYPE_KEY =&gt; [], self::EVENT_TYPE_CHAR =&gt; [], self::EVENT_TYPE_CHAR_MODS =&gt; [], self::EVENT_TYPE_MOUSE_BUTTON =&gt; [], self::EVENT_TYPE_CURSOR_POSITION =&gt; [], self::EVENT_TYPE_CURSOR_ENTER =&gt; [], self::EVENT_TYPE_DROP =&gt; []]</span></code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_eventRegistrationIndex">
+        $eventRegistrationIndex
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#property_eventRegistrationIndex" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">21</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">A counter that ensures registered callbacks dont share the same ID</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">int</span>
+    <span class="phpdocumentor-signature__name">$eventRegistrationIndex</span>
+     = <span class="phpdocumentor-signature__default-value">0</span></code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+            </section>
+
+            <section class="phpdocumentor-methods">
+        <h3 class="phpdocumentor-elements__header" id="methods">
+            Methods
+            <a href="classes/VISU-OS-WindowEventCallbackHandler.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_handleWindowChar">
+        handleWindowChar()
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowChar" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">87</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Window char event callback
+This method is invoked when a character is inputted (e.g. when typing).</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">handleWindowChar</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$window</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$char</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$window</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The window that received the event</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$char</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The Unicode code point of the character</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_handleWindowCharMods">
+        handleWindowCharMods()
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowCharMods" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">127</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Window char mods event callback
+This method is invoked when a character is inputted (e.g. when typing).</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">handleWindowCharMods</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$window</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$char</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mods</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$window</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The window that received the event</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$char</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The Unicode code point of the character</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$mods</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Bit field describing which modifier keys were held down</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_handleWindowCursorEnter">
+        handleWindowCursorEnter()
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowCursorEnter" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">244</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Window cursor enter event callback
+This method is invoked when the cursor enters or leaves the client area of the window.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">handleWindowCursorEnter</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$window</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entered</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$window</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The window that received the event</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$entered</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Whether the cursor entered or left the window</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_handleWindowCursorPos">
+        handleWindowCursorPos()
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowCursorPos" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">206</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Window cursor position event callback
+This method is invoked when the cursor is moved.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">handleWindowCursorPos</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$window</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$xpos</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$ypos</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$window</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The window that received the event</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$xpos</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The new x-coordinate, in screen coordinates, of the cursor</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$ypos</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The new y-coordinate, in screen coordinates, of the cursor</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_handleWindowDidPollEvents">
+        handleWindowDidPollEvents()
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowDidPollEvents" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">368</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Callback after new evenets are polled
+This method is invoked after new events are polled think of it as a post-update method.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">handleWindowDidPollEvents</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$window</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$window</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The window that received the event</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_handleWindowDrop">
+        handleWindowDrop()
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowDrop" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">321</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Window drop event callback
+This method is invoked when one or more dragged files are dropped on the window.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">handleWindowDrop</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$window</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$paths</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$window</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The window that received the event</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$paths</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, string&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The UTF-8 encoded file and/or directory path names</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_handleWindowKey">
+        handleWindowKey()
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowKey" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">49</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Window key event callback
+This method is invoked when a key is pressed, repeated or released.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">handleWindowKey</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$window</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$key</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$scancode</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$action</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mods</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$window</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The window that received the event</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$key</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The key that was pressed, repeated or released</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$scancode</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The system-specific scancode of the key</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$action</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The key action. One of: GLFW_PRESS, GLFW_RELEASE or GLFW_REPEAT</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$mods</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Bit field describing which modifier keys were held down</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_handleWindowMouseButton">
+        handleWindowMouseButton()
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowMouseButton" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">167</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Window mouse button event callback
+This method is invoked when a mouse button is pressed or released.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">handleWindowMouseButton</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$window</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$button</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$action</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mods</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$window</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The window that received the event</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$button</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The mouse button that was pressed or released</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$action</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The mouse button action. One of: GLFW_PRESS or GLFW_RELEASE</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$mods</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Bit field describing which modifier keys were held down</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_handleWindowScroll">
+        handleWindowScroll()
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowScroll" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">283</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Window scroll event callback
+This method is invoked when a scrolling device is used, such as a mouse wheel or scrolling area of a touchpad.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">handleWindowScroll</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$window</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$xoffset</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$yoffset</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$window</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The window that received the event</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$xoffset</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The scroll offset along the x-axis</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$yoffset</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The scroll offset along the y-axis</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_handleWindowWillPollEvents">
+        handleWindowWillPollEvents()
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowWillPollEvents" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">358</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Callback before new evenets are polled
+This method is invoked before new events are polled think of it as a pre-update method.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">handleWindowWillPollEvents</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$window</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$window</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The window that received the event</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_onWindowChar">
+        onWindowChar()
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_onWindowChar" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">100</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Register a callback for the window char event</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">onWindowChar</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$callback</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$callback</span>
+                : <span class="phpdocumentor-signature__argument__return-type">callable</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The ID of the registered callback, store this if you want to unregister the callback later</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_onWindowCharMods">
+        onWindowCharMods()
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_onWindowCharMods" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">140</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Register a callback for the window char mods event</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">onWindowCharMods</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$callback</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$callback</span>
+                : <span class="phpdocumentor-signature__argument__return-type">callable</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The ID of the registered callback, store this if you want to unregister the callback later</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_onWindowCursorEnter">
+        onWindowCursorEnter()
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_onWindowCursorEnter" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">257</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Register a callback for the window cursor enter event</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">onWindowCursorEnter</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$callback</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$callback</span>
+                : <span class="phpdocumentor-signature__argument__return-type">callable</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The ID of the registered callback, store this if you want to unregister the callback later</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_onWindowCursorPos">
+        onWindowCursorPos()
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_onWindowCursorPos" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">219</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Register a callback for the window cursor position event</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">onWindowCursorPos</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$callback</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$callback</span>
+                : <span class="phpdocumentor-signature__argument__return-type">callable</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The ID of the registered callback, store this if you want to unregister the callback later</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_onWindowDrop">
+        onWindowDrop()
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_onWindowDrop" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">334</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Register a callback for the window drop event</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">onWindowDrop</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$callback</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$callback</span>
+                : <span class="phpdocumentor-signature__argument__return-type">callable</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The ID of the registered callback, store this if you want to unregister the callback later</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_onWindowKey">
+        onWindowKey()
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_onWindowKey" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">62</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Register a callback for the window key event</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">onWindowKey</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$callback</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$callback</span>
+                : <span class="phpdocumentor-signature__argument__return-type">callable</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The ID of the registered callback, store this if you want to unregister the callback later</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_onWindowMouseButton">
+        onWindowMouseButton()
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_onWindowMouseButton" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">180</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Register a callback for the window mouse button event</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">onWindowMouseButton</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$callback</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$callback</span>
+                : <span class="phpdocumentor-signature__argument__return-type">callable</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The ID of the registered callback, store this if you want to unregister the callback later</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_onWindowScroll">
+        onWindowScroll()
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_onWindowScroll" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">296</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Register a callback for the window scroll event</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">onWindowScroll</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">callable&nbsp;</span><span class="phpdocumentor-signature__argument__name">$callback</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$callback</span>
+                : <span class="phpdocumentor-signature__argument__return-type">callable</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The ID of the registered callback, store this if you want to unregister the callback later</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_unbindWindowCharCallback">
+        unbindWindowCharCallback()
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_unbindWindowCharCallback" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">112</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Unregister a callback for the window char event</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">unbindWindowCharCallback</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$id</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The ID of the callback to unregister</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_unbindWindowCharModsCallback">
+        unbindWindowCharModsCallback()
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_unbindWindowCharModsCallback" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">152</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Unregister a callback for the window char mods event</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">unbindWindowCharModsCallback</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$id</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The ID of the callback to unregister</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_unbindWindowCursorEnterCallback">
+        unbindWindowCursorEnterCallback()
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_unbindWindowCursorEnterCallback" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">269</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Unregister a callback for the window cursor enter event</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">unbindWindowCursorEnterCallback</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$id</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The ID of the callback to unregister</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_unbindWindowCursorPosCallback">
+        unbindWindowCursorPosCallback()
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_unbindWindowCursorPosCallback" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">231</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Unregister a callback for the window cursor position event</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">unbindWindowCursorPosCallback</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$id</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The ID of the callback to unregister</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_unbindWindowDropCallback">
+        unbindWindowDropCallback()
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_unbindWindowDropCallback" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">346</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Unregister a callback for the window drop event</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">unbindWindowDropCallback</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$id</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The ID of the callback to unregister</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_unbindWindowKeyCallback">
+        unbindWindowKeyCallback()
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_unbindWindowKeyCallback" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">74</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Unregister a callback for the window key event</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">unbindWindowKeyCallback</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$id</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The ID of the callback to unregister</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_unbindWindowMouseButtonCallback">
+        unbindWindowMouseButtonCallback()
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_unbindWindowMouseButtonCallback" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">192</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Unregister a callback for the window mouse button event</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">unbindWindowMouseButtonCallback</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$id</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The ID of the callback to unregister</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_unbindWindowScrollCallback">
+        unbindWindowScrollCallback()
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_unbindWindowScrollCallback" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowEventCallbackHandler.php"><a href="files/src-os-windoweventcallbackhandler.html"><abbr title="src/OS/WindowEventCallbackHandler.php">WindowEventCallbackHandler.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">308</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Unregister a callback for the window scroll event</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">unbindWindowScrollCallback</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$id</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$id</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The ID of the callback to unregister</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+            </section>
+
+        <div class="phpdocumentor-modal" id="source-view">
+    <div class="phpdocumentor-modal-bg" data-exit-button></div>
+    <div class="phpdocumentor-modal-container">
+        <div class="phpdocumentor-modal-content">
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/OS/WindowEventCallbackHandler.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+        </div>
+        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
+    </div>
+</div>
+
+    <script type="text/javascript">
+        (function () {
+            function loadExternalCodeSnippet(el, url, line) {
+                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
+                    const language = 'php';
+
+                    const code = document.createElement('code');
+                    code.className = 'language-' + language;
+                    pre.textContent = '';
+                    pre.setAttribute('data-line', line)
+                    code.textContent = 'Loading…';
+                    pre.appendChild(code);
+
+                    var xhr = new XMLHttpRequest();
+
+                    xhr.open('GET', src, true);
+
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState !== 4) {
+                            return;
+                        }
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+                            Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
+                            return;
+                        }
+
+                        if (xhr.status === 404) {
+                            code.textContent = '✖ Error: File could not be found';
+                            return;
+                        }
+
+                        if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                            return;
+                        }
+
+                        code.textContent = '✖ Error: An unknown error occurred';
+                    };
+
+                    xhr.send(null);
+                });
+            }
+
+            const modalButtons = document.querySelectorAll("[data-modal]");
+            const openedAsLocalFile = window.location.protocol === 'file:';
+            if (modalButtons.length > 0 && openedAsLocalFile) {
+                console.warn(
+                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
+                    'browsers block XHR requests when a page is opened this way'
+                );
+            }
+
+            modalButtons.forEach(function (trigger) {
+                if (openedAsLocalFile) {
+                    trigger.setAttribute("hidden", "hidden");
+                }
+
+                trigger.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const modal = document.getElementById(trigger.dataset.modal);
+                    if (!modal) {
+                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
+                        return;
+                    }
+                    modal.classList.add("phpdocumentor-modal__open");
+
+                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
+                    const exits = modal.querySelectorAll("[data-exit-button]");
+                    exits.forEach(function (exit) {
+                        exit.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            modal.classList.remove("phpdocumentor-modal__open");
+                        });
+                    });
+                });
+            });
+        })();
+    </script>
+
+    </article>
+                                </section>
+                <section class="phpdocumentor-on-this-page__sidebar">
+                                
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                        <li><a href="classes/VISU-OS-WindowEventCallbackHandler.html#toc-constants">Constants</a></li>
+                                                            <li><a href="classes/VISU-OS-WindowEventCallbackHandler.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/VISU-OS-WindowEventCallbackHandler.html#toc-methods">Methods</a></li>
+                                    </ul>
+            </li>
+                            <li class="phpdocumentor-on-this-page-section__title">Constants</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#constant_EVENT_TYPE_CHAR">EVENT_TYPE_CHAR</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#constant_EVENT_TYPE_CHAR_MODS">EVENT_TYPE_CHAR_MODS</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#constant_EVENT_TYPE_CURSOR_ENTER">EVENT_TYPE_CURSOR_ENTER</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#constant_EVENT_TYPE_CURSOR_POSITION">EVENT_TYPE_CURSOR_POSITION</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#constant_EVENT_TYPE_DROP">EVENT_TYPE_DROP</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#constant_EVENT_TYPE_KEY">EVENT_TYPE_KEY</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#constant_EVENT_TYPE_MOUSE_BUTTON">EVENT_TYPE_MOUSE_BUTTON</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#constant_EVENT_TYPE_SCROLL">EVENT_TYPE_SCROLL</a></li>
+                                            </ul>
+                </li>
+            
+                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#property_eventHandlers">$eventHandlers</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#property_eventRegistrationIndex">$eventRegistrationIndex</a></li>
+                                            </ul>
+                </li>
+            
+                        <li class="phpdocumentor-on-this-page-section__title">Methods</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowChar">handleWindowChar()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowCharMods">handleWindowCharMods()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowCursorEnter">handleWindowCursorEnter()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowCursorPos">handleWindowCursorPos()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowDidPollEvents">handleWindowDidPollEvents()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowDrop">handleWindowDrop()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowKey">handleWindowKey()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowMouseButton">handleWindowMouseButton()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowScroll">handleWindowScroll()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_handleWindowWillPollEvents">handleWindowWillPollEvents()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_onWindowChar">onWindowChar()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_onWindowCharMods">onWindowCharMods()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_onWindowCursorEnter">onWindowCursorEnter()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_onWindowCursorPos">onWindowCursorPos()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_onWindowDrop">onWindowDrop()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_onWindowKey">onWindowKey()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_onWindowMouseButton">onWindowMouseButton()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_onWindowScroll">onWindowScroll()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_unbindWindowCharCallback">unbindWindowCharCallback()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_unbindWindowCharModsCallback">unbindWindowCharModsCallback()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_unbindWindowCursorEnterCallback">unbindWindowCursorEnterCallback()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_unbindWindowCursorPosCallback">unbindWindowCursorPosCallback()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_unbindWindowDropCallback">unbindWindowDropCallback()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_unbindWindowKeyCallback">unbindWindowKeyCallback()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_unbindWindowMouseButtonCallback">unbindWindowMouseButtonCallback()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowEventCallbackHandler.html#method_unbindWindowScrollCallback">unbindWindowScrollCallback()</a></li>
+                                    </ul>
+            </li>
+                    </ul>
+    </section>
+
+                </section>
+                            </div>
+            <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+    <section class="phpdocumentor-search-results__dialog">
+        <header class="phpdocumentor-search-results__header">
+            <h2 class="phpdocumentor-search-results__title">Search results</h2>
+            <button class="phpdocumentor-search-results__close"><i class="fas fa-times"></i></button>
+        </header>
+        <section class="phpdocumentor-search-results__body">
+            <ul class="phpdocumentor-search-results__entries"></ul>
+        </section>
+    </section>
+</section>
+        </div>
+        <a href="classes/VISU-OS-WindowEventCallbackHandler.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+
+    </main>
+
+    <script>
+        cssVars({});
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+</body>
+</html>

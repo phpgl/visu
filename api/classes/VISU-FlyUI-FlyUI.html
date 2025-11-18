@@ -1,0 +1,2448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+            <title>VISU - PHP Game Framework</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="../">
+    <link rel="icon" href="images/favicon.ico"/>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/base.css">
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/template.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism-okaidia.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
+        <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="js/template.js"></script>
+        <script src="js/search.js"></script>
+        <script defer src="js/searchIndex.js"></script>
+    </head>
+<body id="top">
+    <header class="phpdocumentor-header phpdocumentor-section">
+    <h1 class="phpdocumentor-title"><a href="" class="phpdocumentor-title__link">VISU - PHP Game Framework</a></h1>
+    <input class="phpdocumentor-header__menu-button" type="checkbox" id="menu-button" name="menu-button" />
+    <label class="phpdocumentor-header__menu-icon" for="menu-button">
+        <i class="fas fa-bars"></i>
+    </label>
+    <section data-search-form class="phpdocumentor-search">
+    <label>
+        <span class="visually-hidden">Search for</span>
+        <svg class="phpdocumentor-search__icon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="7.5" cy="7.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <line x1="12.4892" y1="12.2727" x2="19.1559" y2="18.9393" stroke="currentColor" stroke-width="3"/>
+        </svg>
+        <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+    </label>
+</section>
+
+    <nav class="phpdocumentor-topnav">
+    <ul class="phpdocumentor-topnav__menu">
+        </ul>
+</nav>
+</header>
+
+    <main class="phpdocumentor">
+        <div class="phpdocumentor-section">
+            <input class="phpdocumentor-sidebar__menu-button" type="checkbox" id="sidebar-button" name="sidebar-button" />
+<label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
+    Menu
+</label>
+<aside class="phpdocumentor-column -three phpdocumentor-sidebar">
+                    <section class="phpdocumentor-sidebar__category -namespaces">
+            <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/visu.html" class="">VISU</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/visu-animation.html" class="">Animation</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-command.html" class="">Command</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-component.html" class="">Component</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-ecs.html" class="">ECS</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-exception.html" class="">Exception</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-flyui.html" class="">FlyUI</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-geo.html" class="">Geo</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-graphics.html" class="">Graphics</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-instrument.html" class="">Instrument</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-maker.html" class="">Maker</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-os.html" class="">OS</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-quickstart.html" class="">Quickstart</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-runtime.html" class="">Runtime</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-signal.html" class="">Signal</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-signals.html" class="">Signals</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-system.html" class="">System</a>
+                
+            </li>
+            </ul>
+
+                        </section>
+                <section class="phpdocumentor-sidebar__category -packages">
+            <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Application.html" class="">Application</a>
+</h4>
+
+                        </section>
+            
+    <section class="phpdocumentor-sidebar__category -reports">
+        <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="graphs/classes.html">Class Diagram</a></h3>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
+    </section>
+
+    <section class="phpdocumentor-sidebar__category -indices">
+        <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
+    </section>
+</aside>
+
+            <div class="phpdocumentor-column -nine phpdocumentor-content">
+                                <section>
+                                        <ul class="phpdocumentor-breadcrumbs">
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/visu.html">VISU</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/visu-flyui.html">FlyUI</a></li>
+    </ul>
+
+    <article class="phpdocumentor-element -class">
+        <h2 class="phpdocumentor-content__title">
+    FlyUI
+
+    
+            <div class="phpdocumentor-element__package">
+            in package
+            <ul class="phpdocumentor-breadcrumbs">
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Application.html">Application</a></li>
+                            </ul>
+        </div>
+    
+    
+    </h2>
+
+<div class="phpdocumentor-label-line">
+
+
+</div>
+
+        <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">24</span>
+
+    </aside>
+
+            <p class="phpdocumentor-summary">FlyUI is intended as a simple to use immediate mode GUI library primarly for
+prototyping, debugging or very small projects.</p>
+
+
+    <section class="phpdocumentor-description"><p>The rendering architecture is designed for convenience and not performance.
+So please be not supprised when you build a complex UI that it will eat up
+your system resources more then the rest of your application.</p>
+</section>
+
+
+
+
+
+
+
+<h3 id="toc">
+    Table of Contents
+    <a href="classes/VISU-FlyUI-FlyUI.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h3>
+
+
+
+
+
+
+
+
+
+<h4 id="toc-properties">
+    Properties
+    <a href="classes/VISU-FlyUI-FlyUI.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#property_instance">$instance</a>
+    <span>
+                        &nbsp;: <a href="classes/VISU-FlyUI-FlyUI.html"><abbr title="\VISU\FlyUI\FlyUI">FlyUI</abbr></a>            </span>
+</dt>
+<dd>Global FlyUI instance</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#property_performanceTracingEnabled">$performanceTracingEnabled</a>
+    <span>
+                        &nbsp;: bool            </span>
+</dt>
+<dd>Boolean if performance tracing is enabled</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#property_theme">$theme</a>
+    <span>
+                        &nbsp;: <a href="classes/VISU-FlyUI-FUITheme.html"><abbr title="\VISU\FlyUI\FUITheme">FUITheme</abbr></a>            </span>
+</dt>
+<dd>The Theme currently used</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#property_currentContentScale">$currentContentScale</a>
+    <span>
+                        &nbsp;: float            </span>
+</dt>
+<dd>Internal holder for the current content scale
+Will be passed to the render context</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#property_currentResolution">$currentResolution</a>
+    <span>
+                        &nbsp;: <abbr title="\GL\Math\Vec2">Vec2</abbr>            </span>
+</dt>
+<dd>Internal holder for the current resolution</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#property_currentView">$currentView</a>
+    <span>
+                        &nbsp;: <a href="classes/VISU-FlyUI-FUIView.html"><abbr title="\VISU\FlyUI\FUIView">FUIView</abbr></a>            </span>
+</dt>
+<dd>The currently active view in the view stack</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#property_dispatcher">$dispatcher</a>
+    <span>
+                        &nbsp;: <a href="classes/VISU-Signal-Dispatcher.html"><abbr title="\VISU\Signal\Dispatcher">Dispatcher</abbr></a>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#property_input">$input</a>
+    <span>
+                        &nbsp;: <a href="classes/VISU-OS-Input.html"><abbr title="\VISU\OS\Input">Input</abbr></a>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#property_performanceOverlay">$performanceOverlay</a>
+    <span>
+                        &nbsp;: <a href="classes/VISU-FlyUI-FUIPerformanceTracerOverlay.html"><abbr title="\VISU\FlyUI\FUIPerformanceTracerOverlay">FUIPerformanceTracerOverlay</abbr></a>|null            </span>
+</dt>
+<dd>Performance tracer overlay for visualizing performance data</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#property_performanceTracer">$performanceTracer</a>
+    <span>
+                        &nbsp;: <a href="classes/VISU-FlyUI-FUIPerformanceTracer.html"><abbr title="\VISU\FlyUI\FUIPerformanceTracer">FUIPerformanceTracer</abbr></a>            </span>
+</dt>
+<dd>Performance tracer instance</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#property_selfManageVGContext">$selfManageVGContext</a>
+    <span>
+                        &nbsp;: bool            </span>
+</dt>
+<dd>If true, FLyUI will create and end VGContext frames itself</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#property_vgContext">$vgContext</a>
+    <span>
+                        &nbsp;: <abbr title="\GL\VectorGraphics\VGContext">VGContext</abbr>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#property_viewTree">$viewTree</a>
+    <span>
+                        &nbsp;: array&lt;string|int, <a href="classes/VISU-FlyUI-FUIView.html"><abbr title="\VISU\FlyUI\FUIView">FUIView</abbr></a>&gt;            </span>
+</dt>
+<dd>The current tree of views
+This functions as a stack where the last element is the current view</dd>
+
+    </dl>
+
+<h4 id="toc-methods">
+    Methods
+    <a href="classes/VISU-FlyUI-FlyUI.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#method___construct">__construct()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+<dd>Constructor</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#method_addChildView">addChildView()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Adds the given view as a child of the current view</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#method_beginCardView">beginCardView()</a>
+    <span>
+                                &nbsp;: <a href="classes/VISU-FlyUI-FUICard.html"><abbr title="\VISU\FlyUI\FUICard">FUICard</abbr></a>    </span>
+</dt>
+<dd>Begins a new card view</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#method_beginFrame">beginFrame()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Begins a FlyUI frame</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#method_beginHorizontalStack">beginHorizontalStack()</a>
+    <span>
+                                &nbsp;: <a href="classes/VISU-FlyUI-FUILayout.html"><abbr title="\VISU\FlyUI\FUILayout">FUILayout</abbr></a>    </span>
+</dt>
+<dd>Starts a horiazontal layout where elements are stacked after each other from left to right</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#method_beginLayout">beginLayout()</a>
+    <span>
+                                &nbsp;: <a href="classes/VISU-FlyUI-FUILayout.html"><abbr title="\VISU\FlyUI\FUILayout">FUILayout</abbr></a>    </span>
+</dt>
+<dd>Starts a layout element.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#method_beginSection">beginSection()</a>
+    <span>
+                                &nbsp;: <a href="classes/VISU-FlyUI-FUILayout.html"><abbr title="\VISU\FlyUI\FUILayout">FUILayout</abbr></a>    </span>
+</dt>
+<dd>Starts a section
+A section is a container with a title and some content underneath</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#method_button">button()</a>
+    <span>
+                                &nbsp;: <a href="classes/VISU-FlyUI-FUIButton.html"><abbr title="\VISU\FlyUI\FUIButton">FUIButton</abbr></a>    </span>
+</dt>
+<dd>Creates a button element</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#method_buttonGroup">buttonGroup()</a>
+    <span>
+                                &nbsp;: <a href="classes/VISU-FlyUI-FUIButtonGroup.html"><abbr title="\VISU\FlyUI\FUIButtonGroup">FUIButtonGroup</abbr></a>    </span>
+</dt>
+<dd>Creates a button group element</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#method_checkbox">checkbox()</a>
+    <span>
+                                &nbsp;: <a href="classes/VISU-FlyUI-FUICheckbox.html"><abbr title="\VISU\FlyUI\FUICheckbox">FUICheckbox</abbr></a>    </span>
+</dt>
+<dd>Creates a checkbox element</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#method_currentView">currentView()</a>
+    <span>
+                                &nbsp;: <a href="classes/VISU-FlyUI-FUIView.html"><abbr title="\VISU\FlyUI\FUIView">FUIView</abbr></a>    </span>
+</dt>
+<dd>Returns the current view</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#method_enablePerformanceTracing">enablePerformanceTracing()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Enables performance tracing for the current FlyUI instance</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#method_end">end()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Ends the current view</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#method_endFrame">endFrame()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Ends a FlyUI frame</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#method_initailize">initailize()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Initializes the global FlyUI instance</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#method_popView">popView()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Pops the last view from the view tree</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#method_pushView">pushView()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Adds a view to the view tree</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#method_select">select()</a>
+    <span>
+                                &nbsp;: <a href="classes/VISU-FlyUI-FUISelect.html"><abbr title="\VISU\FlyUI\FUISelect">FUISelect</abbr></a>    </span>
+</dt>
+<dd>Creates a select (dropdown) element</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#method_setSelfManageVGContext">setSelfManageVGContext()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets if FlyUI should manage the VGContext frames itself</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#method_spaceX">spaceX()</a>
+    <span>
+                                &nbsp;: <a href="classes/VISU-FlyUI-FUISpace.html"><abbr title="\VISU\FlyUI\FUISpace">FUISpace</abbr></a>    </span>
+</dt>
+<dd>Creates a X space element</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#method_spaceY">spaceY()</a>
+    <span>
+                                &nbsp;: <a href="classes/VISU-FlyUI-FUISpace.html"><abbr title="\VISU\FlyUI\FUISpace">FUISpace</abbr></a>    </span>
+</dt>
+<dd>Creates a Y space element</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#method_text">text()</a>
+    <span>
+                                &nbsp;: <a href="classes/VISU-FlyUI-FUIText.html"><abbr title="\VISU\FlyUI\FUIText">FUIText</abbr></a>    </span>
+</dt>
+<dd>Creates a text element</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#method_internalBeginFrame">internalBeginFrame()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Start a new UI frame</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/VISU-FlyUI-FlyUI.html#method_internalEndFrame">internalEndFrame()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>End a UI frame (Dispatches the rendering of the views)</dd>
+
+    </dl>
+
+
+
+        
+
+        
+    <section class="phpdocumentor-properties">
+        <h3 class="phpdocumentor-elements__header" id="properties">
+            Properties
+            <a href="classes/VISU-FlyUI-FlyUI.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+            -static                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="property_instance">
+        $instance
+        <a href="classes/VISU-FlyUI-FlyUI.html#property_instance" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">29</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Global FlyUI instance</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__static">static</span>    <span class="phpdocumentor-signature__type"><a href="classes/VISU-FlyUI-FlyUI.html"><abbr title="\VISU\FlyUI\FlyUI">FlyUI</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$instance</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_performanceTracingEnabled">
+        $performanceTracingEnabled
+        <a href="classes/VISU-FlyUI-FlyUI.html#property_performanceTracingEnabled" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">298</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Boolean if performance tracing is enabled</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool</span>
+    <span class="phpdocumentor-signature__name">$performanceTracingEnabled</span>
+     = <span class="phpdocumentor-signature__default-value">false</span></code>
+
+        <section class="phpdocumentor-description"><p>Performance tracing will replace all views just before rendering with proxies
+allowing to measure the time they took to execute. Keep in mind this will really only mesure
+CPU time and not GPU time.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_theme">
+        $theme
+        <a href="classes/VISU-FlyUI-FlyUI.html#property_theme" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">258</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The Theme currently used</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/VISU-FlyUI-FUITheme.html"><abbr title="\VISU\FlyUI\FUITheme">FUITheme</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$theme</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_currentContentScale">
+        $currentContentScale
+        <a href="classes/VISU-FlyUI-FlyUI.html#property_currentContentScale" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">282</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Internal holder for the current content scale
+Will be passed to the render context</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">float</span>
+    <span class="phpdocumentor-signature__name">$currentContentScale</span>
+     = <span class="phpdocumentor-signature__default-value">1.0</span></code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_currentResolution">
+        $currentResolution
+        <a href="classes/VISU-FlyUI-FlyUI.html#property_currentResolution" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">276</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Internal holder for the current resolution</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><abbr title="\GL\Math\Vec2">Vec2</abbr></span>
+    <span class="phpdocumentor-signature__name">$currentResolution</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_currentView">
+        $currentView
+        <a href="classes/VISU-FlyUI-FlyUI.html#property_currentView" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">271</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The currently active view in the view stack</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/VISU-FlyUI-FUIView.html"><abbr title="\VISU\FlyUI\FUIView">FUIView</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$currentView</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_dispatcher">
+        $dispatcher
+        <a href="classes/VISU-FlyUI-FlyUI.html#property_dispatcher" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">318</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/VISU-Signal-Dispatcher.html"><abbr title="\VISU\Signal\Dispatcher">Dispatcher</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$dispatcher</span>
+    </code>
+
+    
+    
+    
+    <h5 class="phpdocumentor-tag-list__heading" id="tags">
+        Tags
+        <a href="classes/VISU-FlyUI-FlyUI.html#property_dispatcher#tags" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h5>
+    <dl class="phpdocumentor-tag-list">
+                                    <dt class="phpdocumentor-tag-list__entry">
+                    <span class="phpdocumentor-tag__name">phpstan-ignore-next-line</span>
+                </dt>
+                <dd class="phpdocumentor-tag-list__definition">
+                                                                                
+                                             
+                                    </dd>
+                                            </dl>
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_input">
+        $input
+        <a href="classes/VISU-FlyUI-FlyUI.html#property_input" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">319</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/VISU-OS-Input.html"><abbr title="\VISU\OS\Input">Input</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$input</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_performanceOverlay">
+        $performanceOverlay
+        <a href="classes/VISU-FlyUI-FlyUI.html#property_performanceOverlay" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">310</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Performance tracer overlay for visualizing performance data</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/VISU-FlyUI-FUIPerformanceTracerOverlay.html"><abbr title="\VISU\FlyUI\FUIPerformanceTracerOverlay">FUIPerformanceTracerOverlay</abbr></a>|null</span>
+    <span class="phpdocumentor-signature__name">$performanceOverlay</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_performanceTracer">
+        $performanceTracer
+        <a href="classes/VISU-FlyUI-FlyUI.html#property_performanceTracer" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">305</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Performance tracer instance</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/VISU-FlyUI-FUIPerformanceTracer.html"><abbr title="\VISU\FlyUI\FUIPerformanceTracer">FUIPerformanceTracer</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$performanceTracer</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This thing that does the tracing...</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_selfManageVGContext">
+        $selfManageVGContext
+        <a href="classes/VISU-FlyUI-FlyUI.html#property_selfManageVGContext" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">287</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">If true, FLyUI will create and end VGContext frames itself</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">bool</span>
+    <span class="phpdocumentor-signature__name">$selfManageVGContext</span>
+     = <span class="phpdocumentor-signature__default-value">false</span></code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_vgContext">
+        $vgContext
+        <a href="classes/VISU-FlyUI-FlyUI.html#property_vgContext" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">316</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><abbr title="\GL\VectorGraphics\VGContext">VGContext</abbr></span>
+    <span class="phpdocumentor-signature__name">$vgContext</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_viewTree">
+        $viewTree
+        <a href="classes/VISU-FlyUI-FlyUI.html#property_viewTree" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">266</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The current tree of views
+This functions as a stack where the last element is the current view</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">array&lt;string|int, <a href="classes/VISU-FlyUI-FUIView.html"><abbr title="\VISU\FlyUI\FUIView">FUIView</abbr></a>&gt;</span>
+    <span class="phpdocumentor-signature__name">$viewTree</span>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+            </section>
+
+            <section class="phpdocumentor-methods">
+        <h3 class="phpdocumentor-elements__header" id="methods">
+            Methods
+            <a href="classes/VISU-FlyUI-FlyUI.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/VISU-FlyUI-FlyUI.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">315</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Constructor</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\VectorGraphics\VGContext">VGContext</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$vgContext</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Signal-Dispatcher.html"><abbr title="\VISU\Signal\Dispatcher">Dispatcher</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$dispatcher</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Input.html"><abbr title="\VISU\OS\Input">Input</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$input</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-FlyUI-FUITheme.html"><abbr title="\VISU\FlyUI\FUITheme">FUITheme</abbr></a>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$theme</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$vgContext</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\VectorGraphics\VGContext">VGContext</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$dispatcher</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Signal-Dispatcher.html"><abbr title="\VISU\Signal\Dispatcher">Dispatcher</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$input</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Input.html"><abbr title="\VISU\OS\Input">Input</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$theme</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-FlyUI-FUITheme.html"><abbr title="\VISU\FlyUI\FUITheme">FUITheme</abbr></a>|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_addChildView">
+        addChildView()
+        <a href="classes/VISU-FlyUI-FlyUI.html#method_addChildView" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">359</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Adds the given view as a child of the current view</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">addChildView</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-FlyUI-FUIView.html"><abbr title="\VISU\FlyUI\FUIView">FUIView</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$view</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$view</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-FlyUI-FUIView.html"><abbr title="\VISU\FlyUI\FUIView">FUIView</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_beginCardView">
+        beginCardView()
+        <a href="classes/VISU-FlyUI-FlyUI.html#method_beginCardView" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">142</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Begins a new card view</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">beginCardView</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/VISU-FlyUI-FUICard.html"><abbr title="\VISU\FlyUI\FUICard">FUICard</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/VISU-FlyUI-FUICard.html"><abbr title="\VISU\FlyUI\FUICard">FUICard</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_beginFrame">
+        beginFrame()
+        <a href="classes/VISU-FlyUI-FlyUI.html#method_beginFrame" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">56</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Begins a FlyUI frame</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">beginFrame</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Vec2">Vec2</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$resolution</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$contentScale</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">1.0</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$resolution</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Vec2">Vec2</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The resolution of the frame (in points not pixels)</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$contentScale</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">1.0</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_beginHorizontalStack">
+        beginHorizontalStack()
+        <a href="classes/VISU-FlyUI-FlyUI.html#method_beginHorizontalStack" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">108</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Starts a horiazontal layout where elements are stacked after each other from left to right</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">beginHorizontalStack</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">float|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$spacing</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Vec4">Vec4</abbr>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$padding</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/VISU-FlyUI-FUILayout.html"><abbr title="\VISU\FlyUI\FUILayout">FUILayout</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$spacing</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$padding</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Vec4">Vec4</abbr>|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/VISU-FlyUI-FUILayout.html"><abbr title="\VISU\FlyUI\FUILayout">FUILayout</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_beginLayout">
+        beginLayout()
+        <a href="classes/VISU-FlyUI-FlyUI.html#method_beginLayout" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">98</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Starts a layout element.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">beginLayout</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Vec4">Vec4</abbr>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$padding</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/VISU-FlyUI-FUILayout.html"><abbr title="\VISU\FlyUI\FUILayout">FUILayout</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>A layout is a container view that arranges its children either vertically or horizontally.</p>
+<p>There is support for different sizing modes:</p>
+<ul>
+<li>Fixed: a fixed size in points</li>
+<li>Fill: takes up all available space</li>
+<li>Fit: sizes to the content</li>
+</ul>
+<p>The layout can then also align its children to topLeft, topCenter etc...</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$padding</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Vec4">Vec4</abbr>|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/VISU-FlyUI-FUILayout.html"><abbr title="\VISU\FlyUI\FUILayout">FUILayout</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_beginSection">
+        beginSection()
+        <a href="classes/VISU-FlyUI-FlyUI.html#method_beginSection" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">123</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Starts a section
+A section is a container with a title and some content underneath</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">beginSection</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$title</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/VISU-FlyUI-FUILayout.html"><abbr title="\VISU\FlyUI\FUILayout">FUILayout</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$title</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/VISU-FlyUI-FUILayout.html"><abbr title="\VISU\FlyUI\FUILayout">FUILayout</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_button">
+        button()
+        <a href="classes/VISU-FlyUI-FlyUI.html#method_button" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">190</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Creates a button element</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">button</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$text</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Closure">Closure</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$onClick</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/VISU-FlyUI-FUIButton.html"><abbr title="\VISU\FlyUI\FUIButton">FUIButton</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$text</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$onClick</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Closure">Closure</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/VISU-FlyUI-FUIButton.html"><abbr title="\VISU\FlyUI\FUIButton">FUIButton</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_buttonGroup">
+        buttonGroup()
+        <a href="classes/VISU-FlyUI-FlyUI.html#method_buttonGroup" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">203</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Creates a button group element</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">buttonGroup</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$options</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__reference-operator">&amp;</span><span class="phpdocumentor-signature__argument__name">$selectedOption</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\Closure">Closure</abbr>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$onSelect</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/VISU-FlyUI-FUIButtonGroup.html"><abbr title="\VISU\FlyUI\FUIButtonGroup">FUIButtonGroup</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$name</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$options</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string, string&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Array of key =&gt; label pairs</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$selectedOption</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$onSelect</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\Closure">Closure</abbr>|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/VISU-FlyUI-FUIButtonGroup.html"><abbr title="\VISU\FlyUI\FUIButtonGroup">FUIButtonGroup</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_checkbox">
+        checkbox()
+        <a href="classes/VISU-FlyUI-FlyUI.html#method_checkbox" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">222</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Creates a checkbox element</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">checkbox</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$text</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__reference-operator">&amp;</span><span class="phpdocumentor-signature__argument__name">$checked</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">callable(bool): void&nbsp;</span><span class="phpdocumentor-signature__argument__name">$callback</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/VISU-FlyUI-FUICheckbox.html"><abbr title="\VISU\FlyUI\FUICheckbox">FUICheckbox</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$text</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The text to display next to the checkbox</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$checked</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Reference to the checked state</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$callback</span>
+                : <span class="phpdocumentor-signature__argument__return-type">callable(bool): void</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Callback that is called when the checkbox is toggled</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/VISU-FlyUI-FUICheckbox.html"><abbr title="\VISU\FlyUI\FUICheckbox">FUICheckbox</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_currentView">
+        currentView()
+        <a href="classes/VISU-FlyUI-FlyUI.html#method_currentView" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">380</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the current view</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">currentView</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/VISU-FlyUI-FUIView.html"><abbr title="\VISU\FlyUI\FUIView">FUIView</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/VISU-FlyUI-FUIView.html"><abbr title="\VISU\FlyUI\FUIView">FUIView</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_enablePerformanceTracing">
+        enablePerformanceTracing()
+        <a href="classes/VISU-FlyUI-FlyUI.html#method_enablePerformanceTracing" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">78</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Enables performance tracing for the current FlyUI instance</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">enablePerformanceTracing</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$enable</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">true</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$enable</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">true</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_end">
+        end()
+        <a href="classes/VISU-FlyUI-FlyUI.html#method_end" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">152</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Ends the current view</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">end</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_endFrame">
+        endFrame()
+        <a href="classes/VISU-FlyUI-FlyUI.html#method_endFrame" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">67</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Ends a FlyUI frame</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">endFrame</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_initailize">
+        initailize()
+        <a href="classes/VISU-FlyUI-FlyUI.html#method_initailize" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">34</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Initializes the global FlyUI instance</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">initailize</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\VectorGraphics\VGContext">VGContext</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$vgContext</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Signal-Dispatcher.html"><abbr title="\VISU\Signal\Dispatcher">Dispatcher</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$dispatcher</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Input.html"><abbr title="\VISU\OS\Input">Input</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$input</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$vgContext</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\VectorGraphics\VGContext">VGContext</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$dispatcher</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Signal-Dispatcher.html"><abbr title="\VISU\Signal\Dispatcher">Dispatcher</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$input</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Input.html"><abbr title="\VISU\OS\Input">Input</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_popView">
+        popView()
+        <a href="classes/VISU-FlyUI-FlyUI.html#method_popView" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">367</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Pops the last view from the view tree</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">popView</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_pushView">
+        pushView()
+        <a href="classes/VISU-FlyUI-FlyUI.html#method_pushView" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">344</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Adds a view to the view tree</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">pushView</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-FlyUI-FUIView.html"><abbr title="\VISU\FlyUI\FUIView">FUIView</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$view</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$view</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-FlyUI-FUIView.html"><abbr title="\VISU\FlyUI\FUIView">FUIView</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_select">
+        select()
+        <a href="classes/VISU-FlyUI-FlyUI.html#method_select" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">237</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Creates a select (dropdown) element</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">select</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$name</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$options</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__reference-operator">&amp;</span><span class="phpdocumentor-signature__argument__name">$selectedOption</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">callable(string): void|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$onSelect</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/VISU-FlyUI-FUISelect.html"><abbr title="\VISU\FlyUI\FUISelect">FUISelect</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$name</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The name of the select</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$options</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string, string&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Array of key =&gt; label pairs</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$selectedOption</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Reference to the selected option</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$onSelect</span>
+                : <span class="phpdocumentor-signature__argument__return-type">callable(string): void|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Callback that is called when an option is selected</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/VISU-FlyUI-FUISelect.html"><abbr title="\VISU\FlyUI\FUISelect">FUISelect</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setSelfManageVGContext">
+        setSelfManageVGContext()
+        <a href="classes/VISU-FlyUI-FlyUI.html#method_setSelfManageVGContext" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">336</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets if FlyUI should manage the VGContext frames itself</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setSelfManageVGContext</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$value</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>When enabled FlyUI will call beginFrame and endFrame itself.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$value</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_spaceX">
+        spaceX()
+        <a href="classes/VISU-FlyUI-FlyUI.html#method_spaceX" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">160</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Creates a X space element</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">spaceX</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$width</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/VISU-FlyUI-FUISpace.html"><abbr title="\VISU\FlyUI\FUISpace">FUISpace</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$width</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/VISU-FlyUI-FUISpace.html"><abbr title="\VISU\FlyUI\FUISpace">FUISpace</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_spaceY">
+        spaceY()
+        <a href="classes/VISU-FlyUI-FlyUI.html#method_spaceY" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">170</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Creates a Y space element</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">spaceY</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$height</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/VISU-FlyUI-FUISpace.html"><abbr title="\VISU\FlyUI\FUISpace">FUISpace</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$height</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/VISU-FlyUI-FUISpace.html"><abbr title="\VISU\FlyUI\FUISpace">FUISpace</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                    -static                    "
+>
+    <h4 class="phpdocumentor-element__name" id="method_text">
+        text()
+        <a href="classes/VISU-FlyUI-FlyUI.html#method_text" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">180</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Creates a text element</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__static">static</span>        <span class="phpdocumentor-signature__name">text</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$text</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\VectorGraphics\VGColor">VGColor</abbr>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$color</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/VISU-FlyUI-FUIText.html"><abbr title="\VISU\FlyUI\FUIText">FUIText</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$text</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$color</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\VectorGraphics\VGColor">VGColor</abbr>|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/VISU-FlyUI-FUIText.html"><abbr title="\VISU\FlyUI\FUIText">FUIText</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_internalBeginFrame">
+        internalBeginFrame()
+        <a href="classes/VISU-FlyUI-FlyUI.html#method_internalBeginFrame" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">388</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Start a new UI frame</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">internalBeginFrame</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Vec2">Vec2</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$resolution</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$contentScale</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">1.0</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$resolution</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Vec2">Vec2</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$contentScale</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">1.0</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_internalEndFrame">
+        internalEndFrame()
+        <a href="classes/VISU-FlyUI-FlyUI.html#method_internalEndFrame" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/FlyUI/FlyUI.php"><a href="files/src-flyui-flyui.html"><abbr title="src/FlyUI/FlyUI.php">FlyUI.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">412</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">End a UI frame (Dispatches the rendering of the views)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">internalEndFrame</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+    
+</article>
+            </section>
+
+        <div class="phpdocumentor-modal" id="source-view">
+    <div class="phpdocumentor-modal-bg" data-exit-button></div>
+    <div class="phpdocumentor-modal-container">
+        <div class="phpdocumentor-modal-content">
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/FlyUI/FlyUI.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+        </div>
+        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
+    </div>
+</div>
+
+    <script type="text/javascript">
+        (function () {
+            function loadExternalCodeSnippet(el, url, line) {
+                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
+                    const language = 'php';
+
+                    const code = document.createElement('code');
+                    code.className = 'language-' + language;
+                    pre.textContent = '';
+                    pre.setAttribute('data-line', line)
+                    code.textContent = 'Loading…';
+                    pre.appendChild(code);
+
+                    var xhr = new XMLHttpRequest();
+
+                    xhr.open('GET', src, true);
+
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState !== 4) {
+                            return;
+                        }
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+                            Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
+                            return;
+                        }
+
+                        if (xhr.status === 404) {
+                            code.textContent = '✖ Error: File could not be found';
+                            return;
+                        }
+
+                        if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                            return;
+                        }
+
+                        code.textContent = '✖ Error: An unknown error occurred';
+                    };
+
+                    xhr.send(null);
+                });
+            }
+
+            const modalButtons = document.querySelectorAll("[data-modal]");
+            const openedAsLocalFile = window.location.protocol === 'file:';
+            if (modalButtons.length > 0 && openedAsLocalFile) {
+                console.warn(
+                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
+                    'browsers block XHR requests when a page is opened this way'
+                );
+            }
+
+            modalButtons.forEach(function (trigger) {
+                if (openedAsLocalFile) {
+                    trigger.setAttribute("hidden", "hidden");
+                }
+
+                trigger.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const modal = document.getElementById(trigger.dataset.modal);
+                    if (!modal) {
+                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
+                        return;
+                    }
+                    modal.classList.add("phpdocumentor-modal__open");
+
+                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
+                    const exits = modal.querySelectorAll("[data-exit-button]");
+                    exits.forEach(function (exit) {
+                        exit.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            modal.classList.remove("phpdocumentor-modal__open");
+                        });
+                    });
+                });
+            });
+        })();
+    </script>
+
+    </article>
+                                </section>
+                <section class="phpdocumentor-on-this-page__sidebar">
+                                
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                                            <li><a href="classes/VISU-FlyUI-FlyUI.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/VISU-FlyUI-FlyUI.html#toc-methods">Methods</a></li>
+                                    </ul>
+            </li>
+            
+                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#property_instance">$instance</a></li>
+                                                    <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#property_performanceTracingEnabled">$performanceTracingEnabled</a></li>
+                                                    <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#property_theme">$theme</a></li>
+                                                    <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#property_currentContentScale">$currentContentScale</a></li>
+                                                    <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#property_currentResolution">$currentResolution</a></li>
+                                                    <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#property_currentView">$currentView</a></li>
+                                                    <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#property_dispatcher">$dispatcher</a></li>
+                                                    <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#property_input">$input</a></li>
+                                                    <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#property_performanceOverlay">$performanceOverlay</a></li>
+                                                    <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#property_performanceTracer">$performanceTracer</a></li>
+                                                    <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#property_selfManageVGContext">$selfManageVGContext</a></li>
+                                                    <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#property_vgContext">$vgContext</a></li>
+                                                    <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#property_viewTree">$viewTree</a></li>
+                                            </ul>
+                </li>
+            
+                        <li class="phpdocumentor-on-this-page-section__title">Methods</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#method___construct">__construct()</a></li>
+                                            <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#method_addChildView">addChildView()</a></li>
+                                            <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#method_beginCardView">beginCardView()</a></li>
+                                            <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#method_beginFrame">beginFrame()</a></li>
+                                            <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#method_beginHorizontalStack">beginHorizontalStack()</a></li>
+                                            <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#method_beginLayout">beginLayout()</a></li>
+                                            <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#method_beginSection">beginSection()</a></li>
+                                            <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#method_button">button()</a></li>
+                                            <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#method_buttonGroup">buttonGroup()</a></li>
+                                            <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#method_checkbox">checkbox()</a></li>
+                                            <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#method_currentView">currentView()</a></li>
+                                            <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#method_enablePerformanceTracing">enablePerformanceTracing()</a></li>
+                                            <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#method_end">end()</a></li>
+                                            <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#method_endFrame">endFrame()</a></li>
+                                            <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#method_initailize">initailize()</a></li>
+                                            <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#method_popView">popView()</a></li>
+                                            <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#method_pushView">pushView()</a></li>
+                                            <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#method_select">select()</a></li>
+                                            <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#method_setSelfManageVGContext">setSelfManageVGContext()</a></li>
+                                            <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#method_spaceX">spaceX()</a></li>
+                                            <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#method_spaceY">spaceY()</a></li>
+                                            <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#method_text">text()</a></li>
+                                            <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#method_internalBeginFrame">internalBeginFrame()</a></li>
+                                            <li class=""><a href="classes/VISU-FlyUI-FlyUI.html#method_internalEndFrame">internalEndFrame()</a></li>
+                                    </ul>
+            </li>
+                    </ul>
+    </section>
+
+                </section>
+                            </div>
+            <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+    <section class="phpdocumentor-search-results__dialog">
+        <header class="phpdocumentor-search-results__header">
+            <h2 class="phpdocumentor-search-results__title">Search results</h2>
+            <button class="phpdocumentor-search-results__close"><i class="fas fa-times"></i></button>
+        </header>
+        <section class="phpdocumentor-search-results__body">
+            <ul class="phpdocumentor-search-results__entries"></ul>
+        </section>
+    </section>
+</section>
+        </div>
+        <a href="classes/VISU-FlyUI-FlyUI.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+
+    </main>
+
+    <script>
+        cssVars({});
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,4245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+            <title>VISU - PHP Game Framework</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="../">
+    <link rel="icon" href="images/favicon.ico"/>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/base.css">
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/template.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism-okaidia.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
+        <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="js/template.js"></script>
+        <script src="js/search.js"></script>
+        <script defer src="js/searchIndex.js"></script>
+    </head>
+<body id="top">
+    <header class="phpdocumentor-header phpdocumentor-section">
+    <h1 class="phpdocumentor-title"><a href="" class="phpdocumentor-title__link">VISU - PHP Game Framework</a></h1>
+    <input class="phpdocumentor-header__menu-button" type="checkbox" id="menu-button" name="menu-button" />
+    <label class="phpdocumentor-header__menu-icon" for="menu-button">
+        <i class="fas fa-bars"></i>
+    </label>
+    <section data-search-form class="phpdocumentor-search">
+    <label>
+        <span class="visually-hidden">Search for</span>
+        <svg class="phpdocumentor-search__icon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="7.5" cy="7.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <line x1="12.4892" y1="12.2727" x2="19.1559" y2="18.9393" stroke="currentColor" stroke-width="3"/>
+        </svg>
+        <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+    </label>
+</section>
+
+    <nav class="phpdocumentor-topnav">
+    <ul class="phpdocumentor-topnav__menu">
+        </ul>
+</nav>
+</header>
+
+    <main class="phpdocumentor">
+        <div class="phpdocumentor-section">
+            <input class="phpdocumentor-sidebar__menu-button" type="checkbox" id="sidebar-button" name="sidebar-button" />
+<label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
+    Menu
+</label>
+<aside class="phpdocumentor-column -three phpdocumentor-sidebar">
+                    <section class="phpdocumentor-sidebar__category -namespaces">
+            <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/visu.html" class="">VISU</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/visu-animation.html" class="">Animation</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-command.html" class="">Command</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-component.html" class="">Component</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-ecs.html" class="">ECS</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-exception.html" class="">Exception</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-flyui.html" class="">FlyUI</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-geo.html" class="">Geo</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-graphics.html" class="">Graphics</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-instrument.html" class="">Instrument</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-maker.html" class="">Maker</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-os.html" class="">OS</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-quickstart.html" class="">Quickstart</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-runtime.html" class="">Runtime</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-signal.html" class="">Signal</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-signals.html" class="">Signals</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-system.html" class="">System</a>
+                
+            </li>
+            </ul>
+
+                        </section>
+                <section class="phpdocumentor-sidebar__category -packages">
+            <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Application.html" class="">Application</a>
+</h4>
+
+                        </section>
+            
+    <section class="phpdocumentor-sidebar__category -reports">
+        <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="graphs/classes.html">Class Diagram</a></h3>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
+    </section>
+
+    <section class="phpdocumentor-sidebar__category -indices">
+        <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
+    </section>
+</aside>
+
+            <div class="phpdocumentor-column -nine phpdocumentor-content">
+                                <section>
+                                        <ul class="phpdocumentor-breadcrumbs">
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/visu.html">VISU</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/visu-os.html">OS</a></li>
+    </ul>
+
+    <article class="phpdocumentor-element -class">
+        <h2 class="phpdocumentor-content__title">
+    Input
+
+    
+            <div class="phpdocumentor-element__package">
+            in package
+            <ul class="phpdocumentor-breadcrumbs">
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Application.html">Application</a></li>
+                            </ul>
+        </div>
+    
+            <span class="phpdocumentor-element__implements">
+            implements
+                            <a href="classes/VISU-OS-WindowEventHandlerInterface.html"><abbr title="\VISU\OS\WindowEventHandlerInterface">WindowEventHandlerInterface</abbr></a>                    </span>
+    
+    </h2>
+
+<div class="phpdocumentor-label-line">
+
+
+</div>
+
+        <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">26</span>
+
+    </aside>
+
+            <p class="phpdocumentor-summary">This class is responsible for handling window events, and includes a bunch of
+helpers and utility methods to easly handle user input.</p>
+
+
+
+
+
+
+
+
+
+<h3 id="toc">
+    Table of Contents
+    <a href="classes/VISU-OS-Input.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h3>
+
+
+
+    <h4 id="toc-interfaces">
+        Interfaces
+        <a href="classes/VISU-OS-Input.html#toc-interfaces" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <dl class="phpdocumentor-table-of-contents">
+                    <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/VISU-OS-WindowEventHandlerInterface.html"><abbr title="\VISU\OS\WindowEventHandlerInterface">WindowEventHandlerInterface</abbr></a></dt>    </dl>
+
+
+
+
+<h4 id="toc-constants">
+    Constants
+    <a href="classes/VISU-OS-Input.html#toc-constants" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/VISU-OS-Input.html#constant_EVENT_CHAR">EVENT_CHAR</a>
+    <span>
+        &nbsp;= &#039;input.char&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/VISU-OS-Input.html#constant_EVENT_CHAR_MOD">EVENT_CHAR_MOD</a>
+    <span>
+        &nbsp;= &#039;input.char_mods&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/VISU-OS-Input.html#constant_EVENT_CURSOR">EVENT_CURSOR</a>
+    <span>
+        &nbsp;= &#039;input.cursor&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/VISU-OS-Input.html#constant_EVENT_CURSOR_ENTER">EVENT_CURSOR_ENTER</a>
+    <span>
+        &nbsp;= &#039;input.cursor_enter&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/VISU-OS-Input.html#constant_EVENT_DROP">EVENT_DROP</a>
+    <span>
+        &nbsp;= &#039;input.drop&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/VISU-OS-Input.html#constant_EVENT_KEY">EVENT_KEY</a>
+    <span>
+        &nbsp;= &#039;input.key&#039;                            </span>
+</dt>
+<dd>The event names the input class will dispatch on</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/VISU-OS-Input.html#constant_EVENT_MOUSE_BUTTON">EVENT_MOUSE_BUTTON</a>
+    <span>
+        &nbsp;= &#039;input.mouse_button&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/VISU-OS-Input.html#constant_EVENT_MOUSE_CLICK">EVENT_MOUSE_CLICK</a>
+    <span>
+        &nbsp;= &#039;input.mouse_click&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/VISU-OS-Input.html#constant_EVENT_SCROLL">EVENT_SCROLL</a>
+    <span>
+        &nbsp;= &#039;input.scroll&#039;                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/VISU-OS-Input.html#constant_PRESS">PRESS</a>
+    <span>
+        &nbsp;= GLFW_PRESS                            </span>
+</dt>
+<dd>We warp the GLFW state constants to make the syntax a bit more eye pleasing.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/VISU-OS-Input.html#constant_RELEASE">RELEASE</a>
+    <span>
+        &nbsp;= GLFW_RELEASE                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/VISU-OS-Input.html#constant_REPEAT">REPEAT</a>
+    <span>
+        &nbsp;= GLFW_REPEAT                            </span>
+</dt>
+
+    </dl>
+
+
+<h4 id="toc-properties">
+    Properties
+    <a href="classes/VISU-OS-Input.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-OS-Input.html#property_currentInputContext">$currentInputContext</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>Current input context is just represented by a string.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-OS-Input.html#property_dispatcher">$dispatcher</a>
+    <span>
+                        &nbsp;: <a href="classes/VISU-Signal-DispatcherInterface.html"><abbr title="\VISU\Signal\DispatcherInterface">DispatcherInterface</abbr></a>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-OS-Input.html#property_glfwWindowHandle">$glfwWindowHandle</a>
+    <span>
+                        &nbsp;: <abbr title="\GLFWwindow">GLFWwindow</abbr>            </span>
+</dt>
+<dd>GLFW window instance.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-OS-Input.html#property_keysDidPress">$keysDidPress</a>
+    <span>
+                        &nbsp;: array&lt;int, bool&gt;            </span>
+</dt>
+<dd>An array of all keys that have been pressed since the last poll</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-OS-Input.html#property_keysDidPressFrame">$keysDidPressFrame</a>
+    <span>
+                        &nbsp;: array&lt;int, bool&gt;            </span>
+</dt>
+<dd>Same as &quot;keysDidPress&quot; but for per frame state instead of per poll state</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-OS-Input.html#property_keysDidRelease">$keysDidRelease</a>
+    <span>
+                        &nbsp;: array&lt;int, bool&gt;            </span>
+</dt>
+<dd>An array of all keys that have been released since the last poll</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-OS-Input.html#property_keysDidReleaseFrame">$keysDidReleaseFrame</a>
+    <span>
+                        &nbsp;: array&lt;int, bool&gt;            </span>
+</dt>
+<dd>Same as &quot;keysDidRelease&quot; but for per frame state instead of per poll state</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-OS-Input.html#property_lastCursorPosition">$lastCursorPosition</a>
+    <span>
+                        &nbsp;: <abbr title="\GL\Math\Vec2">Vec2</abbr>            </span>
+</dt>
+<dd>The last polled cursor position</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-OS-Input.html#property_lastLeftMouseDownPosition">$lastLeftMouseDownPosition</a>
+    <span>
+                        &nbsp;: <abbr title="\GL\Math\Vec2">Vec2</abbr>            </span>
+</dt>
+<dd>Last left mouse button pressed down cursor position</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-OS-Input.html#property_lastLeftMouseReleasePosition">$lastLeftMouseReleasePosition</a>
+    <span>
+                        &nbsp;: <abbr title="\GL\Math\Vec2">Vec2</abbr>            </span>
+</dt>
+<dd>Last left mouse button released cursor position</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-OS-Input.html#property_mouseButtonsDidPress">$mouseButtonsDidPress</a>
+    <span>
+                        &nbsp;: array&lt;int, bool&gt;            </span>
+</dt>
+<dd>An array of all mouse buttons that have been pressed since the last poll</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-OS-Input.html#property_mouseButtonsDidPressFrame">$mouseButtonsDidPressFrame</a>
+    <span>
+                        &nbsp;: array&lt;int, bool&gt;            </span>
+</dt>
+<dd>Same as &quot;mouseButtonsDidPress&quot; but for per frame state instead of per poll state</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-OS-Input.html#property_mouseButtonsDidRelease">$mouseButtonsDidRelease</a>
+    <span>
+                        &nbsp;: array&lt;int, bool&gt;            </span>
+</dt>
+<dd>An array of all mouse buttons that have been released since the last poll</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-OS-Input.html#property_mouseButtonsDidReleaseFrame">$mouseButtonsDidReleaseFrame</a>
+    <span>
+                        &nbsp;: array&lt;int, bool&gt;            </span>
+</dt>
+<dd>Same as &quot;mouseButtonsDidRelease&quot; but for per frame state instead of per poll state</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-OS-Input.html#property_mouseClickMaxDistanceFromStart">$mouseClickMaxDistanceFromStart</a>
+    <span>
+                        &nbsp;: float            </span>
+</dt>
+<dd>The maximum distance the cursor can move between a mouse down and mouse up event
+to still trigger a mouse click event.</dd>
+
+    </dl>
+
+<h4 id="toc-methods">
+    Methods
+    <a href="classes/VISU-OS-Input.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method___construct">__construct()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Constructor for the Input class.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_claimContext">claimContext()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Claim the input context</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_endFrame">endFrame()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Invoke this method at the end of a frame to let the input manager
+apply state changes to the per frame state.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_getCurrentContext">getCurrentContext()</a>
+    <span>
+                                &nbsp;: string|null    </span>
+</dt>
+<dd>Get the current input context</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_getCursorMode">getCursorMode()</a>
+    <span>
+                                &nbsp;: <a href="classes/VISU-OS-CursorMode.html"><abbr title="\VISU\OS\CursorMode">CursorMode</abbr></a>    </span>
+</dt>
+<dd>Get the current cursor mode</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_getCursorPosition">getCursorPosition()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Vec2">Vec2</abbr>    </span>
+</dt>
+<dd>Get the current cursor position</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_getKeyPresses">getKeyPresses()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, int&gt;    </span>
+</dt>
+<dd>Returns an array of all currently pressed keys</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_getKeyPressesThisFrame">getKeyPressesThisFrame()</a>
+    <span>
+                                &nbsp;: array&lt;string|int, int&gt;    </span>
+</dt>
+<dd>Returns an array of all keys pressed this frame</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_getKeyState">getKeyState()</a>
+    <span>
+                                &nbsp;: int    </span>
+</dt>
+<dd>Get the state for a given key</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_getLastCursorPosition">getLastCursorPosition()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Vec2">Vec2</abbr>    </span>
+</dt>
+<dd>Get the last recieved cursor position
+This represents the last position the cursor was at before the current position,
+!Note: This will be overwritten after the `input.cursor` events are dispatched.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_getLastLeftMouseDownPosition">getLastLeftMouseDownPosition()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Vec2">Vec2</abbr>    </span>
+</dt>
+<dd>Returns the last mouse down position</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_getLastLeftMouseReleasePosition">getLastLeftMouseReleasePosition()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Vec2">Vec2</abbr>    </span>
+</dt>
+<dd>Returns the last mouse release position</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_getMouseButtonState">getMouseButtonState()</a>
+    <span>
+                                &nbsp;: int    </span>
+</dt>
+<dd>Get the state for a given mouse button</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_getNormalizedCursorPosition">getNormalizedCursorPosition()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Vec2">Vec2</abbr>    </span>
+</dt>
+<dd>Returns the normalized cursor position</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_handleWindowChar">handleWindowChar()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Window char event callback
+This method is invoked when a character is inputted (e.g. when typing).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_handleWindowCharMods">handleWindowCharMods()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Window char mods event callback
+This method is invoked when a character is inputted (e.g. when typing).</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_handleWindowCursorEnter">handleWindowCursorEnter()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Window cursor enter event callback
+This method is invoked when the cursor enters or leaves the client area of the window.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_handleWindowCursorPos">handleWindowCursorPos()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Window cursor position event callback
+This method is invoked when the cursor is moved.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_handleWindowDidPollEvents">handleWindowDidPollEvents()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Callback after new evenets are polled
+This method is invoked after new events are polled think of it as a post-update method.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_handleWindowDrop">handleWindowDrop()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Window drop event callback
+This method is invoked when one or more dragged files are dropped on the window.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_handleWindowKey">handleWindowKey()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Window key event callback
+This method is invoked when a key is pressed, repeated or released.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_handleWindowMouseButton">handleWindowMouseButton()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Window mouse button event callback
+This method is invoked when a mouse button is pressed or released.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_handleWindowScroll">handleWindowScroll()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Window scroll event callback
+This method is invoked when a scrolling device is used, such as a mouse wheel or scrolling area of a touchpad.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_handleWindowWillPollEvents">handleWindowWillPollEvents()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Callback before new evenets are polled
+This method is invoked before new events are polled think of it as a pre-update method.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_hasKeyBeenPressed">hasKeyBeenPressed()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Returns boolean if the given key was pressed since the last poll</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_hasKeyBeenPressedThisFrame">hasKeyBeenPressedThisFrame()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Returns boolean if the given key was pressed since the last frame</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_hasKeyBeenReleased">hasKeyBeenReleased()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Returns boolean if the given key was released since the last poll</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_hasKeyBeenReleasedThisFrame">hasKeyBeenReleasedThisFrame()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Returns boolean if the given key was released since the last frame</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_hasMouseButtonBeenPressed">hasMouseButtonBeenPressed()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Returns boolean if the given mouse button was pressed since the last poll</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_hasMouseButtonBeenPressedThisFrame">hasMouseButtonBeenPressedThisFrame()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Returns boolean if the given mouse button was pressed since the last frame</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_hasMouseButtonBeenReleased">hasMouseButtonBeenReleased()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Returns boolean if the given mouse button was released since the last poll</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_hasMouseButtonBeenReleasedThisFrame">hasMouseButtonBeenReleasedThisFrame()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Returns boolean if the given mouse button was released since the last frame</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_isClaimedContext">isClaimedContext()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Returns true if the given input context is currently claimed</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_isContextUnclaimed">isContextUnclaimed()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Is the input context currently claimed?</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_isKeyPressed">isKeyPressed()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Returns boolean if the given key is pressed</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_isKeyReleased">isKeyReleased()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Returns boolean if the given key is released</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_isKeyRepeated">isKeyRepeated()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Returns boolean if the given key is repeated</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_isMouseButtonPressed">isMouseButtonPressed()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Returns boolean if the given mouse button is pressed</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_isMouseButtonReleased">isMouseButtonReleased()</a>
+    <span>
+                                &nbsp;: bool    </span>
+</dt>
+<dd>Returns boolean if the given mouse button is released</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_releaseContext">releaseContext()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Release the input context</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_setCursorMode">setCursorMode()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Set the cursor mode</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-Input.html#method_setCursorPosition">setCursorPosition()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Set the cursor position</dd>
+
+    </dl>
+
+
+
+        
+    <section class="phpdocumentor-constants">
+        <h3 class="phpdocumentor-elements__header" id="constants">
+            Constants
+            <a href="classes/VISU-OS-Input.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_EVENT_CHAR">
+        EVENT_CHAR
+        <a href="classes/VISU-OS-Input.html#constant_EVENT_CHAR" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">147</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">EVENT_CHAR</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;input.char&#039;</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_EVENT_CHAR_MOD">
+        EVENT_CHAR_MOD
+        <a href="classes/VISU-OS-Input.html#constant_EVENT_CHAR_MOD" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">148</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">EVENT_CHAR_MOD</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;input.char_mods&#039;</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_EVENT_CURSOR">
+        EVENT_CURSOR
+        <a href="classes/VISU-OS-Input.html#constant_EVENT_CURSOR" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">143</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">EVENT_CURSOR</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;input.cursor&#039;</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_EVENT_CURSOR_ENTER">
+        EVENT_CURSOR_ENTER
+        <a href="classes/VISU-OS-Input.html#constant_EVENT_CURSOR_ENTER" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">144</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">EVENT_CURSOR_ENTER</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;input.cursor_enter&#039;</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_EVENT_DROP">
+        EVENT_DROP
+        <a href="classes/VISU-OS-Input.html#constant_EVENT_DROP" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">146</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">EVENT_DROP</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;input.drop&#039;</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_EVENT_KEY">
+        EVENT_KEY
+        <a href="classes/VISU-OS-Input.html#constant_EVENT_KEY" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">140</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The event names the input class will dispatch on</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">EVENT_KEY</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;input.key&#039;</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_EVENT_MOUSE_BUTTON">
+        EVENT_MOUSE_BUTTON
+        <a href="classes/VISU-OS-Input.html#constant_EVENT_MOUSE_BUTTON" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">141</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">EVENT_MOUSE_BUTTON</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;input.mouse_button&#039;</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_EVENT_MOUSE_CLICK">
+        EVENT_MOUSE_CLICK
+        <a href="classes/VISU-OS-Input.html#constant_EVENT_MOUSE_CLICK" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">142</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">EVENT_MOUSE_CLICK</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;input.mouse_click&#039;</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_EVENT_SCROLL">
+        EVENT_SCROLL
+        <a href="classes/VISU-OS-Input.html#constant_EVENT_SCROLL" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">145</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">EVENT_SCROLL</span>
+    = <span class="phpdocumentor-signature__default-value">&#039;input.scroll&#039;</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_PRESS">
+        PRESS
+        <a href="classes/VISU-OS-Input.html#constant_PRESS" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">32</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">We warp the GLFW state constants to make the syntax a bit more eye pleasing.</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">PRESS</span>
+    = <span class="phpdocumentor-signature__default-value">GLFW_PRESS</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_RELEASE">
+        RELEASE
+        <a href="classes/VISU-OS-Input.html#constant_RELEASE" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">33</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">RELEASE</span>
+    = <span class="phpdocumentor-signature__default-value">GLFW_RELEASE</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_REPEAT">
+        REPEAT
+        <a href="classes/VISU-OS-Input.html#constant_REPEAT" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">34</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">REPEAT</span>
+    = <span class="phpdocumentor-signature__default-value">GLFW_REPEAT</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+            </section>
+
+        
+    <section class="phpdocumentor-properties">
+        <h3 class="phpdocumentor-elements__header" id="properties">
+            Properties
+            <a href="classes/VISU-OS-Input.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_currentInputContext">
+        $currentInputContext
+        <a href="classes/VISU-OS-Input.html#property_currentInputContext" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">41</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Current input context is just represented by a string.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$currentInputContext</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>The input context can be used as mutex like flag so that
+different systems can use the input class without interfering with each other.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_dispatcher">
+        $dispatcher
+        <a href="classes/VISU-OS-Input.html#property_dispatcher" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">160</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/VISU-Signal-DispatcherInterface.html"><abbr title="\VISU\Signal\DispatcherInterface">DispatcherInterface</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$dispatcher</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_glfwWindowHandle">
+        $glfwWindowHandle
+        <a href="classes/VISU-OS-Input.html#property_glfwWindowHandle" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">51</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW window instance.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><abbr title="\GLFWwindow">GLFWwindow</abbr></span>
+    <span class="phpdocumentor-signature__name">$glfwWindowHandle</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>required to fetch key states. We copy a reference to the raw window
+so we don't always have to use <code class="prettyprint">getGLFWHandle</code> everytime we want to check
+a windows key state.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_keysDidPress">
+        $keysDidPress
+        <a href="classes/VISU-OS-Input.html#property_keysDidPress" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">113</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">An array of all keys that have been pressed since the last poll</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">array&lt;int, bool&gt;</span>
+    <span class="phpdocumentor-signature__name">$keysDidPress</span>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_keysDidPressFrame">
+        $keysDidPressFrame
+        <a href="classes/VISU-OS-Input.html#property_keysDidPressFrame" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">127</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Same as &quot;keysDidPress&quot; but for per frame state instead of per poll state</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">array&lt;int, bool&gt;</span>
+    <span class="phpdocumentor-signature__name">$keysDidPressFrame</span>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_keysDidRelease">
+        $keysDidRelease
+        <a href="classes/VISU-OS-Input.html#property_keysDidRelease" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">120</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">An array of all keys that have been released since the last poll</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">array&lt;int, bool&gt;</span>
+    <span class="phpdocumentor-signature__name">$keysDidRelease</span>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_keysDidReleaseFrame">
+        $keysDidReleaseFrame
+        <a href="classes/VISU-OS-Input.html#property_keysDidReleaseFrame" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">134</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Same as &quot;keysDidRelease&quot; but for per frame state instead of per poll state</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">array&lt;int, bool&gt;</span>
+    <span class="phpdocumentor-signature__name">$keysDidReleaseFrame</span>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_lastCursorPosition">
+        $lastCursorPosition
+        <a href="classes/VISU-OS-Input.html#property_lastCursorPosition" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">58</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The last polled cursor position</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><abbr title="\GL\Math\Vec2">Vec2</abbr></span>
+    <span class="phpdocumentor-signature__name">$lastCursorPosition</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_lastLeftMouseDownPosition">
+        $lastLeftMouseDownPosition
+        <a href="classes/VISU-OS-Input.html#property_lastLeftMouseDownPosition" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">65</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Last left mouse button pressed down cursor position</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><abbr title="\GL\Math\Vec2">Vec2</abbr></span>
+    <span class="phpdocumentor-signature__name">$lastLeftMouseDownPosition</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This is needed to calculate the delta needed to cancel click events</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_lastLeftMouseReleasePosition">
+        $lastLeftMouseReleasePosition
+        <a href="classes/VISU-OS-Input.html#property_lastLeftMouseReleasePosition" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">72</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Last left mouse button released cursor position</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><abbr title="\GL\Math\Vec2">Vec2</abbr></span>
+    <span class="phpdocumentor-signature__name">$lastLeftMouseReleasePosition</span>
+    </code>
+
+        <section class="phpdocumentor-description"><p>This is needed to calculate the delta needed to cancel click events</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_mouseButtonsDidPress">
+        $mouseButtonsDidPress
+        <a href="classes/VISU-OS-Input.html#property_mouseButtonsDidPress" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">85</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">An array of all mouse buttons that have been pressed since the last poll</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">array&lt;int, bool&gt;</span>
+    <span class="phpdocumentor-signature__name">$mouseButtonsDidPress</span>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_mouseButtonsDidPressFrame">
+        $mouseButtonsDidPressFrame
+        <a href="classes/VISU-OS-Input.html#property_mouseButtonsDidPressFrame" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">99</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Same as &quot;mouseButtonsDidPress&quot; but for per frame state instead of per poll state</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">array&lt;int, bool&gt;</span>
+    <span class="phpdocumentor-signature__name">$mouseButtonsDidPressFrame</span>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_mouseButtonsDidRelease">
+        $mouseButtonsDidRelease
+        <a href="classes/VISU-OS-Input.html#property_mouseButtonsDidRelease" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">92</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">An array of all mouse buttons that have been released since the last poll</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">array&lt;int, bool&gt;</span>
+    <span class="phpdocumentor-signature__name">$mouseButtonsDidRelease</span>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_mouseButtonsDidReleaseFrame">
+        $mouseButtonsDidReleaseFrame
+        <a href="classes/VISU-OS-Input.html#property_mouseButtonsDidReleaseFrame" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">106</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Same as &quot;mouseButtonsDidRelease&quot; but for per frame state instead of per poll state</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">array&lt;int, bool&gt;</span>
+    <span class="phpdocumentor-signature__name">$mouseButtonsDidReleaseFrame</span>
+     = <span class="phpdocumentor-signature__default-value">[]</span></code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_mouseClickMaxDistanceFromStart">
+        $mouseClickMaxDistanceFromStart
+        <a href="classes/VISU-OS-Input.html#property_mouseClickMaxDistanceFromStart" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">78</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The maximum distance the cursor can move between a mouse down and mouse up event
+to still trigger a mouse click event.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type">float</span>
+    <span class="phpdocumentor-signature__name">$mouseClickMaxDistanceFromStart</span>
+     = <span class="phpdocumentor-signature__default-value">10.0</span></code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+            </section>
+
+            <section class="phpdocumentor-methods">
+        <h3 class="phpdocumentor-elements__header" id="methods">
+            Methods
+            <a href="classes/VISU-OS-Input.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/VISU-OS-Input.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">158</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Constructor for the Input class.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$window</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Signal-DispatcherInterface.html"><abbr title="\VISU\Signal\DispatcherInterface">DispatcherInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$dispatcher</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$window</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The window instance to handle input for.</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$dispatcher</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Signal-DispatcherInterface.html"><abbr title="\VISU\Signal\DispatcherInterface">DispatcherInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The dispatcher instance events will be dispatched to.</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_claimContext">
+        claimContext()
+        <a href="classes/VISU-OS-Input.html#method_claimContext" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">767</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Claim the input context</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">claimContext</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$context</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$context</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The context string to claim</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_endFrame">
+        endFrame()
+        <a href="classes/VISU-OS-Input.html#method_endFrame" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">745</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Invoke this method at the end of a frame to let the input manager
+apply state changes to the per frame state.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">endFrame</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getCurrentContext">
+        getCurrentContext()
+        <a href="classes/VISU-OS-Input.html#method_getCurrentContext" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">796</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Get the current input context</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getCurrentContext</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">string|null</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">string|null</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The current input context or null if no context is claimed</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getCursorMode">
+        getCursorMode()
+        <a href="classes/VISU-OS-Input.html#method_getCursorMode" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">540</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Get the current cursor mode</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getCursorMode</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/VISU-OS-CursorMode.html"><abbr title="\VISU\OS\CursorMode">CursorMode</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/VISU-OS-CursorMode.html"><abbr title="\VISU\OS\CursorMode">CursorMode</abbr></a></span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The current cursor mode</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getCursorPosition">
+        getCursorPosition()
+        <a href="classes/VISU-OS-Input.html#method_getCursorPosition" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">452</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Get the current cursor position</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getCursorPosition</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec2">Vec2</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec2">Vec2</abbr></span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The current cursor position</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getKeyPresses">
+        getKeyPresses()
+        <a href="classes/VISU-OS-Input.html#method_getKeyPresses" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">421</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns an array of all currently pressed keys</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getKeyPresses</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, int&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>This method returns the key codes of all keys that were pressed
+since the last poll event.</p>
+<p>Example:</p>
+<pre class="prettyprint"><code class="language-php">$pressedKeys = $input-&gt;getKeyPresses();
+foreach ($pressedKeys as $key) {
+    echo &quot;Key $key was pressed\n&quot;;
+}
+</code></pre>
+</section>
+
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, int&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Array of key codes that were pressed since last poll</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getKeyPressesThisFrame">
+        getKeyPressesThisFrame()
+        <a href="classes/VISU-OS-Input.html#method_getKeyPressesThisFrame" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">442</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns an array of all keys pressed this frame</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getKeyPressesThisFrame</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;string|int, int&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>This method returns the key codes of all keys that were pressed
+since the last frame.</p>
+<p>Example:</p>
+<pre class="prettyprint"><code class="language-php">$pressedKeys = $input-&gt;getKeyPressesThisFrame();
+foreach ($pressedKeys as $key) {
+    echo &quot;Key $key was pressed this frame\n&quot;;
+}
+</code></pre>
+</section>
+
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;string|int, int&gt;</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>Array of key codes that were pressed this frame</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getKeyState">
+        getKeyState()
+        <a href="classes/VISU-OS-Input.html#method_getKeyState" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">177</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Get the state for a given key</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getKeyState</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$key</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Can return one of the following values:</p>
+<ul>
+<li><code class="prettyprint">Input::PRESS</code></li>
+<li><code class="prettyprint">Input::RELEASE</code></li>
+<li><code class="prettyprint">Input::REPEAT</code></li>
+</ul>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$key</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The key to get the state for</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The state of the key</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getLastCursorPosition">
+        getLastCursorPosition()
+        <a href="classes/VISU-OS-Input.html#method_getLastCursorPosition" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">486</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Get the last recieved cursor position
+This represents the last position the cursor was at before the current position,
+!Note: This will be overwritten after the `input.cursor` events are dispatched.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getLastCursorPosition</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec2">Vec2</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec2">Vec2</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getLastLeftMouseDownPosition">
+        getLastLeftMouseDownPosition()
+        <a href="classes/VISU-OS-Input.html#method_getLastLeftMouseDownPosition" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">494</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the last mouse down position</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getLastLeftMouseDownPosition</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec2">Vec2</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec2">Vec2</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getLastLeftMouseReleasePosition">
+        getLastLeftMouseReleasePosition()
+        <a href="classes/VISU-OS-Input.html#method_getLastLeftMouseReleasePosition" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">502</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the last mouse release position</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getLastLeftMouseReleasePosition</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec2">Vec2</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec2">Vec2</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getMouseButtonState">
+        getMouseButtonState()
+        <a href="classes/VISU-OS-Input.html#method_getMouseButtonState" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">240</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Get the state for a given mouse button</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getMouseButtonState</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$button</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Can return one of the following values:</p>
+<ul>
+<li><code class="prettyprint">Input::PRESS</code></li>
+<li><code class="prettyprint">Input::RELEASE</code></li>
+</ul>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$button</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The mouse button to get the state for</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The state of the mouse button</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getNormalizedCursorPosition">
+        getNormalizedCursorPosition()
+        <a href="classes/VISU-OS-Input.html#method_getNormalizedCursorPosition" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">468</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the normalized cursor position</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getNormalizedCursorPosition</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec2">Vec2</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>This is the cursor position normalized to the range of -1.0 to 1.0</p>
+</section>
+
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec2">Vec2</abbr></span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The normalized cursor position</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_handleWindowChar">
+        handleWindowChar()
+        <a href="classes/VISU-OS-Input.html#method_handleWindowChar" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">580</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Window char event callback
+This method is invoked when a character is inputted (e.g. when typing).</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">handleWindowChar</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$window</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$char</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$window</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The window that received the event</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$char</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The Unicode code point of the character</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_handleWindowCharMods">
+        handleWindowCharMods()
+        <a href="classes/VISU-OS-Input.html#method_handleWindowCharMods" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">595</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Window char mods event callback
+This method is invoked when a character is inputted (e.g. when typing).</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">handleWindowCharMods</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$window</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$char</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mods</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$window</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The window that received the event</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$char</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The Unicode code point of the character</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$mods</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Bit field describing which modifier keys were held down</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_handleWindowCursorEnter">
+        handleWindowCursorEnter()
+        <a href="classes/VISU-OS-Input.html#method_handleWindowCursorEnter" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">679</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Window cursor enter event callback
+This method is invoked when the cursor enters or leaves the client area of the window.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">handleWindowCursorEnter</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$window</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entered</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$window</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The window that received the event</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$entered</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>True if the cursor entered the window's client area, or false if it left it</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_handleWindowCursorPos">
+        handleWindowCursorPos()
+        <a href="classes/VISU-OS-Input.html#method_handleWindowCursorPos" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">658</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Window cursor position event callback
+This method is invoked when the cursor is moved.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">handleWindowCursorPos</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$window</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$xpos</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$ypos</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$window</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The window that received the event</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$xpos</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The new x-coordinate, in screen coordinates, of the cursor</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$ypos</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The new y-coordinate, in screen coordinates, of the cursor</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_handleWindowDidPollEvents">
+        handleWindowDidPollEvents()
+        <a href="classes/VISU-OS-Input.html#method_handleWindowDidPollEvents" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">735</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Callback after new evenets are polled
+This method is invoked after new events are polled think of it as a post-update method.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">handleWindowDidPollEvents</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$window</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$window</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The window that received the event</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_handleWindowDrop">
+        handleWindowDrop()
+        <a href="classes/VISU-OS-Input.html#method_handleWindowDrop" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">708</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Window drop event callback
+This method is invoked when one or more dragged files are dropped on the window.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">handleWindowDrop</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$window</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, string&gt;&nbsp;</span><span class="phpdocumentor-signature__argument__name">$paths</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$window</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The window that received the event</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$paths</span>
+                : <span class="phpdocumentor-signature__argument__return-type">array&lt;string|int, string&gt;</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The UTF-8 encoded file and/or directory path names</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_handleWindowKey">
+        handleWindowKey()
+        <a href="classes/VISU-OS-Input.html#method_handleWindowKey" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">557</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Window key event callback
+This method is invoked when a key is pressed, repeated or released.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">handleWindowKey</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$window</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$key</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$scancode</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$action</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mods</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$window</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The window that received the event</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$key</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The key that was pressed, repeated or released</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$scancode</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The system-specific scancode of the key</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$action</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The key action. One of: GLFW_PRESS, GLFW_RELEASE or GLFW_REPEAT</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$mods</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Bit field describing which modifier keys were held down</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_handleWindowMouseButton">
+        handleWindowMouseButton()
+        <a href="classes/VISU-OS-Input.html#method_handleWindowMouseButton" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">611</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Window mouse button event callback
+This method is invoked when a mouse button is pressed or released.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">handleWindowMouseButton</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$window</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$button</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$action</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mods</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$window</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The window that received the event</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$button</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The mouse button that was pressed or released</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$action</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The mouse button action. One of: GLFW_PRESS or GLFW_RELEASE</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$mods</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>Bit field describing which modifier keys were held down</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_handleWindowScroll">
+        handleWindowScroll()
+        <a href="classes/VISU-OS-Input.html#method_handleWindowScroll" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">694</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Window scroll event callback
+This method is invoked when a scrolling device is used, such as a mouse wheel or scrolling area of a touchpad.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">handleWindowScroll</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$window</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$xoffset</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$yoffset</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$window</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The window that received the event</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$xoffset</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The scroll offset along the x-axis</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$yoffset</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The scroll offset along the y-axis</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_handleWindowWillPollEvents">
+        handleWindowWillPollEvents()
+        <a href="classes/VISU-OS-Input.html#method_handleWindowWillPollEvents" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">720</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Callback before new evenets are polled
+This method is invoked before new events are polled think of it as a pre-update method.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">handleWindowWillPollEvents</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$window</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$window</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Window.html"><abbr title="\VISU\OS\Window">Window</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The window that received the event</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_hasKeyBeenPressed">
+        hasKeyBeenPressed()
+        <a href="classes/VISU-OS-Input.html#method_hasKeyBeenPressed" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">352</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns boolean if the given key was pressed since the last poll</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">hasKeyBeenPressed</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$key</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Example:</p>
+<pre class="prettyprint"><code class="language-php">$input-&gt;hasKeyBeenPressed(Key::SPACE);
+</code></pre>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$key</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The key to check</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>True if the key was pressed, false otherwise</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_hasKeyBeenPressedThisFrame">
+        hasKeyBeenPressedThisFrame()
+        <a href="classes/VISU-OS-Input.html#method_hasKeyBeenPressedThisFrame" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">384</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns boolean if the given key was pressed since the last frame</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">hasKeyBeenPressedThisFrame</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$key</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Example:</p>
+<pre class="prettyprint"><code class="language-php">$input-&gt;hasKeyBeenPressedThisFrame(Key::SPACE);
+</code></pre>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$key</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The key to check</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>True if the key was pressed, false otherwise</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_hasKeyBeenReleased">
+        hasKeyBeenReleased()
+        <a href="classes/VISU-OS-Input.html#method_hasKeyBeenReleased" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">368</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns boolean if the given key was released since the last poll</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">hasKeyBeenReleased</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$key</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Example:</p>
+<pre class="prettyprint"><code class="language-php">$input-&gt;hasKeyBeenReleased(Key::SPACE);
+</code></pre>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$key</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The key to check</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>True if the key was released, false otherwise</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_hasKeyBeenReleasedThisFrame">
+        hasKeyBeenReleasedThisFrame()
+        <a href="classes/VISU-OS-Input.html#method_hasKeyBeenReleasedThisFrame" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">400</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns boolean if the given key was released since the last frame</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">hasKeyBeenReleasedThisFrame</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$key</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Example:</p>
+<pre class="prettyprint"><code class="language-php">$input-&gt;hasKeyBeenReleasedThisFrame(Key::SPACE);
+</code></pre>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$key</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The key to check</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>True if the key was released, false otherwise</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_hasMouseButtonBeenPressed">
+        hasMouseButtonBeenPressed()
+        <a href="classes/VISU-OS-Input.html#method_hasMouseButtonBeenPressed" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">288</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns boolean if the given mouse button was pressed since the last poll</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">hasMouseButtonBeenPressed</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$button</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Example:</p>
+<pre class="prettyprint"><code class="language-php">$input-&gt;hasMouseButtonBeenPressed(MouseButton::LEFT);
+</code></pre>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$button</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The mouse button to check</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>True if the mouse button was pressed, false otherwise</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_hasMouseButtonBeenPressedThisFrame">
+        hasMouseButtonBeenPressedThisFrame()
+        <a href="classes/VISU-OS-Input.html#method_hasMouseButtonBeenPressedThisFrame" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">320</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns boolean if the given mouse button was pressed since the last frame</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">hasMouseButtonBeenPressedThisFrame</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$button</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Example:</p>
+<pre class="prettyprint"><code class="language-php">$input-&gt;hasMouseButtonBeenPressedThisFrame(MouseButton::LEFT);
+</code></pre>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$button</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The mouse button to check</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>True if the mouse button was pressed, false otherwise</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_hasMouseButtonBeenReleased">
+        hasMouseButtonBeenReleased()
+        <a href="classes/VISU-OS-Input.html#method_hasMouseButtonBeenReleased" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">304</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns boolean if the given mouse button was released since the last poll</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">hasMouseButtonBeenReleased</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$button</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Example:</p>
+<pre class="prettyprint"><code class="language-php">$input-&gt;hasMouseButtonBeenReleased(MouseButton::LEFT);
+</code></pre>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$button</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The mouse button to check</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>True if the mouse button was released, false otherwise</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_hasMouseButtonBeenReleasedThisFrame">
+        hasMouseButtonBeenReleasedThisFrame()
+        <a href="classes/VISU-OS-Input.html#method_hasMouseButtonBeenReleasedThisFrame" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">336</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns boolean if the given mouse button was released since the last frame</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">hasMouseButtonBeenReleasedThisFrame</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$button</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Example:</p>
+<pre class="prettyprint"><code class="language-php">$input-&gt;hasMouseButtonBeenReleasedThisFrame(MouseButton::LEFT);
+</code></pre>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$button</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The mouse button to check</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>True if the mouse button was released, false otherwise</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_isClaimedContext">
+        isClaimedContext()
+        <a href="classes/VISU-OS-Input.html#method_isClaimedContext" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">807</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns true if the given input context is currently claimed</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">isClaimedContext</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$context</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$context</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The context string to check</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>True if the given input context is currently claimed</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_isContextUnclaimed">
+        isContextUnclaimed()
+        <a href="classes/VISU-OS-Input.html#method_isContextUnclaimed" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">756</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Is the input context currently claimed?</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">isContextUnclaimed</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_isKeyPressed">
+        isKeyPressed()
+        <a href="classes/VISU-OS-Input.html#method_isKeyPressed" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">193</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns boolean if the given key is pressed</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">isKeyPressed</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$key</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Example:</p>
+<pre class="prettyprint"><code class="language-php">$input-&gt;isKeyPressed(Key::SPACE);
+</code></pre>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$key</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The key to check</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>True if the key is pressed, false otherwise</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_isKeyReleased">
+        isKeyReleased()
+        <a href="classes/VISU-OS-Input.html#method_isKeyReleased" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">209</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns boolean if the given key is released</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">isKeyReleased</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$key</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Example:</p>
+<pre class="prettyprint"><code class="language-php">$input-&gt;isKeyReleased(Key::SPACE);
+</code></pre>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$key</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The key to check</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>True if the key is released, false otherwise</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_isKeyRepeated">
+        isKeyRepeated()
+        <a href="classes/VISU-OS-Input.html#method_isKeyRepeated" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">225</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns boolean if the given key is repeated</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">isKeyRepeated</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$key</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Example:</p>
+<pre class="prettyprint"><code class="language-php">$input-&gt;isKeyRepeated(Key::SPACE);
+</code></pre>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$key</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The key to check</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>True if the key is repeated, false otherwise</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_isMouseButtonPressed">
+        isMouseButtonPressed()
+        <a href="classes/VISU-OS-Input.html#method_isMouseButtonPressed" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">256</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns boolean if the given mouse button is pressed</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">isMouseButtonPressed</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$button</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Example:</p>
+<pre class="prettyprint"><code class="language-php">$input-&gt;isMouseButtonPressed(MouseButton::LEFT);
+</code></pre>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$button</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The mouse button to check</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>True if the mouse button is pressed, false otherwise</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_isMouseButtonReleased">
+        isMouseButtonReleased()
+        <a href="classes/VISU-OS-Input.html#method_isMouseButtonReleased" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">272</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns boolean if the given mouse button is released</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">isMouseButtonReleased</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$button</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">bool</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Example:</p>
+<pre class="prettyprint"><code class="language-php">$input-&gt;isMouseButtonReleased(MouseButton::LEFT);
+</code></pre>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$button</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The mouse button to check</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">bool</span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>True if the mouse button is released, false otherwise</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_releaseContext">
+        releaseContext()
+        <a href="classes/VISU-OS-Input.html#method_releaseContext" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">782</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Release the input context</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">releaseContext</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string&nbsp;</span><span class="phpdocumentor-signature__argument__name">$context</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$context</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The context string to release</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setCursorMode">
+        setCursorMode()
+        <a href="classes/VISU-OS-Input.html#method_setCursorMode" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">530</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Set the cursor mode</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setCursorMode</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-CursorMode.html"><abbr title="\VISU\OS\CursorMode">CursorMode</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mode</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Available modes:</p>
+<ul>
+<li><code class="prettyprint">CursorMode::NORMAL</code></li>
+<li><code class="prettyprint">CursorMode::HIDDEN</code></li>
+<li><code class="prettyprint">CursorMode::DISABLED</code></li>
+</ul>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$mode</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-CursorMode.html"><abbr title="\VISU\OS\CursorMode">CursorMode</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The mode to set the cursor to</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setCursorPosition">
+        setCursorPosition()
+        <a href="classes/VISU-OS-Input.html#method_setCursorPosition" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/Input.php"><a href="files/src-os-input.html"><abbr title="src/OS/Input.php">Input.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">514</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Set the cursor position</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setCursorPosition</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Vec2">Vec2</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$position</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$position</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Vec2">Vec2</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The position to set the cursor to</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+            </section>
+
+        <div class="phpdocumentor-modal" id="source-view">
+    <div class="phpdocumentor-modal-bg" data-exit-button></div>
+    <div class="phpdocumentor-modal-container">
+        <div class="phpdocumentor-modal-content">
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/OS/Input.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+        </div>
+        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
+    </div>
+</div>
+
+    <script type="text/javascript">
+        (function () {
+            function loadExternalCodeSnippet(el, url, line) {
+                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
+                    const language = 'php';
+
+                    const code = document.createElement('code');
+                    code.className = 'language-' + language;
+                    pre.textContent = '';
+                    pre.setAttribute('data-line', line)
+                    code.textContent = 'Loading…';
+                    pre.appendChild(code);
+
+                    var xhr = new XMLHttpRequest();
+
+                    xhr.open('GET', src, true);
+
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState !== 4) {
+                            return;
+                        }
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+                            Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
+                            return;
+                        }
+
+                        if (xhr.status === 404) {
+                            code.textContent = '✖ Error: File could not be found';
+                            return;
+                        }
+
+                        if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                            return;
+                        }
+
+                        code.textContent = '✖ Error: An unknown error occurred';
+                    };
+
+                    xhr.send(null);
+                });
+            }
+
+            const modalButtons = document.querySelectorAll("[data-modal]");
+            const openedAsLocalFile = window.location.protocol === 'file:';
+            if (modalButtons.length > 0 && openedAsLocalFile) {
+                console.warn(
+                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
+                    'browsers block XHR requests when a page is opened this way'
+                );
+            }
+
+            modalButtons.forEach(function (trigger) {
+                if (openedAsLocalFile) {
+                    trigger.setAttribute("hidden", "hidden");
+                }
+
+                trigger.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const modal = document.getElementById(trigger.dataset.modal);
+                    if (!modal) {
+                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
+                        return;
+                    }
+                    modal.classList.add("phpdocumentor-modal__open");
+
+                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
+                    const exits = modal.querySelectorAll("[data-exit-button]");
+                    exits.forEach(function (exit) {
+                        exit.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            modal.classList.remove("phpdocumentor-modal__open");
+                        });
+                    });
+                });
+            });
+        })();
+    </script>
+
+    </article>
+                                </section>
+                <section class="phpdocumentor-on-this-page__sidebar">
+                                
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                        <li><a href="classes/VISU-OS-Input.html#toc-constants">Constants</a></li>
+                                                            <li><a href="classes/VISU-OS-Input.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/VISU-OS-Input.html#toc-methods">Methods</a></li>
+                                    </ul>
+            </li>
+                            <li class="phpdocumentor-on-this-page-section__title">Constants</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/VISU-OS-Input.html#constant_EVENT_CHAR">EVENT_CHAR</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-Input.html#constant_EVENT_CHAR_MOD">EVENT_CHAR_MOD</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-Input.html#constant_EVENT_CURSOR">EVENT_CURSOR</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-Input.html#constant_EVENT_CURSOR_ENTER">EVENT_CURSOR_ENTER</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-Input.html#constant_EVENT_DROP">EVENT_DROP</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-Input.html#constant_EVENT_KEY">EVENT_KEY</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-Input.html#constant_EVENT_MOUSE_BUTTON">EVENT_MOUSE_BUTTON</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-Input.html#constant_EVENT_MOUSE_CLICK">EVENT_MOUSE_CLICK</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-Input.html#constant_EVENT_SCROLL">EVENT_SCROLL</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-Input.html#constant_PRESS">PRESS</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-Input.html#constant_RELEASE">RELEASE</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-Input.html#constant_REPEAT">REPEAT</a></li>
+                                            </ul>
+                </li>
+            
+                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/VISU-OS-Input.html#property_currentInputContext">$currentInputContext</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-Input.html#property_dispatcher">$dispatcher</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-Input.html#property_glfwWindowHandle">$glfwWindowHandle</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-Input.html#property_keysDidPress">$keysDidPress</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-Input.html#property_keysDidPressFrame">$keysDidPressFrame</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-Input.html#property_keysDidRelease">$keysDidRelease</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-Input.html#property_keysDidReleaseFrame">$keysDidReleaseFrame</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-Input.html#property_lastCursorPosition">$lastCursorPosition</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-Input.html#property_lastLeftMouseDownPosition">$lastLeftMouseDownPosition</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-Input.html#property_lastLeftMouseReleasePosition">$lastLeftMouseReleasePosition</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-Input.html#property_mouseButtonsDidPress">$mouseButtonsDidPress</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-Input.html#property_mouseButtonsDidPressFrame">$mouseButtonsDidPressFrame</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-Input.html#property_mouseButtonsDidRelease">$mouseButtonsDidRelease</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-Input.html#property_mouseButtonsDidReleaseFrame">$mouseButtonsDidReleaseFrame</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-Input.html#property_mouseClickMaxDistanceFromStart">$mouseClickMaxDistanceFromStart</a></li>
+                                            </ul>
+                </li>
+            
+                        <li class="phpdocumentor-on-this-page-section__title">Methods</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method___construct">__construct()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_claimContext">claimContext()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_endFrame">endFrame()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_getCurrentContext">getCurrentContext()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_getCursorMode">getCursorMode()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_getCursorPosition">getCursorPosition()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_getKeyPresses">getKeyPresses()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_getKeyPressesThisFrame">getKeyPressesThisFrame()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_getKeyState">getKeyState()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_getLastCursorPosition">getLastCursorPosition()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_getLastLeftMouseDownPosition">getLastLeftMouseDownPosition()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_getLastLeftMouseReleasePosition">getLastLeftMouseReleasePosition()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_getMouseButtonState">getMouseButtonState()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_getNormalizedCursorPosition">getNormalizedCursorPosition()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_handleWindowChar">handleWindowChar()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_handleWindowCharMods">handleWindowCharMods()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_handleWindowCursorEnter">handleWindowCursorEnter()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_handleWindowCursorPos">handleWindowCursorPos()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_handleWindowDidPollEvents">handleWindowDidPollEvents()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_handleWindowDrop">handleWindowDrop()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_handleWindowKey">handleWindowKey()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_handleWindowMouseButton">handleWindowMouseButton()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_handleWindowScroll">handleWindowScroll()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_handleWindowWillPollEvents">handleWindowWillPollEvents()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_hasKeyBeenPressed">hasKeyBeenPressed()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_hasKeyBeenPressedThisFrame">hasKeyBeenPressedThisFrame()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_hasKeyBeenReleased">hasKeyBeenReleased()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_hasKeyBeenReleasedThisFrame">hasKeyBeenReleasedThisFrame()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_hasMouseButtonBeenPressed">hasMouseButtonBeenPressed()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_hasMouseButtonBeenPressedThisFrame">hasMouseButtonBeenPressedThisFrame()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_hasMouseButtonBeenReleased">hasMouseButtonBeenReleased()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_hasMouseButtonBeenReleasedThisFrame">hasMouseButtonBeenReleasedThisFrame()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_isClaimedContext">isClaimedContext()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_isContextUnclaimed">isContextUnclaimed()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_isKeyPressed">isKeyPressed()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_isKeyReleased">isKeyReleased()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_isKeyRepeated">isKeyRepeated()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_isMouseButtonPressed">isMouseButtonPressed()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_isMouseButtonReleased">isMouseButtonReleased()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_releaseContext">releaseContext()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_setCursorMode">setCursorMode()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-Input.html#method_setCursorPosition">setCursorPosition()</a></li>
+                                    </ul>
+            </li>
+                    </ul>
+    </section>
+
+                </section>
+                            </div>
+            <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+    <section class="phpdocumentor-search-results__dialog">
+        <header class="phpdocumentor-search-results__header">
+            <h2 class="phpdocumentor-search-results__title">Search results</h2>
+            <button class="phpdocumentor-search-results__close"><i class="fas fa-times"></i></button>
+        </header>
+        <section class="phpdocumentor-search-results__body">
+            <ul class="phpdocumentor-search-results__entries"></ul>
+        </section>
+    </section>
+</section>
+        </div>
+        <a href="classes/VISU-OS-Input.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+
+    </main>
+
+    <script>
+        cssVars({});
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+</body>
+</html>

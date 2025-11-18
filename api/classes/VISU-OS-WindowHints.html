@@ -1,0 +1,3572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+            <title>VISU - PHP Game Framework</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="../">
+    <link rel="icon" href="images/favicon.ico"/>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/base.css">
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/template.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism-okaidia.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
+        <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="js/template.js"></script>
+        <script src="js/search.js"></script>
+        <script defer src="js/searchIndex.js"></script>
+    </head>
+<body id="top">
+    <header class="phpdocumentor-header phpdocumentor-section">
+    <h1 class="phpdocumentor-title"><a href="" class="phpdocumentor-title__link">VISU - PHP Game Framework</a></h1>
+    <input class="phpdocumentor-header__menu-button" type="checkbox" id="menu-button" name="menu-button" />
+    <label class="phpdocumentor-header__menu-icon" for="menu-button">
+        <i class="fas fa-bars"></i>
+    </label>
+    <section data-search-form class="phpdocumentor-search">
+    <label>
+        <span class="visually-hidden">Search for</span>
+        <svg class="phpdocumentor-search__icon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="7.5" cy="7.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <line x1="12.4892" y1="12.2727" x2="19.1559" y2="18.9393" stroke="currentColor" stroke-width="3"/>
+        </svg>
+        <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+    </label>
+</section>
+
+    <nav class="phpdocumentor-topnav">
+    <ul class="phpdocumentor-topnav__menu">
+        </ul>
+</nav>
+</header>
+
+    <main class="phpdocumentor">
+        <div class="phpdocumentor-section">
+            <input class="phpdocumentor-sidebar__menu-button" type="checkbox" id="sidebar-button" name="sidebar-button" />
+<label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
+    Menu
+</label>
+<aside class="phpdocumentor-column -three phpdocumentor-sidebar">
+                    <section class="phpdocumentor-sidebar__category -namespaces">
+            <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/visu.html" class="">VISU</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/visu-animation.html" class="">Animation</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-command.html" class="">Command</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-component.html" class="">Component</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-ecs.html" class="">ECS</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-exception.html" class="">Exception</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-flyui.html" class="">FlyUI</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-geo.html" class="">Geo</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-graphics.html" class="">Graphics</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-instrument.html" class="">Instrument</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-maker.html" class="">Maker</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-os.html" class="">OS</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-quickstart.html" class="">Quickstart</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-runtime.html" class="">Runtime</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-signal.html" class="">Signal</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-signals.html" class="">Signals</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-system.html" class="">System</a>
+                
+            </li>
+            </ul>
+
+                        </section>
+                <section class="phpdocumentor-sidebar__category -packages">
+            <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Application.html" class="">Application</a>
+</h4>
+
+                        </section>
+            
+    <section class="phpdocumentor-sidebar__category -reports">
+        <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="graphs/classes.html">Class Diagram</a></h3>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
+    </section>
+
+    <section class="phpdocumentor-sidebar__category -indices">
+        <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
+    </section>
+</aside>
+
+            <div class="phpdocumentor-column -nine phpdocumentor-content">
+                                <section>
+                                        <ul class="phpdocumentor-breadcrumbs">
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/visu.html">VISU</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/visu-os.html">OS</a></li>
+    </ul>
+
+    <article class="phpdocumentor-element -class">
+        <h2 class="phpdocumentor-content__title">
+    WindowHints
+
+    
+            <div class="phpdocumentor-element__package">
+            in package
+            <ul class="phpdocumentor-breadcrumbs">
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Application.html">Application</a></li>
+                            </ul>
+        </div>
+    
+    
+    </h2>
+
+<div class="phpdocumentor-label-line">
+
+
+</div>
+
+        <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">8</span>
+
+    </aside>
+
+        
+
+
+
+
+
+
+
+
+<h3 id="toc">
+    Table of Contents
+    <a href="classes/VISU-OS-WindowHints.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h3>
+
+
+
+
+
+
+
+
+
+<h4 id="toc-properties">
+    Properties
+    <a href="classes/VISU-OS-WindowHints.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#property_autoIconify">$autoIconify</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+<dd>GLFW_AUTO_ICONIFY</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#property_centerCursor">$centerCursor</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+<dd>GLFW_CENTER_CURSOR</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#property_clientAPI">$clientAPI</a>
+    <span>
+                        &nbsp;: int|null            </span>
+</dt>
+<dd>GLFW_CLIENT_API</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#property_cocoaframeName">$cocoaframeName</a>
+    <span>
+                        &nbsp;: string|null            </span>
+</dt>
+<dd>GLFW_COCOA_FRAME_NAME</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#property_cocoaGraphicsSwitching">$cocoaGraphicsSwitching</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+<dd>GLFW_COCOA_GRAPHICS_SWITCHING</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#property_cocoaRetinaFramebuffer">$cocoaRetinaFramebuffer</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+<dd>GLFW_COCOA_RETINA_FRAMEBUFFER</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#property_contextCreationAPI">$contextCreationAPI</a>
+    <span>
+                        &nbsp;: int|null            </span>
+</dt>
+<dd>GLFW_CONTEXT_CREATION_API</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#property_contextVersionMajor">$contextVersionMajor</a>
+    <span>
+                        &nbsp;: int|null            </span>
+</dt>
+<dd>GLFW_CONTEXT_VERSION_MAJOR</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#property_contextVersionMinor">$contextVersionMinor</a>
+    <span>
+                        &nbsp;: int|null            </span>
+</dt>
+<dd>GLFW_CONTEXT_VERSION_MINOR</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#property_debugContext">$debugContext</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+<dd>GLFW_OPENGL_DEBUG_CONTEXT</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#property_decorated">$decorated</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+<dd>GLFW_DECORATED</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#property_doubleBuffer">$doubleBuffer</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+<dd>GLFW_DOUBLEBUFFER</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#property_floating">$floating</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+<dd>GLFW_FLOATING</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#property_focused">$focused</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+<dd>GLFW_FOCUSED</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#property_focusOnShow">$focusOnShow</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+<dd>GLFW_FOCUS_ON_SHOW</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#property_forwardCompatible">$forwardCompatible</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+<dd>GLFW_OPENGL_FORWARD_COMPAT</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#property_maximized">$maximized</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+<dd>GLFW_MAXIMIZED</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#property_noError">$noError</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+<dd>GLFW_CONTEXT_NO_ERROR</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#property_profile">$profile</a>
+    <span>
+                        &nbsp;: int|null            </span>
+</dt>
+<dd>GLFW_OPENGL_PROFILE</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#property_refreshRate">$refreshRate</a>
+    <span>
+                        &nbsp;: int|null            </span>
+</dt>
+<dd>GLFW_REFRESH_RATE</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#property_releaseBehavior">$releaseBehavior</a>
+    <span>
+                        &nbsp;: int|null            </span>
+</dt>
+<dd>GLFW_CONTEXT_RELEASE_BEHAVIOR</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#property_resizable">$resizable</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+<dd>GLFW_RESIZABLE</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#property_robustness">$robustness</a>
+    <span>
+                        &nbsp;: int|null            </span>
+</dt>
+<dd>GLFW_CONTEXT_ROBUSTNESS</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#property_samples">$samples</a>
+    <span>
+                        &nbsp;: int|null            </span>
+</dt>
+<dd>GLFW_SAMPLES</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#property_scaleToMonitor">$scaleToMonitor</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+<dd>GLFW_SCALE_TO_MONITOR</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#property_sRGBCapable">$sRGBCapable</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+<dd>GLFW_SRGB_CAPABLE</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#property_stereoscopic">$stereoscopic</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+<dd>GLFW_STEREO</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#property_transparentFramebuffer">$transparentFramebuffer</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+<dd>GLFW_TRANSPARENT_FRAMEBUFFER</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#property_visible">$visible</a>
+    <span>
+                        &nbsp;: bool|null            </span>
+</dt>
+<dd>GLFW_VISIBLE</dd>
+
+    </dl>
+
+<h4 id="toc-methods">
+    Methods
+    <a href="classes/VISU-OS-WindowHints.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_apply">apply()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Applies the hints to the window.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_getHintConstantMap">getHintConstantMap()</a>
+    <span>
+                                &nbsp;: array&lt;int, mixed&gt;    </span>
+</dt>
+<dd>Returns an array of all available window hints.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_setAutoIconify">setAutoIconify()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the autoIconify hint. (GLFW_AUTO_ICONIFY)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_setCenterCursor">setCenterCursor()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the centerCursor hint. (GLFW_CENTER_CURSOR)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_setClientAPI">setClientAPI()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the clientAPI hint. (GLFW_CLIENT_API)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_setCocoaFrameName">setCocoaFrameName()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the cocoaFrameName hint. (GLFW_COCOA_FRAME_NAME)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_setCocoaGraphicsSwitching">setCocoaGraphicsSwitching()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the cocoaGraphicsSwitching hint. (GLFW_COCOA_GRAPHICS_SWITCHING)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_setCocoaRetinaFramebuffer">setCocoaRetinaFramebuffer()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the cocoaRetinaFramebuffer hint. (GLFW_COCOA_RETINA_FRAMEBUFFER)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_setContextCreationAPI">setContextCreationAPI()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the contextCreationAPI hint. (GLFW_CONTEXT_CREATION_API)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_setContextVersionMajor">setContextVersionMajor()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the contextVersionMajor hint. (GLFW_CONTEXT_VERSION_MAJOR)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_setContextVersionMinor">setContextVersionMinor()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the contextVersionMinor hint. (GLFW_CONTEXT_VERSION_MINOR)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_setDebugContext">setDebugContext()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the debugContext hint. (GLFW_OPENGL_DEBUG_CONTEXT)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_setDecorated">setDecorated()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the decorated hint. (GLFW_DECORATED)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_setDoubleBuffer">setDoubleBuffer()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the doubleBuffer hint. (GLFW_DOUBLEBUFFER)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_setFloating">setFloating()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the floating hint. (GLFW_FLOATING)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_setFocused">setFocused()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the focused hint. (GLFW_FOCUSED)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_setFocusOnShow">setFocusOnShow()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the focusOnShow hint. (GLFW_FOCUS_ON_SHOW)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_setForwardCompatible">setForwardCompatible()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the forwardCompatible hint. (GLFW_OPENGL_FORWARD_COMPAT)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_setMaximized">setMaximized()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the maximized hint. (GLFW_MAXIMIZED)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_setNoError">setNoError()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the noError hint. (GLFW_CONTEXT_NO_ERROR)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_setProfile">setProfile()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the profile hint. (GLFW_OPENGL_PROFILE)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_setRefreshRate">setRefreshRate()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the refreshRate hint. (GLFW_REFRESH_RATE)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_setReleaseBehavior">setReleaseBehavior()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the releaseBehavior hint. (GLFW_CONTEXT_RELEASE_BEHAVIOR)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_setResizable">setResizable()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the resizable hint. (GLFW_RESIZABLE)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_setRobustness">setRobustness()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the robustness hint. (GLFW_CONTEXT_ROBUSTNESS)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_setSamples">setSamples()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the samples hint. (GLFW_SAMPLES)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_setScaleToMonitor">setScaleToMonitor()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the scaleToMonitor hint. (GLFW_SCALE_TO_MONITOR)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_setSRGBCapable">setSRGBCapable()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the sRGBCapable hint. (GLFW_SRGB_CAPABLE)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_setStereoscopic">setStereoscopic()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the stereoscopic hint. (GLFW_STEREO)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_setTransparentFramebuffer">setTransparentFramebuffer()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the transparentFramebuffer hint. (GLFW_TRANSPARENT_FRAMEBUFFER)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-OS-WindowHints.html#method_setVisible">setVisible()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the visible hint. (GLFW_VISIBLE)</dd>
+
+    </dl>
+
+
+
+        
+
+        
+    <section class="phpdocumentor-properties">
+        <h3 class="phpdocumentor-elements__header" id="properties">
+            Properties
+            <a href="classes/VISU-OS-WindowHints.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_autoIconify">
+        $autoIconify
+        <a href="classes/VISU-OS-WindowHints.html#property_autoIconify" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">52</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW_AUTO_ICONIFY</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$autoIconify</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>Should the window be iconified when it loses focus?
+If null, the glfw default value is used</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_centerCursor">
+        $centerCursor
+        <a href="classes/VISU-OS-WindowHints.html#property_centerCursor" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">76</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW_CENTER_CURSOR</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$centerCursor</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>Should the cursor be centered over the window when created?
+If null, the glfw default value is used</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_clientAPI">
+        $clientAPI
+        <a href="classes/VISU-OS-WindowHints.html#property_clientAPI" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">162</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW_CLIENT_API</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">int|null</span>
+    <span class="phpdocumentor-signature__name">$clientAPI</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>The client API to use. Possible values are GLFW_OPENGL_API, GLFW_OPENGL_ES_API and GLFW_NO_API.
+If null, the glfw default value is used.
+This is a hard constraint.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_cocoaframeName">
+        $cocoaframeName
+        <a href="classes/VISU-OS-WindowHints.html#property_cocoaframeName" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">257</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW_COCOA_FRAME_NAME</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">string|null</span>
+    <span class="phpdocumentor-signature__name">$cocoaframeName</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>The name of the window frame. If null, the glfw default value is used.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_cocoaGraphicsSwitching">
+        $cocoaGraphicsSwitching
+        <a href="classes/VISU-OS-WindowHints.html#property_cocoaGraphicsSwitching" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">265</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW_COCOA_GRAPHICS_SWITCHING</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$cocoaGraphicsSwitching</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>This allows the context to be used by multiple GPUs simultaneously. This is useful for laptops with both an integrated and a discrete GPU.
+If null, the glfw default value is used.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_cocoaRetinaFramebuffer">
+        $cocoaRetinaFramebuffer
+        <a href="classes/VISU-OS-WindowHints.html#property_cocoaRetinaFramebuffer" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">250</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW_COCOA_RETINA_FRAMEBUFFER</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$cocoaRetinaFramebuffer</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>Should the framebuffer be in Retina mode? This means the framebuffer will have the same resolution as the screen.
+If null, the glfw default value is used.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_contextCreationAPI">
+        $contextCreationAPI
+        <a href="classes/VISU-OS-WindowHints.html#property_contextCreationAPI" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">171</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW_CONTEXT_CREATION_API</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">int|null</span>
+    <span class="phpdocumentor-signature__name">$contextCreationAPI</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>The context creation api that should be used. Possible values are GLFW_NATIVE_CONTEXT_API, GLFW_EGL_CONTEXT_API, GLFW_OSMESA_CONTEXT_API.
+If null, the glfw default value is used.
+This is a hard constraint.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_contextVersionMajor">
+        $contextVersionMajor
+        <a href="classes/VISU-OS-WindowHints.html#property_contextVersionMajor" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">180</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW_CONTEXT_VERSION_MAJOR</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">int|null</span>
+    <span class="phpdocumentor-signature__name">$contextVersionMajor</span>
+     = <span class="phpdocumentor-signature__default-value">4</span></code>
+
+        <section class="phpdocumentor-description"><p>The major version of the client API context to create. In PHP-GLFW this is by default 4.
+If null, the glfw default value is used.
+This is a hard constraint.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_contextVersionMinor">
+        $contextVersionMinor
+        <a href="classes/VISU-OS-WindowHints.html#property_contextVersionMinor" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">189</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW_CONTEXT_VERSION_MINOR</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">int|null</span>
+    <span class="phpdocumentor-signature__name">$contextVersionMinor</span>
+     = <span class="phpdocumentor-signature__default-value">1</span></code>
+
+        <section class="phpdocumentor-description"><p>The minor version of the client API context to create. In PHP-GLFW this is by default 1.
+If null, the glfw default value is used.
+This is a hard constraint.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_debugContext">
+        $debugContext
+        <a href="classes/VISU-OS-WindowHints.html#property_debugContext" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">205</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW_OPENGL_DEBUG_CONTEXT</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$debugContext</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>Should the OpenGL context be a debug context?
+If null, the glfw default value is used.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_decorated">
+        $decorated
+        <a href="classes/VISU-OS-WindowHints.html#property_decorated" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">36</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW_DECORATED</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$decorated</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>Should the window have a menu bar (border, close button etc.)?
+If null, the glfw default value is used</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_doubleBuffer">
+        $doubleBuffer
+        <a href="classes/VISU-OS-WindowHints.html#property_doubleBuffer" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">136</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW_DOUBLEBUFFER</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$doubleBuffer</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>Should the framebuffer be double buffered? You almost always want this enabled, which is the default.
+If null, the glfw default value is used.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_floating">
+        $floating
+        <a href="classes/VISU-OS-WindowHints.html#property_floating" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">60</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW_FLOATING</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$floating</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>Should the window be floating above other windows? This is also called topmost or always-on-top.
+If null, the glfw default value is used</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_focused">
+        $focused
+        <a href="classes/VISU-OS-WindowHints.html#property_focused" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">44</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW_FOCUSED</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$focused</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>Should the window be focused?
+If null, the glfw default value is used</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_focusOnShow">
+        $focusOnShow
+        <a href="classes/VISU-OS-WindowHints.html#property_focusOnShow" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">92</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW_FOCUS_ON_SHOW</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$focusOnShow</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>Should the window be focused when it is shown?
+If null, the glfw default value is used</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_forwardCompatible">
+        $forwardCompatible
+        <a href="classes/VISU-OS-WindowHints.html#property_forwardCompatible" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">197</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW_OPENGL_FORWARD_COMPAT</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$forwardCompatible</span>
+     = <span class="phpdocumentor-signature__default-value">true</span></code>
+
+        <section class="phpdocumentor-description"><p>Should the OpenGL context be forward compatible? In PHP-GLFW this is by default true.
+If null, the glfw default value is used.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_maximized">
+        $maximized
+        <a href="classes/VISU-OS-WindowHints.html#property_maximized" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">68</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW_MAXIMIZED</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$maximized</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>Should the window be maximized when created?
+If null, the glfw default value is used</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_noError">
+        $noError
+        <a href="classes/VISU-OS-WindowHints.html#property_noError" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">238</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW_CONTEXT_NO_ERROR</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$noError</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>Should the context be created without error reporting?
+If null, the glfw default value is used.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_profile">
+        $profile
+        <a href="classes/VISU-OS-WindowHints.html#property_profile" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">214</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW_OPENGL_PROFILE</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">int|null</span>
+    <span class="phpdocumentor-signature__name">$profile</span>
+     = <span class="phpdocumentor-signature__default-value">GLFW_OPENGL_CORE_PROFILE</span></code>
+
+        <section class="phpdocumentor-description"><p>The OpenGL profile to create the context for. Possible values are GLFW_OPENGL_ANY_PROFILE, GLFW_OPENGL_CORE_PROFILE and GLFW_OPENGL_COMPAT_PROFILE.
+If null, the glfw default value is used.
+In PHP-GLFW this is by default GLFW_OPENGL_CORE_PROFILE.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_refreshRate">
+        $refreshRate
+        <a href="classes/VISU-OS-WindowHints.html#property_refreshRate" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">149</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW_REFRESH_RATE</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">int|null</span>
+    <span class="phpdocumentor-signature__name">$refreshRate</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>The desired refresh rate for the fullscreen window, in Hz. This hint is ignored for windowed mode windows.
+If GLFW_DONT_CARE is specified, the highest available refresh rate will be used.
+If null, the glfw default value is used.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_releaseBehavior">
+        $releaseBehavior
+        <a href="classes/VISU-OS-WindowHints.html#property_releaseBehavior" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">230</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW_CONTEXT_RELEASE_BEHAVIOR</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">int|null</span>
+    <span class="phpdocumentor-signature__name">$releaseBehavior</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>The release behavior to be used by the context. Possible values are GLFW_ANY_RELEASE_BEHAVIOR, GLFW_RELEASE_BEHAVIOR_FLUSH and GLFW_RELEASE_BEHAVIOR_NONE.
+If null, the glfw default value is used.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_resizable">
+        $resizable
+        <a href="classes/VISU-OS-WindowHints.html#property_resizable" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">20</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW_RESIZABLE</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$resizable</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>Should the user be able to resize the window?
+If null, the glfw default value is used</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_robustness">
+        $robustness
+        <a href="classes/VISU-OS-WindowHints.html#property_robustness" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">222</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW_CONTEXT_ROBUSTNESS</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">int|null</span>
+    <span class="phpdocumentor-signature__name">$robustness</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>The robustness strategy to be used by the context. Possible values are GLFW_NO_ROBUSTNESS, GLFW_NO_RESET_NOTIFICATION and GLFW_LOSE_CONTEXT_ON_RESET.
+If null, the glfw default value is used.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_samples">
+        $samples
+        <a href="classes/VISU-OS-WindowHints.html#property_samples" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">120</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW_SAMPLES</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">int|null</span>
+    <span class="phpdocumentor-signature__name">$samples</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>The number of samples to use for multisampling. Zero disables multisampling.
+If null, the glfw default value is used.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_scaleToMonitor">
+        $scaleToMonitor
+        <a href="classes/VISU-OS-WindowHints.html#property_scaleToMonitor" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">100</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW_SCALE_TO_MONITOR</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$scaleToMonitor</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>Should the window content scale be changed when the window is moved to a different monitor?
+If null, the glfw default value is used</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_sRGBCapable">
+        $sRGBCapable
+        <a href="classes/VISU-OS-WindowHints.html#property_sRGBCapable" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">128</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW_SRGB_CAPABLE</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$sRGBCapable</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>Should the framebuffer be sRGB capable?
+If null, the glfw default value is used.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_stereoscopic">
+        $stereoscopic
+        <a href="classes/VISU-OS-WindowHints.html#property_stereoscopic" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">112</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW_STEREO</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$stereoscopic</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>Should the framebuffer be stereoscopic?
+If null, the glfw default value is used. This is a hard constraint.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_transparentFramebuffer">
+        $transparentFramebuffer
+        <a href="classes/VISU-OS-WindowHints.html#property_transparentFramebuffer" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">84</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW_TRANSPARENT_FRAMEBUFFER</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$transparentFramebuffer</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>Should the framebuffer be transparent?
+If null, the glfw default value is used</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_visible">
+        $visible
+        <a href="classes/VISU-OS-WindowHints.html#property_visible" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">28</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">GLFW_VISIBLE</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool|null</span>
+    <span class="phpdocumentor-signature__name">$visible</span>
+     = <span class="phpdocumentor-signature__default-value">null</span></code>
+
+        <section class="phpdocumentor-description"><p>Should the window be visible?
+If null, the glfw default value is used</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+            </section>
+
+            <section class="phpdocumentor-methods">
+        <h3 class="phpdocumentor-elements__header" id="methods">
+            Methods
+            <a href="classes/VISU-OS-WindowHints.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_apply">
+        apply()
+        <a href="classes/VISU-OS-WindowHints.html#method_apply" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">312</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Applies the hints to the window.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">apply</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>This will execute the glfwWindowHint function for each hint that is not null.</p>
+</section>
+
+    
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getHintConstantMap">
+        getHintConstantMap()
+        <a href="classes/VISU-OS-WindowHints.html#method_getHintConstantMap" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">272</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns an array of all available window hints.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getHintConstantMap</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">array&lt;int, mixed&gt;</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">array&lt;int, mixed&gt;</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setAutoIconify">
+        setAutoIconify()
+        <a href="classes/VISU-OS-WindowHints.html#method_setAutoIconify" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">386</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the autoIconify hint. (GLFW_AUTO_ICONIFY)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setAutoIconify</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$autoIconify</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Should the window be iconified when it loses focus?
+If null, the glfw default value is used</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$autoIconify</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setCenterCursor">
+        setCenterCursor()
+        <a href="classes/VISU-OS-WindowHints.html#method_setCenterCursor" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">419</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the centerCursor hint. (GLFW_CENTER_CURSOR)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setCenterCursor</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$centerCursor</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Should the cursor be centered over the window when created?
+If null, the glfw default value is used</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$centerCursor</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setClientAPI">
+        setClientAPI()
+        <a href="classes/VISU-OS-WindowHints.html#method_setClientAPI" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">520</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the clientAPI hint. (GLFW_CLIENT_API)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setClientAPI</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$clientAPI</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>The client API to use. Possible values are GLFW_OPENGL_API, GLFW_OPENGL_ES_API and GLFW_NO_API.
+If null, the glfw default value is used.
+This is a hard constraint.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$clientAPI</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setCocoaFrameName">
+        setCocoaFrameName()
+        <a href="classes/VISU-OS-WindowHints.html#method_setCocoaFrameName" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">643</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the cocoaFrameName hint. (GLFW_COCOA_FRAME_NAME)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setCocoaFrameName</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">string|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$cocoaFrameName</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>The name of the window frame. If null, the glfw default value is used.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$cocoaFrameName</span>
+                : <span class="phpdocumentor-signature__argument__return-type">string|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setCocoaGraphicsSwitching">
+        setCocoaGraphicsSwitching()
+        <a href="classes/VISU-OS-WindowHints.html#method_setCocoaGraphicsSwitching" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">654</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the cocoaGraphicsSwitching hint. (GLFW_COCOA_GRAPHICS_SWITCHING)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setCocoaGraphicsSwitching</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$cocoaGraphicsSwitching</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>This allows the context to be used by multiple GPUs simultaneously. This is useful for laptops with both an integrated and a discrete GPU.
+If null, the glfw default value is used.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$cocoaGraphicsSwitching</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setCocoaRetinaFramebuffer">
+        setCocoaRetinaFramebuffer()
+        <a href="classes/VISU-OS-WindowHints.html#method_setCocoaRetinaFramebuffer" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">633</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the cocoaRetinaFramebuffer hint. (GLFW_COCOA_RETINA_FRAMEBUFFER)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setCocoaRetinaFramebuffer</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$cocoaRetinaFramebuffer</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Should the framebuffer be in Retina mode? This means the framebuffer will have the same resolution as the screen.
+If null, the glfw default value is used.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$cocoaRetinaFramebuffer</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setContextCreationAPI">
+        setContextCreationAPI()
+        <a href="classes/VISU-OS-WindowHints.html#method_setContextCreationAPI" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">532</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the contextCreationAPI hint. (GLFW_CONTEXT_CREATION_API)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setContextCreationAPI</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$contextCreationAPI</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>The context creation api that should be used. Possible values are GLFW_NATIVE_CONTEXT_API, GLFW_EGL_CONTEXT_API, GLFW_OSMESA_CONTEXT_API.
+If null, the glfw default value is used.
+This is a hard constraint.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$contextCreationAPI</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setContextVersionMajor">
+        setContextVersionMajor()
+        <a href="classes/VISU-OS-WindowHints.html#method_setContextVersionMajor" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">544</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the contextVersionMajor hint. (GLFW_CONTEXT_VERSION_MAJOR)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setContextVersionMajor</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$contextVersionMajor</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>The major version of the client API context to create. In PHP-GLFW this is by default 4.
+If null, the glfw default value is used.
+This is a hard constraint.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$contextVersionMajor</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setContextVersionMinor">
+        setContextVersionMinor()
+        <a href="classes/VISU-OS-WindowHints.html#method_setContextVersionMinor" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">556</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the contextVersionMinor hint. (GLFW_CONTEXT_VERSION_MINOR)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setContextVersionMinor</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$contextVersionMinor</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>The minor version of the client API context to create. In PHP-GLFW this is by default 6.
+If null, the glfw default value is used.
+This is a hard constraint.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$contextVersionMinor</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setDebugContext">
+        setDebugContext()
+        <a href="classes/VISU-OS-WindowHints.html#method_setDebugContext" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">577</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the debugContext hint. (GLFW_OPENGL_DEBUG_CONTEXT)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setDebugContext</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$debugContext</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Should the OpenGL context be a debug context?
+If null, the glfw default value is used.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$debugContext</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setDecorated">
+        setDecorated()
+        <a href="classes/VISU-OS-WindowHints.html#method_setDecorated" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">364</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the decorated hint. (GLFW_DECORATED)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setDecorated</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$decorated</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Should the window have a menu bar (border, close button etc.)?
+If null, the glfw default value is used</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$decorated</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setDoubleBuffer">
+        setDoubleBuffer()
+        <a href="classes/VISU-OS-WindowHints.html#method_setDoubleBuffer" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">496</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the doubleBuffer hint. (GLFW_DOUBLEBUFFER)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setDoubleBuffer</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$doubleBuffer</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Should the framebuffer be double buffered? You almost always want this enabled.
+If null, the glfw default value is used</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$doubleBuffer</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setFloating">
+        setFloating()
+        <a href="classes/VISU-OS-WindowHints.html#method_setFloating" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">397</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the floating hint. (GLFW_FLOATING)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setFloating</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$floating</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Should the window be floating above other windows? This is also called topmost or always-on-top.
+If null, the glfw default value is used</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$floating</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setFocused">
+        setFocused()
+        <a href="classes/VISU-OS-WindowHints.html#method_setFocused" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">375</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the focused hint. (GLFW_FOCUSED)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setFocused</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$focused</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Should the window be focused?
+If null, the glfw default value is used</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$focused</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setFocusOnShow">
+        setFocusOnShow()
+        <a href="classes/VISU-OS-WindowHints.html#method_setFocusOnShow" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">441</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the focusOnShow hint. (GLFW_FOCUS_ON_SHOW)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setFocusOnShow</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$focusOnShow</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Should the window be focused when it is shown?
+If null, the glfw default value is used</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$focusOnShow</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setForwardCompatible">
+        setForwardCompatible()
+        <a href="classes/VISU-OS-WindowHints.html#method_setForwardCompatible" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">566</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the forwardCompatible hint. (GLFW_OPENGL_FORWARD_COMPAT)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setForwardCompatible</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$forwardCompatible</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Should the OpenGL context be forward compatible? In PHP-GLFW this is by default true.
+If null, the glfw default value is used.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$forwardCompatible</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setMaximized">
+        setMaximized()
+        <a href="classes/VISU-OS-WindowHints.html#method_setMaximized" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">408</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the maximized hint. (GLFW_MAXIMIZED)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setMaximized</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$maximized</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Should the window be maximized when created?
+If null, the glfw default value is used</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$maximized</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setNoError">
+        setNoError()
+        <a href="classes/VISU-OS-WindowHints.html#method_setNoError" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">622</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the noError hint. (GLFW_CONTEXT_NO_ERROR)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setNoError</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$noError</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Should the context be created without error reporting?
+If null, the glfw default value is used.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$noError</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setProfile">
+        setProfile()
+        <a href="classes/VISU-OS-WindowHints.html#method_setProfile" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">589</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the profile hint. (GLFW_OPENGL_PROFILE)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setProfile</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$profile</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>The OpenGL profile to create the context for. Possible values are GLFW_OPENGL_ANY_PROFILE, GLFW_OPENGL_CORE_PROFILE and GLFW_OPENGL_COMPAT_PROFILE.
+If null, the glfw default value is used.
+In PHP-GLFW this is by default GLFW_OPENGL_CORE_PROFILE.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$profile</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setRefreshRate">
+        setRefreshRate()
+        <a href="classes/VISU-OS-WindowHints.html#method_setRefreshRate" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">508</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the refreshRate hint. (GLFW_REFRESH_RATE)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setRefreshRate</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$refreshRate</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>The desired refresh rate for the fullscreen window, in Hz. This hint is ignored for windowed mode windows.
+If GLFW_DONT_CARE is specified, the highest available refresh rate will be used.
+If null, the glfw default value is used.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$refreshRate</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setReleaseBehavior">
+        setReleaseBehavior()
+        <a href="classes/VISU-OS-WindowHints.html#method_setReleaseBehavior" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">611</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the releaseBehavior hint. (GLFW_CONTEXT_RELEASE_BEHAVIOR)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setReleaseBehavior</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$releaseBehavior</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>The release behavior to be used by the context. Possible values are GLFW_ANY_RELEASE_BEHAVIOR, GLFW_RELEASE_BEHAVIOR_FLUSH and GLFW_RELEASE_BEHAVIOR_NONE.
+If null, the glfw default value is used.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$releaseBehavior</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setResizable">
+        setResizable()
+        <a href="classes/VISU-OS-WindowHints.html#method_setResizable" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">342</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the resizable hint. (GLFW_RESIZABLE)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setResizable</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool&nbsp;</span><span class="phpdocumentor-signature__argument__name">$resizable</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Should the user be able to resize the window?
+If null, the glfw default value is used</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$resizable</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setRobustness">
+        setRobustness()
+        <a href="classes/VISU-OS-WindowHints.html#method_setRobustness" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">600</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the robustness hint. (GLFW_CONTEXT_ROBUSTNESS)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setRobustness</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$robustness</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>The robustness strategy to be used by the context. Possible values are GLFW_NO_ROBUSTNESS, GLFW_NO_RESET_NOTIFICATION and GLFW_LOSE_CONTEXT_ON_RESET.
+If null, the glfw default value is used.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$robustness</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setSamples">
+        setSamples()
+        <a href="classes/VISU-OS-WindowHints.html#method_setSamples" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">474</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the samples hint. (GLFW_SAMPLES)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setSamples</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$samples</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>The number of samples to use for multisampling. Zero disables multisampling.
+If null, the glfw default value is used</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$samples</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setScaleToMonitor">
+        setScaleToMonitor()
+        <a href="classes/VISU-OS-WindowHints.html#method_setScaleToMonitor" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">452</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the scaleToMonitor hint. (GLFW_SCALE_TO_MONITOR)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setScaleToMonitor</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$scaleToMonitor</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Should the window content scale be changed when the window is moved to a different monitor?
+If null, the glfw default value is used</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$scaleToMonitor</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setSRGBCapable">
+        setSRGBCapable()
+        <a href="classes/VISU-OS-WindowHints.html#method_setSRGBCapable" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">485</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the sRGBCapable hint. (GLFW_SRGB_CAPABLE)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setSRGBCapable</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$sRGBCapable</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Should the framebuffer be sRGB capable?
+If null, the glfw default value is used</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$sRGBCapable</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setStereoscopic">
+        setStereoscopic()
+        <a href="classes/VISU-OS-WindowHints.html#method_setStereoscopic" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">463</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the stereoscopic hint. (GLFW_STEREO)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setStereoscopic</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$stereoscopic</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Should the framebuffer be stereoscopic?
+If null, the glfw default value is used</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$stereoscopic</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setTransparentFramebuffer">
+        setTransparentFramebuffer()
+        <a href="classes/VISU-OS-WindowHints.html#method_setTransparentFramebuffer" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">430</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the transparentFramebuffer hint. (GLFW_TRANSPARENT_FRAMEBUFFER)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setTransparentFramebuffer</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$transparentFramebuffer</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Should the framebuffer be transparent?
+If null, the glfw default value is used</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$transparentFramebuffer</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setVisible">
+        setVisible()
+        <a href="classes/VISU-OS-WindowHints.html#method_setVisible" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/OS/WindowHints.php"><a href="files/src-os-windowhints.html"><abbr title="src/OS/WindowHints.php">WindowHints.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">353</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the visible hint. (GLFW_VISIBLE)</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setVisible</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">bool|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$visible</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Should the window be visible?
+If null, the glfw default value is used</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$visible</span>
+                : <span class="phpdocumentor-signature__argument__return-type">bool|null</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+            </section>
+
+        <div class="phpdocumentor-modal" id="source-view">
+    <div class="phpdocumentor-modal-bg" data-exit-button></div>
+    <div class="phpdocumentor-modal-container">
+        <div class="phpdocumentor-modal-content">
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/OS/WindowHints.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+        </div>
+        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
+    </div>
+</div>
+
+    <script type="text/javascript">
+        (function () {
+            function loadExternalCodeSnippet(el, url, line) {
+                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
+                    const language = 'php';
+
+                    const code = document.createElement('code');
+                    code.className = 'language-' + language;
+                    pre.textContent = '';
+                    pre.setAttribute('data-line', line)
+                    code.textContent = 'Loading…';
+                    pre.appendChild(code);
+
+                    var xhr = new XMLHttpRequest();
+
+                    xhr.open('GET', src, true);
+
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState !== 4) {
+                            return;
+                        }
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+                            Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
+                            return;
+                        }
+
+                        if (xhr.status === 404) {
+                            code.textContent = '✖ Error: File could not be found';
+                            return;
+                        }
+
+                        if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                            return;
+                        }
+
+                        code.textContent = '✖ Error: An unknown error occurred';
+                    };
+
+                    xhr.send(null);
+                });
+            }
+
+            const modalButtons = document.querySelectorAll("[data-modal]");
+            const openedAsLocalFile = window.location.protocol === 'file:';
+            if (modalButtons.length > 0 && openedAsLocalFile) {
+                console.warn(
+                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
+                    'browsers block XHR requests when a page is opened this way'
+                );
+            }
+
+            modalButtons.forEach(function (trigger) {
+                if (openedAsLocalFile) {
+                    trigger.setAttribute("hidden", "hidden");
+                }
+
+                trigger.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const modal = document.getElementById(trigger.dataset.modal);
+                    if (!modal) {
+                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
+                        return;
+                    }
+                    modal.classList.add("phpdocumentor-modal__open");
+
+                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
+                    const exits = modal.querySelectorAll("[data-exit-button]");
+                    exits.forEach(function (exit) {
+                        exit.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            modal.classList.remove("phpdocumentor-modal__open");
+                        });
+                    });
+                });
+            });
+        })();
+    </script>
+
+    </article>
+                                </section>
+                <section class="phpdocumentor-on-this-page__sidebar">
+                                
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                                            <li><a href="classes/VISU-OS-WindowHints.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/VISU-OS-WindowHints.html#toc-methods">Methods</a></li>
+                                    </ul>
+            </li>
+            
+                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/VISU-OS-WindowHints.html#property_autoIconify">$autoIconify</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowHints.html#property_centerCursor">$centerCursor</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowHints.html#property_clientAPI">$clientAPI</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowHints.html#property_cocoaframeName">$cocoaframeName</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowHints.html#property_cocoaGraphicsSwitching">$cocoaGraphicsSwitching</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowHints.html#property_cocoaRetinaFramebuffer">$cocoaRetinaFramebuffer</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowHints.html#property_contextCreationAPI">$contextCreationAPI</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowHints.html#property_contextVersionMajor">$contextVersionMajor</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowHints.html#property_contextVersionMinor">$contextVersionMinor</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowHints.html#property_debugContext">$debugContext</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowHints.html#property_decorated">$decorated</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowHints.html#property_doubleBuffer">$doubleBuffer</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowHints.html#property_floating">$floating</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowHints.html#property_focused">$focused</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowHints.html#property_focusOnShow">$focusOnShow</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowHints.html#property_forwardCompatible">$forwardCompatible</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowHints.html#property_maximized">$maximized</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowHints.html#property_noError">$noError</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowHints.html#property_profile">$profile</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowHints.html#property_refreshRate">$refreshRate</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowHints.html#property_releaseBehavior">$releaseBehavior</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowHints.html#property_resizable">$resizable</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowHints.html#property_robustness">$robustness</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowHints.html#property_samples">$samples</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowHints.html#property_scaleToMonitor">$scaleToMonitor</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowHints.html#property_sRGBCapable">$sRGBCapable</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowHints.html#property_stereoscopic">$stereoscopic</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowHints.html#property_transparentFramebuffer">$transparentFramebuffer</a></li>
+                                                    <li class=""><a href="classes/VISU-OS-WindowHints.html#property_visible">$visible</a></li>
+                                            </ul>
+                </li>
+            
+                        <li class="phpdocumentor-on-this-page-section__title">Methods</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_apply">apply()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_getHintConstantMap">getHintConstantMap()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_setAutoIconify">setAutoIconify()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_setCenterCursor">setCenterCursor()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_setClientAPI">setClientAPI()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_setCocoaFrameName">setCocoaFrameName()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_setCocoaGraphicsSwitching">setCocoaGraphicsSwitching()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_setCocoaRetinaFramebuffer">setCocoaRetinaFramebuffer()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_setContextCreationAPI">setContextCreationAPI()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_setContextVersionMajor">setContextVersionMajor()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_setContextVersionMinor">setContextVersionMinor()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_setDebugContext">setDebugContext()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_setDecorated">setDecorated()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_setDoubleBuffer">setDoubleBuffer()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_setFloating">setFloating()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_setFocused">setFocused()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_setFocusOnShow">setFocusOnShow()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_setForwardCompatible">setForwardCompatible()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_setMaximized">setMaximized()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_setNoError">setNoError()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_setProfile">setProfile()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_setRefreshRate">setRefreshRate()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_setReleaseBehavior">setReleaseBehavior()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_setResizable">setResizable()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_setRobustness">setRobustness()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_setSamples">setSamples()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_setScaleToMonitor">setScaleToMonitor()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_setSRGBCapable">setSRGBCapable()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_setStereoscopic">setStereoscopic()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_setTransparentFramebuffer">setTransparentFramebuffer()</a></li>
+                                            <li class=""><a href="classes/VISU-OS-WindowHints.html#method_setVisible">setVisible()</a></li>
+                                    </ul>
+            </li>
+                    </ul>
+    </section>
+
+                </section>
+                            </div>
+            <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+    <section class="phpdocumentor-search-results__dialog">
+        <header class="phpdocumentor-search-results__header">
+            <h2 class="phpdocumentor-search-results__title">Search results</h2>
+            <button class="phpdocumentor-search-results__close"><i class="fas fa-times"></i></button>
+        </header>
+        <section class="phpdocumentor-search-results__body">
+            <ul class="phpdocumentor-search-results__entries"></ul>
+        </section>
+    </section>
+</section>
+        </div>
+        <a href="classes/VISU-OS-WindowHints.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+
+    </main>
+
+    <script>
+        cssVars({});
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+</body>
+</html>

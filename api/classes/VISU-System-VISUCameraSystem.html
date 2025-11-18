@@ -1,0 +1,1870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+            <title>VISU - PHP Game Framework</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="../">
+    <link rel="icon" href="images/favicon.ico"/>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/base.css">
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/template.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism-okaidia.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
+        <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="js/template.js"></script>
+        <script src="js/search.js"></script>
+        <script defer src="js/searchIndex.js"></script>
+    </head>
+<body id="top">
+    <header class="phpdocumentor-header phpdocumentor-section">
+    <h1 class="phpdocumentor-title"><a href="" class="phpdocumentor-title__link">VISU - PHP Game Framework</a></h1>
+    <input class="phpdocumentor-header__menu-button" type="checkbox" id="menu-button" name="menu-button" />
+    <label class="phpdocumentor-header__menu-icon" for="menu-button">
+        <i class="fas fa-bars"></i>
+    </label>
+    <section data-search-form class="phpdocumentor-search">
+    <label>
+        <span class="visually-hidden">Search for</span>
+        <svg class="phpdocumentor-search__icon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="7.5" cy="7.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <line x1="12.4892" y1="12.2727" x2="19.1559" y2="18.9393" stroke="currentColor" stroke-width="3"/>
+        </svg>
+        <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+    </label>
+</section>
+
+    <nav class="phpdocumentor-topnav">
+    <ul class="phpdocumentor-topnav__menu">
+        </ul>
+</nav>
+</header>
+
+    <main class="phpdocumentor">
+        <div class="phpdocumentor-section">
+            <input class="phpdocumentor-sidebar__menu-button" type="checkbox" id="sidebar-button" name="sidebar-button" />
+<label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
+    Menu
+</label>
+<aside class="phpdocumentor-column -three phpdocumentor-sidebar">
+                    <section class="phpdocumentor-sidebar__category -namespaces">
+            <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/visu.html" class="">VISU</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/visu-animation.html" class="">Animation</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-command.html" class="">Command</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-component.html" class="">Component</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-ecs.html" class="">ECS</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-exception.html" class="">Exception</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-flyui.html" class="">FlyUI</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-geo.html" class="">Geo</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-graphics.html" class="">Graphics</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-instrument.html" class="">Instrument</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-maker.html" class="">Maker</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-os.html" class="">OS</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-quickstart.html" class="">Quickstart</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-runtime.html" class="">Runtime</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-signal.html" class="">Signal</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-signals.html" class="">Signals</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-system.html" class="">System</a>
+                
+            </li>
+            </ul>
+
+                        </section>
+                <section class="phpdocumentor-sidebar__category -packages">
+            <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Application.html" class="">Application</a>
+</h4>
+
+                        </section>
+            
+    <section class="phpdocumentor-sidebar__category -reports">
+        <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="graphs/classes.html">Class Diagram</a></h3>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
+    </section>
+
+    <section class="phpdocumentor-sidebar__category -indices">
+        <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
+    </section>
+</aside>
+
+            <div class="phpdocumentor-column -nine phpdocumentor-content">
+                                <section>
+                                        <ul class="phpdocumentor-breadcrumbs">
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/visu.html">VISU</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/visu-system.html">System</a></li>
+    </ul>
+
+    <article class="phpdocumentor-element -class">
+        <h2 class="phpdocumentor-content__title">
+    VISUCameraSystem
+
+    
+            <div class="phpdocumentor-element__package">
+            in package
+            <ul class="phpdocumentor-breadcrumbs">
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Application.html">Application</a></li>
+                            </ul>
+        </div>
+    
+            <span class="phpdocumentor-element__implements">
+            implements
+                            <a href="classes/VISU-ECS-SystemInterface.html"><abbr title="\VISU\ECS\SystemInterface">SystemInterface</abbr></a>                    </span>
+    
+    </h2>
+
+<div class="phpdocumentor-label-line">
+
+
+</div>
+
+        <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/System/VISUCameraSystem.php"><a href="files/src-system-visucamerasystem.html"><abbr title="src/System/VISUCameraSystem.php">VISUCameraSystem.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">24</span>
+
+    </aside>
+
+        
+
+
+
+
+
+
+
+
+<h3 id="toc">
+    Table of Contents
+    <a href="classes/VISU-System-VISUCameraSystem.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h3>
+
+
+
+    <h4 id="toc-interfaces">
+        Interfaces
+        <a href="classes/VISU-System-VISUCameraSystem.html#toc-interfaces" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <dl class="phpdocumentor-table-of-contents">
+                    <dt class="phpdocumentor-table-of-contents__entry -interface"><a href="classes/VISU-ECS-SystemInterface.html"><abbr title="\VISU\ECS\SystemInterface">SystemInterface</abbr></a></dt>    </dl>
+
+
+
+
+<h4 id="toc-constants">
+    Constants
+    <a href="classes/VISU-System-VISUCameraSystem.html#toc-constants" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/VISU-System-VISUCameraSystem.html#constant_CAMERA_MODE_FLYING">CAMERA_MODE_FLYING</a>
+    <span>
+        &nbsp;= 1                            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -constant -public">
+    <a class="" href="classes/VISU-System-VISUCameraSystem.html#constant_CAMERA_MODE_GAME">CAMERA_MODE_GAME</a>
+    <span>
+        &nbsp;= 0                            </span>
+</dt>
+<dd>Camera modes</dd>
+
+    </dl>
+
+
+<h4 id="toc-properties">
+    Properties
+    <a href="classes/VISU-System-VISUCameraSystem.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-System-VISUCameraSystem.html#property_activeCameraEntity">$activeCameraEntity</a>
+    <span>
+                        &nbsp;: int            </span>
+</dt>
+<dd>The currently active camera entity</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a class="" href="classes/VISU-System-VISUCameraSystem.html#property_dispatcher">$dispatcher</a>
+    <span>
+                        &nbsp;: <a href="classes/VISU-Signal-Dispatcher.html"><abbr title="\VISU\Signal\Dispatcher">Dispatcher</abbr></a>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a class="" href="classes/VISU-System-VISUCameraSystem.html#property_input">$input</a>
+    <span>
+                        &nbsp;: <a href="classes/VISU-OS-Input.html"><abbr title="\VISU\OS\Input">Input</abbr></a>            </span>
+</dt>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -protected">
+    <a class="" href="classes/VISU-System-VISUCameraSystem.html#property_visuCameraMode">$visuCameraMode</a>
+    <span>
+                        &nbsp;: int            </span>
+</dt>
+<dd>Current camera mode, this basically determines the subroutine that is used to update the camera</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-System-VISUCameraSystem.html#property_cameraEuler">$cameraEuler</a>
+    <span>
+                        &nbsp;: <abbr title="\GL\Math\Vec2">Vec2</abbr>            </span>
+</dt>
+<dd>Euler angles for default camera</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-System-VISUCameraSystem.html#property_inputCursorQueue">$inputCursorQueue</a>
+    <span>
+                        &nbsp;: <a href="classes/VISU-Signal-SignalQueue.html"><abbr title="\VISU\Signal\SignalQueue">SignalQueue</abbr></a>&lt;string|int, <a href="classes/VISU-Signals-Input-CursorPosSignal.html"><abbr title="\VISU\Signals\Input\CursorPosSignal">CursorPosSignal</abbr></a>&gt;            </span>
+</dt>
+<dd>Cursor input queue</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-System-VISUCameraSystem.html#property_inputScrollQueue">$inputScrollQueue</a>
+    <span>
+                        &nbsp;: <a href="classes/VISU-Signal-SignalQueue.html"><abbr title="\VISU\Signal\SignalQueue">SignalQueue</abbr></a>&lt;string|int, <a href="classes/VISU-Signals-Input-ScrollSignal.html"><abbr title="\VISU\Signals\Input\ScrollSignal">ScrollSignal</abbr></a>&gt;            </span>
+</dt>
+<dd>Mouse Scroll input queue</dd>
+
+    </dl>
+
+<h4 id="toc-methods">
+    Methods
+    <a href="classes/VISU-System-VISUCameraSystem.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-System-VISUCameraSystem.html#method___construct">__construct()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+<dd>Constructor</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-System-VISUCameraSystem.html#method_getActiveCamera">getActiveCamera()</a>
+    <span>
+                                &nbsp;: <a href="classes/VISU-Graphics-Camera.html"><abbr title="\VISU\Graphics\Camera">Camera</abbr></a>    </span>
+</dt>
+<dd>Returns the active camera object or throws an exception if no camera is set,
+or cannot be retrieved.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-System-VISUCameraSystem.html#method_getActiveCameraEntity">getActiveCameraEntity()</a>
+    <span>
+                                &nbsp;: int    </span>
+</dt>
+<dd>Returns the active camera entity</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-System-VISUCameraSystem.html#method_getCameraData">getCameraData()</a>
+    <span>
+                                &nbsp;: <a href="classes/VISU-Graphics-Rendering-Pass-CameraData.html"><abbr title="\VISU\Graphics\Rendering\Pass\CameraData">CameraData</abbr></a>    </span>
+</dt>
+<dd>Create a camera data structure for the given render target.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-System-VISUCameraSystem.html#method_handleCursorPos">handleCursorPos()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Cursor position handler</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-System-VISUCameraSystem.html#method_handleScroll">handleScroll()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Scroll wheel handler</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-System-VISUCameraSystem.html#method_register">register()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Registers the system, this is where you should register all required components.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-System-VISUCameraSystem.html#method_render">render()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Handles rendering of the scene, here you can attach additional render passes,
+modify the render pipeline or customize rendering related data.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-System-VISUCameraSystem.html#method_setActiveCameraEntity">setActiveCameraEntity()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Sets the currently active camera entity</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-System-VISUCameraSystem.html#method_spawnDefaultFlyingCamera">spawnDefaultFlyingCamera()</a>
+    <span>
+                                &nbsp;: int    </span>
+</dt>
+<dd>Spwans a default flying camera entity</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-System-VISUCameraSystem.html#method_unregister">unregister()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Unregisters the system, this is where you can handle any cleanup.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-System-VISUCameraSystem.html#method_update">update()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Updates handler, this is where the game state should be updated.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-System-VISUCameraSystem.html#method_updateGameCamera">updateGameCamera()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Override this method to update the camera in game mode</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-System-VISUCameraSystem.html#method_updateVISUFlyingCamera">updateVISUFlyingCamera()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Flying camera mode update</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a class="" href="classes/VISU-System-VISUCameraSystem.html#method_handleCursorPosVISUGame">handleCursorPosVISUGame()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Override this method to handle the cursor position in game mode</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -protected">
+    <a class="" href="classes/VISU-System-VISUCameraSystem.html#method_handleScrollVISUGame">handleScrollVISUGame()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Override this method to handle the scroll wheel in game mode</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/VISU-System-VISUCameraSystem.html#method_handleCursorPosVISUFlying">handleCursorPosVISUFlying()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Cursor position handler</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -private">
+    <a class="" href="classes/VISU-System-VISUCameraSystem.html#method_handleScrollVISUFlying">handleScrollVISUFlying()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Scroll wheel handler</dd>
+
+    </dl>
+
+
+
+        
+    <section class="phpdocumentor-constants">
+        <h3 class="phpdocumentor-elements__header" id="constants">
+            Constants
+            <a href="classes/VISU-System-VISUCameraSystem.html#constants" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_CAMERA_MODE_FLYING">
+        CAMERA_MODE_FLYING
+        <a href="classes/VISU-System-VISUCameraSystem.html#constant_CAMERA_MODE_FLYING" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/System/VISUCameraSystem.php"><a href="files/src-system-visucamerasystem.html"><abbr title="src/System/VISUCameraSystem.php">VISUCameraSystem.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">40</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">CAMERA_MODE_FLYING</span>
+    = <span class="phpdocumentor-signature__default-value">1</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+                    <article class="phpdocumentor-element -constant -public ">
+    <h4 class="phpdocumentor-element__name" id="constant_CAMERA_MODE_GAME">
+        CAMERA_MODE_GAME
+        <a href="classes/VISU-System-VISUCameraSystem.html#constant_CAMERA_MODE_GAME" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/System/VISUCameraSystem.php"><a href="files/src-system-visucamerasystem.html"><abbr title="src/System/VISUCameraSystem.php">VISUCameraSystem.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">39</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Camera modes</p>
+
+    
+    <code class="phpdocumentor-signature phpdocumentor-code ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+        <span class="phpdocumentor-signature__type">mixed</span>
+    <span class="phpdocumentor-signature__name">CAMERA_MODE_GAME</span>
+    = <span class="phpdocumentor-signature__default-value">0</span>
+</code>
+
+
+    
+    
+    
+
+    
+
+</article>
+            </section>
+
+        
+    <section class="phpdocumentor-properties">
+        <h3 class="phpdocumentor-elements__header" id="properties">
+            Properties
+            <a href="classes/VISU-System-VISUCameraSystem.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_activeCameraEntity">
+        $activeCameraEntity
+        <a href="classes/VISU-System-VISUCameraSystem.html#property_activeCameraEntity" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/System/VISUCameraSystem.php"><a href="files/src-system-visucamerasystem.html"><abbr title="src/System/VISUCameraSystem.php">VISUCameraSystem.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">29</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The currently active camera entity</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">int</span>
+    <span class="phpdocumentor-signature__name">$activeCameraEntity</span>
+     = <span class="phpdocumentor-signature__default-value">0</span></code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_dispatcher">
+        $dispatcher
+        <a href="classes/VISU-System-VISUCameraSystem.html#property_dispatcher" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/System/VISUCameraSystem.php"><a href="files/src-system-visucamerasystem.html"><abbr title="src/System/VISUCameraSystem.php">VISUCameraSystem.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">66</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/VISU-Signal-Dispatcher.html"><abbr title="\VISU\Signal\Dispatcher">Dispatcher</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$dispatcher</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_input">
+        $input
+        <a href="classes/VISU-System-VISUCameraSystem.html#property_input" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/System/VISUCameraSystem.php"><a href="files/src-system-visucamerasystem.html"><abbr title="src/System/VISUCameraSystem.php">VISUCameraSystem.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">65</span>
+
+    </aside>
+
+    
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/VISU-OS-Input.html"><abbr title="\VISU\OS\Input">Input</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$input</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -protected
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_visuCameraMode">
+        $visuCameraMode
+        <a href="classes/VISU-System-VISUCameraSystem.html#property_visuCameraMode" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/System/VISUCameraSystem.php"><a href="files/src-system-visucamerasystem.html"><abbr title="src/System/VISUCameraSystem.php">VISUCameraSystem.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">45</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Current camera mode, this basically determines the subroutine that is used to update the camera</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">protected</span>
+            <span class="phpdocumentor-signature__type">int</span>
+    <span class="phpdocumentor-signature__name">$visuCameraMode</span>
+     = <span class="phpdocumentor-signature__default-value">self::CAMERA_MODE_FLYING</span></code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_cameraEuler">
+        $cameraEuler
+        <a href="classes/VISU-System-VISUCameraSystem.html#property_cameraEuler" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/System/VISUCameraSystem.php"><a href="files/src-system-visucamerasystem.html"><abbr title="src/System/VISUCameraSystem.php">VISUCameraSystem.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">34</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Euler angles for default camera</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><abbr title="\GL\Math\Vec2">Vec2</abbr></span>
+    <span class="phpdocumentor-signature__name">$cameraEuler</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_inputCursorQueue">
+        $inputCursorQueue
+        <a href="classes/VISU-System-VISUCameraSystem.html#property_inputCursorQueue" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/System/VISUCameraSystem.php"><a href="files/src-system-visucamerasystem.html"><abbr title="src/System/VISUCameraSystem.php">VISUCameraSystem.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">52</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Cursor input queue</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/VISU-Signal-SignalQueue.html"><abbr title="\VISU\Signal\SignalQueue">SignalQueue</abbr></a>&lt;string|int, <a href="classes/VISU-Signals-Input-CursorPosSignal.html"><abbr title="\VISU\Signals\Input\CursorPosSignal">CursorPosSignal</abbr></a>&gt;</span>
+    <span class="phpdocumentor-signature__name">$inputCursorQueue</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_inputScrollQueue">
+        $inputScrollQueue
+        <a href="classes/VISU-System-VISUCameraSystem.html#property_inputScrollQueue" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/System/VISUCameraSystem.php"><a href="files/src-system-visucamerasystem.html"><abbr title="src/System/VISUCameraSystem.php">VISUCameraSystem.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">59</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Mouse Scroll input queue</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/VISU-Signal-SignalQueue.html"><abbr title="\VISU\Signal\SignalQueue">SignalQueue</abbr></a>&lt;string|int, <a href="classes/VISU-Signals-Input-ScrollSignal.html"><abbr title="\VISU\Signals\Input\ScrollSignal">ScrollSignal</abbr></a>&gt;</span>
+    <span class="phpdocumentor-signature__name">$inputScrollQueue</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+            </section>
+
+            <section class="phpdocumentor-methods">
+        <h3 class="phpdocumentor-elements__header" id="methods">
+            Methods
+            <a href="classes/VISU-System-VISUCameraSystem.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/VISU-System-VISUCameraSystem.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/System/VISUCameraSystem.php"><a href="files/src-system-visucamerasystem.html"><abbr title="src/System/VISUCameraSystem.php">VISUCameraSystem.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">64</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Constructor</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Input.html"><abbr title="\VISU\OS\Input">Input</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$input</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Signal-Dispatcher.html"><abbr title="\VISU\Signal\Dispatcher">Dispatcher</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$dispatcher</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$input</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-OS-Input.html"><abbr title="\VISU\OS\Input">Input</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$dispatcher</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Signal-Dispatcher.html"><abbr title="\VISU\Signal\Dispatcher">Dispatcher</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getActiveCamera">
+        getActiveCamera()
+        <a href="classes/VISU-System-VISUCameraSystem.html#method_getActiveCamera" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/System/VISUCameraSystem.php"><a href="files/src-system-visucamerasystem.html"><abbr title="src/System/VISUCameraSystem.php">VISUCameraSystem.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">239</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the active camera object or throws an exception if no camera is set,
+or cannot be retrieved.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getActiveCamera</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entities</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/VISU-Graphics-Camera.html"><abbr title="\VISU\Graphics\Camera">Camera</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$entities</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/VISU-Graphics-Camera.html"><abbr title="\VISU\Graphics\Camera">Camera</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getActiveCameraEntity">
+        getActiveCameraEntity()
+        <a href="classes/VISU-System-VISUCameraSystem.html#method_getActiveCameraEntity" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/System/VISUCameraSystem.php"><a href="files/src-system-visucamerasystem.html"><abbr title="src/System/VISUCameraSystem.php">VISUCameraSystem.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">83</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the active camera entity</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getActiveCameraEntity</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getCameraData">
+        getCameraData()
+        <a href="classes/VISU-System-VISUCameraSystem.html#method_getCameraData" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/System/VISUCameraSystem.php"><a href="files/src-system-visucamerasystem.html"><abbr title="src/System/VISUCameraSystem.php">VISUCameraSystem.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">348</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Create a camera data structure for the given render target.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getCameraData</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entities</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-RenderTarget.html"><abbr title="\VISU\Graphics\RenderTarget">RenderTarget</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$renderTarget</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$compensation</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/VISU-Graphics-Rendering-Pass-CameraData.html"><abbr title="\VISU\Graphics\Rendering\Pass\CameraData">CameraData</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$entities</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$renderTarget</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-RenderTarget.html"><abbr title="\VISU\Graphics\RenderTarget">RenderTarget</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$compensation</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/VISU-Graphics-Rendering-Pass-CameraData.html"><abbr title="\VISU\Graphics\Rendering\Pass\CameraData">CameraData</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_handleCursorPos">
+        handleCursorPos()
+        <a href="classes/VISU-System-VISUCameraSystem.html#method_handleCursorPos" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/System/VISUCameraSystem.php"><a href="files/src-system-visucamerasystem.html"><abbr title="src/System/VISUCameraSystem.php">VISUCameraSystem.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">140</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Cursor position handler</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">handleCursorPos</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entities</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Signals-Input-CursorPosSignal.html"><abbr title="\VISU\Signals\Input\CursorPosSignal">CursorPosSignal</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$signal</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$entities</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$signal</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Signals-Input-CursorPosSignal.html"><abbr title="\VISU\Signals\Input\CursorPosSignal">CursorPosSignal</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_handleScroll">
+        handleScroll()
+        <a href="classes/VISU-System-VISUCameraSystem.html#method_handleScroll" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/System/VISUCameraSystem.php"><a href="files/src-system-visucamerasystem.html"><abbr title="src/System/VISUCameraSystem.php">VISUCameraSystem.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">161</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Scroll wheel handler</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">handleScroll</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entities</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Signals-Input-ScrollSignal.html"><abbr title="\VISU\Signals\Input\ScrollSignal">ScrollSignal</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$signal</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$entities</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$signal</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Signals-Input-ScrollSignal.html"><abbr title="\VISU\Signals\Input\ScrollSignal">ScrollSignal</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_register">
+        register()
+        <a href="classes/VISU-System-VISUCameraSystem.html#method_register" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/System/VISUCameraSystem.php"><a href="files/src-system-visucamerasystem.html"><abbr title="src/System/VISUCameraSystem.php">VISUCameraSystem.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">116</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Registers the system, this is where you should register all required components.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">register</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entities</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$entities</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_render">
+        render()
+        <a href="classes/VISU-System-VISUCameraSystem.html#method_render" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/System/VISUCameraSystem.php"><a href="files/src-system-visucamerasystem.html"><abbr title="src/System/VISUCameraSystem.php">VISUCameraSystem.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">360</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Handles rendering of the scene, here you can attach additional render passes,
+modify the render pipeline or customize rendering related data.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">render</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entities</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Rendering-RenderContext.html"><abbr title="\VISU\Graphics\Rendering\RenderContext">RenderContext</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$context</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$entities</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$context</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Rendering-RenderContext.html"><abbr title="\VISU\Graphics\Rendering\RenderContext">RenderContext</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_setActiveCameraEntity">
+        setActiveCameraEntity()
+        <a href="classes/VISU-System-VISUCameraSystem.html#method_setActiveCameraEntity" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/System/VISUCameraSystem.php"><a href="files/src-system-visucamerasystem.html"><abbr title="src/System/VISUCameraSystem.php">VISUCameraSystem.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">75</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Sets the currently active camera entity</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">setActiveCameraEntity</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type">int&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entity</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$entity</span>
+                : <span class="phpdocumentor-signature__argument__return-type">int</span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_spawnDefaultFlyingCamera">
+        spawnDefaultFlyingCamera()
+        <a href="classes/VISU-System-VISUCameraSystem.html#method_spawnDefaultFlyingCamera" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/System/VISUCameraSystem.php"><a href="files/src-system-visucamerasystem.html"><abbr title="src/System/VISUCameraSystem.php">VISUCameraSystem.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">91</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Spwans a default flying camera entity</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">spawnDefaultFlyingCamera</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entities</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Vec3">Vec3</abbr>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$position</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">int</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$entities</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$position</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Vec3">Vec3</abbr>|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type">int</span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_unregister">
+        unregister()
+        <a href="classes/VISU-System-VISUCameraSystem.html#method_unregister" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/System/VISUCameraSystem.php"><a href="files/src-system-visucamerasystem.html"><abbr title="src/System/VISUCameraSystem.php">VISUCameraSystem.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">129</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Unregisters the system, this is where you can handle any cleanup.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">unregister</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entities</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$entities</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_update">
+        update()
+        <a href="classes/VISU-System-VISUCameraSystem.html#method_update" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/System/VISUCameraSystem.php"><a href="files/src-system-visucamerasystem.html"><abbr title="src/System/VISUCameraSystem.php">VISUCameraSystem.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">258</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Updates handler, this is where the game state should be updated.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">update</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entities</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$entities</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_updateGameCamera">
+        updateGameCamera()
+        <a href="classes/VISU-System-VISUCameraSystem.html#method_updateGameCamera" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/System/VISUCameraSystem.php"><a href="files/src-system-visucamerasystem.html"><abbr title="src/System/VISUCameraSystem.php">VISUCameraSystem.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">295</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Override this method to update the camera in game mode</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">updateGameCamera</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entities</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Camera.html"><abbr title="\VISU\Graphics\Camera">Camera</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$camera</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$entities</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$camera</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Camera.html"><abbr title="\VISU\Graphics\Camera">Camera</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_updateVISUFlyingCamera">
+        updateVISUFlyingCamera()
+        <a href="classes/VISU-System-VISUCameraSystem.html#method_updateVISUFlyingCamera" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/System/VISUCameraSystem.php"><a href="files/src-system-visucamerasystem.html"><abbr title="src/System/VISUCameraSystem.php">VISUCameraSystem.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">305</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Flying camera mode update</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">updateVISUFlyingCamera</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entities</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Camera.html"><abbr title="\VISU\Graphics\Camera">Camera</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$camera</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$entities</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$camera</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Camera.html"><abbr title="\VISU\Graphics\Camera">Camera</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_handleCursorPosVISUGame">
+        handleCursorPosVISUGame()
+        <a href="classes/VISU-System-VISUCameraSystem.html#method_handleCursorPosVISUGame" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/System/VISUCameraSystem.php"><a href="files/src-system-visucamerasystem.html"><abbr title="src/System/VISUCameraSystem.php">VISUCameraSystem.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">183</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Override this method to handle the cursor position in game mode</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">handleCursorPosVISUGame</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entities</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Signals-Input-CursorPosSignal.html"><abbr title="\VISU\Signals\Input\CursorPosSignal">CursorPosSignal</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$signal</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$entities</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$signal</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Signals-Input-CursorPosSignal.html"><abbr title="\VISU\Signals\Input\CursorPosSignal">CursorPosSignal</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -protected
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_handleScrollVISUGame">
+        handleScrollVISUGame()
+        <a href="classes/VISU-System-VISUCameraSystem.html#method_handleScrollVISUGame" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/System/VISUCameraSystem.php"><a href="files/src-system-visucamerasystem.html"><abbr title="src/System/VISUCameraSystem.php">VISUCameraSystem.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">194</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Override this method to handle the scroll wheel in game mode</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">protected</span>
+                    <span class="phpdocumentor-signature__name">handleScrollVISUGame</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$entities</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Signals-Input-ScrollSignal.html"><abbr title="\VISU\Signals\Input\ScrollSignal">ScrollSignal</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$signal</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$entities</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-ECS-EntitiesInterface.html"><abbr title="\VISU\ECS\EntitiesInterface">EntitiesInterface</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$signal</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Signals-Input-ScrollSignal.html"><abbr title="\VISU\Signals\Input\ScrollSignal">ScrollSignal</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_handleCursorPosVISUFlying">
+        handleCursorPosVISUFlying()
+        <a href="classes/VISU-System-VISUCameraSystem.html#method_handleCursorPosVISUFlying" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/System/VISUCameraSystem.php"><a href="files/src-system-visucamerasystem.html"><abbr title="src/System/VISUCameraSystem.php">VISUCameraSystem.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">204</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Cursor position handler</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">handleCursorPosVISUFlying</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Signals-Input-CursorPosSignal.html"><abbr title="\VISU\Signals\Input\CursorPosSignal">CursorPosSignal</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$signal</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$signal</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Signals-Input-CursorPosSignal.html"><abbr title="\VISU\Signals\Input\CursorPosSignal">CursorPosSignal</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -private
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_handleScrollVISUFlying">
+        handleScrollVISUFlying()
+        <a href="classes/VISU-System-VISUCameraSystem.html#method_handleScrollVISUFlying" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/System/VISUCameraSystem.php"><a href="files/src-system-visucamerasystem.html"><abbr title="src/System/VISUCameraSystem.php">VISUCameraSystem.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">228</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Scroll wheel handler</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">private</span>
+                    <span class="phpdocumentor-signature__name">handleScrollVISUFlying</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Signals-Input-ScrollSignal.html"><abbr title="\VISU\Signals\Input\ScrollSignal">ScrollSignal</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$signal</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$signal</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Signals-Input-ScrollSignal.html"><abbr title="\VISU\Signals\Input\ScrollSignal">ScrollSignal</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+            </section>
+
+        <div class="phpdocumentor-modal" id="source-view">
+    <div class="phpdocumentor-modal-bg" data-exit-button></div>
+    <div class="phpdocumentor-modal-container">
+        <div class="phpdocumentor-modal-content">
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/System/VISUCameraSystem.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+        </div>
+        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
+    </div>
+</div>
+
+    <script type="text/javascript">
+        (function () {
+            function loadExternalCodeSnippet(el, url, line) {
+                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
+                    const language = 'php';
+
+                    const code = document.createElement('code');
+                    code.className = 'language-' + language;
+                    pre.textContent = '';
+                    pre.setAttribute('data-line', line)
+                    code.textContent = 'Loading…';
+                    pre.appendChild(code);
+
+                    var xhr = new XMLHttpRequest();
+
+                    xhr.open('GET', src, true);
+
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState !== 4) {
+                            return;
+                        }
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+                            Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
+                            return;
+                        }
+
+                        if (xhr.status === 404) {
+                            code.textContent = '✖ Error: File could not be found';
+                            return;
+                        }
+
+                        if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                            return;
+                        }
+
+                        code.textContent = '✖ Error: An unknown error occurred';
+                    };
+
+                    xhr.send(null);
+                });
+            }
+
+            const modalButtons = document.querySelectorAll("[data-modal]");
+            const openedAsLocalFile = window.location.protocol === 'file:';
+            if (modalButtons.length > 0 && openedAsLocalFile) {
+                console.warn(
+                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
+                    'browsers block XHR requests when a page is opened this way'
+                );
+            }
+
+            modalButtons.forEach(function (trigger) {
+                if (openedAsLocalFile) {
+                    trigger.setAttribute("hidden", "hidden");
+                }
+
+                trigger.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const modal = document.getElementById(trigger.dataset.modal);
+                    if (!modal) {
+                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
+                        return;
+                    }
+                    modal.classList.add("phpdocumentor-modal__open");
+
+                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
+                    const exits = modal.querySelectorAll("[data-exit-button]");
+                    exits.forEach(function (exit) {
+                        exit.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            modal.classList.remove("phpdocumentor-modal__open");
+                        });
+                    });
+                });
+            });
+        })();
+    </script>
+
+    </article>
+                                </section>
+                <section class="phpdocumentor-on-this-page__sidebar">
+                                
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                        <li><a href="classes/VISU-System-VISUCameraSystem.html#toc-constants">Constants</a></li>
+                                                            <li><a href="classes/VISU-System-VISUCameraSystem.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/VISU-System-VISUCameraSystem.html#toc-methods">Methods</a></li>
+                                    </ul>
+            </li>
+                            <li class="phpdocumentor-on-this-page-section__title">Constants</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/VISU-System-VISUCameraSystem.html#constant_CAMERA_MODE_FLYING">CAMERA_MODE_FLYING</a></li>
+                                                    <li class=""><a href="classes/VISU-System-VISUCameraSystem.html#constant_CAMERA_MODE_GAME">CAMERA_MODE_GAME</a></li>
+                                            </ul>
+                </li>
+            
+                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/VISU-System-VISUCameraSystem.html#property_activeCameraEntity">$activeCameraEntity</a></li>
+                                                    <li class=""><a href="classes/VISU-System-VISUCameraSystem.html#property_dispatcher">$dispatcher</a></li>
+                                                    <li class=""><a href="classes/VISU-System-VISUCameraSystem.html#property_input">$input</a></li>
+                                                    <li class=""><a href="classes/VISU-System-VISUCameraSystem.html#property_visuCameraMode">$visuCameraMode</a></li>
+                                                    <li class=""><a href="classes/VISU-System-VISUCameraSystem.html#property_cameraEuler">$cameraEuler</a></li>
+                                                    <li class=""><a href="classes/VISU-System-VISUCameraSystem.html#property_inputCursorQueue">$inputCursorQueue</a></li>
+                                                    <li class=""><a href="classes/VISU-System-VISUCameraSystem.html#property_inputScrollQueue">$inputScrollQueue</a></li>
+                                            </ul>
+                </li>
+            
+                        <li class="phpdocumentor-on-this-page-section__title">Methods</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li class=""><a href="classes/VISU-System-VISUCameraSystem.html#method___construct">__construct()</a></li>
+                                            <li class=""><a href="classes/VISU-System-VISUCameraSystem.html#method_getActiveCamera">getActiveCamera()</a></li>
+                                            <li class=""><a href="classes/VISU-System-VISUCameraSystem.html#method_getActiveCameraEntity">getActiveCameraEntity()</a></li>
+                                            <li class=""><a href="classes/VISU-System-VISUCameraSystem.html#method_getCameraData">getCameraData()</a></li>
+                                            <li class=""><a href="classes/VISU-System-VISUCameraSystem.html#method_handleCursorPos">handleCursorPos()</a></li>
+                                            <li class=""><a href="classes/VISU-System-VISUCameraSystem.html#method_handleScroll">handleScroll()</a></li>
+                                            <li class=""><a href="classes/VISU-System-VISUCameraSystem.html#method_register">register()</a></li>
+                                            <li class=""><a href="classes/VISU-System-VISUCameraSystem.html#method_render">render()</a></li>
+                                            <li class=""><a href="classes/VISU-System-VISUCameraSystem.html#method_setActiveCameraEntity">setActiveCameraEntity()</a></li>
+                                            <li class=""><a href="classes/VISU-System-VISUCameraSystem.html#method_spawnDefaultFlyingCamera">spawnDefaultFlyingCamera()</a></li>
+                                            <li class=""><a href="classes/VISU-System-VISUCameraSystem.html#method_unregister">unregister()</a></li>
+                                            <li class=""><a href="classes/VISU-System-VISUCameraSystem.html#method_update">update()</a></li>
+                                            <li class=""><a href="classes/VISU-System-VISUCameraSystem.html#method_updateGameCamera">updateGameCamera()</a></li>
+                                            <li class=""><a href="classes/VISU-System-VISUCameraSystem.html#method_updateVISUFlyingCamera">updateVISUFlyingCamera()</a></li>
+                                            <li class=""><a href="classes/VISU-System-VISUCameraSystem.html#method_handleCursorPosVISUGame">handleCursorPosVISUGame()</a></li>
+                                            <li class=""><a href="classes/VISU-System-VISUCameraSystem.html#method_handleScrollVISUGame">handleScrollVISUGame()</a></li>
+                                            <li class=""><a href="classes/VISU-System-VISUCameraSystem.html#method_handleCursorPosVISUFlying">handleCursorPosVISUFlying()</a></li>
+                                            <li class=""><a href="classes/VISU-System-VISUCameraSystem.html#method_handleScrollVISUFlying">handleScrollVISUFlying()</a></li>
+                                    </ul>
+            </li>
+                    </ul>
+    </section>
+
+                </section>
+                            </div>
+            <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+    <section class="phpdocumentor-search-results__dialog">
+        <header class="phpdocumentor-search-results__header">
+            <h2 class="phpdocumentor-search-results__title">Search results</h2>
+            <button class="phpdocumentor-search-results__close"><i class="fas fa-times"></i></button>
+        </header>
+        <section class="phpdocumentor-search-results__body">
+            <ul class="phpdocumentor-search-results__entries"></ul>
+        </section>
+    </section>
+</section>
+        </div>
+        <a href="classes/VISU-System-VISUCameraSystem.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+
+    </main>
+
+    <script>
+        cssVars({});
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+</body>
+</html>

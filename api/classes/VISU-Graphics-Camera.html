@@ -1,0 +1,1839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+            <title>VISU - PHP Game Framework</title>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="../">
+    <link rel="icon" href="images/favicon.ico"/>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/base.css">
+            <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@100;200;300;400;600;700&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/template.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" integrity="sha256-ybRkN9dBjhcS2qrW1z+hfCxq+1aBdwyQM5wlQoQVt/0=" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism-okaidia.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.css">
+                <script src="https://cdn.jsdelivr.net/npm/fuse.js@3.4.6"></script>
+        <script src="https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2"></script>
+        <script src="js/template.js"></script>
+        <script src="js/search.js"></script>
+        <script defer src="js/searchIndex.js"></script>
+    </head>
+<body id="top">
+    <header class="phpdocumentor-header phpdocumentor-section">
+    <h1 class="phpdocumentor-title"><a href="" class="phpdocumentor-title__link">VISU - PHP Game Framework</a></h1>
+    <input class="phpdocumentor-header__menu-button" type="checkbox" id="menu-button" name="menu-button" />
+    <label class="phpdocumentor-header__menu-icon" for="menu-button">
+        <i class="fas fa-bars"></i>
+    </label>
+    <section data-search-form class="phpdocumentor-search">
+    <label>
+        <span class="visually-hidden">Search for</span>
+        <svg class="phpdocumentor-search__icon" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="7.5" cy="7.5" r="6.5" stroke="currentColor" stroke-width="2"/>
+            <line x1="12.4892" y1="12.2727" x2="19.1559" y2="18.9393" stroke="currentColor" stroke-width="3"/>
+        </svg>
+        <input type="search" class="phpdocumentor-field phpdocumentor-search__field" placeholder="Loading .." disabled />
+    </label>
+</section>
+
+    <nav class="phpdocumentor-topnav">
+    <ul class="phpdocumentor-topnav__menu">
+        </ul>
+</nav>
+</header>
+
+    <main class="phpdocumentor">
+        <div class="phpdocumentor-section">
+            <input class="phpdocumentor-sidebar__menu-button" type="checkbox" id="sidebar-button" name="sidebar-button" />
+<label class="phpdocumentor-sidebar__menu-icon" for="sidebar-button">
+    Menu
+</label>
+<aside class="phpdocumentor-column -three phpdocumentor-sidebar">
+                    <section class="phpdocumentor-sidebar__category -namespaces">
+            <h2 class="phpdocumentor-sidebar__category-header">Namespaces</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="namespaces/visu.html" class="">VISU</a>
+</h4>
+    <ul class="phpdocumentor-list">
+                    <li>
+                <a href="namespaces/visu-animation.html" class="">Animation</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-command.html" class="">Command</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-component.html" class="">Component</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-ecs.html" class="">ECS</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-exception.html" class="">Exception</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-flyui.html" class="">FlyUI</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-geo.html" class="">Geo</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-graphics.html" class="">Graphics</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-instrument.html" class="">Instrument</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-maker.html" class="">Maker</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-os.html" class="">OS</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-quickstart.html" class="">Quickstart</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-runtime.html" class="">Runtime</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-signal.html" class="">Signal</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-signals.html" class="">Signals</a>
+                
+            </li>
+                    <li>
+                <a href="namespaces/visu-system.html" class="">System</a>
+                
+            </li>
+            </ul>
+
+                        </section>
+                <section class="phpdocumentor-sidebar__category -packages">
+            <h2 class="phpdocumentor-sidebar__category-header">Packages</h2>
+                                    <h4 class="phpdocumentor-sidebar__root-namespace">
+    <a href="packages/Application.html" class="">Application</a>
+</h4>
+
+                        </section>
+            
+    <section class="phpdocumentor-sidebar__category -reports">
+        <h2 class="phpdocumentor-sidebar__category-header">Reports</h2>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="graphs/classes.html">Class Diagram</a></h3>
+                <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/deprecated.html">Deprecated</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/errors.html">Errors</a></h3>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="reports/markers.html">Markers</a></h3>
+    </section>
+
+    <section class="phpdocumentor-sidebar__category -indices">
+        <h2 class="phpdocumentor-sidebar__category-header">Indices</h2>
+        <h3 class="phpdocumentor-sidebar__root-package"><a href="indices/files.html">Files</a></h3>
+    </section>
+</aside>
+
+            <div class="phpdocumentor-column -nine phpdocumentor-content">
+                                <section>
+                                        <ul class="phpdocumentor-breadcrumbs">
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/visu.html">VISU</a></li>
+            <li class="phpdocumentor-breadcrumb"><a href="namespaces/visu-graphics.html">Graphics</a></li>
+    </ul>
+
+    <article class="phpdocumentor-element -class">
+        <h2 class="phpdocumentor-content__title">
+    Camera
+
+    
+            <div class="phpdocumentor-element__package">
+            in package
+            <ul class="phpdocumentor-breadcrumbs">
+                                    <li class="phpdocumentor-breadcrumb"><a href="packages/Application.html">Application</a></li>
+                            </ul>
+        </div>
+    
+    
+    </h2>
+
+<div class="phpdocumentor-label-line">
+
+
+</div>
+
+        <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Camera.php"><a href="files/src-graphics-camera.html"><abbr title="src/Graphics/Camera.php">Camera.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">18</span>
+
+    </aside>
+
+        
+
+
+
+
+
+
+
+
+<h3 id="toc">
+    Table of Contents
+    <a href="classes/VISU-Graphics-Camera.html#toc" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h3>
+
+
+
+
+
+
+
+
+
+<h4 id="toc-properties">
+    Properties
+    <a href="classes/VISU-Graphics-Camera.html#toc-properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-Graphics-Camera.html#property_allowInterpolation">$allowInterpolation</a>
+    <span>
+                        &nbsp;: bool            </span>
+</dt>
+<dd>If enabled, the camera will interpolate its position and orientation
+from the previous frame to the current frame given the delta time.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-Graphics-Camera.html#property_farPlane">$farPlane</a>
+    <span>
+                        &nbsp;: float            </span>
+</dt>
+<dd>The cameras far plane distance
+This is the distance from the camera to the far clipping plane, aka
+the furthest distance at which objects will be rendered.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-Graphics-Camera.html#property_fieldOfView">$fieldOfView</a>
+    <span>
+                        &nbsp;: float            </span>
+</dt>
+<dd>The cameras field of view (FOV)</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-Graphics-Camera.html#property_flipViewportY">$flipViewportY</a>
+    <span>
+                        &nbsp;: bool            </span>
+</dt>
+<dd>Flip the viewport on the y axis
+The camera by default uses y+ as up, this will flip the viewport to use y- as up.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-Graphics-Camera.html#property_nearPlane">$nearPlane</a>
+    <span>
+                        &nbsp;: float            </span>
+</dt>
+<dd>The cameras near plane distance
+This is the distance from the camera to the near clipping plane, aka
+the closest distance at which objects will be rendered.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-Graphics-Camera.html#property_projectionMode">$projectionMode</a>
+    <span>
+                        &nbsp;: <a href="classes/VISU-Graphics-CameraProjectionMode.html"><abbr title="\VISU\Graphics\CameraProjectionMode">CameraProjectionMode</abbr></a>            </span>
+</dt>
+<dd>The cameras projection mode</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-Graphics-Camera.html#property_staticWorldHeight">$staticWorldHeight</a>
+    <span>
+                        &nbsp;: float            </span>
+</dt>
+<dd>Fixed world height in units for orthographic static world projection mode</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-Graphics-Camera.html#property_transform">$transform</a>
+    <span>
+                        &nbsp;: <a href="classes/VISU-Geo-Transform.html"><abbr title="\VISU\Geo\Transform">Transform</abbr></a>            </span>
+</dt>
+<dd>The camera&#039;s transform / location, orientation in space</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -public">
+    <a class="" href="classes/VISU-Graphics-Camera.html#property_zoom">$zoom</a>
+    <span>
+                        &nbsp;: float            </span>
+</dt>
+<dd>Camera Zoom</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-Graphics-Camera.html#property_interpolationTransformAlloc">$interpolationTransformAlloc</a>
+    <span>
+                        &nbsp;: <a href="classes/VISU-Geo-Transform.html"><abbr title="\VISU\Geo\Transform">Transform</abbr></a>            </span>
+</dt>
+<dd>Internal holder for a temporary transform instance used for interpolation</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-Graphics-Camera.html#property_lfCameraPos">$lfCameraPos</a>
+    <span>
+                        &nbsp;: <abbr title="\GL\Math\Vec3">Vec3</abbr>            </span>
+</dt>
+<dd>Holds the cameras position from the last frame</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-Graphics-Camera.html#property_lfCameraRot">$lfCameraRot</a>
+    <span>
+                        &nbsp;: <abbr title="\GL\Math\Quat">Quat</abbr>            </span>
+</dt>
+<dd>Holds the cameras orientation from the last frame</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -property -private">
+    <a class="" href="classes/VISU-Graphics-Camera.html#property_projectionMatrixAlloc">$projectionMatrixAlloc</a>
+    <span>
+                        &nbsp;: <abbr title="\GL\Math\Mat4">Mat4</abbr>            </span>
+</dt>
+<dd>Internal holder for the projection view matrix</dd>
+
+    </dl>
+
+<h4 id="toc-methods">
+    Methods
+    <a href="classes/VISU-Graphics-Camera.html#toc-methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+</h4>
+<dl class="phpdocumentor-table-of-contents">
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Graphics-Camera.html#method___construct">__construct()</a>
+    <span>
+                                &nbsp;: mixed    </span>
+</dt>
+<dd>Camera constructor.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Graphics-Camera.html#method_createCameraData">createCameraData()</a>
+    <span>
+                                &nbsp;: <a href="classes/VISU-Graphics-Rendering-Pass-CameraData.html"><abbr title="\VISU\Graphics\Rendering\Pass\CameraData">CameraData</abbr></a>    </span>
+</dt>
+<dd>Creates and returns a camera data instance for the given render target and delta time.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Graphics-Camera.html#method_finalizeFrame">finalizeFrame()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Calling this method will store the current camera position and orientation
+as the previous frame. This is used for interpolation.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Graphics-Camera.html#method_getModelMatrix">getModelMatrix()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Mat4">Mat4</abbr>    </span>
+</dt>
+<dd>Returns the model matrix of the camera
+This is basically the inverse of the cameras view matrix.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Graphics-Camera.html#method_getProjectionMatrix">getProjectionMatrix()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Mat4">Mat4</abbr>    </span>
+</dt>
+<dd>Calculates and retuns the cameras projection matrix.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Graphics-Camera.html#method_getSSDirection">getSSDirection()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Vec3">Vec3</abbr>    </span>
+</dt>
+<dd>Calculates and returns the ray direction of the camera at the given screen position.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Graphics-Camera.html#method_getSSPointFromWS">getSSPointFromWS()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Vec2">Vec2</abbr>    </span>
+</dt>
+<dd>Returns a screen space position from the given world space position.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Graphics-Camera.html#method_getSSRay">getSSRay()</a>
+    <span>
+                                &nbsp;: <a href="classes/VISU-Geo-Ray.html"><abbr title="\VISU\Geo\Ray">Ray</abbr></a>    </span>
+</dt>
+<dd>Creates a Ray instance from the camera at the given screen position.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Graphics-Camera.html#method_getViewMatrix">getViewMatrix()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Mat4">Mat4</abbr>    </span>
+</dt>
+<dd>Calculates and returns the cameras view matrix. The matrix is inverted on the fly
+so cache the result if you need to use it multiple times.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Graphics-Camera.html#method_getViewport">getViewport()</a>
+    <span>
+                                &nbsp;: <a href="classes/VISU-Graphics-Viewport.html"><abbr title="\VISU\Graphics\Viewport">Viewport</abbr></a>    </span>
+</dt>
+<dd>Returns a viewport for the given render target
+This will only work for orthographic projection modes.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Graphics-Camera.html#method_getViewProjectionMatrix">getViewProjectionMatrix()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Mat4">Mat4</abbr>    </span>
+</dt>
+<dd>Calculates and returns the cameras view projection matrix.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Graphics-Camera.html#method_getWSPointFromSS">getWSPointFromSS()</a>
+    <span>
+                                &nbsp;: <abbr title="\GL\Math\Vec2">Vec2</abbr>    </span>
+</dt>
+<dd>Returns a world space position from the given screen space position.</dd>
+
+            <dt class="phpdocumentor-table-of-contents__entry -method -public">
+    <a class="" href="classes/VISU-Graphics-Camera.html#method_transformVGSpace">transformVGSpace()</a>
+    <span>
+                                &nbsp;: void    </span>
+</dt>
+<dd>Will translate and scale the given VGContext to match the cameras viewport.</dd>
+
+    </dl>
+
+
+
+        
+
+        
+    <section class="phpdocumentor-properties">
+        <h3 class="phpdocumentor-elements__header" id="properties">
+            Properties
+            <a href="classes/VISU-Graphics-Camera.html#properties" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_allowInterpolation">
+        $allowInterpolation
+        <a href="classes/VISU-Graphics-Camera.html#property_allowInterpolation" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Camera.php"><a href="files/src-graphics-camera.html"><abbr title="src/Graphics/Camera.php">Camera.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">102</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">If enabled, the camera will interpolate its position and orientation
+from the previous frame to the current frame given the delta time.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool</span>
+    <span class="phpdocumentor-signature__name">$allowInterpolation</span>
+     = <span class="phpdocumentor-signature__default-value">true</span></code>
+
+        <section class="phpdocumentor-description"><p>When enabled you will have to call <code class="prettyprint">finalizeFrame</code> at the end of each frame.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_farPlane">
+        $farPlane
+        <a href="classes/VISU-Graphics-Camera.html#property_farPlane" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Camera.php"><a href="files/src-graphics-camera.html"><abbr title="src/Graphics/Camera.php">Camera.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">52</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The cameras far plane distance
+This is the distance from the camera to the far clipping plane, aka
+the furthest distance at which objects will be rendered.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">float</span>
+    <span class="phpdocumentor-signature__name">$farPlane</span>
+     = <span class="phpdocumentor-signature__default-value">65536.0</span></code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_fieldOfView">
+        $fieldOfView
+        <a href="classes/VISU-Graphics-Camera.html#property_fieldOfView" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Camera.php"><a href="files/src-graphics-camera.html"><abbr title="src/Graphics/Camera.php">Camera.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">59</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The cameras field of view (FOV)</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">float</span>
+    <span class="phpdocumentor-signature__name">$fieldOfView</span>
+     = <span class="phpdocumentor-signature__default-value">45.0</span></code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_flipViewportY">
+        $flipViewportY
+        <a href="classes/VISU-Graphics-Camera.html#property_flipViewportY" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Camera.php"><a href="files/src-graphics-camera.html"><abbr title="src/Graphics/Camera.php">Camera.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">82</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Flip the viewport on the y axis
+The camera by default uses y+ as up, this will flip the viewport to use y- as up.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">bool</span>
+    <span class="phpdocumentor-signature__name">$flipViewportY</span>
+     = <span class="phpdocumentor-signature__default-value">false</span></code>
+
+        <section class="phpdocumentor-description"><p>When you want to use the camera with a vector graphics context you will want to
+flip the viewport.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_nearPlane">
+        $nearPlane
+        <a href="classes/VISU-Graphics-Camera.html#property_nearPlane" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Camera.php"><a href="files/src-graphics-camera.html"><abbr title="src/Graphics/Camera.php">Camera.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">45</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The cameras near plane distance
+This is the distance from the camera to the near clipping plane, aka
+the closest distance at which objects will be rendered.</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">float</span>
+    <span class="phpdocumentor-signature__name">$nearPlane</span>
+     = <span class="phpdocumentor-signature__default-value">0.1</span></code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_projectionMode">
+        $projectionMode
+        <a href="classes/VISU-Graphics-Camera.html#property_projectionMode" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Camera.php"><a href="files/src-graphics-camera.html"><abbr title="src/Graphics/Camera.php">Camera.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">23</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The cameras projection mode</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/VISU-Graphics-CameraProjectionMode.html"><abbr title="\VISU\Graphics\CameraProjectionMode">CameraProjectionMode</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$projectionMode</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_staticWorldHeight">
+        $staticWorldHeight
+        <a href="classes/VISU-Graphics-Camera.html#property_staticWorldHeight" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Camera.php"><a href="files/src-graphics-camera.html"><abbr title="src/Graphics/Camera.php">Camera.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">66</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Fixed world height in units for orthographic static world projection mode</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">float</span>
+    <span class="phpdocumentor-signature__name">$staticWorldHeight</span>
+     = <span class="phpdocumentor-signature__default-value">100.0</span></code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_transform">
+        $transform
+        <a href="classes/VISU-Graphics-Camera.html#property_transform" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Camera.php"><a href="files/src-graphics-camera.html"><abbr title="src/Graphics/Camera.php">Camera.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">28</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">The camera&#039;s transform / location, orientation in space</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/VISU-Geo-Transform.html"><abbr title="\VISU\Geo\Transform">Transform</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$transform</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -public
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_zoom">
+        $zoom
+        <a href="classes/VISU-Graphics-Camera.html#property_zoom" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Camera.php"><a href="files/src-graphics-camera.html"><abbr title="src/Graphics/Camera.php">Camera.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">73</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Camera Zoom</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">public</span>
+            <span class="phpdocumentor-signature__type">float</span>
+    <span class="phpdocumentor-signature__name">$zoom</span>
+     = <span class="phpdocumentor-signature__default-value">1.0</span></code>
+
+        <section class="phpdocumentor-description"><p>Only applies to orthographic projection modes and vg contexts.</p>
+</section>
+
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_interpolationTransformAlloc">
+        $interpolationTransformAlloc
+        <a href="classes/VISU-Graphics-Camera.html#property_interpolationTransformAlloc" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Camera.php"><a href="files/src-graphics-camera.html"><abbr title="src/Graphics/Camera.php">Camera.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">92</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Internal holder for a temporary transform instance used for interpolation</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><a href="classes/VISU-Geo-Transform.html"><abbr title="\VISU\Geo\Transform">Transform</abbr></a></span>
+    <span class="phpdocumentor-signature__name">$interpolationTransformAlloc</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_lfCameraPos">
+        $lfCameraPos
+        <a href="classes/VISU-Graphics-Camera.html#property_lfCameraPos" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Camera.php"><a href="files/src-graphics-camera.html"><abbr title="src/Graphics/Camera.php">Camera.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">33</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Holds the cameras position from the last frame</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span>
+    <span class="phpdocumentor-signature__name">$lfCameraPos</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_lfCameraRot">
+        $lfCameraRot
+        <a href="classes/VISU-Graphics-Camera.html#property_lfCameraRot" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Camera.php"><a href="files/src-graphics-camera.html"><abbr title="src/Graphics/Camera.php">Camera.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">38</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Holds the cameras orientation from the last frame</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><abbr title="\GL\Math\Quat">Quat</abbr></span>
+    <span class="phpdocumentor-signature__name">$lfCameraRot</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+                    <article
+        class="
+            phpdocumentor-element
+            -property
+            -private
+                                                                    "
+>
+    <h4 class="phpdocumentor-element__name" id="property_projectionMatrixAlloc">
+        $projectionMatrixAlloc
+        <a href="classes/VISU-Graphics-Camera.html#property_projectionMatrixAlloc" class="headerlink"><i class="fas fa-link"></i></a>
+
+        <span class="phpdocumentor-element__modifiers">
+                                            </span>
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Camera.php"><a href="files/src-graphics-camera.html"><abbr title="src/Graphics/Camera.php">Camera.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">87</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Internal holder for the projection view matrix</p>
+
+    
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+        <span class="phpdocumentor-signature__visibility">private</span>
+            <span class="phpdocumentor-signature__type"><abbr title="\GL\Math\Mat4">Mat4</abbr></span>
+    <span class="phpdocumentor-signature__name">$projectionMatrixAlloc</span>
+    </code>
+
+    
+    
+    
+
+    
+
+    
+
+</article>
+            </section>
+
+            <section class="phpdocumentor-methods">
+        <h3 class="phpdocumentor-elements__header" id="methods">
+            Methods
+            <a href="classes/VISU-Graphics-Camera.html#methods" class="headerlink"><i class="fas fa-link"></i></a>
+
+        </h3>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method___construct">
+        __construct()
+        <a href="classes/VISU-Graphics-Camera.html#method___construct" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Camera.php"><a href="files/src-graphics-camera.html"><abbr title="src/Graphics/Camera.php">Camera.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">110</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Camera constructor.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">__construct</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-CameraProjectionMode.html"><abbr title="\VISU\Graphics\CameraProjectionMode">CameraProjectionMode</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$mode</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Geo-Transform.html"><abbr title="\VISU\Geo\Transform">Transform</abbr></a>|null&nbsp;</span><span class="phpdocumentor-signature__argument__name">$transform</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">null</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">mixed</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$mode</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-CameraProjectionMode.html"><abbr title="\VISU\Graphics\CameraProjectionMode">CameraProjectionMode</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The cameras projection mode</p>
+</section>
+
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$transform</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Geo-Transform.html"><abbr title="\VISU\Geo\Transform">Transform</abbr></a>|null</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">null</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The inital cameras transform, note this is by reference! (Its PHP..)</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_createCameraData">
+        createCameraData()
+        <a href="classes/VISU-Graphics-Camera.html#method_createCameraData" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Camera.php"><a href="files/src-graphics-camera.html"><abbr title="src/Graphics/Camera.php">Camera.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">359</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Creates and returns a camera data instance for the given render target and delta time.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">createCameraData</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-RenderTarget.html"><abbr title="\VISU\Graphics\RenderTarget">RenderTarget</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$renderTarget</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$compensation</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">0.0</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/VISU-Graphics-Rendering-Pass-CameraData.html"><abbr title="\VISU\Graphics\Rendering\Pass\CameraData">CameraData</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$renderTarget</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-RenderTarget.html"><abbr title="\VISU\Graphics\RenderTarget">RenderTarget</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$compensation</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">0.0</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/VISU-Graphics-Rendering-Pass-CameraData.html"><abbr title="\VISU\Graphics\Rendering\Pass\CameraData">CameraData</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_finalizeFrame">
+        finalizeFrame()
+        <a href="classes/VISU-Graphics-Camera.html#method_finalizeFrame" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Camera.php"><a href="files/src-graphics-camera.html"><abbr title="src/Graphics/Camera.php">Camera.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">350</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Calling this method will store the current camera position and orientation
+as the previous frame. This is used for interpolation.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">finalizeFrame</span><span>(</span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+    
+    
+
+    
+
+    
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getModelMatrix">
+        getModelMatrix()
+        <a href="classes/VISU-Graphics-Camera.html#method_getModelMatrix" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Camera.php"><a href="files/src-graphics-camera.html"><abbr title="src/Graphics/Camera.php">Camera.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">244</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns the model matrix of the camera
+This is basically the inverse of the cameras view matrix.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getModelMatrix</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$deltaTime</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">0.0</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Mat4">Mat4</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$deltaTime</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">0.0</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Mat4">Mat4</abbr></span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The model matrix of the camera</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getProjectionMatrix">
+        getProjectionMatrix()
+        <a href="classes/VISU-Graphics-Camera.html#method_getProjectionMatrix" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Camera.php"><a href="files/src-graphics-camera.html"><abbr title="src/Graphics/Camera.php">Camera.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">128</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Calculates and retuns the cameras projection matrix.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getProjectionMatrix</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-RenderTarget.html"><abbr title="\VISU\Graphics\RenderTarget">RenderTarget</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$renderTarget</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Mat4">Mat4</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$renderTarget</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-RenderTarget.html"><abbr title="\VISU\Graphics\RenderTarget">RenderTarget</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The render target to calculate the projection matrix for</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Mat4">Mat4</abbr></span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>A copy of the calculated projection matrix</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getSSDirection">
+        getSSDirection()
+        <a href="classes/VISU-Graphics-Camera.html#method_getSSDirection" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Camera.php"><a href="files/src-graphics-camera.html"><abbr title="src/Graphics/Camera.php">Camera.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">281</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Calculates and returns the ray direction of the camera at the given screen position.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getSSDirection</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-RenderTarget.html"><abbr title="\VISU\Graphics\RenderTarget">RenderTarget</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$renderTarget</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Vec2">Vec2</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$screenPos</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Warning: This method is rather expensive, use it sparingly.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$renderTarget</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-RenderTarget.html"><abbr title="\VISU\Graphics\RenderTarget">RenderTarget</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$screenPos</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Vec2">Vec2</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec3">Vec3</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getSSPointFromWS">
+        getSSPointFromWS()
+        <a href="classes/VISU-Graphics-Camera.html#method_getSSPointFromWS" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Camera.php"><a href="files/src-graphics-camera.html"><abbr title="src/Graphics/Camera.php">Camera.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">305</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns a screen space position from the given world space position.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getSSPointFromWS</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Viewport.html"><abbr title="\VISU\Graphics\Viewport">Viewport</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$viewport</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Vec2">Vec2</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$viewSpacePos</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec2">Vec2</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$viewport</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Viewport.html"><abbr title="\VISU\Graphics\Viewport">Viewport</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$viewSpacePos</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Vec2">Vec2</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec2">Vec2</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getSSRay">
+        getSSRay()
+        <a href="classes/VISU-Graphics-Camera.html#method_getSSRay" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Camera.php"><a href="files/src-graphics-camera.html"><abbr title="src/Graphics/Camera.php">Camera.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">297</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Creates a Ray instance from the camera at the given screen position.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getSSRay</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-RenderTarget.html"><abbr title="\VISU\Graphics\RenderTarget">RenderTarget</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$renderTarget</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Vec2">Vec2</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$screenPos</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/VISU-Geo-Ray.html"><abbr title="\VISU\Geo\Ray">Ray</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+        <section class="phpdocumentor-description"><p>Warning: This method is rather expensive, use it sparingly.</p>
+</section>
+
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$renderTarget</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-RenderTarget.html"><abbr title="\VISU\Graphics\RenderTarget">RenderTarget</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$screenPos</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Vec2">Vec2</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/VISU-Geo-Ray.html"><abbr title="\VISU\Geo\Ray">Ray</abbr></a></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getViewMatrix">
+        getViewMatrix()
+        <a href="classes/VISU-Graphics-Camera.html#method_getViewMatrix" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Camera.php"><a href="files/src-graphics-camera.html"><abbr title="src/Graphics/Camera.php">Camera.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">264</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Calculates and returns the cameras view matrix. The matrix is inverted on the fly
+so cache the result if you need to use it multiple times.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getViewMatrix</span><span>(</span><span class="phpdocumentor-signature__argument"><span>[</span><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$deltaTime</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">0.0</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Mat4">Mat4</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$deltaTime</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">0.0</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The delta time since the last frame</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Mat4">Mat4</abbr></span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>A copy of the calculated view matrix</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getViewport">
+        getViewport()
+        <a href="classes/VISU-Graphics-Camera.html#method_getViewport" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Camera.php"><a href="files/src-graphics-camera.html"><abbr title="src/Graphics/Camera.php">Camera.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">191</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns a viewport for the given render target
+This will only work for orthographic projection modes.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getViewport</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-RenderTarget.html"><abbr title="\VISU\Graphics\RenderTarget">RenderTarget</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$renderTarget</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><a href="classes/VISU-Graphics-Viewport.html"><abbr title="\VISU\Graphics\Viewport">Viewport</abbr></a></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$renderTarget</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-RenderTarget.html"><abbr title="\VISU\Graphics\RenderTarget">RenderTarget</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                    <section class="phpdocumentor-description"><p>The render target to calculate the viewport for</p>
+</section>
+
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><a href="classes/VISU-Graphics-Viewport.html"><abbr title="\VISU\Graphics\Viewport">Viewport</abbr></a></span>
+                    &mdash;
+                <section class="phpdocumentor-description"><p>The calculated viewport</p>
+</section>
+
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getViewProjectionMatrix">
+        getViewProjectionMatrix()
+        <a href="classes/VISU-Graphics-Camera.html#method_getViewProjectionMatrix" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Camera.php"><a href="files/src-graphics-camera.html"><abbr title="src/Graphics/Camera.php">Camera.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">272</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Calculates and returns the cameras view projection matrix.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getViewProjectionMatrix</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-RenderTarget.html"><abbr title="\VISU\Graphics\RenderTarget">RenderTarget</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$renderTarget</span></span><span class="phpdocumentor-signature__argument"><span>[</span><span>, </span><span class="phpdocumentor-signature__argument__return-type">float&nbsp;</span><span class="phpdocumentor-signature__argument__name">$deltaTime</span><span> = </span><span class="phpdocumentor-signature__argument__default-value">0.0</span><span> ]</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Mat4">Mat4</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$renderTarget</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-RenderTarget.html"><abbr title="\VISU\Graphics\RenderTarget">RenderTarget</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$deltaTime</span>
+                : <span class="phpdocumentor-signature__argument__return-type">float</span>
+                 = <span class="phpdocumentor-signature__argument__default-value">0.0</span>            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Mat4">Mat4</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_getWSPointFromSS">
+        getWSPointFromSS()
+        <a href="classes/VISU-Graphics-Camera.html#method_getWSPointFromSS" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Camera.php"><a href="files/src-graphics-camera.html"><abbr title="src/Graphics/Camera.php">Camera.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">316</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Returns a world space position from the given screen space position.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">getWSPointFromSS</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Viewport.html"><abbr title="\VISU\Graphics\Viewport">Viewport</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$viewport</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Vec2">Vec2</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$screenSpacePos</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec2">Vec2</abbr></span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$viewport</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Viewport.html"><abbr title="\VISU\Graphics\Viewport">Viewport</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$screenSpacePos</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\Math\Vec2">Vec2</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+            <section>
+        <h5 class="phpdocumentor-return-value__heading">Return values</h5>
+        <span class="phpdocumentor-signature__response_type"><abbr title="\GL\Math\Vec2">Vec2</abbr></span>
+            </section>
+
+</article>
+                    <article
+        class="phpdocumentor-element
+            -method
+            -public
+                                                        "
+>
+    <h4 class="phpdocumentor-element__name" id="method_transformVGSpace">
+        transformVGSpace()
+        <a href="classes/VISU-Graphics-Camera.html#method_transformVGSpace" class="headerlink"><i class="fas fa-link"></i></a>
+
+    </h4>
+    <aside class="phpdocumentor-element-found-in">
+    <abbr class="phpdocumentor-element-found-in__file" title="src/Graphics/Camera.php"><a href="files/src-graphics-camera.html"><abbr title="src/Graphics/Camera.php">Camera.php</abbr></a></abbr>
+    :
+    <span class="phpdocumentor-element-found-in__line">327</span>
+
+    </aside>
+
+        <p class="phpdocumentor-summary">Will translate and scale the given VGContext to match the cameras viewport.</p>
+
+    <code class="phpdocumentor-code phpdocumentor-signature ">
+    <span class="phpdocumentor-signature__visibility">public</span>
+                    <span class="phpdocumentor-signature__name">transformVGSpace</span><span>(</span><span class="phpdocumentor-signature__argument"><span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Viewport.html"><abbr title="\VISU\Graphics\Viewport">Viewport</abbr></a>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$viewport</span></span><span class="phpdocumentor-signature__argument"><span>, </span><span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\VectorGraphics\VGContext">VGContext</abbr>&nbsp;</span><span class="phpdocumentor-signature__argument__name">$vg</span></span><span>)</span><span> : </span><span class="phpdocumentor-signature__response_type">void</span></code>
+
+    <div class="phpdocumentor-label-line">
+        </div>
+    
+    
+        <h5 class="phpdocumentor-argument-list__heading">Parameters</h5>
+    <dl class="phpdocumentor-argument-list">
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$viewport</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><a href="classes/VISU-Graphics-Viewport.html"><abbr title="\VISU\Graphics\Viewport">Viewport</abbr></a></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+                    <dt class="phpdocumentor-argument-list__entry">
+                <span class="phpdocumentor-signature__argument__name">$vg</span>
+                : <span class="phpdocumentor-signature__argument__return-type"><abbr title="\GL\VectorGraphics\VGContext">VGContext</abbr></span>
+                            </dt>
+            <dd class="phpdocumentor-argument-list__definition">
+                
+            </dd>
+            </dl>
+
+    
+
+    
+
+    
+</article>
+            </section>
+
+        <div class="phpdocumentor-modal" id="source-view">
+    <div class="phpdocumentor-modal-bg" data-exit-button></div>
+    <div class="phpdocumentor-modal-container">
+        <div class="phpdocumentor-modal-content">
+            <pre style="max-height: 500px; overflow-y: scroll" data-src="files/src/Graphics/Camera.php.txt" class="language-php line-numbers linkable-line-numbers"></pre>
+        </div>
+        <button data-exit-button class="phpdocumentor-modal__close">&times;</button>
+    </div>
+</div>
+
+    <script type="text/javascript">
+        (function () {
+            function loadExternalCodeSnippet(el, url, line) {
+                Array.prototype.slice.call(el.querySelectorAll('pre[data-src]')).forEach((pre) => {
+                    const src = url || pre.getAttribute('data-src').replace(/\\/g, '/');
+                    const language = 'php';
+
+                    const code = document.createElement('code');
+                    code.className = 'language-' + language;
+                    pre.textContent = '';
+                    pre.setAttribute('data-line', line)
+                    code.textContent = 'Loading…';
+                    pre.appendChild(code);
+
+                    var xhr = new XMLHttpRequest();
+
+                    xhr.open('GET', src, true);
+
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState !== 4) {
+                            return;
+                        }
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+                            Prism.highlightElement(code);
+                            d=document.getElementsByClassName("line-numbers");
+                            d[0].scrollTop = d[0].children[1].offsetTop;
+                            return;
+                        }
+
+                        if (xhr.status === 404) {
+                            code.textContent = '✖ Error: File could not be found';
+                            return;
+                        }
+
+                        if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                            return;
+                        }
+
+                        code.textContent = '✖ Error: An unknown error occurred';
+                    };
+
+                    xhr.send(null);
+                });
+            }
+
+            const modalButtons = document.querySelectorAll("[data-modal]");
+            const openedAsLocalFile = window.location.protocol === 'file:';
+            if (modalButtons.length > 0 && openedAsLocalFile) {
+                console.warn(
+                    'Viewing the source code is unavailable because you are opening this page from the file:// scheme; ' +
+                    'browsers block XHR requests when a page is opened this way'
+                );
+            }
+
+            modalButtons.forEach(function (trigger) {
+                if (openedAsLocalFile) {
+                    trigger.setAttribute("hidden", "hidden");
+                }
+
+                trigger.addEventListener("click", function (event) {
+                    event.preventDefault();
+                    const modal = document.getElementById(trigger.dataset.modal);
+                    if (!modal) {
+                        console.error(`Modal with id "${trigger.dataset.modal}" could not be found`);
+                        return;
+                    }
+                    modal.classList.add("phpdocumentor-modal__open");
+
+                    loadExternalCodeSnippet(modal, trigger.dataset.src || null, trigger.dataset.line)
+                    const exits = modal.querySelectorAll("[data-exit-button]");
+                    exits.forEach(function (exit) {
+                        exit.addEventListener("click", function (event) {
+                            event.preventDefault();
+                            modal.classList.remove("phpdocumentor-modal__open");
+                        });
+                    });
+                });
+            });
+        })();
+    </script>
+
+    </article>
+                                </section>
+                <section class="phpdocumentor-on-this-page__sidebar">
+                                
+    <section class="phpdocumentor-on-this-page__content">
+        <strong class="phpdocumentor-on-this-page__title">On this page</strong>
+
+        <ul class="phpdocumentor-list -clean">
+            <li class="phpdocumentor-on-this-page-section__title">Table Of Contents</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                                            <li><a href="classes/VISU-Graphics-Camera.html#toc-properties">Properties</a></li>
+                                                            <li><a href="classes/VISU-Graphics-Camera.html#toc-methods">Methods</a></li>
+                                    </ul>
+            </li>
+            
+                            <li class="phpdocumentor-on-this-page-section__title">Properties</li>
+                <li>
+                    <ul class="phpdocumentor-list -clean">
+                                                    <li class=""><a href="classes/VISU-Graphics-Camera.html#property_allowInterpolation">$allowInterpolation</a></li>
+                                                    <li class=""><a href="classes/VISU-Graphics-Camera.html#property_farPlane">$farPlane</a></li>
+                                                    <li class=""><a href="classes/VISU-Graphics-Camera.html#property_fieldOfView">$fieldOfView</a></li>
+                                                    <li class=""><a href="classes/VISU-Graphics-Camera.html#property_flipViewportY">$flipViewportY</a></li>
+                                                    <li class=""><a href="classes/VISU-Graphics-Camera.html#property_nearPlane">$nearPlane</a></li>
+                                                    <li class=""><a href="classes/VISU-Graphics-Camera.html#property_projectionMode">$projectionMode</a></li>
+                                                    <li class=""><a href="classes/VISU-Graphics-Camera.html#property_staticWorldHeight">$staticWorldHeight</a></li>
+                                                    <li class=""><a href="classes/VISU-Graphics-Camera.html#property_transform">$transform</a></li>
+                                                    <li class=""><a href="classes/VISU-Graphics-Camera.html#property_zoom">$zoom</a></li>
+                                                    <li class=""><a href="classes/VISU-Graphics-Camera.html#property_interpolationTransformAlloc">$interpolationTransformAlloc</a></li>
+                                                    <li class=""><a href="classes/VISU-Graphics-Camera.html#property_lfCameraPos">$lfCameraPos</a></li>
+                                                    <li class=""><a href="classes/VISU-Graphics-Camera.html#property_lfCameraRot">$lfCameraRot</a></li>
+                                                    <li class=""><a href="classes/VISU-Graphics-Camera.html#property_projectionMatrixAlloc">$projectionMatrixAlloc</a></li>
+                                            </ul>
+                </li>
+            
+                        <li class="phpdocumentor-on-this-page-section__title">Methods</li>
+            <li>
+                <ul class="phpdocumentor-list -clean">
+                                            <li class=""><a href="classes/VISU-Graphics-Camera.html#method___construct">__construct()</a></li>
+                                            <li class=""><a href="classes/VISU-Graphics-Camera.html#method_createCameraData">createCameraData()</a></li>
+                                            <li class=""><a href="classes/VISU-Graphics-Camera.html#method_finalizeFrame">finalizeFrame()</a></li>
+                                            <li class=""><a href="classes/VISU-Graphics-Camera.html#method_getModelMatrix">getModelMatrix()</a></li>
+                                            <li class=""><a href="classes/VISU-Graphics-Camera.html#method_getProjectionMatrix">getProjectionMatrix()</a></li>
+                                            <li class=""><a href="classes/VISU-Graphics-Camera.html#method_getSSDirection">getSSDirection()</a></li>
+                                            <li class=""><a href="classes/VISU-Graphics-Camera.html#method_getSSPointFromWS">getSSPointFromWS()</a></li>
+                                            <li class=""><a href="classes/VISU-Graphics-Camera.html#method_getSSRay">getSSRay()</a></li>
+                                            <li class=""><a href="classes/VISU-Graphics-Camera.html#method_getViewMatrix">getViewMatrix()</a></li>
+                                            <li class=""><a href="classes/VISU-Graphics-Camera.html#method_getViewport">getViewport()</a></li>
+                                            <li class=""><a href="classes/VISU-Graphics-Camera.html#method_getViewProjectionMatrix">getViewProjectionMatrix()</a></li>
+                                            <li class=""><a href="classes/VISU-Graphics-Camera.html#method_getWSPointFromSS">getWSPointFromSS()</a></li>
+                                            <li class=""><a href="classes/VISU-Graphics-Camera.html#method_transformVGSpace">transformVGSpace()</a></li>
+                                    </ul>
+            </li>
+                    </ul>
+    </section>
+
+                </section>
+                            </div>
+            <section data-search-results class="phpdocumentor-search-results phpdocumentor-search-results--hidden">
+    <section class="phpdocumentor-search-results__dialog">
+        <header class="phpdocumentor-search-results__header">
+            <h2 class="phpdocumentor-search-results__title">Search results</h2>
+            <button class="phpdocumentor-search-results__close"><i class="fas fa-times"></i></button>
+        </header>
+        <section class="phpdocumentor-search-results__body">
+            <ul class="phpdocumentor-search-results__entries"></ul>
+        </section>
+    </section>
+</section>
+        </div>
+        <a href="classes/VISU-Graphics-Camera.html#top" class="phpdocumentor-back-to-top"><i class="fas fa-chevron-circle-up"></i></a>
+
+    </main>
+
+    <script>
+        cssVars({});
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-numbers/prism-line-numbers.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/line-highlight/prism-line-highlight.min.js"></script>
+</body>
+</html>
