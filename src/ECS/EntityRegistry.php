@@ -41,6 +41,40 @@ class EntityRegistry implements EntitiesInterface
     private array $entityComponents = [];
 
     /**
+     * An array holding the "attach" listeners
+     * 
+     * @var array<int, callable(int, object): void>
+     */
+    private array $attachListeners = [];
+
+    /**
+     * @var array<class-string, array<int>>
+     */
+    private array $attachListenersHandles = [];
+
+    /**
+     * the attach listener index
+     */
+    private int $attachListenerIndex = 0;
+
+    /**
+     * An array holding the "detached" listeners
+     * 
+     * @var array<int, callable(int, object): void>
+     */
+    private array $detachListeners = [];
+
+    /**
+     * @var array<class-string, array<int>>
+     */
+    private array $detachListenersHandles = [];
+
+    /**
+     * the detach listener index
+     */
+    private int $detachListenerIndex = 0;
+
+    /**
      * Creates an entity and returns its ID
      */
     public function create() : int
@@ -76,6 +110,10 @@ class EntityRegistry implements EntitiesInterface
         }
 
         $this->components[$componentClassName] = [];
+        
+        // also the slots for the listeners
+        $this->attachListenersHandles[$componentClassName] = [];
+        $this->detachListenersHandles[$componentClassName] = [];
     }
 
     /**
@@ -131,12 +169,7 @@ class EntityRegistry implements EntitiesInterface
      */
     public function destroy(int $entity) : void
     {
-        $componentClasses = array_keys($this->entityComponents[$entity]);
-        unset($this->entityComponents[$entity]);
-        foreach($componentClasses as $componentClass) {
-            unset($this->components[$componentClass][$entity]);
-        }
-
+        $this->detachAll($entity);
         $this->freelist[] = $entity;
     } 
 
@@ -158,7 +191,52 @@ class EntityRegistry implements EntitiesInterface
         $this->components[$className][$entity] = $component;
         $this->entityComponents[$entity][$className] = $component;
 
+        // invoke attach listeners
+        foreach($this->attachListenersHandles[$className] as $handle) {
+            $listener = $this->attachListeners[$handle];
+            $listener($entity, $component);
+        }
+
         return $component;
+    }
+
+    /**
+     * Regsiters a callback which is beeing invoked every time a component of given type is
+     * attached to an entity.
+     * 
+     * @template T of object
+     * @param class-string<T>         $componentClassName the component class name to listen for
+     * @param callable(int, T): void  $callback 
+     * 
+     * @return int Returns the listener handle which can be used to deregister the listener later on
+     */
+    public function onAttach(string $componentClassName, callable $callback) : int
+    {
+        $handle = $this->attachListenerIndex++;
+        $this->attachListeners[$handle] = $callback; // @phpstan-ignore-line
+        $this->attachListenersHandles[$componentClassName][$handle] = $handle;
+
+        return $handle;
+    }
+
+    /**
+     * Deregisters a previously registered attach listener
+     * 
+     * @param int $listenerHandle The listener handle returned by `onAttach`
+     */
+    public function releaseOnAttach(int $listenerHandle) : void
+    {
+        if (!isset($this->attachListeners[$listenerHandle])) {
+            return;
+        }
+
+        unset($this->attachListeners[$listenerHandle]);
+
+        foreach($this->attachListenersHandles as $componentClassName => $handles) {
+            if (isset($handles[$listenerHandle])) {
+                unset($this->attachListenersHandles[$componentClassName][$listenerHandle]);
+            }
+        }
     }
 
     /**
@@ -169,6 +247,13 @@ class EntityRegistry implements EntitiesInterface
      */
     public function detach(int $entity, string $componentClassName) : void
     {
+        // invoke detach listeners
+        foreach($this->detachListenersHandles[$componentClassName] as $handle) {
+            $listener = $this->detachListeners[$handle];
+            $listener($entity, $this->entityComponents[$entity][$componentClassName]);
+        }
+
+        // actually detach the component
         unset(
             $this->components[$componentClassName][$entity],
             $this->entityComponents[$entity][$componentClassName]
@@ -183,10 +268,54 @@ class EntityRegistry implements EntitiesInterface
     public function detachAll(int $entity) : void
     {
         foreach($this->entityComponents[$entity] as $componentClassName => $component) {
+            // invoke detach listeners
+            foreach($this->detachListenersHandles[$componentClassName] as $handle) {
+                $listener = $this->detachListeners[$handle];
+                $listener($entity, $component);
+            }
+
             unset($this->components[$componentClassName][$entity]);
         }
 
         unset($this->entityComponents[$entity]);
+    }
+
+    /**
+     * Registers a callback which is beeing invoked every time a component of given type is
+     * dettached from an entity.
+     * @template T
+     * @param class-string            $componentClassName the component class name to listen for
+     * @param callable(int, T): void  $callback 
+     * 
+     * @return int Returns the listener handle which can be used to deregister the listener later on
+     */
+    public function onDetach(string $componentClassName, callable $callback) : int
+    {
+        $handle = $this->detachListenerIndex++;
+        $this->detachListeners[$handle] = $callback; // @phpstan-ignore-line
+        $this->detachListenersHandles[$componentClassName][$handle] = $handle;
+
+        return $handle;   
+    }
+
+    /**
+     * Deregisters a previously registered detach listener
+     * 
+     * @param int $listenerHandle The listener handle returned by `onDetach`
+     */
+    public function releaseOnDetach(int $listenerHandle) : void
+    {
+        if (!isset($this->detachListeners[$listenerHandle])) {
+            return;
+        }
+
+        unset($this->detachListeners[$listenerHandle]);
+
+        foreach($this->detachListenersHandles as $componentClassName => $handles) {
+            if (isset($handles[$listenerHandle])) {
+                unset($this->detachListenersHandles[$componentClassName][$listenerHandle]);
+            }
+        }
     }
 
     /**
