@@ -40,7 +40,7 @@ class QuadVertexArray
 
         // two triangles to form a quad (CCW)
         $buffer = new FloatBuffer([
-            // positions     // texture Coords
+            // positions     // texture coords
             -1.0,  1.0, 0.0,  0.0, 1.0, // top left
             -1.0, -1.0, 0.0,  0.0, 0.0, // bottom left
              1.0,  1.0, 0.0,  1.0, 1.0, // top right

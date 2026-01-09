@@ -2,6 +2,7 @@
 
 namespace VISU\Graphics\Rendering;
 
+use VISU\Graphics\Cubemap;
 use VISU\Graphics\Exception\PipelineResourceException;
 use VISU\Graphics\Framebuffer;
 use VISU\Graphics\GLState;
@@ -32,6 +33,13 @@ class PipelineResources
      * @var array<string, Texture>
      */
     private array $textures = [];
+
+    /**
+     * Internal array of cubemaps
+     * 
+     * @var array<string, Cubemap>
+     */
+    private array $cubemaps = [];
 
     /**
      * Holder of mixed generic static resources 
@@ -370,6 +378,64 @@ class PipelineResources
     }
 
     /**
+     * Sets a cubemap to the given handle
+     * 
+     * @param RenderResource $resource
+     * @param Cubemap $cubemap
+     * 
+     * @return void
+     */
+    public function setCubemap(RenderResource $resource, Cubemap $cubemap): void
+    {
+        $this->cubemaps[$resource->name] = $cubemap;
+    }
+
+    /**
+     * Returns a cubemap for the given resource
+     * 
+     * @param RenderResource $resource
+     * @return Cubemap
+     */
+    public function getCubemap(RenderResource $resource): Cubemap
+    {
+        if (!isset($this->cubemaps[$resource->name])) {
+            throw new PipelineResourceException("Cubemap not found for resource handle: " . $resource->handle . ' name: ' . $resource->name);
+        }
+
+        $this->resourceUseTick[$resource->name] = $this->tickIndex;
+        return $this->cubemaps[$resource->name];
+    }
+
+    /**
+     * Returns a cubemap ID for the given resource
+     * The cubemap ID is the raw GL handle
+     * 
+     * @param RenderResource $resource
+     * @return int
+     */
+    public function getCubemapID(RenderResource $resource): int
+    {
+        return $this->getCubemap($resource)->id;
+    }
+
+    /**
+     * Returns a cubemap by its name, will return null if not found
+     * This will also update the resource use tick
+     * 
+     * @param string $name
+     * @return Cubemap|null
+     */
+    public function getCubemapByName(string $name): ?Cubemap
+    {
+        if (!isset($this->cubemaps[$name])) {
+            return null;
+        }
+
+        $this->resourceUseTick[$name] = $this->tickIndex;
+        return $this->cubemaps[$name];
+    }
+
+    /**
      * Collects all garbage and removes all unused resources
      * 
      * @return void
@@ -379,6 +445,8 @@ class PipelineResources
         foreach ($this->resourceUseTick as $name => $tick) {
             if ($tick < $this->tickIndex) {
                 unset($this->renderTargets[$name]);
+                unset($this->textures[$name]);
+                unset($this->cubemaps[$name]);
                 unset($this->resourceUseTick[$name]);
             }
         }

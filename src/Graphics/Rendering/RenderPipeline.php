@@ -2,9 +2,11 @@
 
 namespace VISU\Graphics\Rendering;
 
+use VISU\Graphics\Cubemap;
 use VISU\Graphics\Rendering\Pass\BackbufferData;
 use VISU\Graphics\Rendering\Resource\RenderTargetResource;
 use VISU\Graphics\Rendering\Resource\TextureResource;
+use VISU\Graphics\Rendering\Resource\CubemapResource;
 use VISU\Graphics\RenderTarget;
 use VISU\Graphics\Texture;
 use VISU\Graphics\TextureOptions;
@@ -206,6 +208,24 @@ class RenderPipeline
         $resource = $this->createResource(TextureResource::class, $resourceName, $texture->width(), $texture->height());
 
         $this->resourceAllocator->setTexture($resource, $texture);
+
+        return $resource;
+    }
+
+    /**
+     * Imports a cubemap resource
+     * 
+     * @param string $resourceName
+     * @param Cubemap $cubemap
+     * 
+     * @return CubemapResource
+     */
+    public function importCubemap(string $resourceName, Cubemap $cubemap): CubemapResource
+    {
+        /** @var CubemapResource */
+        $resource = $this->createResource(CubemapResource::class, $resourceName, $cubemap->size());
+
+        $this->resourceAllocator->setCubemap($resource, $cubemap);
 
         return $resource;
     }

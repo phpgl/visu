@@ -14,4 +14,7 @@ void main()
     gbuffer_normal = v_normal;
     gbuffer_position = v_position;
     gbuffer_vposition = v_vposition.xyz;
+    gbuffer_metallic = 0.0;
+    gbuffer_roughness = 1.0;
+    gbuffer_emissive = vec3(0.0);
 }

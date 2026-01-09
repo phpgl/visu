@@ -36,6 +36,9 @@ class DeferredLightPass extends RenderPass
         $pipeline->reads($this, $gbufferData->albedoTexture);
         $pipeline->reads($this, $gbufferData->normalTexture);
         $pipeline->reads($this, $gbufferData->worldSpacePositionTexture);
+        $pipeline->reads($this, $gbufferData->metallicTexture);
+        $pipeline->reads($this, $gbufferData->roughnessTexture);
+        $pipeline->reads($this, $gbufferData->emissiveTexture);
 
         // create light pass target with the same size as the gbuffer
         $lightpassData->renderTarget = $pipeline->createRenderTarget('lightpass', $gbufferData->renderTarget->width, $gbufferData->renderTarget->height);
@@ -83,6 +86,9 @@ class DeferredLightPass extends RenderPass
             [$gbufferData->normalTexture, 'normal'],
             [$gbufferData->depthTexture, 'depth'],
             [$gbufferData->albedoTexture, 'albedo'],
+            [$gbufferData->metallicTexture, 'metallic'],
+            [$gbufferData->roughnessTexture, 'roughness'],
+            [$gbufferData->emissiveTexture, 'emissive'],
             [$ssaoData->blurTexture, 'ao'],
         ] as $i => $tuple) {
             list($texture, $name) = $tuple;

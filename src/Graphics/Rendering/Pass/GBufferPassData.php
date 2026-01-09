@@ -13,4 +13,7 @@ class GBufferPassData
     public TextureResource $viewSpacePositionTexture;
     public TextureResource $normalTexture; 
     public TextureResource $albedoTexture;
+    public TextureResource $metallicTexture;
+    public TextureResource $roughnessTexture;
+    public TextureResource $emissiveTexture;
 }

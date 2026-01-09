@@ -3,6 +3,7 @@
 namespace App\Tests\ECS;
 
 use Exception;
+use VISU\ECS\EntitiesInterface;
 use VISU\ECS\EntityRegistry;
 use VISU\ECS\Exception\EntityRegistryException;
 
@@ -197,7 +198,7 @@ class EntityRegistryTest extends \PHPUnit\Framework\TestCase
         $attachedComponents = [];
 
         // register an attach listener
-        $handle = $entities->onAttach(\Exception::class, function(int $entity, \Exception $component) use (&$attachedEntities, &$attachedComponents) {
+        $handle = $entities->onAttach(\Exception::class, function(EntitiesInterface $entities, int $entity, \Exception $component) use (&$attachedEntities, &$attachedComponents) {
             $attachedEntities[] = $entity;
             $attachedComponents[] = $component->getMessage();
         });
@@ -225,7 +226,7 @@ class EntityRegistryTest extends \PHPUnit\Framework\TestCase
         $detachedComponents = [];
 
         // register a detach listener
-        $handle = $entities->onDetach(\Exception::class, function(int $entity, \Exception $component) use (&$detachedEntities, &$detachedComponents) {
+        $handle = $entities->onDetach(\Exception::class, function(EntitiesInterface $entities, int $entity, \Exception $component) use (&$detachedEntities, &$detachedComponents) {
             $detachedEntities[] = $entity;
             $detachedComponents[] = $component->getMessage();
         });
@@ -258,11 +259,11 @@ class EntityRegistryTest extends \PHPUnit\Framework\TestCase
         $detachedErrors = [];
 
         // register detach listeners for both component types
-        $entities->onDetach(\Exception::class, function(int $entity, \Exception $component) use (&$detachedExceptions) {
+        $entities->onDetach(\Exception::class, function(EntitiesInterface $entities, int $entity, \Exception $component) use (&$detachedExceptions) {
             $detachedExceptions[] = $component->getMessage();
         });
 
-        $entities->onDetach(\Error::class, function(int $entity, \Error $component) use (&$detachedErrors) {
+        $entities->onDetach(\Error::class, function(EntitiesInterface $entities, int $entity, \Error $component) use (&$detachedErrors) {
             $detachedErrors[] = $component->getMessage();
         });
 
@@ -287,7 +288,7 @@ class EntityRegistryTest extends \PHPUnit\Framework\TestCase
         $attachedComponents = [];
 
         // register an attach listener
-        $handle = $entities->onAttach(\Exception::class, function(int $entity, \Exception $component) use (&$attachedComponents) {
+        $handle = $entities->onAttach(\Exception::class, function(EntitiesInterface $entities, int $entity, \Exception $component) use (&$attachedComponents) {
             $attachedComponents[] = $component->getMessage();
         });
 
@@ -316,7 +317,7 @@ class EntityRegistryTest extends \PHPUnit\Framework\TestCase
         $detachedComponents = [];
 
         // register a detach listener
-        $handle = $entities->onDetach(\Exception::class, function(int $entity, \Exception $component) use (&$detachedComponents) {
+        $handle = $entities->onDetach(\Exception::class, function(EntitiesInterface $entities, int $entity, \Exception $component) use (&$detachedComponents) {
             $detachedComponents[] = $component->getMessage();
         });
 
@@ -350,11 +351,11 @@ class EntityRegistryTest extends \PHPUnit\Framework\TestCase
         $listener2Called = false;
 
         // register two different attach listeners
-        $entities->onAttach(\Exception::class, function(int $entity, \Exception $component) use (&$listener1Called) {
+        $entities->onAttach(\Exception::class, function(EntitiesInterface $entities, int $entity, \Exception $component) use (&$listener1Called) {
             $listener1Called = true;
         });
 
-        $entities->onAttach(\Exception::class, function(int $entity, \Exception $component) use (&$listener2Called) {
+        $entities->onAttach(\Exception::class, function(EntitiesInterface $entities, int $entity, \Exception $component) use (&$listener2Called) {
             $listener2Called = true;
         });
 
@@ -376,11 +377,11 @@ class EntityRegistryTest extends \PHPUnit\Framework\TestCase
         $listener2Called = false;
 
         // register two different detach listeners
-        $entities->onDetach(\Exception::class, function(int $entity, \Exception $component) use (&$listener1Called) {
+        $entities->onDetach(\Exception::class, function(EntitiesInterface $entities, int $entity, \Exception $component) use (&$listener1Called) {
             $listener1Called = true;
         });
 
-        $entities->onDetach(\Exception::class, function(int $entity, \Exception $component) use (&$listener2Called) {
+        $entities->onDetach(\Exception::class, function(EntitiesInterface $entities, int $entity, \Exception $component) use (&$listener2Called) {
             $listener2Called = true;
         });
 
@@ -404,7 +405,7 @@ class EntityRegistryTest extends \PHPUnit\Framework\TestCase
         $detachedComponents = [];
 
         // register a detach listener
-        $entities->onDetach(\Exception::class, function(int $entity, \Exception $component) use (&$detachedComponents) {
+        $entities->onDetach(\Exception::class, function(EntitiesInterface $entities, int $entity, \Exception $component) use (&$detachedComponents) {
             $detachedComponents[] = $component->getMessage();
         });
 

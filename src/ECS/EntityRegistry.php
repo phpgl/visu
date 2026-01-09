@@ -43,7 +43,7 @@ class EntityRegistry implements EntitiesInterface
     /**
      * An array holding the "attach" listeners
      * 
-     * @var array<int, callable(int, object): void>
+     * @var array<int, callable(self, int, object): void>
      */
     private array $attachListeners = [];
 
@@ -60,7 +60,7 @@ class EntityRegistry implements EntitiesInterface
     /**
      * An array holding the "detached" listeners
      * 
-     * @var array<int, callable(int, object): void>
+     * @var array<int, callable(self, int, object): void>
      */
     private array $detachListeners = [];
 
@@ -194,7 +194,7 @@ class EntityRegistry implements EntitiesInterface
         // invoke attach listeners
         foreach($this->attachListenersHandles[$className] as $handle) {
             $listener = $this->attachListeners[$handle];
-            $listener($entity, $component);
+            $listener($this, $entity, $component);
         }
 
         return $component;
@@ -205,8 +205,8 @@ class EntityRegistry implements EntitiesInterface
      * attached to an entity.
      * 
      * @template T of object
-     * @param class-string<T>         $componentClassName the component class name to listen for
-     * @param callable(int, T): void  $callback 
+     * @param class-string<T>               $componentClassName the component class name to listen for
+     * @param callable(self, int, T): void  $callback  
      * 
      * @return int Returns the listener handle which can be used to deregister the listener later on
      */
@@ -250,7 +250,7 @@ class EntityRegistry implements EntitiesInterface
         // invoke detach listeners
         foreach($this->detachListenersHandles[$componentClassName] as $handle) {
             $listener = $this->detachListeners[$handle];
-            $listener($entity, $this->entityComponents[$entity][$componentClassName]);
+            $listener($this, $entity, $this->entityComponents[$entity][$componentClassName]);
         }
 
         // actually detach the component
@@ -271,7 +271,7 @@ class EntityRegistry implements EntitiesInterface
             // invoke detach listeners
             foreach($this->detachListenersHandles[$componentClassName] as $handle) {
                 $listener = $this->detachListeners[$handle];
-                $listener($entity, $component);
+                $listener($this, $entity, $component);
             }
 
             unset($this->components[$componentClassName][$entity]);
@@ -284,8 +284,8 @@ class EntityRegistry implements EntitiesInterface
      * Registers a callback which is beeing invoked every time a component of given type is
      * dettached from an entity.
      * @template T
-     * @param class-string            $componentClassName the component class name to listen for
-     * @param callable(int, T): void  $callback 
+     * @param class-string                  $componentClassName the component class name to listen for
+     * @param callable(self, int, T): void  $callback 
      * 
      * @return int Returns the listener handle which can be used to deregister the listener later on
      */

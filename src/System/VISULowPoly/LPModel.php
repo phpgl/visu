@@ -27,6 +27,16 @@ class LPModel
     public AABB $aabb;
 
     /**
+     * The handle of the static geometry draw call assembler entry for this mesh
+     */
+    public ?int $staticDCAHandle = null;
+
+    /**
+     * The handle of the dynamic geometry draw call assembler entry for this mesh
+     */
+    public ?int $dynamicDCAHandle = null;
+
+    /**
      * Constructor
      * 
      * @param string $name 

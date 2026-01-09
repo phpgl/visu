@@ -7,6 +7,16 @@ use VISU\Geo\AABB;
 class LPMesh
 {
     /**
+     * The handle of the static geometry draw call assembler entry for this mesh
+     */
+    public ?int $staticDCAHandle = null;
+     
+    /**
+     * The handle of the dynamic geometry draw call assembler entry for this mesh
+     */
+    public ?int $dynamicDCAHandle = null;
+
+    /**
      * Constructor
      * 
      * @return void 

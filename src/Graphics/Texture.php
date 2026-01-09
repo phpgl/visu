@@ -6,6 +6,7 @@ use GL\Buffer\BufferInterface;
 use GL\Buffer\UByteBuffer;
 use GL\Math\Vec2;
 use GL\Texture\Texture2D;
+
 use VISU\Graphics\Exception\TextureLoadException;
 
 class Texture

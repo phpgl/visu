@@ -45,6 +45,9 @@ import app
 @visu.command.dump_signal_handlers: VISU\Command\SignalDumpCommand(@visu.dispatcher)
     = command: 'signals:dump'
 
+@visu.command.hdri_cubemap: VISU\Command\HDRIToCubemapCommand
+    = command: 'tools:hdri_to_cubemap'
+
 /**
  * Maker / CodeGenerator
  *

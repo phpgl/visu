@@ -21,6 +21,9 @@ uniform sampler2D gbuffer_position;
 uniform sampler2D gbuffer_normal;
 uniform sampler2D gbuffer_depth;
 uniform sampler2D gbuffer_albedo;
+uniform sampler2D gbuffer_metallic;
+uniform sampler2D gbuffer_roughness;
+uniform sampler2D gbuffer_emissive;
 uniform sampler2D gbuffer_ao;
 
 // camera uniforms
@@ -132,10 +135,12 @@ void main()
     vec3 buffer_pos = texture(gbuffer_position, v_texture_cords).rgb;
     vec3 buffer_normal = texture(gbuffer_normal, v_texture_cords).rgb;
     vec3 buffer_albedo = texture(gbuffer_albedo, v_texture_cords).rgb;
-    vec3 buffer_ao = texture(gbuffer_ao, v_texture_cords).rgb;
-    vec3 buffer_emissive = vec3(0.0);
-    float buffer_metal = 0.0;
-    float buffer_roughness = 1.0;
+    float buffer_metal = texture(gbuffer_metallic, v_texture_cords).r;
+    float buffer_roughness = texture(gbuffer_roughness, v_texture_cords).r;
+    float ao = texture(gbuffer_ao, v_texture_cords).r;
+    vec3 buffer_emissive = texture(gbuffer_emissive, v_texture_cords).rgb;
+
+    float roughness = clamp(buffer_roughness, 0.04, 1.0);
 
     float inverse_metal = 1.0f - buffer_metal;
 
@@ -152,19 +157,17 @@ void main()
 
     vec3 F0 = mix(vec3(0.04), buffer_albedo, buffer_metal);
     vec3 F = fresnel(F0, max(0.0, dot(H, V)));
-    vec3 specular = pbr_specular(N, V, H, L, F0, buffer_roughness);
+    vec3 specular = pbr_specular(N, V, H, L, F0, roughness);
 
     float NdotL = max(dot(N, L), 0.0);     	
     vec3 kD = (1.0 - F) * inverse_metal; 
 
-    vec3 Lo = (kD * buffer_albedo / PI + specular) * radiance * NdotL;
+    vec3 diffuse = kD * buffer_albedo / PI;
+    vec3 Lo = (diffuse * ao + specular) * radiance * NdotL;
 
-    vec3 ambient = vec3(0.05) * buffer_albedo * buffer_ao.r;
+    vec3 ambient = vec3(0.05) * buffer_albedo * ao;
 
-    // also apply ao to Lo
-    Lo *= buffer_ao.r;
-
-    vec3 fragment = ambient + Lo;
+    vec3 fragment = ambient + Lo + buffer_emissive;
 
     // HDR tonemapping
     fragment = tone_mapping_ACESFilm(fragment);

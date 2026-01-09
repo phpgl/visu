@@ -68,8 +68,8 @@ interface EntitiesInterface
      * attached to an entity.
      * 
      * @template T
-     * @param class-string            $componentClassName the component class name to listen for
-     * @param callable(int, T): void  $callback 
+     * @param class-string                  $componentClassName the component class name to listen for
+     * @param callable(self, int, T): void  $callback 
      * 
      * @return int Returns the listener handle which can be used to deregister the listener later on
      */
@@ -101,8 +101,8 @@ interface EntitiesInterface
      * Registers a callback which is beeing invoked every time a component of given type is
      * dettached from an entity.
      * @template T
-     * @param class-string            $componentClassName the component class name to listen for
-     * @param callable(int, T): void  $callback 
+     * @param class-string                  $componentClassName the component class name to listen for
+     * @param callable(self, int, T): void  $callback 
      * 
      * @return int Returns the listener handle which can be used to deregister the listener later on
      */
@@ -114,7 +114,7 @@ interface EntitiesInterface
      * @param int $listenerHandle The listener handle returned by `onDetach`
      */
     public function releaseOnDetach(int $listenerHandle) : void;
-    
+
     /**
      * Returns a component for the given entity 
      * ! Warning: This method does no error checking and assumes you made sure the component needs to actually exist!

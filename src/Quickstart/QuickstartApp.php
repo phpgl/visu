@@ -3,6 +3,7 @@
 namespace VISU\Quickstart;
 
 use ClanCats\Container\Container;
+use GL\Audio\Engine;
 use GL\Math\Vec2;
 use VISU\ECS\EntityRegistry as EntityRegistry;
 use VISU\Graphics\GLState;
@@ -32,6 +33,7 @@ use VISU\Graphics\Rendering\Resource\RenderTargetResource;
 use VISU\Graphics\ShaderCollection;
 use VISU\Instrument\ProfilerInterface;
 use VISU\Quickstart\Render\QuickstartPassData;
+use VISU\Runtime\EventLoop;
 
 class QuickstartApp implements GameLoopDelegate
 {
@@ -133,6 +135,14 @@ class QuickstartApp implements GameLoopDelegate
             return new GLState();
         });
 
+        // event loop
+        $eventLoop = $getOrCreateService('event_loop', function() {
+            return new EventLoop();
+        });
+
+        // register as the main loop
+        EventLoop::registerMain($eventLoop);
+
         // fetch the main dispatcher from the container or create a new one
         $this->dispatcher = $getOrCreateService('visu.dispatcher', function() {
             return new Dispatcher();
@@ -149,6 +159,11 @@ class QuickstartApp implements GameLoopDelegate
             $shaders->scanShaderDirectory();
 
             return $shaders;
+        });
+
+        // audio engine 
+        $getOrCreateService('audio.engine', function(): Engine {
+            return new Engine();;
         });
 
         // create & initialize the window
@@ -238,6 +253,9 @@ class QuickstartApp implements GameLoopDelegate
 
         // poll for new events
         $this->window->pollEvents();
+
+        // process event loop timers
+        EventLoop::main()->tick();
 
         // run the update callback if available
         $this->options->update?->__invoke($this);
