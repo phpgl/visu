@@ -7,7 +7,9 @@ parameters:
         - src/System/VISUTransitionAnimationSystem.php
     paths:
         - src
+    reportUnmatchedIgnoredErrors: false
     ignoreErrors:
+        # php-glfw math types (property access, operator overloading)
         - '/Access to an undefined property GL\\Math\\Vec[2-4]::\$[x|y|z|w|r|g|b|a]\./'
         - '/Access to an undefined property GL\\Math\\Quat::\$[w|x|y|z]\./'
         - '/Cannot access property \$([a-zA-Z0-9]+) on VISU\\Graphics\\TextureOptions\|null\./'
@@ -17,8 +19,23 @@ parameters:
         - '/Cannot access offset [0-9|int]+ on GL\\Math\\Mat4\./'
         - '/\(VISU\\Signal\\SignalQueue<.*>\) does not accept VISU\\Signal\\SignalQueue<VISU\\Signal\\Signal>/'
         - '/expects +VISU\\Signal\\SignalQueue<VISU\\Signal\\Signal>, VISU\\Signal\\SignalQueue<.*>/'
-        - '/.*expects GL\\Buffer\\GL\\.*/' 
+        - '/.*expects GL\\Buffer\\GL\\.*/'
         - '/Parameter .* expects GL\\Math\\Vec[0-4], \((array\|)?float\|int\) given\./'
         - '/constructor expects GL\\Math\\Vec[0-4], float given\./'
         - '/.*[copy]\(\) on \(float\|int\).*/'
         - '/should return GL\\Math\\Vec[0-4] but returns float\./'
+        # php-glfw NanoVG (VGContext methods not visible to PHPStan)
+        - '/Call to an undefined (static )?method GL\\VectorGraphics\\VGContext::/'
+        - '/Cannot call method .* on GL\\VectorGraphics\\VGContext\|null\./'
+        # FFI — PHPStan cannot statically analyze FFI method calls and CData access
+        - '/Call to an undefined method FFI::/'
+        - '/Access to an undefined property FFI\\CData::\$\w+/'
+        - '/Cannot access property \$\w+ on FFI.CData\|null/'
+        - '/Parameter .* expects FFI.CData, FFI.CData\|null given/'
+        - '/Cannot cast .* to int\.$/'
+        - '/Offset .* does not exist on FFI.CData\|null/'
+        - '/Offset .* on array\|false/'
+        - '/Binary operation .* between .* FFI.CData/'
+        - '/does not accept array<bool\|FFI/'
+        - '/Deprecated in PHP 8.4: Parameter .* is implicitly nullable/'
+        - '/\(array<int, array\{source:/'

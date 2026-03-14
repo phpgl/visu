@@ -1,0 +1,18 @@
+{
+  "name": "Desk",
+  "transform": {
+    "position": [0, 0, 0],
+    "rotation": [0, 0, 0],
+    "scale": [1, 1, 1]
+  },
+  "components": [
+    {
+      "type": "SpriteRenderer",
+      "sprite": "sprites/desk.png",
+      "sortingLayer": "Default",
+      "orderInLayer": -1,
+      "width": 32,
+      "height": 32
+    }
+  ]
+}

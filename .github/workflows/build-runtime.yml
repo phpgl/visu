@@ -1,0 +1,164 @@
+name: Build Runtime (micro.sfx)
+
+on:
+  workflow_dispatch:
+    inputs:
+      php_version:
+        description: 'PHP version (8.3, 8.4, 8.5)'
+        required: true
+        default: '8.4'
+        type: choice
+        options:
+          - '8.3'
+          - '8.4'
+          - '8.5'
+
+jobs:
+  build:
+    name: micro.sfx / ${{ matrix.os }}-${{ matrix.arch }} / PHP ${{ inputs.php_version }}
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos
+            arch: arm64
+            runner: macos-14
+          - os: macos
+            arch: x86_64
+            runner: macos-13
+          - os: linux
+            arch: x86_64
+            runner: ubuntu-latest
+          - os: linux
+            arch: arm64
+            runner: ubuntu-24.04-arm
+          - os: windows
+            arch: x86_64
+            runner: windows-latest
+
+    steps:
+      - name: Checkout static-php-cli
+        uses: actions/checkout@v4
+        with:
+          repository: crazywhalecc/static-php-cli
+          ref: main
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          tools: composer
+
+      - name: Install Composer dependencies
+        run: composer install --no-dev --no-interaction
+
+      # ── Unix builds (macOS + Linux) ──
+
+      - name: Download sources (Unix)
+        if: runner.os != 'Windows'
+        run: |
+          php bin/spc download \
+            --with-php=${{ inputs.php_version }} \
+            --for-extensions=glfw,mbstring,zip,phar \
+            --prefer-pre-built
+
+      - name: Install build tools (Linux)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential cmake pkg-config \
+            libx11-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev \
+            libwayland-dev libxkbcommon-dev wayland-protocols extra-cmake-modules
+
+      - name: Install build tools (macOS)
+        if: runner.os == 'macOS'
+        run: brew install cmake pkg-config
+
+      - name: Build micro.sfx (Unix)
+        if: runner.os != 'Windows'
+        run: php bin/spc build glfw,mbstring,zip,phar --build-micro
+
+      # ── Windows build ──
+
+      - name: Download sources (Windows)
+        if: runner.os == 'Windows'
+        shell: powershell
+        run: |
+          php bin/spc download `
+            --with-php=${{ inputs.php_version }} `
+            --for-extensions=glfw,mbstring,zip,phar `
+            --prefer-pre-built
+
+      - name: Setup Windows build environment
+        if: runner.os == 'Windows'
+        shell: powershell
+        run: php bin/spc doctor --auto-fix
+
+      - name: Build micro.sfx (Windows)
+        if: runner.os == 'Windows'
+        shell: powershell
+        run: php bin/spc build glfw,mbstring,zip,phar --build-micro
+
+      # ── Upload ──
+
+      - name: Upload micro.sfx
+        uses: actions/upload-artifact@v4
+        with:
+          name: micro-${{ matrix.os }}-${{ matrix.arch }}
+          path: buildroot/bin/micro.sfx
+          retention-days: 90
+
+  release:
+    name: Create Release
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Prepare release files
+        run: |
+          mkdir release
+          for dir in artifacts/micro-*/; do
+            platform=$(basename "$dir")
+            cp "$dir/micro.sfx" "release/${platform}.sfx"
+          done
+          ls -lh release/
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: runtime-php${{ inputs.php_version }}
+          name: "VISU Runtime — PHP ${{ inputs.php_version }}"
+          body: |
+            ## VISU Runtime Binaries
+
+            Static PHP micro.sfx binaries for VISU game distribution.
+
+            **PHP Version:** ${{ inputs.php_version }}
+            **Extensions:** glfw, mbstring, zip, phar
+
+            ### Downloads
+
+            | Platform | Architecture | File |
+            |----------|-------------|------|
+            | macOS | arm64 (Apple Silicon) | `micro-macos-arm64.sfx` |
+            | macOS | x86_64 (Intel) | `micro-macos-x86_64.sfx` |
+            | Linux | x86_64 | `micro-linux-x86_64.sfx` |
+            | Linux | arm64 | `micro-linux-arm64.sfx` |
+            | Windows | x86_64 | `micro-windows-x86_64.sfx` |
+
+            ### Usage
+
+            These binaries are automatically downloaded by `visu build`.
+            Manual: `cat micro-<platform>-<arch>.sfx game.phar > MyGame && chmod +x MyGame`
+          files: release/*
+          draft: false
+          prerelease: false

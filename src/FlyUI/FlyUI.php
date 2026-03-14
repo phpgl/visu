@@ -247,8 +247,18 @@ class FlyUI
     }
 
     /**
+     * Creates a progress bar element
+     */
+    public static function progressBar(float $value, ?VGColor $fillColor = null): FUIProgressBar
+    {
+        $view = new FUIProgressBar($value, $fillColor);
+        self::$instance->addChildView($view);
+        return $view;
+    }
+
+    /**
      * Instance Functions/Properties
-     * 
+     *
      * ------------------------------------------------------------------------
      */
 
@@ -415,8 +425,10 @@ class FlyUI
         $ctx->containerSize = $this->currentResolution;
         $ctx->contentScale = $this->currentContentScale;
 
-        // toggle performance tracing overlay on f6
-        if ($this->input->hasKeyBeenPressedThisFrame(Key::F6)) {
+        // toggle performance tracing overlay on f6 (cross-check with polling
+        // to filter phantom key events from macOS fullscreen transitions)
+        if ($this->input->hasKeyBeenPressedThisFrame(Key::F6)
+            && $this->input->getKeyState(Key::F6) === GLFW_PRESS) {
             $this->performanceTracingEnabled = !$this->performanceTracingEnabled;
         }
 

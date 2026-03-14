@@ -1,0 +1,29 @@
+{
+  "type": "panel",
+  "layout": "column",
+  "padding": 15,
+  "spacing": 8,
+  "verticalSizing": "fit",
+  "horizontalSizing": "fit",
+  "children": [
+    { "type": "label", "text": "Office Demo", "fontSize": 20, "bold": true, "color": "#ffffff" },
+    { "type": "label", "text": "Money: ${economy.money}", "fontSize": 14, "color": "#cccccc" },
+    { "type": "label", "text": "Employees: {company.employees}", "fontSize": 14, "color": "#cccccc" },
+    { "type": "space", "height": 5 },
+    { "type": "label", "text": "Morale", "fontSize": 11, "color": "#999999" },
+    { "type": "progressbar", "value": "{company.morale}", "color": "#33cc55", "height": 12 },
+    { "type": "space", "height": 5 },
+    { "type": "label", "text": "Project Progress", "fontSize": 11, "color": "#999999" },
+    { "type": "progressbar", "value": "{project.progress}", "color": "#0088ff", "height": 12 },
+    { "type": "space", "height": 10 },
+    { "type": "button", "label": "Hire Employee", "event": "ui.hire_employee", "id": "btn_hire" },
+    { "type": "button", "label": "Start Project", "event": "ui.start_project", "style": "secondary", "id": "btn_project" },
+    { "type": "space", "height": 5 },
+    {
+      "type": "checkbox",
+      "text": "Auto-Assign Tasks",
+      "id": "cb_auto_assign",
+      "event": "ui.toggle_auto_assign"
+    }
+  ]
+}

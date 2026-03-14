@@ -17,8 +17,11 @@ use VISU\Graphics\Rendering\{
     RenderPass, 
     RenderPipeline
 };
+use VISU\Audio\AudioManager;
+use VISU\OS\GamepadManager;
 use VISU\OS\Input;
 use VISU\OS\{Window, WindowHints};
+use VISU\SDL3\SDL;
 use VISU\Runtime\GameLoopDelegate;
 use VISU\Signal\Dispatcher;
 use VISU\OS\InputContextMap;
@@ -111,6 +114,17 @@ class QuickstartApp implements GameLoopDelegate
     private ?ProfilerInterface $profiler = null;
 
     /**
+     * Audio Manager (null when audio is not enabled).
+     * Backend auto-detected: SDL3 -> OpenAL.
+     */
+    public ?AudioManager $audio = null;
+
+    /**
+     * SDL3 Gamepad Manager (null when gamepad support is not enabled)
+     */
+    public ?GamepadManager $gamepad = null;
+
+    /**
      * QuickstartApp constructor.
      * 
      * @param Container $container 
@@ -201,6 +215,35 @@ class QuickstartApp implements GameLoopDelegate
         // create the fullscreen texture renderer
         $this->fullscreenTextureRenderer = new FullscreenTextureRenderer($this->gl);
         $this->dbgOverlayRenderer = new QuickstartDebugMetricsOverlay($this->container);
+
+        // Resolve combined audio flag (new enableAudio OR legacy enableSDL3Audio)
+        $wantAudio = $options->enableAudio || $options->enableSDL3Audio;
+
+        // initialize SDL3 subsystems if requested
+        $sdl = null;
+        if ($wantAudio || $options->enableGamepad) {
+            try {
+                $sdl   = SDL::getInstance();
+                $flags = 0;
+                if ($wantAudio) {
+                    $flags |= SDL::INIT_AUDIO;
+                }
+                if ($options->enableGamepad) {
+                    $flags |= SDL::INIT_GAMEPAD | SDL::INIT_EVENTS;
+                }
+                $sdl->init($flags);
+            } catch (\Throwable) {
+                // SDL3 not available — $sdl stays null, audio will try OpenAL fallback
+                $sdl = null;
+            }
+        }
+
+        if ($wantAudio) {
+            $this->audio = AudioManager::create($sdl);
+        }
+        if ($options->enableGamepad && $sdl !== null) {
+            $this->gamepad = new GamepadManager($sdl, $this->dispatcher);
+        }
     }
 
     /**
@@ -212,6 +255,11 @@ class QuickstartApp implements GameLoopDelegate
     public function ready() : void
     {
         $this->options->ready?->__invoke($this);
+
+        // bind the gamepad manager as a system if enabled so it gets registered
+        if ($this->gamepad !== null) {
+            $this->bindSystem($this->gamepad);
+        }
 
         // auto register all system from the registry
         $this->registerSystems($this->entities);
@@ -238,6 +286,14 @@ class QuickstartApp implements GameLoopDelegate
 
         // poll for new events
         $this->window->pollEvents();
+
+        // update SDL3 audio stream
+        $this->audio?->update();
+
+        // poll SDL3 gamepad events (handled internally via update())
+        if ($this->gamepad !== null) {
+            $this->gamepad->update($this->entities);
+        }
 
         // run the update callback if available
         $this->options->update?->__invoke($this);
@@ -279,6 +335,8 @@ class QuickstartApp implements GameLoopDelegate
         // create a color attachment
         $sceneColorOptions = new TextureOptions;
         $sceneColorOptions->internalFormat = GL_RGBA;
+        $sceneColorOptions->wrapS = GL_CLAMP_TO_EDGE;
+        $sceneColorOptions->wrapT = GL_CLAMP_TO_EDGE;
         $sceneColorAtt = $context->pipeline->createColorAttachment($quickstartPassData->renderTarget, 'quickstartColor', $sceneColorOptions);
 
         // we plan to render the scene color buffer to the backbuffer

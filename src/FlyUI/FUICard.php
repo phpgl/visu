@@ -29,22 +29,23 @@ class FUICard extends FUILayout
      */
     public function renderContent(FUIRenderContext $ctx) : void
     {
-        $finalPos = $ctx->origin;
-        $finalSize = $ctx->containerSize;
-
-        // borders are always drawn inset in FlyUI, as VG draws them in the middle
-        // we have to adjust the position and size of the rectangle
-        if ($this->borderColor) {
-            $finalPos->x = $finalPos->x + $this->borderWidth * 0.5;
-            $finalPos->y = $finalPos->y + $this->borderWidth * 0.5;
-            $finalSize->x = $finalSize->x - $this->borderWidth;
-            $finalSize->y = $finalSize->y - $this->borderWidth;
-        }
+        // capture border rect before children render (copy to avoid reference mutation)
+        $borderX = $ctx->origin->x + $this->borderWidth * 0.5;
+        $borderY = $ctx->origin->y + $this->borderWidth * 0.5;
+        $borderW = $ctx->containerSize->x - $this->borderWidth;
+        $borderH = $ctx->containerSize->y - $this->borderWidth;
 
         // pass to children
         parent::renderContent($ctx);
 
+        // draw the border on top of children with its own path
         if ($this->borderColor) {
+            $ctx->vg->beginPath();
+            if ($this->cornerRadius > 0.0) {
+                $ctx->vg->roundedRect($borderX, $borderY, $borderW, $borderH, $this->cornerRadius);
+            } else {
+                $ctx->vg->rect($borderX, $borderY, $borderW, $borderH);
+            }
             $ctx->vg->strokeColor($this->borderColor);
             $ctx->vg->strokeWidth($this->borderWidth);
             $ctx->vg->stroke();

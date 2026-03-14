@@ -1,33 +1,64 @@
 <?php
 if (!defined('DS')) { define('DS', DIRECTORY_SEPARATOR); }
 
-$binDir = $_composer_bin_dir ?? __DIR__ . '/../vendor/bin';
+// VISU engine root is always relative to this script's real location
+// (__DIR__ resolves symlinks, so this always points to the engine)
+$engineRoot = dirname(__DIR__);
 
-// we assume the applications bootstrap file to be in the application root
-$bootstrapFile = $binDir . DS . '..' . DS . '..' . DS . 'bootstrap.php';
-
-if (!file_exists($bootstrapFile)) {
-    throw new \Exception('Could not find bootstrap file: ' . $bootstrapFile);
+// Determine project root and autoloader:
+// When run via `vendor/bin/visu` in a consumer project, Composer sets $_composer_bin_dir.
+// Otherwise we assume VISU itself is the project (standalone / development mode).
+if (isset($_composer_bin_dir)) {
+    // Running as a dependency inside a consumer project.
+    // $_composer_bin_dir = .../vendor/bin
+    // autoload.php       = .../vendor/autoload.php
+    // project root       = .../
+    $vendorDir   = realpath($_composer_bin_dir . DS . '..');
+    $projectRoot = realpath($vendorDir . DS . '..');
+    $autoloadFile = $vendorDir . DS . 'autoload.php';
+} else {
+    // Running directly from VISU's own bin/ directory
+    $projectRoot = $engineRoot;
+    $autoloadFile = $engineRoot . DS . 'vendor' . DS . 'autoload.php';
 }
+
+if (!file_exists($autoloadFile)) {
+    throw new \Exception('Could not find autoloader at: ' . $autoloadFile);
+}
+
+require $autoloadFile;
+
+/**
+ *---------------------------------------------------------------
+ * Project Paths
+ *---------------------------------------------------------------
+ *
+ * Set path constants for the project being loaded.
+ * These can be overridden by the project before calling this script.
+ */
+if (!defined('VISU_PATH_ROOT'))      define('VISU_PATH_ROOT',      $projectRoot);
+if (!defined('VISU_PATH_CACHE'))     define('VISU_PATH_CACHE',     $projectRoot . DS . 'var' . DS . 'cache');
+if (!defined('VISU_PATH_STORE'))     define('VISU_PATH_STORE',     $projectRoot . DS . 'var' . DS . 'store');
+if (!defined('VISU_PATH_RESOURCES')) define('VISU_PATH_RESOURCES', $projectRoot . DS . 'resources');
+if (!defined('VISU_PATH_APPCONFIG')) define('VISU_PATH_APPCONFIG', $projectRoot);
 
 set_time_limit(0);
 
 /**
  *---------------------------------------------------------------
- * Autoloader / Compser
+ * Engine Bootstrap
  *---------------------------------------------------------------
  *
- * We need to access our dependencies & autloader..
+ * Load VISU's own bootstrap (always from the engine directory).
  */
-$bootstrapFile = realpath($bootstrapFile);
-$container = require $bootstrapFile;
+$container = require $engineRoot . DS . 'bootstrap.php';
 
 /**
  *---------------------------------------------------------------
- * Forwrard to VISU command line interface handler
+ * Forward to VISU command line interface handler
  *---------------------------------------------------------------
- * 
- * VISU will evaluate the argument vector here and forward 
+ *
+ * VISU will evaluate the argument vector here and forward
  * to the appropriate command.
  */
 $container->get('visu.command.cli_loader')->pass($argv);
