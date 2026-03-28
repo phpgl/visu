@@ -1,0 +1,29 @@
+{
+  "name": "Employee",
+  "transform": {
+    "position": [0, 0, 0],
+    "rotation": [0, 0, 0],
+    "scale": [1, 1, 1]
+  },
+  "components": [
+    {
+      "type": "SpriteRenderer",
+      "sprite": "sprites/employee.png",
+      "sortingLayer": "Default",
+      "orderInLayer": 0,
+      "width": 16,
+      "height": 24
+    },
+    {
+      "type": "SpriteAnimator",
+      "currentAnimation": "idle",
+      "animations": {
+        "idle": {
+          "frames": [[0, 0, 0.25, 1], [0.25, 0, 0.25, 1], [0.5, 0, 0.25, 1], [0.75, 0, 0.25, 1]],
+          "fps": 4,
+          "loop": true
+        }
+      }
+    }
+  ]
+}

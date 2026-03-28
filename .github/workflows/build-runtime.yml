@@ -1,0 +1,242 @@
+name: Build Runtime (micro.sfx)
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      php_version:
+        description: 'PHP version'
+        required: true
+        default: '8.4'
+        type: choice
+        options:
+          - '8.4'
+          - '8.5'
+
+env:
+  PHP_VERSION: ${{ inputs.php_version || '8.4' }}
+
+jobs:
+  # ── macOS build (native) ──
+  build-macos:
+    name: micro.sfx / macos-arm64 / PHP ${{ inputs.php_version || '8.4' }}
+    runs-on: macos-14
+    steps:
+      - name: Checkout static-php-cli (fork)
+        uses: actions/checkout@v4
+        with:
+          repository: hmennen90/static-php-cli
+          ref: main
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: dom, curl, mbstring, xml, tokenizer
+          tools: composer
+
+      - name: Install dependencies
+        run: |
+          composer install --no-dev --no-interaction --ignore-platform-reqs
+          brew install cmake pkg-config
+
+      - name: Download sources
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          php bin/spc download \
+            --with-php=${{ env.PHP_VERSION }} \
+            --for-extensions=glfw,mbstring,zip,phar \
+            --prefer-pre-built
+
+      - name: Build micro.sfx
+        run: |
+          php bin/spc doctor --auto-fix
+          php bin/spc build glfw,mbstring,zip,phar --build-micro --debug
+
+      - name: Upload micro.sfx
+        uses: actions/upload-artifact@v4
+        with:
+          name: micro-macos-arm64
+          path: buildroot/bin/micro.sfx
+          retention-days: 90
+
+  # ── Linux builds (Alpine Docker for musl-compatible X11) ──
+  build-linux:
+    name: micro.sfx / linux-${{ matrix.arch }} / PHP ${{ inputs.php_version || '8.4' }}
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - arch: x86_64
+            runner: ubuntu-latest
+          - arch: arm64
+            runner: ubuntu-24.04-arm
+
+    steps:
+      - name: Checkout static-php-cli (fork)
+        uses: actions/checkout@v4
+        with:
+          repository: hmennen90/static-php-cli
+          ref: main
+
+      - name: Build micro.sfx in Alpine container
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          docker build -t spc-glfw -f- . << 'DOCKERFILE'
+          FROM alpine:3.21
+
+          RUN apk update && apk upgrade -a && apk add --no-cache \
+              autoconf automake bash binutils bison build-base cmake curl \
+              file flex g++ gcc git jq libgcc libtool libstdc++ \
+              linux-headers m4 make pkgconfig re2c wget xz gettext-dev \
+              binutils-gold \
+              libx11-dev libx11-static libxrandr-dev libxinerama-dev libxcursor-dev \
+              libxi-dev libxi-static libxext-static libxcb-dev libxcb-static \
+              libxau-dev libxdmcp-dev mesa-dev \
+              && cd /tmp \
+              && wget -q https://xorg.freedesktop.org/releases/individual/lib/libXrandr-1.5.4.tar.xz \
+              && tar xf libXrandr-1.5.4.tar.xz && cd libXrandr-1.5.4 \
+              && ./configure --enable-static --disable-shared --prefix=/usr >/dev/null 2>&1 \
+              && make -j$(nproc) >/dev/null 2>&1 && make install >/dev/null 2>&1 \
+              && rm -rf /tmp/libXrandr*
+
+          RUN curl -#fSL https://dl.static-php.dev/static-php-cli/bulk/php-8.4.4-cli-linux-$(uname -m).tar.gz \
+              | tar -xz -C /usr/local/bin && chmod +x /usr/local/bin/php
+          RUN curl -#fSL https://getcomposer.org/download/latest-stable/composer.phar \
+              -o /usr/local/bin/composer && chmod +x /usr/local/bin/composer
+
+          WORKDIR /app
+          DOCKERFILE
+
+          docker run --rm \
+            -e GITHUB_TOKEN="${GITHUB_TOKEN}" \
+            -v "$(pwd)/config:/app/config" \
+            -v "$(pwd)/src:/app/src" \
+            -v "$(pwd)/bin:/app/bin" \
+            -v "$(pwd)/composer.json:/app/composer.json" \
+            -v "$(pwd)/composer.lock:/app/composer.lock" \
+            -v "$(pwd)/buildroot:/app/buildroot" \
+            -v "$(pwd)/source:/app/source" \
+            -v "$(pwd)/downloads:/app/downloads" \
+            -v "$(pwd)/pkgroot:/app/pkgroot" \
+            -v "$(pwd)/log:/app/log" \
+            spc-glfw bash -c '
+              composer install --no-dev --no-interaction --ignore-platform-reqs
+              bin/spc doctor --auto-fix
+
+              # Copy Alpine musl X11 headers/libs into buildroot (not symlink — volume mounts break symlinks)
+              mkdir -p buildroot/include buildroot/lib buildroot/lib/pkgconfig
+              for dir in X11 GL; do
+                [ -d "/usr/include/$dir" ] && cp -r "/usr/include/$dir" buildroot/include/
+              done
+              for lib in /usr/lib/libX11.a /usr/lib/libXrandr.a /usr/lib/libXinerama.a \
+                         /usr/lib/libXcursor.a /usr/lib/libXi.a /usr/lib/libXext.a \
+                         /usr/lib/libXfixes.a /usr/lib/libXrender.a /usr/lib/libxcb.a \
+                         /usr/lib/libXau.a /usr/lib/libXdmcp.a; do
+                [ -f "$lib" ] && cp "$lib" buildroot/lib/
+              done
+              for pc in /usr/lib/pkgconfig/x11.pc /usr/lib/pkgconfig/xrandr.pc \
+                        /usr/lib/pkgconfig/xinerama.pc /usr/lib/pkgconfig/xcursor.pc \
+                        /usr/lib/pkgconfig/xi.pc /usr/lib/pkgconfig/xext.pc \
+                        /usr/lib/pkgconfig/xfixes.pc /usr/lib/pkgconfig/xrender.pc \
+                        /usr/lib/pkgconfig/xcb.pc /usr/lib/pkgconfig/xau.pc \
+                        /usr/lib/pkgconfig/xdmcp.pc; do
+                [ -f "$pc" ] && cp "$pc" buildroot/lib/pkgconfig/
+              done
+
+              bin/spc download --with-php=${{ env.PHP_VERSION }} \
+                --for-extensions=glfw,mbstring,zip,phar --prefer-pre-built
+              bin/spc build glfw,mbstring,zip,phar --build-micro --debug || {
+                echo "=== spc.shell.log ===" && cat log/spc.shell.log 2>/dev/null | tail -100
+                echo "=== spc.output.log ===" && cat log/spc.output.log 2>/dev/null | tail -100
+                exit 1
+              }
+            '
+
+      - name: Upload micro.sfx
+        uses: actions/upload-artifact@v4
+        with:
+          name: micro-linux-${{ matrix.arch }}
+          path: buildroot/bin/micro.sfx
+          retention-days: 90
+
+  # ── Windows build ──
+  build-windows:
+    name: micro.sfx / windows-x86_64 / PHP ${{ inputs.php_version || '8.4' }}
+    runs-on: windows-latest
+    steps:
+      - name: Checkout static-php-cli (fork)
+        uses: actions/checkout@v4
+        with:
+          repository: hmennen90/static-php-cli
+          ref: main
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: dom, curl, mbstring, xml, tokenizer
+          tools: composer
+
+      - name: Install dependencies
+        run: composer install --no-dev --no-interaction --ignore-platform-reqs
+
+      - name: Download sources
+        shell: powershell
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          php bin/spc download `
+            --with-php=${{ env.PHP_VERSION }} `
+            --for-extensions=glfw,mbstring,zip,phar `
+            --prefer-pre-built
+
+      - name: Build micro.sfx
+        shell: powershell
+        run: |
+          php bin/spc doctor --auto-fix
+          php bin/spc build glfw,mbstring,zip,phar --build-micro --debug
+
+      - name: Upload micro.sfx
+        uses: actions/upload-artifact@v4
+        with:
+          name: micro-windows-x86_64
+          path: buildroot/bin/micro.sfx
+          retention-days: 90
+
+  # ── Upload binaries to release ──
+  upload-to-release:
+    name: Upload to Release
+    needs: [build-macos, build-linux, build-windows]
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Prepare release files
+        run: |
+          mkdir release
+          for dir in artifacts/micro-*/; do
+            platform=$(basename "$dir")
+            cp "$dir/micro.sfx" "release/${platform}.sfx"
+          done
+          ls -lh release/
+
+      - name: Upload to existing release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          for file in release/*.sfx; do
+            echo "Uploading $(basename $file)..."
+            gh release upload "${{ github.event.release.tag_name }}" "$file" --repo "${{ github.repository }}" --clobber
+          done

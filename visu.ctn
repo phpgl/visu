@@ -45,6 +45,20 @@ import app
 @visu.command.dump_signal_handlers: VISU\Command\SignalDumpCommand(@visu.dispatcher)
     = command: 'signals:dump'
 
+@visu.command.world_editor: VISU\Command\WorldEditorCommand
+    = command: 'world-editor'
+
+@visu.component_registry: VISU\ECS\ComponentRegistry
+
+@visu.command.transpile: VISU\Command\TranspileCommand(@visu.component_registry)
+    = command: 'transpile'
+
+@visu.command.setup: VISU\Command\SetupCommand
+    = command: 'setup'
+
+@visu.command.build: VISU\Command\BuildCommand
+    = command: 'build'
+
 /**
  * Maker / CodeGenerator
  *

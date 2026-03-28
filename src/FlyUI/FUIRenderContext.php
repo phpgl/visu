@@ -5,6 +5,7 @@ namespace VISU\FlyUI;
 use GL\Math\Vec2;
 use GL\VectorGraphics\VGContext;
 use VISU\OS\Input;
+use VISU\OS\InputInterface;
 
 class FUIRenderContext
 {
@@ -192,7 +193,7 @@ class FUIRenderContext
      */
     public function __construct(
         public VGContext $vg,
-        public Input $input,
+        public Input|InputInterface $input,
         public FUITheme $theme
     )
     {

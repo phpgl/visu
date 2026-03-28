@@ -1,57 +1,93 @@
-name: VISU CI 
+name: VISU CI
 
 on:
   push:
-    branches: [ '*' ]
+    branches: ['*']
   pull_request:
-    branches: [ '*' ]
+    branches: ['*']
 
 jobs:
-  ubuntu:
-
-    runs-on: ${{ matrix.operating-system }}
+  tests:
+    name: PHP ${{ matrix.php }} — Tests
+    runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        operating-system: ['ubuntu-latest']
-        php-versions: ['8.1', '8.2']
-        phpunit-versions: ['9.6']
-    
+        php: ['8.3', '8.4', '8.5']
+
     steps:
-    - uses: actions/checkout@v3
-      
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: ${{ matrix.php-versions }}
-        extensions: :glfw
-        coverage: xdebug
-        tools: cs2pr, phpunit:${{ matrix.phpunit-versions }}
-        
-    - name: Install dependenies
-      run: sudo apt-get update && sudo apt-get install -y php-dev build-essential cmake libglfw3-dev xvfb libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev gdb
-      
-    - name: Build PHP-GLFW
-      run: >
-        git clone https://github.com/mario-deluna/php-glfw &&
-        cd php-glfw &&
-        sudo phpize &&
-        ./configure --enable-glfw &&
-        make -j$(nproc) &&
-        sudo make install &&
-        cd ../ &&
-        grep -qxF 'extension=glfw.so' /etc/php/${{ matrix.php-versions }}/cli/php.ini ||
-        echo 'extension=glfw.so' >> /etc/php/${{ matrix.php-versions }}/cli/php.ini
-    
-    - name: Run composer install
-      run: composer install
+      - uses: actions/checkout@v4
 
-    #- name: Install PHPUnit
-    #  run: composer require "phpunit/phpunit"
-      
-    - name: Run PHPUnit 
-      run: xvfb-run --auto-servernum phpunit
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, mbstring, xml, tokenizer
+          coverage: none
+          tools: phpunit:9.6
 
-    - name: Run PHPStan 
-      if: ${{ matrix.php-versions == '8.2' }}
-      run: php vendor/bin/phpstan analyse src --error-format=github -l8
-      
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            php${{ matrix.php }}-dev php${{ matrix.php }}-xml php${{ matrix.php }}-curl \
+            build-essential cmake \
+            libglfw3-dev xvfb \
+            libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev
+
+      - name: Build PHP-GLFW
+        run: |
+          git clone https://github.com/mario-deluna/php-glfw
+          cd php-glfw
+          sudo phpize
+          ./configure --enable-glfw
+          make -j$(nproc)
+          sudo make install
+          cd ../
+          echo 'extension=glfw.so' | sudo tee -a $(php -r "echo php_ini_loaded_file();")
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction
+
+      - name: Run PHPUnit
+        run: xvfb-run --auto-servernum phpunit
+
+  static-analysis:
+    name: PHPStan (Level 8)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: dom, curl, mbstring, xml, tokenizer
+          coverage: none
+
+      - name: Install system dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            php8.4-dev php8.4-xml php8.4-curl \
+            build-essential cmake \
+            libglfw3-dev \
+            libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev
+
+      - name: Build PHP-GLFW
+        run: |
+          git clone https://github.com/mario-deluna/php-glfw
+          cd php-glfw
+          sudo phpize
+          ./configure --enable-glfw
+          make -j$(nproc)
+          sudo make install
+          cd ../
+          echo 'extension=glfw.so' | sudo tee -a $(php -r "echo php_ini_loaded_file();")
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction
+
+      - name: Run PHPStan
+        run: php vendor/bin/phpstan analyse src --error-format=github -l8

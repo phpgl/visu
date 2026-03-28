@@ -2,6 +2,7 @@
 
 namespace VISU\Graphics\Rendering;
 
+use VISU\Graphics\GLValidator;
 use VISU\Graphics\Rendering\Pass\BackbufferData;
 use VISU\Graphics\Rendering\Resource\RenderTargetResource;
 use VISU\Graphics\Rendering\Resource\TextureResource;
@@ -28,10 +29,18 @@ class RenderPipeline
 
     /**
      * A internal counter for the next resource handle
-     * 
+     *
      * @var int
      */
     private int $resourceHandleIndex = 0;
+
+    /**
+     * When enabled, GL errors are checked after each pass execution.
+     * Use getGLValidator() to inspect collected errors.
+     */
+    public bool $glValidationEnabled = false;
+
+    private ?GLValidator $glValidator = null;
 
     /**
      * Constrcutor
@@ -237,12 +246,29 @@ class RenderPipeline
     {
         $this->resourceAllocator->setCurrentTick($tickIndex);
 
+        if ($this->glValidationEnabled) {
+            $this->glValidator = new GLValidator();
+            GLValidator::drainErrors(); // start clean
+        }
+
         foreach ($this->passes as $pass) {
             if ($profiler) $profiler->start($pass->name());
             $pass->execute($this->data, $this->resourceAllocator);
             if ($profiler) $profiler->end($pass->name());
+
+            if ($this->glValidationEnabled && $this->glValidator !== null) {
+                $this->glValidator->collect('after ' . $pass->name());
+            }
         }
 
         $this->resourceAllocator->collectGarbage();
+    }
+
+    /**
+     * Returns the GL validator with collected errors (only available after execute with glValidationEnabled)
+     */
+    public function getGLValidator(): ?GLValidator
+    {
+        return $this->glValidator;
     }
 }

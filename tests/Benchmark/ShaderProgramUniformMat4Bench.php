@@ -69,18 +69,19 @@ GLSL));
      */
     public function benchUnsafeSettersArray()
     {
-        $matrix = [
+        $buffer = new FloatBuffer();
+        $buffer->pushArray([
             1.0, 0.0, 0.0, 0.0,
             0.0, 1.0, 0.0, 0.0,
             0.0, 0.0, 1.0, 0.0,
             0.0, 0.0, 0.0, 1.0,
-        ];
+        ]);
 
         $this->shader->use();
         $uniformLoc = $this->shader->getUniformLocation('somemat');
 
         for ($i = 0; $i < 1000; $i++) {
-            $this->shader->unsafeSetUniformMatrix4fv("somemat", false, $matrix);
+            $this->shader->unsafeSetUniformMatrix4fv("somemat", false, $buffer);
         }
     }
 

@@ -1,0 +1,124 @@
+{
+  "entities": [
+    {
+      "name": "Office",
+      "transform": { "position": [0, 0, 0], "scale": [1, 1, 1] },
+      "children": [
+        {
+          "name": "Floor",
+          "transform": { "position": [0, 0, 0], "scale": [1, 1, 1] },
+          "components": [
+            { "type": "SpriteRenderer", "sprite": "sprites/floor_large.png", "sortingLayer": "Background", "width": 640, "height": 480 }
+          ]
+        },
+        {
+          "name": "Wall_North",
+          "transform": { "position": [0, -200, 0], "scale": [1, 1, 1] },
+          "components": [
+            { "type": "SpriteRenderer", "sprite": "sprites/wall_h.png", "sortingLayer": "Background", "orderInLayer": 1, "width": 640, "height": 32 }
+          ]
+        },
+        {
+          "name": "Wall_South",
+          "transform": { "position": [0, 200, 0], "scale": [1, 1, 1] },
+          "components": [
+            { "type": "SpriteRenderer", "sprite": "sprites/wall_h.png", "sortingLayer": "Background", "orderInLayer": 1, "width": 640, "height": 32 }
+          ]
+        },
+        {
+          "name": "Wall_West",
+          "transform": { "position": [-300, 0, 0], "scale": [1, 1, 1] },
+          "components": [
+            { "type": "SpriteRenderer", "sprite": "sprites/wall_v.png", "sortingLayer": "Background", "orderInLayer": 1, "width": 32, "height": 480 }
+          ]
+        },
+        {
+          "name": "Wall_East",
+          "transform": { "position": [300, 0, 0], "scale": [1, 1, 1] },
+          "components": [
+            { "type": "SpriteRenderer", "sprite": "sprites/wall_v.png", "sortingLayer": "Background", "orderInLayer": 1, "width": 32, "height": 480 }
+          ]
+        },
+
+        {
+          "name": "WorkArea_A",
+          "transform": { "position": [-180, -80, 0] },
+          "children": [
+            { "name": "Desk_A1", "transform": { "position": [0, 0, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/desk.png", "sortingLayer": "Default", "orderInLayer": -1, "width": 32, "height": 32 }] },
+            { "name": "Desk_A2", "transform": { "position": [40, 0, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/desk.png", "sortingLayer": "Default", "orderInLayer": -1, "width": 32, "height": 32 }] },
+            { "name": "Desk_A3", "transform": { "position": [80, 0, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/desk.png", "sortingLayer": "Default", "orderInLayer": -1, "width": 32, "height": 32 }] },
+            { "name": "Desk_A4", "transform": { "position": [0, 40, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/desk.png", "sortingLayer": "Default", "orderInLayer": -1, "width": 32, "height": 32 }] },
+            { "name": "Desk_A5", "transform": { "position": [40, 40, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/desk.png", "sortingLayer": "Default", "orderInLayer": -1, "width": 32, "height": 32 }] },
+            { "name": "Desk_A6", "transform": { "position": [80, 40, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/desk.png", "sortingLayer": "Default", "orderInLayer": -1, "width": 32, "height": 32 }] },
+            { "name": "Employee_A1", "transform": { "position": [0, -8, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/employee.png", "sortingLayer": "Default", "width": 16, "height": 24 }] },
+            { "name": "Employee_A2", "transform": { "position": [40, -8, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/employee.png", "sortingLayer": "Default", "width": 16, "height": 24 }] },
+            { "name": "Employee_A3", "transform": { "position": [80, -8, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/employee.png", "sortingLayer": "Default", "width": 16, "height": 24 }] },
+            { "name": "Employee_A4", "transform": { "position": [0, 48, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/employee.png", "sortingLayer": "Default", "width": 16, "height": 24 }] },
+            { "name": "Employee_A5", "transform": { "position": [40, 48, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/employee.png", "sortingLayer": "Default", "width": 16, "height": 24 }] },
+            { "name": "Employee_A6", "transform": { "position": [80, 48, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/employee.png", "sortingLayer": "Default", "width": 16, "height": 24 }] },
+            { "name": "Chair_A1", "transform": { "position": [0, -16, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/chair.png", "sortingLayer": "Default", "orderInLayer": -2, "width": 16, "height": 16 }] },
+            { "name": "Chair_A2", "transform": { "position": [40, -16, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/chair.png", "sortingLayer": "Default", "orderInLayer": -2, "width": 16, "height": 16 }] },
+            { "name": "Chair_A3", "transform": { "position": [80, -16, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/chair.png", "sortingLayer": "Default", "orderInLayer": -2, "width": 16, "height": 16 }] }
+          ]
+        },
+
+        {
+          "name": "WorkArea_B",
+          "transform": { "position": [80, -80, 0] },
+          "children": [
+            { "name": "Desk_B1", "transform": { "position": [0, 0, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/desk.png", "sortingLayer": "Default", "orderInLayer": -1, "width": 32, "height": 32 }] },
+            { "name": "Desk_B2", "transform": { "position": [40, 0, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/desk.png", "sortingLayer": "Default", "orderInLayer": -1, "width": 32, "height": 32 }] },
+            { "name": "Desk_B3", "transform": { "position": [80, 0, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/desk.png", "sortingLayer": "Default", "orderInLayer": -1, "width": 32, "height": 32 }] },
+            { "name": "Desk_B4", "transform": { "position": [0, 40, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/desk.png", "sortingLayer": "Default", "orderInLayer": -1, "width": 32, "height": 32 }] },
+            { "name": "Desk_B5", "transform": { "position": [40, 40, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/desk.png", "sortingLayer": "Default", "orderInLayer": -1, "width": 32, "height": 32 }] },
+            { "name": "Desk_B6", "transform": { "position": [80, 40, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/desk.png", "sortingLayer": "Default", "orderInLayer": -1, "width": 32, "height": 32 }] },
+            { "name": "Employee_B1", "transform": { "position": [0, -8, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/employee.png", "sortingLayer": "Default", "width": 16, "height": 24 }] },
+            { "name": "Employee_B2", "transform": { "position": [40, -8, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/employee.png", "sortingLayer": "Default", "width": 16, "height": 24 }] },
+            { "name": "Employee_B3", "transform": { "position": [80, -8, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/employee.png", "sortingLayer": "Default", "width": 16, "height": 24 }] }
+          ]
+        },
+
+        {
+          "name": "ServerRoom",
+          "transform": { "position": [200, 80, 0] },
+          "children": [
+            { "name": "Server_1", "transform": { "position": [0, 0, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/server.png", "sortingLayer": "Default", "width": 24, "height": 48 }] },
+            { "name": "Server_2", "transform": { "position": [30, 0, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/server.png", "sortingLayer": "Default", "width": 24, "height": 48 }] },
+            { "name": "Server_3", "transform": { "position": [60, 0, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/server.png", "sortingLayer": "Default", "width": 24, "height": 48 }] },
+            { "name": "ServerLight_1", "transform": { "position": [6, -10, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/led_green.png", "sortingLayer": "Foreground", "width": 4, "height": 4 }] },
+            { "name": "ServerLight_2", "transform": { "position": [36, -10, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/led_green.png", "sortingLayer": "Foreground", "width": 4, "height": 4 }] },
+            { "name": "ServerLight_3", "transform": { "position": [66, -10, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/led_green.png", "sortingLayer": "Foreground", "width": 4, "height": 4 }] }
+          ]
+        },
+
+        {
+          "name": "BreakRoom",
+          "transform": { "position": [-200, 100, 0] },
+          "children": [
+            { "name": "CoffeeMachine", "transform": { "position": [0, 0, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/coffee_machine.png", "sortingLayer": "Default", "width": 16, "height": 24 }] },
+            { "name": "Fridge", "transform": { "position": [30, 0, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/fridge.png", "sortingLayer": "Default", "width": 24, "height": 32 }] },
+            { "name": "Table", "transform": { "position": [0, 40, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/table_round.png", "sortingLayer": "Default", "orderInLayer": -1, "width": 32, "height": 32 }] },
+            { "name": "Chair_Break1", "transform": { "position": [-16, 40, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/chair.png", "sortingLayer": "Default", "orderInLayer": -2, "width": 16, "height": 16 }] },
+            { "name": "Chair_Break2", "transform": { "position": [16, 40, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/chair.png", "sortingLayer": "Default", "orderInLayer": -2, "width": 16, "height": 16, "flipX": true }] }
+          ]
+        },
+
+        {
+          "name": "Decoration",
+          "transform": { "position": [0, 0, 0] },
+          "children": [
+            { "name": "Plant_1", "transform": { "position": [-270, -170, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/plant.png", "sortingLayer": "Default", "orderInLayer": 5, "width": 16, "height": 24 }] },
+            { "name": "Plant_2", "transform": { "position": [270, -170, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/plant.png", "sortingLayer": "Default", "orderInLayer": 5, "width": 16, "height": 24 }] },
+            { "name": "Plant_3", "transform": { "position": [-270, 170, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/plant.png", "sortingLayer": "Default", "orderInLayer": 5, "width": 16, "height": 24 }] },
+            { "name": "Plant_4", "transform": { "position": [270, 170, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/plant.png", "sortingLayer": "Default", "orderInLayer": 5, "width": 16, "height": 24 }] },
+            { "name": "WaterCooler", "transform": { "position": [0, -170, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/water_cooler.png", "sortingLayer": "Default", "width": 12, "height": 24 }] },
+            { "name": "Whiteboard", "transform": { "position": [-50, -180, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/whiteboard.png", "sortingLayer": "Default", "orderInLayer": 2, "width": 48, "height": 32 }] },
+            { "name": "Poster_1", "transform": { "position": [150, -185, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/poster.png", "sortingLayer": "Default", "orderInLayer": 2, "width": 24, "height": 32 }] },
+            { "name": "TrashBin_1", "transform": { "position": [-100, 50, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/trashbin.png", "sortingLayer": "Default", "width": 12, "height": 16 }] },
+            { "name": "TrashBin_2", "transform": { "position": [150, 50, 0] }, "components": [{ "type": "SpriteRenderer", "sprite": "sprites/trashbin.png", "sortingLayer": "Default", "width": 12, "height": 16 }] }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -64,6 +64,23 @@ class QuickstartOptions
     public bool $drawAutoRenderVectorGraphics = true;
 
     /**
+     * Enable audio subsystem.
+     * Auto-detects backend: SDL3 (if available) -> OpenAL -> error.
+     */
+    public bool $enableAudio = false;
+
+    /**
+     * @deprecated Use $enableAudio instead.
+     */
+    public bool $enableSDL3Audio = false;
+
+    /**
+     * Enable SDL3 gamepad/controller subsystem via FFI.
+     * Requires SDL3 to be installed on the system.
+     */
+    public bool $enableGamepad = false;
+
+    /**
      * A callable that is invoked once the app is ready to run.
      * 
      * Here you can prepare your game state, register services, callbacks etc.

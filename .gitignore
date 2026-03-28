@@ -1,5 +1,6 @@
 composer.phar
 composer.lock
+CLAUDE.md
 /vendor/
 /coverage/
 /var/
@@ -7,3 +8,5 @@ docs/docs-assets/
 .phpdoc/
 docs/api
 bin/phpDocumentor.phar
+node_modules/
+.phpunit.result.cache

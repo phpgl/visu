@@ -10,6 +10,7 @@ use GL\VectorGraphics\VGContext;
 use VISU\FlyUI\Exception\FlyUiInitException;
 use VISU\Instrument\Clock;
 use VISU\OS\Input;
+use VISU\OS\InputInterface;
 use VISU\OS\Key;
 use VISU\Signal\Dispatcher;
 
@@ -31,7 +32,7 @@ class FlyUI
     /**
      * Initializes the global FlyUI instance
      */
-    public static function initailize(VGContext $vgContext, Dispatcher $dispatcher, Input $input) : void {
+    public static function initailize(VGContext $vgContext, Dispatcher $dispatcher, Input|InputInterface $input) : void {
         self::$instance = new FlyUI($vgContext, $dispatcher, $input);
 
         if ($vgContext->createFont('inter-regular', VISU_PATH_FRAMEWORK_RESOURCES_FONT . '/inter/Inter-Regular.ttf') === -1) {
@@ -247,8 +248,18 @@ class FlyUI
     }
 
     /**
+     * Creates a progress bar element
+     */
+    public static function progressBar(float $value, ?VGColor $fillColor = null): FUIProgressBar
+    {
+        $view = new FUIProgressBar($value, $fillColor);
+        self::$instance->addChildView($view);
+        return $view;
+    }
+
+    /**
      * Instance Functions/Properties
-     * 
+     *
      * ------------------------------------------------------------------------
      */
 
@@ -298,6 +309,20 @@ class FlyUI
     public bool $performanceTracingEnabled = false;
 
     /**
+     * Viewport offset for letterboxing support.
+     * When set, FlyUI will offset its rendering and mouse hit-testing
+     * by this amount, allowing the game to render in a centered sub-area.
+     */
+    public ?Vec2 $viewportOffset = null;
+
+    /**
+     * Viewport size override for letterboxing support.
+     * When set, FlyUI uses this as the root container size instead of
+     * the full window resolution passed to beginFrame.
+     */
+    public ?Vec2 $viewportSize = null;
+
+    /**
      * Performance tracer instance
      * 
      * This thing that does the tracing...
@@ -314,9 +339,9 @@ class FlyUI
      */
     public function __construct(
         private VGContext $vgContext,
-        /** @phpstan-ignore-next-line */ 
+        /** @phpstan-ignore-next-line */
         private Dispatcher $dispatcher,
-        private Input $input,
+        private Input|InputInterface $input,
         ?FUITheme $theme = null
     )
     {
@@ -412,15 +437,30 @@ class FlyUI
     private function internalEndFrame() : void
     {
         $ctx = new FUIRenderContext($this->vgContext, $this->input, $this->theme);
-        $ctx->containerSize = $this->currentResolution;
+        $ctx->containerSize = $this->viewportSize ?? $this->currentResolution;
         $ctx->contentScale = $this->currentContentScale;
 
-        // toggle performance tracing overlay on f6
-        if ($this->input->hasKeyBeenPressedThisFrame(Key::F6)) {
+        // Apply viewport offset for letterboxing (shift mouse coordinates)
+        if ($this->viewportOffset !== null) {
+            $ctx->mousePos = new Vec2(
+                $ctx->mousePos->x - $this->viewportOffset->x,
+                $ctx->mousePos->y - $this->viewportOffset->y,
+            );
+        }
+
+        // toggle performance tracing overlay on f6 (cross-check with polling
+        // to filter phantom key events from macOS fullscreen transitions)
+        if ($this->input->hasKeyBeenPressedThisFrame(Key::F6)
+            && $this->input->getKeyState(Key::F6) === GLFW_PRESS) {
             $this->performanceTracingEnabled = !$this->performanceTracingEnabled;
         }
 
         $this->vgContext->reset();
+
+        // Apply viewport offset for letterboxing (shift VG rendering)
+        if ($this->viewportOffset !== null) {
+            $this->vgContext->translate($this->viewportOffset->x, $this->viewportOffset->y);
+        }
 
         // set the default font face
         $ctx->ensureRegularFontFace();

@@ -40,7 +40,7 @@ class FUIButton extends FUIView
         $this->style = $buttonStyle ?? FlyUI::$instance->theme->primaryButton;
         parent::__construct($this->style->padding->copy());
 
-        // button ID by default just the text, this means that if 
+        // button ID by default just the text, this means that if
         // you have multiple buttons with the same text, you have to assign a custom ID
         $this->buttonId = $buttonId ?? 'btn_' . $this->text;
     }
@@ -94,7 +94,6 @@ class FUIButton extends FUIView
 
     private const BUTTON_PRESS_NONE = 0;
     private const BUTTON_PRESS_STARTED = 1;
-    private const BUTTON_PRESS_ENDED = 2;
 
     /**
      * Renders the current view using the provided context
@@ -114,61 +113,44 @@ class FUIButton extends FUIView
 
         // last press key
         $lpKey = $this->buttonId . '_lp';
-    
-        static $fuiButtonPressStates = [];
-        if (!isset($fuiButtonPressStates[$this->buttonId])) {
-            $fuiButtonPressStates[$this->buttonId] = self::BUTTON_PRESS_NONE;
-        }
-    
-        if ($isInside && $ctx->input->isMouseButtonPressed(MouseButton::LEFT)) 
-        {
-            // store last press time
-            $ctx->setStaticValue($lpKey, glfwGetTime());
 
-            if ($fuiButtonPressStates[$this->buttonId] === self::BUTTON_PRESS_NONE) {
-                $fuiButtonPressStates[$this->buttonId] = self::BUTTON_PRESS_STARTED;
-            }
-        } else if ($isInside && $fuiButtonPressStates[$this->buttonId] === self::BUTTON_PRESS_STARTED) {
-            $fuiButtonPressStates[$this->buttonId] = self::BUTTON_PRESS_ENDED;
+        // Track press state: NONE → STARTED (on press) → fire onClick (on release inside) → NONE
+        $pressKey = $this->buttonId . '_ps';
+        $rawPressState = $ctx->getStaticValue($pressKey, self::BUTTON_PRESS_NONE);
+        $pressState = (int) $rawPressState;
+
+        // Defensive: reset corrupt press state (can happen during display mode transitions)
+        if ($pressState !== self::BUTTON_PRESS_NONE && $pressState !== self::BUTTON_PRESS_STARTED) {
+            $pressState = self::BUTTON_PRESS_NONE;
+            $ctx->setStaticValue($pressKey, self::BUTTON_PRESS_NONE);
+        }
+
+        $mousePressed = $ctx->input->isMouseButtonPressed(MouseButton::LEFT);
+        $mouseReleased = !$mousePressed;
+
+        if ($isInside && $mousePressed && $pressState === self::BUTTON_PRESS_NONE)
+        {
+            $ctx->setStaticValue($lpKey, glfwGetTime());
+            $ctx->setStaticValue($pressKey, self::BUTTON_PRESS_STARTED);
+        } else if ($isInside && $mouseReleased && $pressState === self::BUTTON_PRESS_STARTED) {
+            $ctx->setStaticValue($pressKey, self::BUTTON_PRESS_NONE);
             if ($this->onClick) {
                 ($this->onClick)();
             }
-        } else {
-            $fuiButtonPressStates[$this->buttonId] = self::BUTTON_PRESS_NONE;
+        } else if ($pressState === self::BUTTON_PRESS_STARTED && $mouseReleased) {
+            // Released outside button bounds — cancel
+            $ctx->setStaticValue($pressKey, self::BUTTON_PRESS_NONE);
         }
 
-        // we have a little fade animation of the ring of the button
-        // so basically check if it has been less then 0.2 seconds since the last press
-        if ($ctx->getStaticValue($lpKey, -99.0) + 0.2 > glfwGetTime()) 
-        {
-            $alpha = (float)(($ctx->getStaticValue($lpKey, 0.0) + 0.2 - glfwGetTime()) * 5.0);
-
-            $ctx->vg->beginPath();
-            $ctx->vg->strokeColor($this->style->backgroundColor->withAlpha($alpha));
-            $ctx->vg->strokeWidth(2);
-            $ringDistance = 2 + (1.0 - $alpha) * 3.0;
-            $ctx->vg->roundedRect(
-                $ctx->origin->x - $ringDistance,
-                $ctx->origin->y - $ringDistance,
-                $ctx->containerSize->x + $ringDistance * 2,
-                $height + $ringDistance * 2,
-                $this->style->cornerRadius
-            );
-            $ctx->vg->stroke();
-        }
-        else {
-            // clean up the last press time
-            $ctx->clearStaticValue($lpKey);
-        }
+        // ring fade animation disabled — causes white line artifacts
+        $ctx->clearStaticValue($lpKey);
 
         // render the button background
         $ctx->vg->beginPath();
         $ctx->vg->fillColor($this->style->backgroundColor);
-
         if ($isInside) {
             $ctx->vg->fillColor($this->style->hoverBackgroundColor);
         }
-
         $ctx->vg->roundedRect(
             $ctx->origin->x,
             $ctx->origin->y,
