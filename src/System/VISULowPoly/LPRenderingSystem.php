@@ -164,7 +164,7 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
         $this->fullscreenRenderer = new FullscreenTextureRenderer($this->gl);
         $this->fullscreenDebugDepthRenderer = new FullscreenDebugDepthRenderer($this->gl);
         $this->ssaoRenderer = new SSAORenderer($this->gl, $this->shaders);
-        $this->cubemapRenderer = new CubemapRenderer($this->gl);
+        $this->cubemapRenderer = new CubemapRenderer($this->shaders);
         $this->iblCache = new IBLCache();
 
         // load the required shaders

@@ -3,21 +3,9 @@
 // Tone mapping
 // ----------------------------------------------------------------------------
 //
-// define TONEMAP_METHOD in as a shader option to change.
-// available methods:
-//   TONEMAP_NEUTRAL   (1) - Khronos PBR neutral tone mapper (default)
-//   TONEMAP_ACES      (2) - ACES filmic curve
-//   TONEMAP_REINHARD  (3) - basic Reinhard
-//   TONEMAP_REINHARD2 (4) - Reinhard with white point
-#define TONEMAP_NONE 0
-#define TONEMAP_NEUTRAL 1
-#define TONEMAP_ACES 2
-#define TONEMAP_REINHARD 3
-#define TONEMAP_REINHARD2 4
-
-#ifndef TONEMAP_METHOD 
-#define TONEMAP_METHOD TONEMAP_NEUTRAL
-#endif
+// the tone mapping method and curves live in visu/functions/tone_mapping.glsl
+// (included below). select a method by defining TONEMAP_METHOD as a shader
+// option; it defaults to the Khronos PBR neutral mapper.
 
 
 // Gamma correction
@@ -124,15 +112,7 @@ void main()
     vec3 color = Lo + ambient + s.emissive;
 
     // tone mapping
-#if TONEMAP_METHOD == TONEMAP_NEUTRAL
-    color = tonemap_neutral(color);
-#elif TONEMAP_METHOD == TONEMAP_ACES
-    color = tonemap_ACESFilm(color);
-#elif TONEMAP_METHOD == TONEMAP_REINHARD
-    color = tonemap_reinhard(color);
-#elif TONEMAP_METHOD == TONEMAP_REINHARD2
-    color = tonemap_reinhard2(color);
-#endif
+    color = apply_tonemap(color);
 
 #if SHOULD_CORRECT_GAMMA
     color = gamma_correct(color);
