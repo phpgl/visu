@@ -143,13 +143,8 @@ class CommandRegistry
             $argv = $argumentVector;
         }
         
-        // load the service 
+        // load the service
         $command = $this->load($commandName);
-
-        // make sure it extends the base command
-        if (!$command instanceof Command) {         
-            throw new CommandException("The command '$commandName' does not extend the base command \\VISU\\Command\\Command");
-        }
 
         // create a new command line interface
         if (is_null($cli)) {

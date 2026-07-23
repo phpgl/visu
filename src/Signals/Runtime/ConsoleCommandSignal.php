@@ -41,6 +41,6 @@ class ConsoleCommandSignal extends Signal
      */
     public function isAction(string $command) : bool
     {
-        return ($this->commandParts[0] ?? null) === $command;
+        return $this->commandParts[0] === $command;
     }
 }

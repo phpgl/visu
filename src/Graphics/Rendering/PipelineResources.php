@@ -2,10 +2,14 @@
 
 namespace VISU\Graphics\Rendering;
 
+use VISU\Graphics\Cubemap;
 use VISU\Graphics\Exception\PipelineResourceException;
 use VISU\Graphics\Framebuffer;
 use VISU\Graphics\GLState;
+use VISU\Graphics\FramebufferTarget;
+use VISU\Graphics\Rendering\Resource\CubemapResource;
 use VISU\Graphics\Rendering\Resource\RenderTargetResource;
+use VISU\Graphics\Rendering\Resource\TextureResource;
 use VISU\Graphics\RenderTarget;
 use VISU\Graphics\Texture;
 use VISU\Graphics\TextureOptions;
@@ -32,6 +36,13 @@ class PipelineResources
      * @var array<string, Texture>
      */
     private array $textures = [];
+
+    /**
+     * Internal array of cubemaps
+     * 
+     * @var array<string, Cubemap>
+     */
+    private array $cubemaps = [];
 
     /**
      * Holder of mixed generic static resources 
@@ -107,30 +118,51 @@ class PipelineResources
 
         // attach color attachments
         foreach($resource->colorAttachments as $i => $colorAttachmentTextureResource) {
-            $texture = new Texture($this->gl, $colorAttachmentTextureResource->name);
-            $options = $colorAttachmentTextureResource->options ?? new TextureOptions;
 
-            // if min filter is using a mipmap, fallback to linear
-            if ($options->minFilter === GL_NEAREST_MIPMAP_NEAREST || $options->minFilter === GL_NEAREST_MIPMAP_LINEAR) {
-                $options->minFilter = GL_NEAREST;
-            } elseif ($options->minFilter === GL_LINEAR_MIPMAP_NEAREST || $options->minFilter === GL_LINEAR_MIPMAP_LINEAR) {
-                $options->minFilter = GL_LINEAR;
+            if ($colorAttachmentTextureResource instanceof TextureResource) {
+                $texture = new Texture($this->gl, $colorAttachmentTextureResource->name);
+                $options = $colorAttachmentTextureResource->options ?? new TextureOptions;
+
+                // if min filter is using a mipmap, fallback to linear
+                if ($options->minFilter === GL_NEAREST_MIPMAP_NEAREST || $options->minFilter === GL_NEAREST_MIPMAP_LINEAR) {
+                    $options->minFilter = GL_NEAREST;
+                } elseif ($options->minFilter === GL_LINEAR_MIPMAP_NEAREST || $options->minFilter === GL_LINEAR_MIPMAP_LINEAR) {
+                    $options->minFilter = GL_LINEAR;
+                }
+                $options->generateMipmaps = false;
+                $texture->allocateEmpty(
+                    $colorAttachmentTextureResource->width, 
+                    $colorAttachmentTextureResource->height,
+                    $options
+                );
+
+                // store the texture
+                $this->textures[$colorAttachmentTextureResource->name] = $texture;
+
+                $target->framebuffer()->bind();
+
+                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + $i, $texture->target, $texture->id, 0);  
+
+                $drawBuffers[] = GL_COLOR_ATTACHMENT0 + $i;
             }
-            $options->generateMipmaps = false;
-            $texture->allocateEmpty(
-                $colorAttachmentTextureResource->width, 
-                $colorAttachmentTextureResource->height,
-                $options
-            );
+            else {
+                $cubemap = new Cubemap($this->gl, $colorAttachmentTextureResource->name);
+                $options = $colorAttachmentTextureResource->options ?? new TextureOptions;
+                
+                $cubemap->allocateEmpty(
+                    $colorAttachmentTextureResource->size,
+                    $options
+                );
 
-            // store the texture
-            $this->textures[$colorAttachmentTextureResource->name] = $texture;
+                // store the cubemap
+                $this->cubemaps[$colorAttachmentTextureResource->name] = $cubemap;
 
-            $target->framebuffer()->bind();
+                $target->framebuffer()->bind();
 
-            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + $i, $texture->target, $texture->id, 0);  
+                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + $i, Cubemap::FACE_TARGETS[0], $cubemap->id, 0);  
 
-            $drawBuffers[] = GL_COLOR_ATTACHMENT0 + $i;
+                $drawBuffers[] = GL_COLOR_ATTACHMENT0 + $i;
+            }
         }
 
         if (!empty($drawBuffers)) {
@@ -257,6 +289,56 @@ class PipelineResources
     }
 
     /**
+     * Activates a depth buffer to be read from
+     * 
+     * @param RenderTargetResource $resource    
+     */
+    public function useDepthFrom(RenderTargetResource $resource): void
+    {
+        if ($resource->depthAttachment === null) {
+            throw new PipelineResourceException('The requested depth source has no depth attachment.');
+        }
+
+        // delegate to texture-based variant using the render target dimensions
+        $this->useDepthTexture(
+            $resource->depthAttachment,
+            $resource->width,
+            $resource->height
+        );
+    }
+
+    /**
+     * Uses a depth texture as depth attachment for the currently active render target.
+     * The texture must be the same size as the active render target.
+     */
+    public function useDepthTexture(TextureResource $depthResource, ?int $expectedWidth = null, ?int $expectedHeight = null): void
+    {
+        if ($this->activeRenderTarget === null) {
+            throw new PipelineResourceException('Cannot use depth buffer before a render target is active.');
+        }
+
+        $depthTexture = $this->getTexture($depthResource);
+
+        $targetWidth = $this->activeRenderTarget->width();
+        $targetHeight = $this->activeRenderTarget->height();
+
+        $requiredWidth = $expectedWidth ?? $depthResource->width;
+        $requiredHeight = $expectedHeight ?? $depthResource->height;
+
+        if ($requiredWidth !== $targetWidth || $requiredHeight !== $targetHeight) {
+            throw new PipelineResourceException('Depth source size does not match the active render target size.');
+        }
+
+        $destinationFramebuffer = $this->activeRenderTarget->framebuffer();
+        if (!$destinationFramebuffer instanceof Framebuffer) {
+            throw new PipelineResourceException('Cannot attach a depth buffer to the active render target.');
+        }
+
+        $destinationFramebuffer->bind(FramebufferTarget::READ_DRAW);
+        $destinationFramebuffer->attachTextureId(GL_DEPTH_ATTACHMENT, $depthTexture->target, $depthTexture->id);
+    }
+
+    /**
      * Returns the currently active render target, throws an exception if none is active
      * 
      * @return RenderTarget
@@ -370,6 +452,64 @@ class PipelineResources
     }
 
     /**
+     * Sets a cubemap to the given handle
+     * 
+     * @param RenderResource $resource
+     * @param Cubemap $cubemap
+     * 
+     * @return void
+     */
+    public function setCubemap(RenderResource $resource, Cubemap $cubemap): void
+    {
+        $this->cubemaps[$resource->name] = $cubemap;
+    }
+
+    /**
+     * Returns a cubemap for the given resource
+     * 
+     * @param RenderResource $resource
+     * @return Cubemap
+     */
+    public function getCubemap(RenderResource $resource): Cubemap
+    {
+        if (!isset($this->cubemaps[$resource->name])) {
+            throw new PipelineResourceException("Cubemap not found for resource handle: " . $resource->handle . ' name: ' . $resource->name);
+        }
+
+        $this->resourceUseTick[$resource->name] = $this->tickIndex;
+        return $this->cubemaps[$resource->name];
+    }
+
+    /**
+     * Returns a cubemap ID for the given resource
+     * The cubemap ID is the raw GL handle
+     * 
+     * @param RenderResource $resource
+     * @return int
+     */
+    public function getCubemapID(RenderResource $resource): int
+    {
+        return $this->getCubemap($resource)->id;
+    }
+
+    /**
+     * Returns a cubemap by its name, will return null if not found
+     * This will also update the resource use tick
+     * 
+     * @param string $name
+     * @return Cubemap|null
+     */
+    public function getCubemapByName(string $name): ?Cubemap
+    {
+        if (!isset($this->cubemaps[$name])) {
+            return null;
+        }
+
+        $this->resourceUseTick[$name] = $this->tickIndex;
+        return $this->cubemaps[$name];
+    }
+
+    /**
      * Collects all garbage and removes all unused resources
      * 
      * @return void
@@ -379,6 +519,8 @@ class PipelineResources
         foreach ($this->resourceUseTick as $name => $tick) {
             if ($tick < $this->tickIndex) {
                 unset($this->renderTargets[$name]);
+                unset($this->textures[$name]);
+                unset($this->cubemaps[$name]);
                 unset($this->resourceUseTick[$name]);
             }
         }

@@ -514,8 +514,8 @@ class FUIPerformanceTracerOverlay extends FUIView
         $treeOutput = $trace->renderPerformanceTree($this->showMethods, 'timestamp');
         $lines = explode("\n", $treeOutput);
         
-        $visibleLines = floor($height / $this->lineHeight);
-        $startLine = floor($this->scrollOffset / $this->lineHeight);
+        $visibleLines = (int) floor($height / $this->lineHeight);
+        $startLine = (int) floor($this->scrollOffset / $this->lineHeight);
         $endLine = min(count($lines), $startLine + $visibleLines);
 
         for ($i = $startLine; $i < $endLine; $i++) {

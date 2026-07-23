@@ -29,6 +29,20 @@ class ShaderCollection
     private array $globalDefines = [];
 
     /**
+     * Array of permutation definitions for shaders
+     * 
+     * @var array<string, array<string, array<string, int|float|string>>>
+     */
+    private array $permutationDefinitions = [];
+
+    /**
+     * Array of compiled shader permutations
+     * 
+     * @var array<string, ShaderProgram>
+     */
+    private array $shaderPermutations = [];
+
+    /**
      * Shader file loader instance
      */
     private ShaderFileLoader $shaderFileLoader;
@@ -64,6 +78,23 @@ class ShaderCollection
     public function setGlobalDefine(string $name, $value): void
     {
         $this->globalDefines[$name] = $value;
+    }
+
+    /**
+     * Defines shader permutations with different define combinations
+     * 
+     * @param string $shaderName The base name of the shader (without permutation suffix)
+     * @param array<string, array<string, int|float|string>> $permutations Array of permutation name => defines
+     * 
+     * Example:
+     * $shaders->definePermutations('lighting', [
+     *     'basic' => ['USE_SHADOWS' => 0, 'MAX_LIGHTS' => 4],
+     *     'advanced' => ['USE_SHADOWS' => 1, 'MAX_LIGHTS' => 8, 'USE_IBL' => 1]
+     * ]);
+     */
+    public function definePermutations(string $shaderName, array $permutations): void
+    {
+        $this->permutationDefinitions[$shaderName] = $permutations;
     }
 
     /**
@@ -125,7 +156,7 @@ class ShaderCollection
             
             // link the shader program
             try {
-                $shaderProgram->link();
+                $shaderProgram->link($name);
             } catch(ShaderException $e) {
                 throw new ShaderProgramLinkingException("ShaderException ('{$name}'): " . $e->getMessage(), $e->getCode(), $e);
             }
@@ -135,6 +166,90 @@ class ShaderCollection
         }
 
         return $this->shaderPrograms[$name];
+    }
+
+    /**
+     * Returns a specific permutation of a shader program
+     * 
+     * @param string $shaderName The base name of the shader
+     * @param string $permutationName The name of the permutation variant
+     * @return ShaderProgram The compiled shader program with the permutation defines
+     * 
+     * Example: $shader = $shaders->getPermutation('lighting', 'advanced');
+     */
+    public function getPermutation(string $shaderName, string $permutationName): ShaderProgram
+    {
+        $permutationKey = $shaderName . '#' . $permutationName;
+        
+        if (!isset($this->shaderPermutations[$permutationKey])) {
+            // check if the permutation is defined
+            if (!isset($this->permutationDefinitions[$shaderName][$permutationName])) {
+                throw new ShaderException("Permutation '{$permutationName}' not defined for shader '{$shaderName}'");
+            }
+            
+            // check if the base shader files exist
+            if (!isset($this->avilableShaderFiles[$shaderName])) {
+                throw new ShaderException("Base shader '{$shaderName}' does not exist and is not registered");
+            }
+            
+            $shaderProgram = new ShaderProgram($this->gl);
+            $permutationDefines = $this->permutationDefinitions[$shaderName][$permutationName];
+            
+            // merge global defines with permutation-specific defines
+            $combinedDefines = array_merge($this->globalDefines, $permutationDefines);  
+            
+            // attach all shader stages with the combined defines
+            foreach($this->avilableShaderFiles[$shaderName] as $stage => $path) {
+                $shaderProgram->attach(new ShaderStage($stage, $this->shaderFileLoader->loadShader($path, $combinedDefines)));
+            }
+            
+            // link the shader program
+            try {
+                $shaderProgram->link($permutationKey);
+            } catch(ShaderException $e) {
+                throw new ShaderProgramLinkingException("ShaderException ('{$permutationKey}'): " . $e->getMessage(), $e->getCode(), $e);
+            }
+            
+            $this->shaderPermutations[$permutationKey] = $shaderProgram;
+        }
+        
+        return $this->shaderPermutations[$permutationKey];
+    }
+
+    /**
+     * Gets the available permutation names for a shader
+     * 
+     * @param string $shaderName The base name of the shader
+     * @return array<string> Array of available permutation names
+     */
+    public function getAvailablePermutations(string $shaderName): array
+    {
+        return isset($this->permutationDefinitions[$shaderName]) ? array_keys($this->permutationDefinitions[$shaderName]) : [];
+    }
+
+    /**
+     * Checks if a shader has permutation variants defined
+     * 
+     * @param string $shaderName The base name of the shader
+     * @return bool True if permutations are defined
+     */
+    public function hasPermutations(string $shaderName): bool
+    {
+        return isset($this->permutationDefinitions[$shaderName]) && !empty($this->permutationDefinitions[$shaderName]);
+    }
+
+    /**
+     * Clears all cached permutations for a shader (useful for hot-reloading)
+     * 
+     * @param string $shaderName The base name of the shader
+     */
+    public function clearPermutations(string $shaderName): void
+    {
+        foreach ($this->shaderPermutations as $key => $shader) {
+            if (str_starts_with($key, $shaderName . '#')) {
+                unset($this->shaderPermutations[$key]);
+            }
+        }
     }
 
     /**
@@ -233,6 +348,36 @@ class ShaderCollection
         foreach($this->avilableShaderFiles as $name => $files) {
             $shader = $this->get($name);
             if ($callback) $callback($name, $shader);
+        }
+    }
+
+    /**
+     * Preloads all permutations for a specific shader
+     * 
+     * @param string $shaderName The base name of the shader
+     * @param callable|null $callback Optional callback called after each permutation is loaded
+     */
+    public function loadAllPermutations(string $shaderName, ?callable $callback = null): void
+    {
+        if (!isset($this->permutationDefinitions[$shaderName])) {
+            return; // no permutations defined
+        }
+        
+        foreach ($this->permutationDefinitions[$shaderName] as $permutationName => $defines) {
+            $shader = $this->getPermutation($shaderName, $permutationName);
+            if ($callback) $callback($shaderName, $permutationName, $shader);
+        }
+    }
+
+    /**
+     * Preloads all defined permutations for all shaders
+     * 
+     * @param callable|null $callback Optional callback called after each permutation is loaded
+     */
+    public function loadAllPermutationsForAllShaders(?callable $callback = null): void
+    {
+        foreach ($this->permutationDefinitions as $shaderName => $permutations) {
+            $this->loadAllPermutations($shaderName, $callback);
         }
     }
 }

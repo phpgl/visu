@@ -30,7 +30,7 @@ class RenderTargetResource extends RenderResource
     /**
      * An array of TextureResource objects that are attached to the render target
      * 
-     * @var array<int, TextureResource>
+     * @var array<int, TextureResource|CubemapResource>
      */
     public array $colorAttachments = [];
 

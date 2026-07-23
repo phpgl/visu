@@ -64,6 +64,25 @@ interface EntitiesInterface
     public function attach(int $entity, object $component) : object;
 
     /**
+     * Regsiters a callback which is beeing invoked every time a component of given type is
+     * attached to an entity.
+     * 
+     * @template T
+     * @param class-string                  $componentClassName the component class name to listen for
+     * @param callable(self, int, T): void  $callback 
+     * 
+     * @return int Returns the listener handle which can be used to deregister the listener later on
+     */
+    public function onAttach(string $componentClassName, callable $callback) : int;
+
+    /**
+     * Deregisters a previously registered attach listener
+     * 
+     * @param int $listenerHandle The listener handle returned by `onAttach`
+     */
+    public function releaseOnAttach(int $listenerHandle) : void;
+
+    /**
      * Dettaches a component by class its class name
      * 
      * @param int                    $entity The entitiy ID of the component to be detached
@@ -77,6 +96,24 @@ interface EntitiesInterface
      * @param int                    $entity The entitiy ID of the component to be detached
      */
     public function detachAll(int $entity) : void;
+
+    /**
+     * Registers a callback which is beeing invoked every time a component of given type is
+     * dettached from an entity.
+     * @template T
+     * @param class-string                  $componentClassName the component class name to listen for
+     * @param callable(self, int, T): void  $callback 
+     * 
+     * @return int Returns the listener handle which can be used to deregister the listener later on
+     */
+    public function onDetach(string $componentClassName, callable $callback) : int;
+
+    /**
+     * Deregisters a previously registered detach listener
+     * 
+     * @param int $listenerHandle The listener handle returned by `onDetach`
+     */
+    public function releaseOnDetach(int $listenerHandle) : void;
 
     /**
      * Returns a component for the given entity 

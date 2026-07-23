@@ -2,7 +2,7 @@
 
 namespace VISU\Component\VISULowPoly;
 
-class DynamicRenderableModel
+class LPDynamicModel
 {
     /**
      * Construct a new DynamicRenderableModel

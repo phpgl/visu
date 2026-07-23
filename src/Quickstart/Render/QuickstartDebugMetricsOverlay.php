@@ -114,7 +114,7 @@ class QuickstartDebugMetricsOverlay
      * 
      * Example:
      *   [RenderPass]          CPU(10): 1.23 ms       | GPU(10): 2.34 ms       | Tri: 12345
-     *   [ShadowPass]          CPU(10): 0.56 ms       | GPU(10): 1.78 ms    §   | Tri: 6789
+     *   [ShadowPass]          CPU(10): 0.56 ms       | GPU(10): 1.78 ms       | Tri: 6789
      *
      * @return array<string>
      */

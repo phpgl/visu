@@ -19,6 +19,5 @@ parameters:
         - '/expects +VISU\\Signal\\SignalQueue<VISU\\Signal\\Signal>, VISU\\Signal\\SignalQueue<.*>/'
         - '/.*expects GL\\Buffer\\GL\\.*/' 
         - '/Parameter .* expects GL\\Math\\Vec[0-4], \((array\|)?float\|int\) given\./'
-        - '/constructor expects GL\\Math\\Vec[0-4], float given\./'
         - '/.*[copy]\(\) on \(float\|int\).*/'
         - '/should return GL\\Math\\Vec[0-4] but returns float\./'

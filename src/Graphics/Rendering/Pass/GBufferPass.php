@@ -39,6 +39,27 @@ class GBufferPass extends RenderPass
         $albedoTextureOptions = new TextureOptions;
         $albedoTextureOptions->internalFormat = GL_SRGB;
         $gbufferData->albedoTexture = $pipeline->createColorAttachment($gbufferData->renderTarget, 'albedo', $albedoTextureOptions);
+
+        $metallicTextureOptions = new TextureOptions;
+        $metallicTextureOptions->dataFormat = GL_RED;
+        $metallicTextureOptions->dataType = GL_UNSIGNED_BYTE;
+        $metallicTextureOptions->internalFormat = GL_R8;
+        $metallicTextureOptions->generateMipmaps = false;
+        $gbufferData->metallicTexture = $pipeline->createColorAttachment($gbufferData->renderTarget, 'metallic', $metallicTextureOptions);
+
+        $roughnessTextureOptions = new TextureOptions;
+        $roughnessTextureOptions->dataFormat = GL_RED;
+        $roughnessTextureOptions->dataType = GL_UNSIGNED_BYTE;
+        $roughnessTextureOptions->internalFormat = GL_R8;
+        $roughnessTextureOptions->generateMipmaps = false;
+        $gbufferData->roughnessTexture = $pipeline->createColorAttachment($gbufferData->renderTarget, 'roughness', $roughnessTextureOptions);
+
+        $emissiveTextureOptions = new TextureOptions;
+        $emissiveTextureOptions->internalFormat = GL_RGB16F;
+        $emissiveTextureOptions->dataFormat = GL_RGB;
+        $emissiveTextureOptions->dataType = GL_FLOAT;
+        $emissiveTextureOptions->generateMipmaps = false;
+        $gbufferData->emissiveTexture = $pipeline->createColorAttachment($gbufferData->renderTarget, 'emissive', $emissiveTextureOptions);
     }
 
     /**

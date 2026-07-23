@@ -3,6 +3,7 @@
 namespace App\Tests\ECS;
 
 use Exception;
+use VISU\ECS\EntitiesInterface;
 use VISU\ECS\EntityRegistry;
 use VISU\ECS\Exception\EntityRegistryException;
 
@@ -186,5 +187,249 @@ class EntityRegistryTest extends \PHPUnit\Framework\TestCase
         }
 
         $this->assertEquals([$e2, $e3], $actualBuffer);
+    }
+
+    public function testOnAttachListener() : void
+    {
+        $entities = new EntityRegistry();
+        $entities->registerComponent(\Exception::class);
+
+        $attachedEntities = [];
+        $attachedComponents = [];
+
+        // register an attach listener
+        $handle = $entities->onAttach(\Exception::class, function(EntitiesInterface $entities, int $entity, \Exception $component) use (&$attachedEntities, &$attachedComponents) {
+            $attachedEntities[] = $entity;
+            $attachedComponents[] = $component->getMessage();
+        });
+
+        $this->assertIsInt($handle);
+
+        // create entities and attach components
+        $e1 = $entities->create();
+        $entities->attach($e1, new \Exception('e1'));
+
+        $e2 = $entities->create();
+        $entities->attach($e2, new \Exception('e2'));
+
+        // verify the listener was called
+        $this->assertEquals([$e1, $e2], $attachedEntities);
+        $this->assertEquals(['e1', 'e2'], $attachedComponents);
+    }
+
+    public function testOnDetachListener() : void
+    {
+        $entities = new EntityRegistry();
+        $entities->registerComponent(\Exception::class);
+
+        $detachedEntities = [];
+        $detachedComponents = [];
+
+        // register a detach listener
+        $handle = $entities->onDetach(\Exception::class, function(EntitiesInterface $entities, int $entity, \Exception $component) use (&$detachedEntities, &$detachedComponents) {
+            $detachedEntities[] = $entity;
+            $detachedComponents[] = $component->getMessage();
+        });
+
+        $this->assertIsInt($handle);
+
+        // create entities and attach components
+        $e1 = $entities->create();
+        $entities->attach($e1, new \Exception('e1'));
+
+        $e2 = $entities->create();
+        $entities->attach($e2, new \Exception('e2'));
+
+        // detach components
+        $entities->detach($e1, \Exception::class);
+        $entities->detach($e2, \Exception::class);
+
+        // verify the listener was called
+        $this->assertEquals([$e1, $e2], $detachedEntities);
+        $this->assertEquals(['e1', 'e2'], $detachedComponents);
+    }
+
+    public function testOnDetachListenerWithDetachAll() : void
+    {
+        $entities = new EntityRegistry();
+        $entities->registerComponent(\Exception::class);
+        $entities->registerComponent(\Error::class);
+
+        $detachedExceptions = [];
+        $detachedErrors = [];
+
+        // register detach listeners for both component types
+        $entities->onDetach(\Exception::class, function(EntitiesInterface $entities, int $entity, \Exception $component) use (&$detachedExceptions) {
+            $detachedExceptions[] = $component->getMessage();
+        });
+
+        $entities->onDetach(\Error::class, function(EntitiesInterface $entities, int $entity, \Error $component) use (&$detachedErrors) {
+            $detachedErrors[] = $component->getMessage();
+        });
+
+        // create entity and attach both components
+        $e1 = $entities->create();
+        $entities->attach($e1, new \Exception('exception'));
+        $entities->attach($e1, new \Error('error'));
+
+        // detach all components
+        $entities->detachAll($e1);
+
+        // verify both listeners were called
+        $this->assertEquals(['exception'], $detachedExceptions);
+        $this->assertEquals(['error'], $detachedErrors);
+    }
+
+    public function testReleaseOnAttach() : void
+    {
+        $entities = new EntityRegistry();
+        $entities->registerComponent(\Exception::class);
+
+        $attachedComponents = [];
+
+        // register an attach listener
+        $handle = $entities->onAttach(\Exception::class, function(EntitiesInterface $entities, int $entity, \Exception $component) use (&$attachedComponents) {
+            $attachedComponents[] = $component->getMessage();
+        });
+
+        // attach a component - listener should be called
+        $e1 = $entities->create();
+        $entities->attach($e1, new \Exception('before release'));
+
+        $this->assertEquals(['before release'], $attachedComponents);
+
+        // release the listener
+        $entities->releaseOnAttach($handle);
+
+        // attach another component - listener should NOT be called
+        $e2 = $entities->create();
+        $entities->attach($e2, new \Exception('after release'));
+
+        // should still be just the first one
+        $this->assertEquals(['before release'], $attachedComponents);
+    }
+
+    public function testReleaseOnDetach() : void
+    {
+        $entities = new EntityRegistry();
+        $entities->registerComponent(\Exception::class);
+
+        $detachedComponents = [];
+
+        // register a detach listener
+        $handle = $entities->onDetach(\Exception::class, function(EntitiesInterface $entities, int $entity, \Exception $component) use (&$detachedComponents) {
+            $detachedComponents[] = $component->getMessage();
+        });
+
+        // create and attach components
+        $e1 = $entities->create();
+        $entities->attach($e1, new \Exception('before release'));
+
+        $e2 = $entities->create();
+        $entities->attach($e2, new \Exception('after release'));
+
+        // detach first component - listener should be called
+        $entities->detach($e1, \Exception::class);
+        $this->assertEquals(['before release'], $detachedComponents);
+
+        // release the listener
+        $entities->releaseOnDetach($handle);
+
+        // detach second component - listener should NOT be called
+        $entities->detach($e2, \Exception::class);
+
+        // should still be just the first one
+        $this->assertEquals(['before release'], $detachedComponents);
+    }
+
+    public function testMultipleAttachListeners() : void
+    {
+        $entities = new EntityRegistry();
+        $entities->registerComponent(\Exception::class);
+
+        $listener1Called = false;
+        $listener2Called = false;
+
+        // register two different attach listeners
+        $entities->onAttach(\Exception::class, function(EntitiesInterface $entities, int $entity, \Exception $component) use (&$listener1Called) {
+            $listener1Called = true;
+        });
+
+        $entities->onAttach(\Exception::class, function(EntitiesInterface $entities, int $entity, \Exception $component) use (&$listener2Called) {
+            $listener2Called = true;
+        });
+
+        // attach a component
+        $e1 = $entities->create();
+        $entities->attach($e1, new \Exception('test'));
+
+        // both listeners should have been called
+        $this->assertTrue($listener1Called);
+        $this->assertTrue($listener2Called);
+    }
+
+    public function testMultipleDetachListeners() : void
+    {
+        $entities = new EntityRegistry();
+        $entities->registerComponent(\Exception::class);
+
+        $listener1Called = false;
+        $listener2Called = false;
+
+        // register two different detach listeners
+        $entities->onDetach(\Exception::class, function(EntitiesInterface $entities, int $entity, \Exception $component) use (&$listener1Called) {
+            $listener1Called = true;
+        });
+
+        $entities->onDetach(\Exception::class, function(EntitiesInterface $entities, int $entity, \Exception $component) use (&$listener2Called) {
+            $listener2Called = true;
+        });
+
+        // create entity and attach component
+        $e1 = $entities->create();
+        $entities->attach($e1, new \Exception('test'));
+
+        // detach the component
+        $entities->detach($e1, \Exception::class);
+
+        // both listeners should have been called
+        $this->assertTrue($listener1Called);
+        $this->assertTrue($listener2Called);
+    }
+
+    public function testListenerWithEntityDestroy() : void
+    {
+        $entities = new EntityRegistry();
+        $entities->registerComponent(\Exception::class);
+
+        $detachedComponents = [];
+
+        // register a detach listener
+        $entities->onDetach(\Exception::class, function(EntitiesInterface $entities, int $entity, \Exception $component) use (&$detachedComponents) {
+            $detachedComponents[] = $component->getMessage();
+        });
+
+        // create entity and attach component
+        $e1 = $entities->create();
+        $entities->attach($e1, new \Exception('to be destroyed'));
+
+        // destroy the entity (which calls detachAll internally)
+        $entities->destroy($e1);
+
+        // verify the detach listener was called
+        $this->assertEquals(['to be destroyed'], $detachedComponents);
+        $this->assertFalse($entities->valid($e1));
+    }
+
+    public function testReleaseNonExistentListener() : void
+    {
+        $entities = new EntityRegistry();
+
+        // releasing non-existent listeners should not cause errors
+        $entities->releaseOnAttach(999);
+        $entities->releaseOnDetach(999);
+
+        // test should pass without exceptions
+        $this->assertTrue(true);
     }
 }

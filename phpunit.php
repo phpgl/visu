@@ -7,11 +7,16 @@ if (!defined('DS')) { define('DS', DIRECTORY_SEPARATOR); }
  *
  * We need to access our dependencies & autloader..
  */
-require __DIR__ . 
-	DS . 
-	'vendor' . 
-	DS . 
+require __DIR__ .
+	DS .
+	'vendor' .
+	DS .
 	'autoload.php';
+
+// don't capture function arguments in exception backtraces (matches the production php.ini default).
+// with args captured, an exception constructed inside the test harness stores closures from the call
+// stack in its trace, which makes serializing exception-like components fail.
+ini_set('zend.exception_ignore_args', '1');
 
 // main paths
 define('VISU_PATH_ROOT', __DIR__ . DS . 'tests_env');

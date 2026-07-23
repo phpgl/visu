@@ -232,7 +232,7 @@ class Debug3DRenderer
             fragment_color = vec4(v_color, 1.0f);
         }
         GLSL));
-        $this->shaderProgram->link();
+        $this->shaderProgram->link('D3D');
     }
 
     /**

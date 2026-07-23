@@ -35,8 +35,6 @@ class FullscreenQuadPass extends RenderPass
 
     /**
      * Constructor 
-     * 
-     * @return void 
      */
     public function __construct(
         private RenderTargetResource $renderTargetRes,

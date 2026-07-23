@@ -27,6 +27,13 @@ class Framebuffer extends AbstractFramebuffer
      */
     final public function __destruct()
     {
+        // if the current framebuffer is bound unbind it
+        if ($this->gl->currentDrawFramebuffer === $this->id || $this->gl->currentReadFramebuffer === $this->id) {
+            glBindFramebuffer(GL_FRAMEBUFFER, 0);
+            $this->gl->currentDrawFramebuffer = 0;
+            $this->gl->currentReadFramebuffer = 0;
+        }
+
         glDeleteFramebuffers(1, $this->id);
     }
 
@@ -47,5 +54,29 @@ class Framebuffer extends AbstractFramebuffer
         glFramebufferRenderbuffer(GL_FRAMEBUFFER, $attachment, GL_RENDERBUFFER, $rbo);
 
         $this->renderbufferAttachments[$attachment] = $rbo;
+    }
+
+    /**
+     * Attaches a existing texture to the framebuffer
+     */
+    public function attachTextureId(int $attachment, int $textureTarget, int $textureId, int $level = 0): void
+    {
+        $this->bind();
+        glFramebufferTexture2D(GL_FRAMEBUFFER, $attachment, $textureTarget, $textureId, $level);
+    }
+
+    /**
+     * Resizes the framebuffer attachments
+     */
+    public function resizeAttachments(int $width, int $height): void
+    {
+        $this->bind();
+        
+        foreach ($this->renderbufferAttachments as $attachment => $rbo) {
+            glBindRenderbuffer(GL_RENDERBUFFER, $rbo);
+            $format = 0;
+            glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_INTERNAL_FORMAT, $format);
+            glRenderbufferStorage(GL_RENDERBUFFER, $format, $width, $height);
+        }
     }
 }

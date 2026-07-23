@@ -2,9 +2,12 @@
 
 namespace VISU\System\VISULowPoly;
 
+use GL\Buffer\FloatBuffer;
 use GL\Math\{GLM, Quat, Vec2, Vec3};
+use GL\Rendering\DrawCallAssembler;
 use VISU\Component\DirectionalLightComponent;
-use VISU\Component\VISULowPoly\DynamicRenderableModel;
+use VISU\Component\VISULowPoly\LPDynamicModel;
+use VISU\Component\VISULowPoly\LPStaticModel;
 use VISU\D3D;
 use VISU\ECS\EntitiesInterface;
 use VISU\ECS\Picker\DevEntityPickerRenderInterface;
@@ -19,17 +22,27 @@ use VISU\Graphics\Rendering\Pass\GBufferPass;
 use VISU\Graphics\Rendering\Pass\GBufferPassData;
 use VISU\Graphics\Rendering\Pass\DeferredLightPassData;
 use VISU\Graphics\Rendering\Pass\SSAOData;
+use VISU\Graphics\Rendering\Pass\IBLPrecomputePass;
+use VISU\Graphics\Rendering\Pass\IBLPrecomputeData;
+use VISU\Graphics\Rendering\Pass\IBLCache;
+use VISU\Graphics\Rendering\Pass\DeferredLightPassPermutation;
 use VISU\Graphics\Rendering\PipelineContainer;
 use VISU\Graphics\Rendering\PipelineResources;
 use VISU\Graphics\Rendering\RenderContext;
 use VISU\Graphics\Rendering\Renderer\FullscreenDebugDepthRenderer;
 use VISU\Graphics\Rendering\Renderer\FullscreenTextureRenderer;
 use VISU\Graphics\Rendering\Renderer\SSAORenderer;
+use VISU\Graphics\Rendering\Renderer\CubemapRenderer;
 use VISU\Graphics\Rendering\RenderPass;
 use VISU\Graphics\Rendering\RenderPipeline;
 use VISU\Graphics\Rendering\Resource\RenderTargetResource;
+use VISU\Graphics\Rendering\Resource\CubemapResource;
 use VISU\Graphics\ShaderCollection;
 use VISU\Graphics\ShaderProgram;
+use VISU\Graphics\Cubemap;
+use VISU\Graphics\Texture;
+use VISU\OS\Logger;
+use VISU\Quickstart\Render\QuickstartDebugMetricsOverlay;
 
 class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterface
 {
@@ -43,6 +56,9 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
     const DEBUG_MODE_DEPTH = 4;
     const DEBUG_MODE_ALBEDO = 5;
     const DEBUG_MODE_SSAO = 6;
+    const DEBUG_MODE_METALLIC = 7;
+    const DEBUG_MODE_ROUGHNESS = 8;
+    const DEBUG_MODE_EMISSIVE = 9;
     public int $debugMode = self::DEBUG_MODE_NONE;
 
     /**
@@ -73,11 +89,70 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
     private SSAORenderer $ssaoRenderer;
 
     /**
+     * Cubemap Renderer for environment mapping
+     */
+    private CubemapRenderer $cubemapRenderer;
+
+    /**
+     * The cubemap used for environment lighting and reflections
+     */
+    private ?Cubemap $environmentCubemap = null;
+
+    /**
+     * Cache for IBL precompute results to avoid expensive recomputation
+     */
+    private IBLCache $iblCache;
+
+    /**
+     * Should the environment cubemap be rendered as skybox?
+     */
+    public bool $renderSkybox = true;
+
+    /**
      * Shader programs
      */
-    private ShaderProgram $objectShader;
+    private ShaderProgram $objectInstancedShader;
     private ShaderProgram $devPickingShader;
-    private ShaderProgram $lightingShader;
+
+    /**
+     * Image based lighting shaders
+     */
+    private ShaderProgram $iblIrradianceShader;
+    private ShaderProgram $iblPrefilterShader;
+    private ShaderProgram $iblBrdfShader;
+
+    /**
+     * onAttach callback handle "LPStaticModel"
+     */
+    private int $onAttachStaticModelHandle;
+
+    /**
+     * onDetach callback handle "LPStaticModel"
+     */
+    private int $onDetachStaticModelHandle;
+
+    /**
+     * onAttach callback handle "LPDynamicModel"
+     */
+    private int $onAttachDynamicModelHandle;
+
+
+    /**
+     * The static geomentry draw call assembler
+     */
+    private DrawCallAssembler $staticGeometryDCA;
+
+    /**
+     * Indicates whether the static geometry DCA needs to be rebuilt.
+     * Attaching or detaching a static model flags this, the static render
+     * pass then re-bakes all static instances on the next frame.
+     */
+    private bool $staticGeometryIsDirty = true;
+
+    /**
+     * The dynamic geomentry draw call assembler
+     */
+    private DrawCallAssembler $dynamicGeometryDCA;
 
     /**
      * Constructor
@@ -91,11 +166,16 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
         $this->fullscreenRenderer = new FullscreenTextureRenderer($this->gl);
         $this->fullscreenDebugDepthRenderer = new FullscreenDebugDepthRenderer($this->gl);
         $this->ssaoRenderer = new SSAORenderer($this->gl, $this->shaders);
+        $this->cubemapRenderer = new CubemapRenderer($this->shaders);
+        $this->iblCache = new IBLCache();
 
         // load the required shaders
-        $this->objectShader = $this->shaders->get('visu/lowpoly/deferred_single_mesh');
+        $this->objectInstancedShader = $this->shaders->get('visu/lowpoly/deferred_instanced_mesh');
         $this->devPickingShader = $this->shaders->get('visu/lowpoly/devpicking');
-        $this->lightingShader = $this->shaders->get('visu/lowpoly/deferred_lightpass');
+
+        $this->iblIrradianceShader = $this->shaders->get('visu/pbr_v1/bake_irradiance');
+        $this->iblPrefilterShader = $this->shaders->get('visu/pbr_v1/bake_prefiltered_env');
+        $this->iblBrdfShader = $this->shaders->get('visu/pbr_v1/bake_brdf_lut');
     }
 
     /**
@@ -116,11 +196,27 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
      */
     public function register(EntitiesInterface $entities) : void
     {
-        $entities->registerComponent(DynamicRenderableModel::class);
+        $entities->registerComponent(LPDynamicModel::class);
+        $entities->registerComponent(LPStaticModel::class);
         $entities->registerComponent(Transform::class);
 
         // create single directional light
         $entities->setSingleton(new DirectionalLightComponent);
+
+        // register attach/detach handlers for static models
+        $this->onAttachStaticModelHandle = $entities->onAttach(LPStaticModel::class, [$this, 'handleAttachStaticModel']);
+        $this->onDetachStaticModelHandle = $entities->onDetach(LPStaticModel::class, [$this, 'handleDetachStaticModel']);
+        $this->onAttachDynamicModelHandle = $entities->onAttach(LPDynamicModel::class, [$this, 'handleAttachDynamicModel']);
+
+        // construct the draw call assembler for static geometry
+        // a persistent octree is reused across frames and only rebuilt when the
+        // instance set changes, ideal for the large mostly-static scene
+        $this->staticGeometryDCA = new DrawCallAssembler();
+        $this->staticGeometryDCA->setCullingStrategy(DrawCallAssembler::CULL_OCTREE);
+
+        // construct the draw call assembler for dynamic geometry
+        // per-instance frustum culling each frame, best for the fully dynamic set
+        $this->dynamicGeometryDCA = new DrawCallAssembler();
     }
 
     /**
@@ -130,6 +226,102 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
      */
     public function unregister(EntitiesInterface $entities) : void
     {
+        $entities->releaseOnAttach($this->onAttachStaticModelHandle);
+        $entities->releaseOnDetach($this->onDetachStaticModelHandle);
+        $entities->releaseOnAttach($this->onAttachDynamicModelHandle);
+    }
+
+    /**
+     * Registers the given model's geometry with the draw call assembler if it
+     * has not been registered yet, storing the resulting mesh handle by-reference.
+     *
+     * @param-out int $meshDcaHandle
+     */
+    private function registerModelWithDCA(LPModel $model, DrawCallAssembler $dca, ?int &$meshDcaHandle) : void
+    {
+        // we render the lowpoly models as a single mesh instead of the multiple sub-meshes
+        // which were used to color them differently. We pack that information into the vertex data.
+        // so register all the meshes as one mesh if not already done
+        if (is_null($meshDcaHandle)) {
+
+            // we load the sub-meshes in sequence into the same VBO, so we really 
+            // can just calculate the offsets and counts here
+            $startOffset = 0;
+            $vertexCount = 0;
+            $fistMesh = null;
+            foreach($model->meshes as $mesh) {
+                if ($vertexCount === 0) {
+                    $startOffset = $mesh->vertexOffset;
+                    $fistMesh = $mesh;
+                }
+
+                $vertexCount += $mesh->vertexCount;
+            }
+
+            if (is_null($fistMesh)) {
+                throw new LPException('LPRenderingSystem - Cannot register model, no meshes found: ' . $model->name);
+            }
+
+            $meshDcaHandle = $dca->registerMesh(
+                vao: $fistMesh->vertexBuffer->getVertexArrayId(),
+                vertexOffset: $startOffset,
+                vertexCount: $vertexCount,
+                indexOffset: 0,
+                indexCount: 0,
+                aabbMin: $model->aabb->min,
+                aabbMax: $model->aabb->max,
+                materialHint: 0,
+                primitive: GL_TRIANGLES
+            );
+
+            $dca->bindTransformBuffer($fistMesh->vertexBuffer->getVertexArrayId(), 6);
+        }
+    }
+
+    /**
+     * Handles the attachment of a static model
+     */
+    public function handleAttachStaticModel(EntitiesInterface $entities, int $entity, LPStaticModel $component) : void
+    {
+        // the static assembler needs to be rebuilt to include the new instance
+        $this->staticGeometryIsDirty = true;
+
+        // validate the model is present
+        if (!isset($this->modelCollection->models[$component->modelIdentifier])) {
+            Logger::warn('LPRenderingSystem - Model not found: ' . $component->modelIdentifier);
+            return;
+        }
+
+        $model = $this->modelCollection->models[$component->modelIdentifier];
+
+        // register the mesh geometry once, the per-instance transforms are
+        // (re)submitted during the dirty rebuild in the static render pass
+        $this->registerModelWithDCA($model, $this->staticGeometryDCA, $model->staticDCAHandle);
+    }
+
+    /**
+     * Handles the detachment of a static model
+     */
+    public function handleDetachStaticModel(EntitiesInterface $entities, int $entity, LPStaticModel $component) : void
+    {
+        // the static assembler needs to be rebuilt so the removed instance is dropped
+        $this->staticGeometryIsDirty = true;
+    }
+
+    /**
+     * Handles the attachment of a dynamic model
+     */
+    public function handleAttachDynamicModel(EntitiesInterface $entities, int $entity, LPDynamicModel $component) : void
+    {
+        // validate the model is present
+        if (!isset($this->modelCollection->models[$component->modelIdentifier])) {
+            Logger::warn('LPRenderingSystem - Model not found: ' . $component->modelIdentifier);
+            return;
+        }
+
+        $model = $this->modelCollection->models[$component->modelIdentifier];
+
+        $this->registerModelWithDCA($model, $this->dynamicGeometryDCA, $model->dynamicDCAHandle);
     }
 
     /**
@@ -139,11 +331,6 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
      */
     public function update(EntitiesInterface $entities) : void
     {
-        // all dynamic renderables need an up to date aabb
-        foreach($entities->view(DynamicRenderableModel::class) as $entity => $renerable) 
-        {
-            
-        }
     }
 
     /**
@@ -158,6 +345,41 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
         $this->currentRenderTargetRes = $renderTargetRes;
     }
     
+    /**
+     * Sets the environment cubemap for rendering
+     * 
+     * @param Cubemap|null $cubemap The cubemap to use for environment lighting and reflections
+     * @return void 
+     */
+    public function setEnvironmentCubemap(?Cubemap $cubemap) : void
+    {
+        // invalidate the cache when the cubemap changes
+        if ($this->environmentCubemap !== $cubemap) {
+            $this->iblCache->invalidate();
+        }
+        $this->environmentCubemap = $cubemap;
+    }
+
+    /**
+     * Forces the IBL cache to be recomputed on the next frame
+     * 
+     * @return void
+     */
+    public function invalidateIBLCache() : void
+    {
+        $this->iblCache->invalidate();
+    }
+    
+    /**
+     * Gets the current environment cubemap
+     * 
+     * @return Cubemap|null The current environment cubemap
+     */
+    public function getEnvironmentCubemap() : ?Cubemap
+    {
+        return $this->environmentCubemap;
+    }
+
     /**
      * Handles rendering of the scene, here you can attach additional render passes,
      * modify the render pipeline or customize rendering related data.
@@ -180,44 +402,132 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
             $renderer->renderToGBuffer($entities, $context, $gbuffer);
         }
 
-        // create a simple render pass for our models 
-        // just to test if everything works @todo move this into seperate system
+        $renderMetrics = [
+            'static_draw_calls' => 0,
+            'static_instances' => 0,
+            'dynamic_draw_calls' => 0,
+            'dynamic_instances' => 0,
+        ];
+
+        /**
+         * Static Geometry Render Pass
+         */
         $context->pipeline->addPass(new CallbackPass(
-            'LPModels',
+            'LPStaticMesh',
             // setup
             function(RenderPass $pass, RenderPipeline $pipeline, PipelineContainer $data) use($gbuffer) 
             {
                 $pipeline->writes($pass, $gbuffer->renderTarget);
             },
             // execute
-            function(PipelineContainer $data, PipelineResources $resources) use($entities) 
+            function(PipelineContainer $data, PipelineResources $resources) use($entities, &$renderMetrics)
             {
                 $cameraData = $data->get(CameraData::class);
 
-                $this->objectShader->use();
-                $this->objectShader->setUniformMatrix4f('projection', false, $cameraData->projection);
-                $this->objectShader->setUniformMatrix4f('view', false, $cameraData->view);
+                // rebuild the static instance buffer only when the geometry changed
+                if ($this->staticGeometryIsDirty) {
+                    $this->staticGeometryDCA->clearInstances();
+
+                    // fetch all static models and (re)submit their instances
+                    $instanceCount = 0;
+                    /** @var iterable<int, array{0: LPStaticModel, 1: Transform}> $staticView */
+                    $staticView = $entities->viewWith(LPStaticModel::class, Transform::class);
+                    foreach ($staticView as $entity => [$renderable, $transform]) {
+                        if (!isset($this->modelCollection->models[$renderable->modelIdentifier])) {
+                            continue;
+                        }
+
+                        $model = $this->modelCollection->models[$renderable->modelIdentifier];
+
+                        // unregistered model
+                        if (is_null($model->staticDCAHandle)) {
+                            continue;
+                        }
+
+                        $this->staticGeometryDCA->submit(
+                            meshHandle: $model->staticDCAHandle,
+                            transform: $transform->getWorldMatrix($entities),
+                            materialId: 1, // material data is packed into the vertex buffer.
+                        );
+                        $instanceCount++;
+                    }
+
+                    $this->staticGeometryIsDirty = false;
+                    Logger::info(sprintf('[LPRenderingSystem] Rebuilding static geometry DCA with %d instances', $instanceCount));
+                }
+
+                $this->objectInstancedShader->use();
+                $this->objectInstancedShader->setUniformMatrix4f('projection', false, $cameraData->projection);
+                $this->objectInstancedShader->setUniformMatrix4f('view', false, $cameraData->view);
                 glEnable(GL_DEPTH_TEST);
 
-                foreach($entities->view(DynamicRenderableModel::class) as $entity => $renderable) 
-                {
-                    $transform = $entities->get($entity, Transform::class);
+                $this->staticGeometryDCA->setCameraData(
+                    $cameraData->renderCamera->transform->position,
+                    $cameraData->view,
+                    $cameraData->projection
+                );
 
-                    $this->objectShader->setUniformMatrix4f('model', false, $transform->getWorldMatrix($entities));
+                $this->staticGeometryDCA->execute(function(int $meshHandle, int $materialId, int $instanceOffset, int $instanceCount, int $flags) use(&$renderMetrics) {
+                    $renderMetrics['static_draw_calls'] += 1;
+                    $renderMetrics['static_instances'] += $instanceCount;
+                });
+            }
+        ));
 
+        /**
+         * Dynamic Geometry Render Pass
+         */
+        $context->pipeline->addPass(new CallbackPass(
+            'LPDynamicMesh',
+            // setup
+            function(RenderPass $pass, RenderPipeline $pipeline, PipelineContainer $data) use($gbuffer) 
+            {
+                $pipeline->writes($pass, $gbuffer->renderTarget);
+            },
+            // execute
+            function(PipelineContainer $data, PipelineResources $resources) use($entities, &$renderMetrics)
+            {
+                $cameraData = $data->get(CameraData::class);
+
+                $this->dynamicGeometryDCA->clearInstances();
+
+                // fetch all dynamic models and submit their instances
+                /** @var iterable<int, array{0: LPDynamicModel, 1: Transform}> $dynamicView */
+                $dynamicView = $entities->viewWith(LPDynamicModel::class, Transform::class);
+                foreach ($dynamicView as $entity => [$renderable, $transform]) {
                     if (!isset($this->modelCollection->models[$renderable->modelIdentifier])) {
-                        throw new \Exception('Model not found: ' . $renderable->modelIdentifier);
+                        continue;
                     }
 
-                    // render each mesh 
-                    foreach($this->modelCollection->models[$renderable->modelIdentifier]->meshes as $mesh) 
-                    {
-                        $mesh->vertexBuffer->bind();
-                        $this->objectShader->setUniformVec3('color', $mesh->material->color);
-                        
-                        glDrawArrays(GL_TRIANGLES, $mesh->vertexOffset, $mesh->vertexCount);
+                    $model = $this->modelCollection->models[$renderable->modelIdentifier];
+
+                    // unregistered model
+                    if (is_null($model->dynamicDCAHandle)) {
+                        continue;
                     }
+
+                    $this->dynamicGeometryDCA->submit(
+                        meshHandle: $model->dynamicDCAHandle,
+                        transform: $transform->getWorldMatrix($entities),
+                        materialId: 1, // material data is packed into the vertex buffer.
+                    );
                 }
+                
+                $this->objectInstancedShader->use();
+                $this->objectInstancedShader->setUniformMatrix4f('projection', false, $cameraData->projection);
+                $this->objectInstancedShader->setUniformMatrix4f('view', false, $cameraData->view);
+                glEnable(GL_DEPTH_TEST);
+
+                $this->dynamicGeometryDCA->setCameraData(
+                    $cameraData->renderCamera->transform->position,
+                    $cameraData->view,
+                    $cameraData->projection
+                );
+
+                $this->dynamicGeometryDCA->execute(function(int $meshHandle, int $materialId, int $instanceOffset, int $instanceCount, int $flags) use(&$renderMetrics) {
+                    $renderMetrics['dynamic_draw_calls'] += 1;
+                    $renderMetrics['dynamic_instances'] += $instanceCount;
+                });
             }
         ));
 
@@ -243,6 +553,18 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
             $this->fullscreenRenderer->attachPass($context->pipeline, $this->currentRenderTargetRes, $gbuffer->albedoTexture);
             return;
         }
+        elseif ($this->debugMode === self::DEBUG_MODE_METALLIC) {
+            $this->fullscreenRenderer->attachPass($context->pipeline, $this->currentRenderTargetRes, $gbuffer->metallicTexture, true);
+            return;
+        }
+        elseif ($this->debugMode === self::DEBUG_MODE_ROUGHNESS) {
+            $this->fullscreenRenderer->attachPass($context->pipeline, $this->currentRenderTargetRes, $gbuffer->roughnessTexture, true);
+            return;
+        }
+        elseif ($this->debugMode === self::DEBUG_MODE_EMISSIVE) {
+            $this->fullscreenRenderer->attachPass($context->pipeline, $this->currentRenderTargetRes, $gbuffer->emissiveTexture);
+            return;
+        }
 
         // make ssao pass
         $this->ssaoRenderer->attachPass($context->pipeline);
@@ -253,14 +575,44 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
             return;
         }
 
+        // import cubemap if available
+        $cubemapRes = null;
+        if ($this->environmentCubemap) {
+            $cubemapRes = $context->pipeline->importCubemap('environment_cubemap', $this->environmentCubemap);
+        }
+
+        if ($this->environmentCubemap !== null) {
+            $context->pipeline->addPass(new IBLPrecomputePass(
+                $cubemapRes,
+                $this->iblIrradianceShader,
+                $this->iblPrefilterShader,
+                $this->iblBrdfShader,
+                $this->iblCache,
+                32,
+                256,
+                128,
+            ));
+        }
+
         // add a light pass
         $context->pipeline->addPass(new DeferredLightPass(
-            $this->lightingShader,
-            $entities->getSingleton(DirectionalLightComponent::class)
+            $this->shaders,
+            $entities->getSingleton(DirectionalLightComponent::class),
+            $cubemapRes,
         ));
 
         // read the light pass data
         $lightpass = $context->data->get(DeferredLightPassData::class);
+    
+        // add a skybox cubemap pass
+        if ($this->renderSkybox && $cubemapRes) {
+            $this->cubemapRenderer->attachSkyboxPass(
+                $context->pipeline,
+                $lightpass->renderTarget, 
+                $cubemapRes,
+                $gbuffer->depthTexture 
+            );
+        }
 
         // copy over to the main render target
         $this->fullscreenRenderer->attachPass($context->pipeline, $this->currentRenderTargetRes, $lightpass->output);
@@ -269,6 +621,13 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
         $this->currentRenderTargetRes = null;
     }
 
+    /**
+     * Renders the static geometry ("LPStaticModel" components)
+     */
+    public function renderStaticGeometry(EntitiesInterface $entities, RenderContext $context, GBufferPassData $gbufferData) : void
+    {
+
+    }
 
     /**
      * Renders all entites to a picking framebuffer 
@@ -285,7 +644,7 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
         $this->devPickingShader->setUniformMat4('projection', false, $cameraData->projection);
         $this->devPickingShader->setUniformMat4('view', false, $cameraData->view);
 
-        foreach($entities->view(DynamicRenderableModel::class) as $entity => $renderable) 
+        foreach($entities->view(LPDynamicModel::class) as $entity => $renderable) 
         {
             $transform = $entities->get($entity, Transform::class);
             $this->devPickingShader->setUniformMatrix4f('model', false, $transform->getWorldMatrix($entities));
