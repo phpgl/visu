@@ -4,6 +4,7 @@ namespace VISU\Tests\Visual;
 
 use ClanCats\Container\Container;
 use Closure;
+use GL\Math\Vec2;
 use GL\Texture\Texture2D;
 use VISU\Quickstart\QuickstartApp;
 use VISU\Quickstart\QuickstartOptions;
@@ -32,9 +33,10 @@ use VISU\Tests\GLContextTestCase;
 abstract class VisualTestCase extends GLContextTestCase
 {
     /**
-     * The fixed offscreen resolution all visual tests render at (logical points).
-     * Kept small and 4-byte aligned for deterministic, cheap captures. Note the actual captured
-     * pixel resolution is this multiplied by the window content scale (e.g. 2x on retina displays).
+     * The fixed offscreen resolution all visual tests render at (device pixels).
+     * Kept small and 4-byte aligned for deterministic, cheap captures. This is forced onto the app
+     * via QuickstartOptions::$renderResolution (content scale 1.0) so the captured pixels are identical
+     * across machines regardless of display DPI (e.g. a retina Mac and a headless CI runner match).
      */
     protected const VISUAL_WIDTH = 240;
     protected const VISUAL_HEIGHT = 160;
@@ -78,6 +80,10 @@ abstract class VisualTestCase extends GLContextTestCase
         $options->windowTitle = 'VISU Visual Test';
         $options->windowWidth = static::VISUAL_WIDTH;
         $options->windowHeight = static::VISUAL_HEIGHT;
+
+        // force a fixed device-pixel render resolution (content scale 1.0) so the capture is identical
+        // across machines, otherwise a retina display would capture at 2x and diverge from CI baselines
+        $options->renderResolution = new Vec2(static::VISUAL_WIDTH, static::VISUAL_HEIGHT);
 
         $app = new QuickstartApp(new Container(), $options);
         $app->ready();

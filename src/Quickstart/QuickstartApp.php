@@ -288,8 +288,20 @@ class QuickstartApp implements GameLoopDelegate
         $quickstartPassData = $data->create(QuickstartPassData::class);
 
         // create an intermediate render target with a texture attachment
-        $appContentScale = $windowRenderTarget->contentScaleX;
-        $quickstartPassData->renderTarget = $context->pipeline->createRenderTargetLike('quickstartTarget', $windowRenderTarget);
+        // when a fixed render resolution is requested we render at that exact pixel size with a
+        // content scale of 1.0 so the output is deterministic regardless of window / display DPI,
+        // otherwise we mirror the window render target (inheriting its high dpi content scale)
+        if ($this->options->renderResolution !== null) {
+            $appContentScale = 1.0;
+            $quickstartPassData->renderTarget = $context->pipeline->createRenderTarget(
+                'quickstartTarget',
+                (int) $this->options->renderResolution->x,
+                (int) $this->options->renderResolution->y,
+            );
+        } else {
+            $appContentScale = $windowRenderTarget->contentScaleX;
+            $quickstartPassData->renderTarget = $context->pipeline->createRenderTargetLike('quickstartTarget', $windowRenderTarget);
+        }
 
         // we want a depth and stencil buffer
         $quickstartPassData->renderTarget->createRenderbufferDepthStencil = true;
