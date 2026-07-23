@@ -83,12 +83,15 @@ void main()
     vec2 uv = sampleSphere(normalize(local_pos));
     vec3 color = texture(hdritex, uv).rgb;
     
+    // clamp extremely bright values to prevent numerical issues
+    color = min(color, vec3(65504.0)); // max value for 16-bit float
+    
     frag_color = color;
 }
 GLSL
         ));
 
-        $this->equirectangularToCubemapShader->link();
+        $this->equirectangularToCubemapShader->link('equirectangular_to_cubemap');
     }
 
     /**
@@ -130,8 +133,8 @@ GLSL
         $options->internalFormat = GL_RGB16F;
         $options->dataFormat = GL_RGB;
         $options->dataType = GL_FLOAT;
-        $options->generateMipmaps = false;
-        $options->minFilter = GL_LINEAR;
+        $options->generateMipmaps = true;
+        $options->minFilter = GL_LINEAR_MIPMAP_LINEAR;
         $options->magFilter = GL_LINEAR;
         
         $cubemap->allocateEmpty($cubemapSize, $options);
@@ -224,6 +227,12 @@ GLSL
         // generate mipmaps for the cubemap
         $cubemap->bind();
         glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
+
+        // unbind framebuffer to restore default state
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+
+        // reset GL state
+        $this->gl->reset();
 
         return $cubemap;
     }

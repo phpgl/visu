@@ -6,7 +6,10 @@ use VISU\Graphics\Cubemap;
 use VISU\Graphics\Exception\PipelineResourceException;
 use VISU\Graphics\Framebuffer;
 use VISU\Graphics\GLState;
+use VISU\Graphics\FramebufferTarget;
+use VISU\Graphics\Rendering\Resource\CubemapResource;
 use VISU\Graphics\Rendering\Resource\RenderTargetResource;
+use VISU\Graphics\Rendering\Resource\TextureResource;
 use VISU\Graphics\RenderTarget;
 use VISU\Graphics\Texture;
 use VISU\Graphics\TextureOptions;
@@ -115,30 +118,51 @@ class PipelineResources
 
         // attach color attachments
         foreach($resource->colorAttachments as $i => $colorAttachmentTextureResource) {
-            $texture = new Texture($this->gl, $colorAttachmentTextureResource->name);
-            $options = $colorAttachmentTextureResource->options ?? new TextureOptions;
 
-            // if min filter is using a mipmap, fallback to linear
-            if ($options->minFilter === GL_NEAREST_MIPMAP_NEAREST || $options->minFilter === GL_NEAREST_MIPMAP_LINEAR) {
-                $options->minFilter = GL_NEAREST;
-            } elseif ($options->minFilter === GL_LINEAR_MIPMAP_NEAREST || $options->minFilter === GL_LINEAR_MIPMAP_LINEAR) {
-                $options->minFilter = GL_LINEAR;
+            if ($colorAttachmentTextureResource instanceof TextureResource) {
+                $texture = new Texture($this->gl, $colorAttachmentTextureResource->name);
+                $options = $colorAttachmentTextureResource->options ?? new TextureOptions;
+
+                // if min filter is using a mipmap, fallback to linear
+                if ($options->minFilter === GL_NEAREST_MIPMAP_NEAREST || $options->minFilter === GL_NEAREST_MIPMAP_LINEAR) {
+                    $options->minFilter = GL_NEAREST;
+                } elseif ($options->minFilter === GL_LINEAR_MIPMAP_NEAREST || $options->minFilter === GL_LINEAR_MIPMAP_LINEAR) {
+                    $options->minFilter = GL_LINEAR;
+                }
+                $options->generateMipmaps = false;
+                $texture->allocateEmpty(
+                    $colorAttachmentTextureResource->width, 
+                    $colorAttachmentTextureResource->height,
+                    $options
+                );
+
+                // store the texture
+                $this->textures[$colorAttachmentTextureResource->name] = $texture;
+
+                $target->framebuffer()->bind();
+
+                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + $i, $texture->target, $texture->id, 0);  
+
+                $drawBuffers[] = GL_COLOR_ATTACHMENT0 + $i;
             }
-            $options->generateMipmaps = false;
-            $texture->allocateEmpty(
-                $colorAttachmentTextureResource->width, 
-                $colorAttachmentTextureResource->height,
-                $options
-            );
+            else if ($colorAttachmentTextureResource instanceof CubemapResource) {
+                $cubemap = new Cubemap($this->gl, $colorAttachmentTextureResource->name);
+                $options = $colorAttachmentTextureResource->options ?? new TextureOptions;
+                
+                $cubemap->allocateEmpty(
+                    $colorAttachmentTextureResource->size,
+                    $options
+                );
 
-            // store the texture
-            $this->textures[$colorAttachmentTextureResource->name] = $texture;
+                // store the cubemap
+                $this->cubemaps[$colorAttachmentTextureResource->name] = $cubemap;
 
-            $target->framebuffer()->bind();
+                $target->framebuffer()->bind();
 
-            glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + $i, $texture->target, $texture->id, 0);  
+                glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0 + $i, Cubemap::FACE_TARGETS[0], $cubemap->id, 0);  
 
-            $drawBuffers[] = GL_COLOR_ATTACHMENT0 + $i;
+                $drawBuffers[] = GL_COLOR_ATTACHMENT0 + $i;
+            }
         }
 
         if (!empty($drawBuffers)) {
@@ -262,6 +286,56 @@ class PipelineResources
         $target->preparePass();
         $this->activeRenderTarget = $target;
         return $target;
+    }
+
+    /**
+     * Activates a depth buffer to be read from
+     * 
+     * @param RenderTargetResource $resource    
+     */
+    public function useDepthFrom(RenderTargetResource $resource): void
+    {
+        if ($resource->depthAttachment === null) {
+            throw new PipelineResourceException('The requested depth source has no depth attachment.');
+        }
+
+        // delegate to texture-based variant using the render target dimensions
+        $this->useDepthTexture(
+            $resource->depthAttachment,
+            $resource->width,
+            $resource->height
+        );
+    }
+
+    /**
+     * Uses a depth texture as depth attachment for the currently active render target.
+     * The texture must be the same size as the active render target.
+     */
+    public function useDepthTexture(TextureResource $depthResource, ?int $expectedWidth = null, ?int $expectedHeight = null): void
+    {
+        if ($this->activeRenderTarget === null) {
+            throw new PipelineResourceException('Cannot use depth buffer before a render target is active.');
+        }
+
+        $depthTexture = $this->getTexture($depthResource);
+
+        $targetWidth = $this->activeRenderTarget->width();
+        $targetHeight = $this->activeRenderTarget->height();
+
+        $requiredWidth = $expectedWidth ?? $depthResource->width;
+        $requiredHeight = $expectedHeight ?? $depthResource->height;
+
+        if ($requiredWidth !== $targetWidth || $requiredHeight !== $targetHeight) {
+            throw new PipelineResourceException('Depth source size does not match the active render target size.');
+        }
+
+        $destinationFramebuffer = $this->activeRenderTarget->framebuffer();
+        if (!$destinationFramebuffer instanceof Framebuffer) {
+            throw new PipelineResourceException('Cannot attach a depth buffer to the active render target.');
+        }
+
+        $destinationFramebuffer->bind(FramebufferTarget::READ_DRAW);
+        $destinationFramebuffer->attachTextureId(GL_DEPTH_ATTACHMENT, $depthTexture->target, $depthTexture->id);
     }
 
     /**

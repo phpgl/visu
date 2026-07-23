@@ -7,6 +7,7 @@ use VISU\Graphics\Rendering\Pass\CubemapPass;
 use VISU\Graphics\Rendering\RenderPipeline;
 use VISU\Graphics\Rendering\Resource\CubemapResource;
 use VISU\Graphics\Rendering\Resource\RenderTargetResource;
+use VISU\Graphics\Rendering\Resource\TextureResource;
 use VISU\Graphics\ShaderProgram;
 use VISU\Graphics\ShaderStage;
 
@@ -60,13 +61,30 @@ class CubemapRenderer
 
         uniform samplerCube u_skybox;
 
+        // simple reinhard tonemapping
+        vec3 reinhard(vec3 color) {
+            return color / (color + vec3(1.0));
+        }
+
+        // gamma correction
+        vec3 gammaCorrect(vec3 color) {
+            return pow(color, vec3(1.0/2.2));
+        }
+
         void main()
         {    
-            frag_color = texture(u_skybox, tex_coords);
+            // vec3 hdrColor = textureLod(u_skybox, tex_coords, 0).rgb;
+            vec3 hdrColor = texture(u_skybox, tex_coords).rgb;
+            
+            // apply tonemapping and gamma correction
+            vec3 mapped = reinhard(hdrColor);
+            vec3 gamma = gammaCorrect(mapped);
+            
+            frag_color = vec4(gamma, 1.0);
         }
         GLSL));
 
-        $this->skyboxShaderProgram->link();
+        $this->skyboxShaderProgram->link('skybox');
     }
 
     /**
@@ -76,12 +94,14 @@ class CubemapRenderer
         RenderPipeline $pipeline, 
         RenderTargetResource $renderTarget,
         CubemapResource $cubemap,
+        ?TextureResource $depthTexture = null,
     ) : CubemapPass
     {
         $pass = new CubemapPass(
             $renderTarget,
             $cubemap,
             $this->skyboxShaderProgram,
+            $depthTexture,
         );
         
         $pipeline->addPass($pass);

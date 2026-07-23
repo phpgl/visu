@@ -60,8 +60,13 @@ class Texture
     {
         glDeleteTextures(1, $this->id);
 
-        if ($this->gl->currentTexture === $this->id) {
-            $this->gl->currentTexture = 0;
+        // clear this texture from all tracked bindings
+        foreach ($this->gl->currentTextures as $unit => $targets) {
+            foreach ($targets as $target => $boundId) {
+                if ($boundId === $this->id) {
+                    $this->gl->currentTextures[$unit][$target] = 0;
+                }
+            }
         }
     }
 
@@ -96,15 +101,7 @@ class Texture
      */
     public function bind(int $unit = GL_TEXTURE0): void
     {
-        if ($this->gl->currentTextureUnit !== $unit) { // TODO: changing buffer, will reset texture unit..
-            glActiveTexture($unit);
-            $this->gl->currentTextureUnit = $unit;
-        }
-
-        if ($this->gl->currentTexture !== $this->id) {
-            glBindTexture($this->target, $this->id);
-            $this->gl->currentTexture = $this->id;
-        }
+        $this->gl->bindTexture($unit, $this->target, $this->id);
     }
     
     /**

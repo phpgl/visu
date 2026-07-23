@@ -31,14 +31,14 @@ uniform mat4 projection;
 uniform mat4 inverse_projection;
 uniform mat4 normal_matrix;
 
-vec4 getViewPos(vec2 texCoord)
+vec4 get_view_pos(vec2 uv)
 {
     // calculate view space position from depth texture
-    float x = texCoord.s * 2.0 - 1.0;
-    float y = texCoord.t * 2.0 - 1.0;
+    float x = uv.s * 2.0 - 1.0;
+    float y = uv.t * 2.0 - 1.0;
     
     // get depth from depth buffer and convert to NDC
-    float z = texture(gbuffer_depth, texCoord).r * 2.0 - 1.0;
+    float z = texture(gbuffer_depth, uv).r * 2.0 - 1.0;
     
     vec4 posProj = vec4(x, y, z, 1.0);
     
@@ -63,17 +63,17 @@ void main()
     }
 
     // calculate view space position from depth
-    vec4 view_position = getViewPos(v_uv);
+    vec4 view_pos = get_view_pos(v_uv);
 
     // get world normal and convert to view space
-    vec3 world_normal = texture(gbuffer_normal, v_uv).xyz;
-    vec3 view_normal = normalize(mat3(normal_matrix) * world_normal);
+    vec3 normal = texture(gbuffer_normal, v_uv).xyz;
+    vec3 view_normal = normalize(mat3(normal_matrix) * normal);
 
     // get noise vector for kernel rotation
-    vec3 noise_vec = normalize(texture(noise_texture, v_uv * noise_size).xyz * 2.0 - 1.0);
+    vec3 noise = normalize(texture(noise_texture, v_uv * noise_size).xyz * 2.0 - 1.0);
 
     // use Gram-Schmidt process to get orthogonal tangent vector
-    vec3 tangent = normalize(noise_vec - dot(noise_vec, view_normal) * view_normal);
+    vec3 tangent = normalize(noise - dot(noise, view_normal) * view_normal);
     vec3 bitangent = cross(view_normal, tangent);
     mat3 TBN = mat3(tangent, bitangent, view_normal);
     
@@ -85,7 +85,7 @@ void main()
         vec3 sample_vec = TBN * samples[i];
         
         // calculate sample point in view space
-        vec4 sample_position = view_position + radius * vec4(sample_vec, 0.0);
+        vec4 sample_position = view_pos + radius * vec4(sample_vec, 0.0);
         
         // project sample position to screen space
         vec4 sample_ndc = projection * sample_position;

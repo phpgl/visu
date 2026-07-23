@@ -4,6 +4,7 @@ namespace VISU\Graphics;
 
 use Exception;
 use GL\Math\Vec2;
+use VISU\Exception\VISUException;
 
 class RenderTarget
 {   
@@ -87,6 +88,18 @@ class RenderTarget
     }
 
     /**
+     * Returns the framebuffer only if it is of instance "Framebuffer" and so is offscreen
+     */
+    public function offscreenFramebuffer(): Framebuffer
+    {
+        if (!($this->framebuffer instanceof Framebuffer)) {
+            return throw new VISUException("RenderTarget does not have an offscreen framebuffer");
+        }
+
+        return $this->framebuffer;;
+    }
+
+    /**
      * Returns boolean if the render target is an offscreen render target
      */
     public function isOffscreen(): bool
@@ -113,5 +126,35 @@ class RenderTarget
         // }
         $this->framebuffer->bind();
         $this->updateViewport();
+    }
+
+    /**
+     * Bind the framebuffer for reading 
+     */
+    public function bindForRead(): void
+    {
+        $this->framebuffer->bind(FramebufferTarget::READ);
+    }
+
+    /**
+     * Resizes the render target to new dimensions
+     * Note: This only updates the internal dimensions and viewport,
+     * it does not resize any attached textures or renderbuffers
+     * 
+     * @param int $width new width in pixels
+     * @param int $height new height in pixels
+     */
+    public function resize(int $width, int $height): void
+    {
+        $this->width = $width;
+        $this->height = $height;
+        
+        // update the viewport if this render target is currently active
+        $this->framebuffer->bind();
+        $this->updateViewport();
+
+        if ($this->framebuffer instanceof Framebuffer) {
+            $this->framebuffer->resizeAttachments($width, $height);
+        }
     }
 }

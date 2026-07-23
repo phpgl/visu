@@ -61,6 +61,22 @@ class Framebuffer extends AbstractFramebuffer
      */
     public function attachTextureId(int $attachment, int $textureTarget, int $textureId, int $level = 0): void
     {
+        $this->bind();
         glFramebufferTexture2D(GL_FRAMEBUFFER, $attachment, $textureTarget, $textureId, $level);
+    }
+
+    /**
+     * Resizes the framebuffer attachments
+     */
+    public function resizeAttachments(int $width, int $height): void
+    {
+        $this->bind();
+        
+        foreach ($this->renderbufferAttachments as $attachment => $rbo) {
+            glBindRenderbuffer(GL_RENDERBUFFER, $rbo);
+            $format = 0;
+            glGetRenderbufferParameteriv(GL_RENDERBUFFER, GL_RENDERBUFFER_INTERNAL_FORMAT, $format);
+            glRenderbufferStorage(GL_RENDERBUFFER, $format, $width, $height);
+        }
     }
 }

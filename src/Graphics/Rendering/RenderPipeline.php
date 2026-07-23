@@ -172,7 +172,22 @@ class RenderPipeline
     {   
         /** @var TextureResource */
         $resource = $this->createResource(TextureResource::class, $target->name . '.attachment.color_' . $name, $target->width, $target->height, $options);
+        $target->colorAttachments[] = $resource;
 
+        return $resource;
+    }
+
+    /**
+     * Creates a cubemap color attachment for a render target resource
+     * 
+     * @param RenderTargetResource $target
+     * @param string $name
+     * @param TextureOptions|null $options Optional texture options for the attachment
+     */
+    public function createCubemapColorAttachment(RenderTargetResource $target, string $name, ?TextureOptions $options = null): CubemapResource
+    {
+        /** @var CubemapResource */
+        $resource = $this->createResource(CubemapResource::class, $target->name . '.attachment.cubemap_' . $name, $target->width, $options);
         $target->colorAttachments[] = $resource;
 
         return $resource;
@@ -227,6 +242,26 @@ class RenderPipeline
 
         $this->resourceAllocator->setCubemap($resource, $cubemap);
 
+        return $resource;
+    }
+
+    /**
+     * Creates an empty cubemap resource without allocating GL storage.
+     */
+    public function createCubemapResource(string $resourceName, int $size, ?TextureOptions $options = null): CubemapResource
+    {
+        /** @var CubemapResource */
+        return $this->createResource(CubemapResource::class, $resourceName, $size, $options);
+    }
+
+    /**
+     * Creates a standalone 2D texture resource.
+     */
+    public function createTextureResource(string $resourceName, int $width, int $height, ?TextureOptions $options = null): TextureResource
+    {
+        /** @var TextureResource */
+        $resource = $this->createResource(TextureResource::class, $resourceName, $width, $height, $options);
+        $resource->options = $options;
         return $resource;
     }
 

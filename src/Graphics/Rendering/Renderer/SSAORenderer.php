@@ -239,9 +239,6 @@ class SSAORenderer
                 $this->ssaoShaderProgram->setUniform1f('strength', $this->currentQuality->strength);
                 $this->ssaoShaderProgram->setUniform1i('sample_count', $this->currentQuality->sampleCount);
 
-                $normalMatrix = $cameradData->view->copy();
-                $normalMatrix->transpose();
-                $normalMatrix->inverse();
                 $this->ssaoShaderProgram->setUniformMat4('normal_matrix', false, $cameradData->view);
                 $this->ssaoShaderProgram->setUniformVec3Array('samples', $this->kernel);
                 

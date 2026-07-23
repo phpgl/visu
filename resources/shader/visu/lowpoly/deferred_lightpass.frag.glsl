@@ -1,30 +1,44 @@
 #version 330 core
 
-/**
- * The PBR Distrubition & Geometry functions
- * 
- *     PBR_DISTRIBUTION_GGX
- *     PBR_DISTRIBUTION_BECKMANN
- * 
- *     PBR_GEOMETRY_SCHLICK
- *     PBR_GEOMETRY_COOK_TORRANCE
- *     PBR_GEOMETRY_KELEMAN
- */
-#define PBR_DISTRIBUTION_GGX
-#define PBR_GEOMETRY_COOK_TORRANCE
+// Tone mapping
+// ----------------------------------------------------------------------------
+//
+// define TONEMAP_METHOD in as a shader option to change.
+// available methods:
+//   TONEMAP_NEUTRAL   (1) - Khronos PBR neutral tone mapper (default)
+//   TONEMAP_ACES      (2) - ACES filmic curve
+//   TONEMAP_REINHARD  (3) - basic Reinhard
+//   TONEMAP_REINHARD2 (4) - Reinhard with white point
+#define TONEMAP_NONE 0
+#define TONEMAP_NEUTRAL 1
+#define TONEMAP_ACES 2
+#define TONEMAP_REINHARD 3
+#define TONEMAP_REINHARD2 4
 
-in vec2 v_texture_cords;
+#ifndef TONEMAP_METHOD 
+#define TONEMAP_METHOD TONEMAP_NEUTRAL
+#endif
+
+
+// Gamma correction
+// ----------------------------------------------------------------------------
+//
+// The gamme value itself can changed by setting the "u_display_gamma" uniform.
+#ifndef SHOULD_CORRECT_GAMMA
+#define SHOULD_CORRECT_GAMMA 1
+#endif
+
+
+in vec2 v_uv;
 out vec4 fragment_color;
 
-// gbuffer textures
-uniform sampler2D gbuffer_position;
-uniform sampler2D gbuffer_normal;
-uniform sampler2D gbuffer_depth;
-uniform sampler2D gbuffer_albedo;
-uniform sampler2D gbuffer_metallic;
-uniform sampler2D gbuffer_roughness;
-uniform sampler2D gbuffer_emissive;
-uniform sampler2D gbuffer_ao;
+#include "visu/functions/gamma_corr.glsl"
+#include "visu/functions/tone_mapping.glsl"
+#include "visu/functions/brdf.glsl"
+
+#include "visu/gbuffer_uniform.glsl"
+#include "visu/pbr/surface.glsl"
+#include "visu/pbr/shade.glsl"
 
 // camera uniforms
 uniform vec3 camera_position;
@@ -35,149 +49,94 @@ uniform vec3 sun_direction;
 uniform vec3 sun_color;
 uniform float sun_intensity;
 
-const float gamma = 2.2;
-const float PI = 3.14159265359;
-const float exposure = 1.5;
-
-vec3 fresnel(vec3 F0, float b) 
-{
-    return F0 + (1.0 - F0) *  pow(clamp(1.0 - b, 0.0, 1.0), 5.0);
-}
-
-float GGX(float NdotH, float roughness) 
-{
-    float a = roughness * roughness;
-    float a2 = a * a;
-    float d = NdotH * NdotH * (a2 - 1.0) + 1.0;
-    return a2 / (PI * d * d);
-}
-
-float distribution_beckmann(float NdotH, float roughness) 
-{
-    float a = roughness * roughness;
-    float a2 = a * a;
-    float r1 = 1.0 / (4.0 * a2 * pow(NdotH, 4.0));
-    float r2 = (NdotH * NdotH - 1.0) / (a2 * NdotH * NdotH);
-    return r1 * exp(r2);
-}
-
-float geometry_schlick(float NdotL, float NdotV, float roughness) 
-{
-    float a = roughness + 1.0;
-    float k = a * a * 0.125;
-    float G1 = NdotL / (NdotL * (1.0 - k) + k);
-    float G2 = NdotV / (NdotV * (1.0 - k) + k);
-    return G1 * G2;
-}
-
-float geometry_cook_torrance(float NdotL, float NdotV, float NdotH, float VdotH) 
-{
-    float G1 = (2.0 * NdotH * NdotV) / VdotH;
-    float G2 = (2.0 * NdotH * NdotL) / VdotH;
-    return min(1.0, min(G1, G2));
-}
-
-float geometry_kelman(float NdotL, float NdotV, float VdotH) 
-{
-    return (NdotL * NdotV) / (VdotH * VdotH);
-}
-
-vec3 pbr_specular(vec3 N, vec3 V, vec3 H, vec3 L, vec3 F0, float roughness) 
-{
-    float NdotH = max(0.0, dot(N, H));
-    float NdotV = max(1e-7, dot(N, V));
-    float NdotL = max(1e-7, dot(N, L));
-    float VdotH = max(0.0, dot(V, H));
-
-#ifdef PBR_DISTRIBUTION_GGX
-    float D = GGX(NdotH, roughness);
+// environment cubemap
+#ifdef USE_ENV_CUBEMAP
+uniform samplerCube environment_cubemap;
+uniform int environment_mip_count;
 #endif
-#ifdef PBR_DISTRIBUTION_BECKMANN
-    float D = distribution_beckmann(NdotH, roughness);
-#endif
-    
-#ifdef PBR_GEOMETRY_SCHLICK
-    float G = geometry_schlick(NdotL, NdotV, roughness);
-#endif
-#ifdef PBR_GEOMETRY_COOK_TORRANCE
-    float G = geometry_cook_torrance(NdotL, NdotV, NdotH, VdotH);
-#endif
-#ifdef PBR_GEOMETRY_KELEMAN
-    float G = geometry_kelman(NdotL, NdotV, VdotH);
-#endif
-    
-    vec3 F = fresnel(F0, VdotH);
-    
-    return (D * F * G) / (4.0 * NdotL * NdotV);
-}
 
-vec3 tone_mapping_ACESFilm(vec3 x)
-{
-    x *= exposure;
-
-    float a = 2.51f;
-    float b = 0.03f;
-    float c = 2.43f;
-    float d = 0.59f;
-    float e = 0.14f;
-
-    return clamp((x*(a*x+b))/(x*(c*x+d)+e), 0.0, 1.0);
-}
-
-vec3 gamma_correct(vec3 color)
-{
-    return pow(color, vec3(1.0 / gamma));
-}
+// IBL 
+#ifdef USE_IBL
+uniform samplerCube ibl_irradiance_map;
+uniform samplerCube ibl_prefilter_map;
+uniform int prefilter_mip_count;
+uniform sampler2D ibl_brdf_lut;
+#endif
 
 void main()
-{             
-    // retrieve data from gbuffer
-    vec3 buffer_pos = texture(gbuffer_position, v_texture_cords).rgb;
-    vec3 buffer_normal = texture(gbuffer_normal, v_texture_cords).rgb;
-    vec3 buffer_albedo = texture(gbuffer_albedo, v_texture_cords).rgb;
-    float buffer_metal = texture(gbuffer_metallic, v_texture_cords).r;
-    float buffer_roughness = texture(gbuffer_roughness, v_texture_cords).r;
-    float ao = texture(gbuffer_ao, v_texture_cords).r;
-    vec3 buffer_emissive = texture(gbuffer_emissive, v_texture_cords).rgb;
+{
+    // fetch gbuffer data
+    GBuffer gbuffer = gbuffer_make(v_uv);
 
-    float roughness = clamp(buffer_roughness, 0.04, 1.0);
+    // create PBR surface from gbuffer data
+    PBRSurface s = pbr_surface_make(
+        gbuffer,
+        camera_position
+    );
 
-    float inverse_metal = 1.0f - buffer_metal;
+    vec3 Lo = vec3(0.0);
 
-    // lighting
-    vec3 N = normalize(buffer_normal);
-    vec3 V = normalize(camera_position - buffer_pos);
-    vec3 L = normalize(sun_direction);
-    vec3 R = normalize(reflect(-L, N));
-    vec3 H = normalize(L + V);
+    // directional light (sun)
+    {
+        vec3 L = normalize(-sun_direction);
+        vec3 radiance = sun_color * sun_intensity;
+        Lo += pbr_shade(s, L, radiance);
+    }
 
-    float visibility = 1.0;
-    float attenuation = 1.0;
-    vec3 radiance = sun_color * sun_intensity * attenuation;
+    // ambient / IBL
+    vec3 ambient = vec3(0.0);
+    {
+        float NdotV = max(dot(s.N, s.V), 0.0);
+        vec3 R = normalize(reflect(-s.V, s.N));
 
-    vec3 F0 = mix(vec3(0.04), buffer_albedo, buffer_metal);
-    vec3 F = fresnel(F0, max(0.0, dot(H, V)));
-    vec3 specular = pbr_specular(N, V, H, L, F0, roughness);
+        vec3 F  = fresnel_schlick_roughness(s.F0, NdotV, s.roughness);
+        vec3 kS = F;
+        vec3 kD = (vec3(1.0) - kS) * (1.0 - s.metallic);
 
-    float NdotL = max(dot(N, L), 0.0);     	
-    vec3 kD = (1.0 - F) * inverse_metal; 
+        // diffuse IBL
+        vec3 diffuseIBL = vec3(0.0);
+#ifdef USE_IBL
+        vec3 irradiance = texture(ibl_irradiance_map, s.N).rgb;
+        diffuseIBL = irradiance * s.albedo / PI;
+#else
+        // basic ambient fallback
+        diffuseIBL = vec3(0.03) * s.albedo;
+#endif
 
-    vec3 diffuse = kD * buffer_albedo / PI;
-    vec3 Lo = (diffuse * ao + specular) * radiance * NdotL;
+        // specular IBL
+        vec3 specIBL = vec3(0.0);
+#ifdef USE_IBL
+        float maxLod = float(prefilter_mip_count - 1);
+        vec3 prefiltered = textureLod(ibl_prefilter_map, R, s.roughness * maxLod).rgb;
+        vec2 brdf = texture(ibl_brdf_lut, vec2(NdotV, s.roughness)).rg;
+        specIBL = prefiltered * (s.F0 * brdf.x + brdf.y);
+#elif defined(USE_ENV_CUBEMAP)
+        float maxLod = float(max(environment_mip_count - 1, 0));
+        vec3 env = textureLod(environment_cubemap, R, s.roughness * maxLod).rgb;
+        specIBL = env * F; // fallback without proper LUT
+#endif
 
-    vec3 ambient = vec3(0.05) * buffer_albedo * ao;
+        float specAO = s.ao;
+        ambient = kD * diffuseIBL * s.ao + specIBL * specAO;
+    }
 
-    vec3 fragment = ambient + Lo + buffer_emissive;
+    // compose lighting, ambient and emissive
+    vec3 color = Lo + ambient + s.emissive;
 
-    // HDR tonemapping
-    fragment = tone_mapping_ACESFilm(fragment);
-    fragment = gamma_correct(fragment);
+    // tone mapping
+#if TONEMAP_METHOD == TONEMAP_NEUTRAL
+    color = tonemap_neutral(color);
+#elif TONEMAP_METHOD == TONEMAP_ACES
+    color = tonemap_ACESFilm(color);
+#elif TONEMAP_METHOD == TONEMAP_REINHARD
+    color = tonemap_reinhard(color);
+#elif TONEMAP_METHOD == TONEMAP_REINHARD2
+    color = tonemap_reinhard2(color);
+#endif
 
-    // // tmp blueish sky if albedo is 0 
-    // // this is a hack till we build a proper skybox renderer
-    // if (buffer_albedo == vec3(0.0)) {
-    //     fragment = vec3(0.654, 0.68, 0.8);
-    // }
+#if SHOULD_CORRECT_GAMMA
+    color = gamma_correct(color);
+#endif
 
-    fragment_color = vec4(fragment, 1.0);
+    fragment_color = vec4(color, 1.0);
 }

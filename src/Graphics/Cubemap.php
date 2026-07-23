@@ -4,12 +4,101 @@ namespace VISU\Graphics;
 
 use GL\Buffer\BufferInterface;
 use GL\Buffer\FloatBuffer;
+use GL\Math\Mat4;
+use GL\Math\Vec3;
 use GL\Texture\Texture2D;
 use VISU\Exception\VISUException;
 use VISU\Graphics\Exception\TextureLoadException;
 
 class Cubemap
-{
+{   
+    /**
+     * @var array<Mat4>|null  The view matrices for capturing each cubemap face
+     */
+    private static ?array $captureViews = null;
+
+    /**
+     * Returns the view matrices for capturing each cubemap face
+     * 
+     * @return array<Mat4>
+     */
+    public static function captureViews() : array
+    {
+        if (self::$captureViews !== null) {
+            return self::$captureViews;
+        }
+
+        // view matrices for each cubemap face
+        $captureViews = [];
+        
+        // +X face
+        $view = new Mat4();
+        $view->lookAt(
+            new Vec3(0.0, 0.0, 0.0), 
+            new Vec3( 1.0,  0.0,  0.0), 
+            new Vec3(0.0, -1.0,  0.0)
+        );
+        $captureViews[] = $view;
+        
+        // -X face
+        $view = new Mat4();
+        $view->lookAt(
+            new Vec3(0.0, 0.0, 0.0), 
+            new Vec3(-1.0,  0.0,  0.0), 
+            new Vec3(0.0, -1.0,  0.0)
+        );
+        $captureViews[] = $view;
+        
+        // +Y face
+        $view = new Mat4();
+        $view->lookAt(
+            new Vec3(0.0, 0.0, 0.0), 
+            new Vec3( 0.0,  1.0,  0.0), 
+            new Vec3(0.0,  0.0,  1.0)
+        );
+        $captureViews[] = $view;
+        
+        // -Y face
+        $view = new Mat4();
+        $view->lookAt(
+            new Vec3(0.0, 0.0, 0.0), 
+            new Vec3( 0.0, -1.0,  0.0), 
+            new Vec3(0.0,  0.0, -1.0)
+        );
+        $captureViews[] = $view;
+        
+        // +Z face
+        $view = new Mat4();
+        $view->lookAt(
+            new Vec3(0.0, 0.0, 0.0), 
+            new Vec3( 0.0,  0.0,  1.0), 
+            new Vec3(0.0, -1.0,  0.0)
+        );
+        $captureViews[] = $view;
+        
+        // -Z face
+        $view = new Mat4();
+        $view->lookAt(
+            new Vec3(0.0, 0.0, 0.0), 
+            new Vec3( 0.0,  0.0, -1.0), 
+            new Vec3(0.0, -1.0,  0.0)
+        );
+        $captureViews[] = $view;
+
+        self::$captureViews = $captureViews;
+        return self::$captureViews;
+    }
+
+    /**
+     * Returns a projection matrix for capturing cubemap faces
+     */
+    public static function captureProjectionMatrix() : Mat4
+    {
+        $captureProjection = new Mat4();
+        $captureProjection->perspective(\GL\Math\GLM::radians(90.0), 1.0, 0.1, 10.0);
+        return $captureProjection;
+    }
+
     /**
      * The GL texture id / handle
      */
@@ -59,9 +148,13 @@ class Cubemap
     {
         glDeleteTextures(1, $this->id);
 
-        if ($this->gl->currentTexture === $this->id) {
-            $this->gl->currentTexture = 0;
+        // remove this cubemap from all tracked bindings
+        foreach ($this->gl->currentTextures as $unit => &$targets) {
+            if (isset($targets[GL_TEXTURE_CUBE_MAP]) && $targets[GL_TEXTURE_CUBE_MAP] === $this->id) {
+                $targets[GL_TEXTURE_CUBE_MAP] = 0;
+            }
         }
+        unset($targets);
     }
 
     /**
@@ -87,15 +180,7 @@ class Cubemap
      */
     public function bind(int $unit = GL_TEXTURE0): void
     {
-        if ($this->gl->currentTextureUnit !== $unit) {
-            glActiveTexture($unit);
-            $this->gl->currentTextureUnit = $unit;
-        }
-
-        if ($this->gl->currentTexture !== $this->id) {
-            glBindTexture(GL_TEXTURE_CUBE_MAP, $this->id);
-            $this->gl->currentTexture = $this->id;
-        }
+        $this->gl->bindTexture($unit, GL_TEXTURE_CUBE_MAP, $this->id);
     }
     
     /**
@@ -103,17 +188,6 @@ class Cubemap
      */
     private function applyFilterParameters(): void
     {
-        // to avoid incomplete textures ensure that mipmaps are generated
-        // when the min filter is set to mipmapped
-        if ($this->options->generateMipmaps === false) {
-            if ($this->options->minFilter === GL_LINEAR_MIPMAP_LINEAR ||
-                $this->options->minFilter === GL_LINEAR_MIPMAP_NEAREST ||
-                $this->options->minFilter === GL_NEAREST_MIPMAP_LINEAR ||
-                $this->options->minFilter === GL_NEAREST_MIPMAP_NEAREST) {
-                throw new TextureLoadException("Mipmapped minification filter set but mipmaps are not generated, this results in incomplete textures");
-            }
-        }
-
         glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, $this->options->minFilter);
         glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, $this->options->magFilter);
 
@@ -368,7 +442,6 @@ class Cubemap
 
         // create framebuffer for resource management
         $framebuffer = new Framebuffer($this->gl);
-        $framebuffer->bind();
         $framebuffer->attachTextureId(GL_COLOR_ATTACHMENT0, self::FACE_TARGETS[$faceIndex], $this->id);
         
         // check framebuffer completeness

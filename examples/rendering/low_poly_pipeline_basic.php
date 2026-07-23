@@ -1,27 +1,19 @@
 <?php
 
-use GL\Math\GLM;
-use GL\Math\Mat4;
-use GL\Math\Quat;
-use GL\Math\Vec3;
+use GL\Math\{GLM, Quat, Vec3};
 use VISU\Component\VISULowPoly\LPDynamicModel;
 use VISU\Geo\Transform;
-use VISU\Graphics\Rendering\Pass\GBufferPassData;
-use VISU\Graphics\Rendering\Pass\SSAOData;
 use VISU\Graphics\Rendering\RenderContext;
 use VISU\Graphics\Rendering\Resource\RenderTargetResource;
-use VISU\Graphics\RenderTarget;
 use VISU\Quickstart;
-use VISU\Quickstart\QuickstartApp;
-use VISU\Quickstart\QuickstartOptions;
-use VISU\Quickstart\Render\QuickstartPassData;
+use VISU\Quickstart\{QuickstartApp, QuickstartOptions};
 use VISU\System\VISUCameraSystem;
-use VISU\System\VISULowPoly\LPModelCollection;
-use VISU\System\VISULowPoly\LPObjLoader;
-use VISU\System\VISULowPoly\LPRenderingSystem;
+use VISU\System\VISULowPoly\{LPModelCollection, LPObjLoader, LPRenderingSystem};
 
 $container = require __DIR__ . '/../bootstrap.php';
 
+// Demo State
+// --------------------------------------------------------------------
 class LowPolyRendererDemoState 
 {
     public VISUCameraSystem $cameraSystem;
@@ -85,6 +77,8 @@ $quickstart = new Quickstart(function(QuickstartOptions $app) use(&$state, $cont
         $state->logoRotationCurrent = $transform->orientation->copy();
     };
 
+    // Update the scene
+    // --------------------------------------------------------------------
     $app->update = function(QuickstartApp $app) use(&$state) 
     {
         $app->updateSystem($state->cameraSystem);
@@ -96,6 +90,8 @@ $quickstart = new Quickstart(function(QuickstartOptions $app) use(&$state, $cont
         $state->logoRotationCurrent->rotate(GLM::radians(1.0), new Vec3(0.0, 0.0, 1.0));
     };
 
+    // Render the scene
+    // --------------------------------------------------------------------
     $app->render = function(QuickstartApp $app, RenderContext $context, RenderTargetResource $target) use(&$state) 
     {
         // interpolate between previous and current rotation state using compensation

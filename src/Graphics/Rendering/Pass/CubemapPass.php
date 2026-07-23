@@ -11,6 +11,7 @@ use VISU\Graphics\Rendering\RenderPass;
 use VISU\Graphics\Rendering\RenderPipeline;
 use VISU\Graphics\Rendering\Resource\CubemapResource;
 use VISU\Graphics\Rendering\Resource\RenderTargetResource;
+use VISU\Graphics\Rendering\Resource\TextureResource;
 use VISU\Graphics\ShaderProgram;
 
 class CubemapPass extends RenderPass
@@ -32,6 +33,7 @@ class CubemapPass extends RenderPass
         private RenderTargetResource $renderTargetRes,
         private CubemapResource $cubemapRes,
         private ShaderProgram $shader,
+        private ?TextureResource $depthTextureRes = null,
     )
     {
     }
@@ -43,6 +45,9 @@ class CubemapPass extends RenderPass
     {
         $pipeline->reads($this, $this->cubemapRes);
         $pipeline->writes($this, $this->renderTargetRes);
+        if ($this->depthTextureRes !== null) {
+            $pipeline->reads($this, $this->depthTextureRes);
+        }
     }
 
     /**
@@ -51,6 +56,9 @@ class CubemapPass extends RenderPass
     public function execute(PipelineContainer $data, PipelineResources $resources): void
     {
         $resources->activateRenderTarget($this->renderTargetRes);
+        if ($this->depthTextureRes !== null) {
+            $resources->useDepthTexture($this->depthTextureRes);
+        }
 
         // fetch camera data
         $cameraData = $data->get(CameraData::class);
@@ -65,6 +73,7 @@ class CubemapPass extends RenderPass
 
         // we need to see the inner faces of the cubemap
         glDisable(GL_CULL_FACE); 
+        glEnable(GL_DEPTH_TEST);
 
         $glCubemap = $resources->getCubemap($this->cubemapRes);
         $this->shader->setUniform1i($this->cubemapUniformName, 0);

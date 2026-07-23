@@ -73,13 +73,13 @@ class GLState
     public int $currentIndexBuffer = 0;
 
     /**
-     * Currently bound texture object
+     * Currently bound textures per unit and target
      * 
      * **Note:** You should never manually manipulate this value.
      * 
-     * @var int
+     * @var array<int, array<int, int>>
      */
-    public int $currentTexture = 0;
+    public array $currentTextures = [];
 
     /**
      * Currently bound texture unit
@@ -88,7 +88,7 @@ class GLState
      * 
      * @var int
      */
-    public int $currentTextureUnit = 0;
+    public int $currentTextureUnit = GL_TEXTURE0;
 
     /**
      * Resets the state of this object.
@@ -101,8 +101,8 @@ class GLState
         $this->currentVertexArray = 0;
         $this->currentVertexArrayBuffer = 0;
         $this->currentIndexBuffer = 0;
-        $this->currentTexture = 0;
-        $this->currentTextureUnit = 0;
+        $this->currentTextures = [];
+        $this->currentTextureUnit = GL_TEXTURE0;
 
         glUseProgram(0);
         glBindFramebuffer(GL_READ_FRAMEBUFFER, 0);
@@ -111,6 +111,7 @@ class GLState
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
         glBindTexture(GL_TEXTURE_2D, 0);
+        glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
         glActiveTexture(GL_TEXTURE0);
     }
 
@@ -169,5 +170,39 @@ class GLState
             $this->currentIndexBuffer = $ibo;
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, $ibo);
         }
+    }
+
+    /**
+     * State aware binding of texture to specific unit and target.
+     * 
+     * @param int $unit The texture unit (GL_TEXTURE0, GL_TEXTURE1, etc.)
+     * @param int $target The texture target (GL_TEXTURE_2D, GL_TEXTURE_CUBE_MAP, etc.)
+     * @param int $textureId The texture ID to bind
+     */
+    public function bindTexture(int $unit, int $target, int $textureId) : void
+    {
+        // check if we need to switch texture unit
+        if ($this->currentTextureUnit !== $unit) {
+            glActiveTexture($unit);
+            $this->currentTextureUnit = $unit;
+        }
+
+        // check if this texture target on this unit is already bound to this texture
+        if (!isset($this->currentTextures[$unit][$target]) || $this->currentTextures[$unit][$target] !== $textureId) {
+            glBindTexture($target, $textureId);
+            $this->currentTextures[$unit][$target] = $textureId;
+        }
+    }
+
+    /**
+     * Gets the currently bound texture for a specific unit and target.
+     * 
+     * @param int $unit The texture unit
+     * @param int $target The texture target
+     * @return int The currently bound texture ID (0 if none)
+     */
+    public function getBoundTexture(int $unit, int $target) : int
+    {
+        return $this->currentTextures[$unit][$target] ?? 0;
     }
 }

@@ -22,17 +22,25 @@ use VISU\Graphics\Rendering\Pass\GBufferPass;
 use VISU\Graphics\Rendering\Pass\GBufferPassData;
 use VISU\Graphics\Rendering\Pass\DeferredLightPassData;
 use VISU\Graphics\Rendering\Pass\SSAOData;
+use VISU\Graphics\Rendering\Pass\IBLPrecomputePass;
+use VISU\Graphics\Rendering\Pass\IBLPrecomputeData;
+use VISU\Graphics\Rendering\Pass\IBLCache;
+use VISU\Graphics\Rendering\Pass\DeferredLightPassPermutation;
 use VISU\Graphics\Rendering\PipelineContainer;
 use VISU\Graphics\Rendering\PipelineResources;
 use VISU\Graphics\Rendering\RenderContext;
 use VISU\Graphics\Rendering\Renderer\FullscreenDebugDepthRenderer;
 use VISU\Graphics\Rendering\Renderer\FullscreenTextureRenderer;
 use VISU\Graphics\Rendering\Renderer\SSAORenderer;
+use VISU\Graphics\Rendering\Renderer\CubemapRenderer;
 use VISU\Graphics\Rendering\RenderPass;
 use VISU\Graphics\Rendering\RenderPipeline;
 use VISU\Graphics\Rendering\Resource\RenderTargetResource;
+use VISU\Graphics\Rendering\Resource\CubemapResource;
 use VISU\Graphics\ShaderCollection;
 use VISU\Graphics\ShaderProgram;
+use VISU\Graphics\Cubemap;
+use VISU\Graphics\Texture;
 use VISU\OS\Logger;
 use VISU\Quickstart\Render\QuickstartDebugMetricsOverlay;
 
@@ -81,12 +89,37 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
     private SSAORenderer $ssaoRenderer;
 
     /**
+     * Cubemap Renderer for environment mapping
+     */
+    private CubemapRenderer $cubemapRenderer;
+
+    /**
+     * The cubemap used for environment lighting and reflections
+     */
+    private ?Cubemap $environmentCubemap = null;
+
+    /**
+     * Cache for IBL precompute results to avoid expensive recomputation
+     */
+    private IBLCache $iblCache;
+
+    /**
+     * Should the environment cubemap be rendered as skybox?
+     */
+    public bool $renderSkybox = true;
+
+    /**
      * Shader programs
      */
-    private ShaderProgram $objectShader;
     private ShaderProgram $objectInstancedShader;
     private ShaderProgram $devPickingShader;
-    private ShaderProgram $lightingShader;
+
+    /**
+     * Image based lighting shaders
+     */
+    private ShaderProgram $iblIrradianceShader;
+    private ShaderProgram $iblPrefilterShader;
+    private ShaderProgram $iblBrdfShader;
 
     /**
      * onAttach callback handle "LPStaticModel"
@@ -131,12 +164,16 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
         $this->fullscreenRenderer = new FullscreenTextureRenderer($this->gl);
         $this->fullscreenDebugDepthRenderer = new FullscreenDebugDepthRenderer($this->gl);
         $this->ssaoRenderer = new SSAORenderer($this->gl, $this->shaders);
+        $this->cubemapRenderer = new CubemapRenderer($this->gl);
+        $this->iblCache = new IBLCache();
 
         // load the required shaders
-        $this->objectShader = $this->shaders->get('visu/lowpoly/deferred_single_mesh');
         $this->objectInstancedShader = $this->shaders->get('visu/lowpoly/deferred_instanced_mesh');
         $this->devPickingShader = $this->shaders->get('visu/lowpoly/devpicking');
-        $this->lightingShader = $this->shaders->get('visu/lowpoly/deferred_lightpass');
+
+        $this->iblIrradianceShader = $this->shaders->get('visu/pbr_v1/bake_irradiance');
+        $this->iblPrefilterShader = $this->shaders->get('visu/pbr_v1/bake_prefiltered_env');
+        $this->iblBrdfShader = $this->shaders->get('visu/pbr_v1/bake_brdf_lut');
     }
 
     /**
@@ -303,6 +340,41 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
     }
     
     /**
+     * Sets the environment cubemap for rendering
+     * 
+     * @param Cubemap|null $cubemap The cubemap to use for environment lighting and reflections
+     * @return void 
+     */
+    public function setEnvironmentCubemap(?Cubemap $cubemap) : void
+    {
+        // invalidate the cache when the cubemap changes
+        if ($this->environmentCubemap !== $cubemap) {
+            $this->iblCache->invalidate();
+        }
+        $this->environmentCubemap = $cubemap;
+    }
+
+    /**
+     * Forces the IBL cache to be recomputed on the next frame
+     * 
+     * @return void
+     */
+    public function invalidateIBLCache() : void
+    {
+        $this->iblCache->invalidate();
+    }
+    
+    /**
+     * Gets the current environment cubemap
+     * 
+     * @return Cubemap|null The current environment cubemap
+     */
+    public function getEnvironmentCubemap() : ?Cubemap
+    {
+        return $this->environmentCubemap;
+    }
+
+    /**
      * Handles rendering of the scene, here you can attach additional render passes,
      * modify the render pipeline or customize rendering related data.
      * 
@@ -444,11 +516,11 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
             return;
         }
         elseif ($this->debugMode === self::DEBUG_MODE_METALLIC) {
-            $this->fullscreenRenderer->attachPass($context->pipeline, $this->currentRenderTargetRes, $gbuffer->metallicTexture);
+            $this->fullscreenRenderer->attachPass($context->pipeline, $this->currentRenderTargetRes, $gbuffer->metallicTexture, true);
             return;
         }
         elseif ($this->debugMode === self::DEBUG_MODE_ROUGHNESS) {
-            $this->fullscreenRenderer->attachPass($context->pipeline, $this->currentRenderTargetRes, $gbuffer->roughnessTexture);
+            $this->fullscreenRenderer->attachPass($context->pipeline, $this->currentRenderTargetRes, $gbuffer->roughnessTexture, true);
             return;
         }
         elseif ($this->debugMode === self::DEBUG_MODE_EMISSIVE) {
@@ -465,14 +537,44 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
             return;
         }
 
+        // import cubemap if available
+        $cubemapRes = null;
+        if ($this->environmentCubemap) {
+            $cubemapRes = $context->pipeline->importCubemap('environment_cubemap', $this->environmentCubemap);
+        }
+
+        if ($this->environmentCubemap !== null) {
+            $context->pipeline->addPass(new IBLPrecomputePass(
+                $cubemapRes,
+                $this->iblIrradianceShader,
+                $this->iblPrefilterShader,
+                $this->iblBrdfShader,
+                $this->iblCache,
+                32,
+                256,
+                128,
+            ));
+        }
+
         // add a light pass
         $context->pipeline->addPass(new DeferredLightPass(
-            $this->lightingShader,
-            $entities->getSingleton(DirectionalLightComponent::class)
+            $this->shaders,
+            $entities->getSingleton(DirectionalLightComponent::class),
+            $cubemapRes,
         ));
 
         // read the light pass data
         $lightpass = $context->data->get(DeferredLightPassData::class);
+    
+        // add a skybox cubemap pass
+        if ($this->renderSkybox && $cubemapRes) {
+            $this->cubemapRenderer->attachSkyboxPass(
+                $context->pipeline,
+                $lightpass->renderTarget, 
+                $cubemapRes,
+                $gbuffer->depthTexture 
+            );
+        }
 
         // copy over to the main render target
         $this->fullscreenRenderer->attachPass($context->pipeline, $this->currentRenderTargetRes, $lightpass->output);

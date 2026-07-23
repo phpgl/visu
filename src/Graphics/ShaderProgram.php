@@ -8,6 +8,7 @@ use GL\Math\Vec3;
 use GL\Math\Vec4;
 use VISU\Graphics\Exception\ShaderProgramException;
 use VISU\Graphics\Exception\ShaderProgramLinkingException;
+use VISU\OS\Logger;
 
 /**
  * This class is a wrapper for OpenGL shader programs.
@@ -85,7 +86,9 @@ class ShaderProgram
      */
     public function __destruct()
     {
-        glDeleteProgram($this->id);
+        if ($this->id > 0) {
+            glDeleteProgram($this->id);
+        }
     }
 
     /**
@@ -188,9 +191,10 @@ class ShaderProgram
     /**
      * Compiles all stages (if requrired) and links the program.
      * 
+     * @param string|null $name Optional name for logging purposes
      * @return void 
      */
-    public function link() : void
+    public function link(?string $name = null) : void
     {
         $this->compileShaderStage($this->vertexShader);
         $this->compileShaderStage($this->fragmentShader);
@@ -209,6 +213,10 @@ class ShaderProgram
         }
 
         $this->isLinked = true;
+
+        if (!is_null($name)) {
+            Logger::info(sprintf("Shader program '%s', linked with ID %d", $name, $this->id));
+        }
     }
 
     /**
@@ -1337,6 +1345,26 @@ class ShaderProgram
     {
         $this->use();
         glUniform4fv($this->getUniformLocation($name), $values);
+    }
+
+    /**
+     * Bind the given set of textures and sets the uniforms automatically, sampler ID is 
+     * determined by the order of the given array.
+     *  
+     * @param array<string, Texture|Cubemap> $textures The textures to bind and set as uniforms
+     * @return void 
+     */
+    public function bindTextures(array $textures) : void
+    {
+        $this->use();
+
+        $textureUnit = 0;
+        foreach($textures as $uniformName => $texture)
+        {
+            $texture->bind(GL_TEXTURE0 + $textureUnit);
+            $this->setUniform1i($uniformName, $textureUnit);
+            $textureUnit++;
+        }
     }
 
     /**
