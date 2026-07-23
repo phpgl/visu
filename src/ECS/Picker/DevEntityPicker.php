@@ -6,7 +6,6 @@ use GL\Buffer\UByteBuffer;
 use GL\Math\Vec4;
 use VISU\ECS\EntitiesInterface;
 use VISU\ECS\EntityRegistry;
-use VISU\ECS\Exception\EntityPickerException;
 use VISU\Graphics\Rendering\Pass\CameraData;
 use VISU\Graphics\RenderTarget;
 use VISU\Signal\Dispatcher;
@@ -54,13 +53,6 @@ class DevEntityPicker
         array $systems, // Array of systems that can produce pickable geometry
     )
     {
-        // validate all systems are of the correct type
-        foreach($systems as $system) {
-            if (!$system instanceof DevEntityPickerRenderInterface) {
-                throw new EntityPickerException("All system that contribute to entity picking must extend the 'DevEntityPickerRenderInterface'.");
-            }
-        }
-
         $this->systems = $systems;
 
         // register a click event handler
@@ -117,10 +109,6 @@ class DevEntityPicker
         $renderTarget->framebuffer()->clear();
 
         foreach($systems as $system) {
-            if (!$system instanceof DevEntityPickerRenderInterface) {
-                throw new EntityPickerException("All system that contribute to entity picking must extend the 'DevEntityPickerRenderInterface'.");
-            }
-
             $system->renderEntityIdsForPicking($entities, $cameraData);
         }
         

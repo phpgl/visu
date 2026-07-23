@@ -75,7 +75,7 @@ $quickstart = new Quickstart(function(QuickstartOptions $app) use($container)
 
     $app->ready = function(CubemapDemoApp $app) {
         // define path to HDRI file - change this to point to your HDRI file
-        $hdriPath = '/Users/mariodoring/Downloads/cedar_bridge_sunset_1_4k.hdr';
+        $hdriPath = VISU_PATH_RESOURCES . '/assets/hdri/cowboy_town_saloon_2k.hdr';
 
         // create HDRI to cubemap converter
         $converter = new HDRIToCubemap($app->gl);
@@ -84,7 +84,7 @@ $quickstart = new Quickstart(function(QuickstartOptions $app) use($container)
         $app->cubemap = $converter->convert($hdriPath, 1024);
 
         // create the cubemap renderer
-        $app->cubemapRenderer = new CubemapRenderer($app->gl);
+        $app->cubemapRenderer = new CubemapRenderer($app->shaders);
 
         // create camera system for 3D navigation
         $app->cameraSystem = new VISUCameraSystem($app->input, $app->dispatcher);

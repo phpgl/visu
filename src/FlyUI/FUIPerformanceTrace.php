@@ -57,8 +57,8 @@ class FUIPerformanceTrace
 
     /**
      * Get the raw flat tracing data
-     * 
-     * @return array<array{method: string, class: string, proxy_class: string, duration_ns: int, duration_ms: float, duration_us: float, timestamp: int, object_id: int}>
+     *
+     * @return list<mixed>
      */
     public function getRawData(): array
     {
@@ -150,7 +150,7 @@ class FUIPerformanceTrace
      * Flattens hierarchical tree to raw tracing data
      * 
      * @param array<string, mixed> $node
-     * @param array<array{method: string, class: string, proxy_class: string, duration_ns: int, duration_ms: float, duration_us: float, timestamp: int, object_id: int}> &$rawData
+     * @param list<mixed> &$rawData
      */
     private function flattenTreeToRawData(array $node, array &$rawData): void
     {
@@ -270,11 +270,13 @@ class FUIPerformanceTrace
                 usort($tree['children'], function($a, $b) {
                     $aMethods = $a['methods'] ?? [];
                     $bMethods = $b['methods'] ?? [];
-                    if (empty($aMethods) || empty($bMethods)) {
+                    $aTimestamps = array_column($aMethods, 'timestamp');
+                    $bTimestamps = array_column($bMethods, 'timestamp');
+                    if (empty($aTimestamps) || empty($bTimestamps)) {
                         return $a['object_id'] <=> $b['object_id'];
                     }
-                    $aTimestamp = min(array_column($aMethods, 'timestamp'));
-                    $bTimestamp = min(array_column($bMethods, 'timestamp'));
+                    $aTimestamp = min($aTimestamps);
+                    $bTimestamp = min($bTimestamps);
                     return $aTimestamp <=> $bTimestamp;
                 });
             }

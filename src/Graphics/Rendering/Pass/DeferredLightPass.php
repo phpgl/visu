@@ -86,9 +86,9 @@ class DeferredLightPass extends RenderPass
             $brdfLut = $resources->getTexture($iblData->brdfLut);
 
             // full IBL when all three IBL textures are available
-            if ($irradianceCubemap && $irradianceCubemap->id > 0 &&
-                $prefilterCubemap && $prefilterCubemap->id > 0 &&
-                $brdfLut && $brdfLut->id > 0) {
+            if ($irradianceCubemap->id > 0 &&
+                $prefilterCubemap->id > 0 &&
+                $brdfLut->id > 0) {
                 return DeferredLightPassPermutation::IBL;
             }
         }
@@ -96,7 +96,7 @@ class DeferredLightPass extends RenderPass
         // check if environment cubemap is available
         if ($this->environmentCubemap) {
             $glCubemap = $resources->getCubemap($this->environmentCubemap);
-            if ($glCubemap && $glCubemap->id > 0) {
+            if ($glCubemap->id > 0) {
                 return DeferredLightPassPermutation::envCubemap;
             }
         }
@@ -159,7 +159,7 @@ class DeferredLightPass extends RenderPass
         }
 
         // bind permutation-specific uniforms
-        if ($permutation === DeferredLightPassPermutation::envCubemap) {
+        if ($permutation === DeferredLightPassPermutation::envCubemap && $this->environmentCubemap !== null) {
             $glCubemap = $resources->getCubemap($this->environmentCubemap);
             $glCubemap->bind(GL_TEXTURE0 + $textureUnit);
             $shader->setUniform1i('environment_cubemap', $textureUnit);

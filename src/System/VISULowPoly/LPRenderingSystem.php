@@ -143,7 +143,9 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
     private DrawCallAssembler $staticGeometryDCA;
 
     /**
-     * Indicates whether the static geometry DCA needs to be rebuilt
+     * Indicates whether the static geometry DCA needs to be rebuilt.
+     * Attaching or detaching a static model flags this, the static render
+     * pass then re-bakes all static instances on the next frame.
      */
     private bool $staticGeometryIsDirty = true;
 
@@ -207,9 +209,13 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
         $this->onAttachDynamicModelHandle = $entities->onAttach(LPDynamicModel::class, [$this, 'handleAttachDynamicModel']);
 
         // construct the draw call assembler for static geometry
+        // a persistent octree is reused across frames and only rebuilt when the
+        // instance set changes, ideal for the large mostly-static scene
         $this->staticGeometryDCA = new DrawCallAssembler();
+        $this->staticGeometryDCA->setCullingStrategy(DrawCallAssembler::CULL_OCTREE);
 
         // construct the draw call assembler for dynamic geometry
+        // per-instance frustum culling each frame, best for the fully dynamic set
         $this->dynamicGeometryDCA = new DrawCallAssembler();
     }
 
@@ -222,8 +228,15 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
     {
         $entities->releaseOnAttach($this->onAttachStaticModelHandle);
         $entities->releaseOnDetach($this->onDetachStaticModelHandle);
+        $entities->releaseOnAttach($this->onAttachDynamicModelHandle);
     }
 
+    /**
+     * Registers the given model's geometry with the draw call assembler if it
+     * has not been registered yet, storing the resulting mesh handle by-reference.
+     *
+     * @param-out int $meshDcaHandle
+     */
     private function registerModelWithDCA(LPModel $model, DrawCallAssembler $dca, ?int &$meshDcaHandle) : void
     {
         // we render the lowpoly models as a single mesh instead of the multiple sub-meshes
@@ -270,6 +283,7 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
      */
     public function handleAttachStaticModel(EntitiesInterface $entities, int $entity, LPStaticModel $component) : void
     {
+        // the static assembler needs to be rebuilt to include the new instance
         $this->staticGeometryIsDirty = true;
 
         // validate the model is present
@@ -280,18 +294,9 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
 
         $model = $this->modelCollection->models[$component->modelIdentifier];
 
+        // register the mesh geometry once, the per-instance transforms are
+        // (re)submitted during the dirty rebuild in the static render pass
         $this->registerModelWithDCA($model, $this->staticGeometryDCA, $model->staticDCAHandle);
-
-        if (!$transform = $entities->tryGet($entity, Transform::class)) {
-            throw new LPException('LPRenderingSystem - Please attach a Transform component first, entity: ' . $entity);
-        }
-
-        // submit the instance
-        $this->staticGeometryDCA->submit(
-            meshHandle: $model->staticDCAHandle,
-            transform: $transform->getWorldMatrix($entities),
-            materialId: 1, // material data is packed into the vertex buffer.
-        );
     }
 
     /**
@@ -299,6 +304,7 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
      */
     public function handleDetachStaticModel(EntitiesInterface $entities, int $entity, LPStaticModel $component) : void
     {
+        // the static assembler needs to be rebuilt so the removed instance is dropped
         $this->staticGeometryIsDirty = true;
     }
 
@@ -414,9 +420,41 @@ class LPRenderingSystem implements SystemInterface, DevEntityPickerRenderInterfa
                 $pipeline->writes($pass, $gbuffer->renderTarget);
             },
             // execute
-            function(PipelineContainer $data, PipelineResources $resources) use(&$renderMetrics) 
+            function(PipelineContainer $data, PipelineResources $resources) use($entities, &$renderMetrics)
             {
                 $cameraData = $data->get(CameraData::class);
+
+                // rebuild the static instance buffer only when the geometry changed
+                if ($this->staticGeometryIsDirty) {
+                    $this->staticGeometryDCA->clearInstances();
+
+                    // fetch all static models and (re)submit their instances
+                    $instanceCount = 0;
+                    /** @var iterable<int, array{0: LPStaticModel, 1: Transform}> $staticView */
+                    $staticView = $entities->viewWith(LPStaticModel::class, Transform::class);
+                    foreach ($staticView as $entity => [$renderable, $transform]) {
+                        if (!isset($this->modelCollection->models[$renderable->modelIdentifier])) {
+                            continue;
+                        }
+
+                        $model = $this->modelCollection->models[$renderable->modelIdentifier];
+
+                        // unregistered model
+                        if (is_null($model->staticDCAHandle)) {
+                            continue;
+                        }
+
+                        $this->staticGeometryDCA->submit(
+                            meshHandle: $model->staticDCAHandle,
+                            transform: $transform->getWorldMatrix($entities),
+                            materialId: 1, // material data is packed into the vertex buffer.
+                        );
+                        $instanceCount++;
+                    }
+
+                    $this->staticGeometryIsDirty = false;
+                    Logger::info(sprintf('[LPRenderingSystem] Rebuilding static geometry DCA with %d instances', $instanceCount));
+                }
 
                 $this->objectInstancedShader->use();
                 $this->objectInstancedShader->setUniformMatrix4f('projection', false, $cameraData->projection);

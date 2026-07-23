@@ -145,7 +145,7 @@ class PipelineResources
 
                 $drawBuffers[] = GL_COLOR_ATTACHMENT0 + $i;
             }
-            else if ($colorAttachmentTextureResource instanceof CubemapResource) {
+            else {
                 $cubemap = new Cubemap($this->gl, $colorAttachmentTextureResource->name);
                 $options = $colorAttachmentTextureResource->options ?? new TextureOptions;
                 
